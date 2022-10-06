@@ -58,6 +58,7 @@
 * [Single Sign-on on mobile devices](integrate/single-sign-on.md)
 * [Force authentication on app launch](integrate/force-authentication-on-app-launch.md)
 * [Account Deletion](integrate/account-deletion.md)
+* [Using Authgear as an OpenID Connect Provider](integrate/oidc-provider.md)
 
 ## Customize
 
