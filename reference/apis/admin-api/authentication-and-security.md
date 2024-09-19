@@ -12,7 +12,7 @@ Accessing the Admin API GraphQL endpoint requires your server to generate a vali
 
 ## Obtaining the private key for signing JWT
 
-* Go to **Settings** -> **Admin API**
+* Go to **Advanced** -> **Admin API**
 * Click **Download** to download the private key. Make it available to your server.
 * **Copy** the key ID. Make it available to your server.
 

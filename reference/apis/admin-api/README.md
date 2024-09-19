@@ -20,7 +20,7 @@ See [authentication-and-security.md](authentication-and-security.md "mention") t
 
 If you want to explore what the Admin API can do, you can visit the GraphiQL tool. The GraphQL schema can also be found there.
 
-* Go to **Settings** -> **Admin API**
+* Go to **Advanced** -> **Admin API**
 * Click on the **GraphiQL tool** link
 * Toggle the **schema** documentation by pressing the Docs button in the top left corner.
 
