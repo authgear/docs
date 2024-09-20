@@ -77,7 +77,6 @@
   * [User Settings](how-to-guide/built-in-ui/auth-ui.md)
   * [Privacy Policy & Terms of Service Links](how-to-guide/built-in-ui/privacy-policy-terms-of-service.md)
   * [Customer Support Link](how-to-guide/built-in-ui/customer-support-link.md)
-  * [Custom Email and SMS Templates](how-to-guide/built-in-ui/custom-email-and-sms-templates.md)
   * [Custom Text](how-to-guide/built-in-ui/localization.md)
 * [Custom UI](how-to-guide/custom-ui/README.md)
   * [Authentication Flow API](how-to-guide/custom-ui/authentication-flow-api.md)
@@ -116,7 +115,8 @@
   * [Use SDK to make authorized API calls to backend](how-to-guide/mobile-apps/using-sdk-to-call-your-application-server.md)
   * [Force authentication on app launch](how-to-guide/mobile-apps/force-authentication-on-app-launch.md)
   * [Customize the Login Pop-up / Disable the login alert box](how-to-guide/mobile-apps/using-webview-to-open-the-authgear-ui.md)
-* [Languages and Localization ](how-to-guide/languages-and-localization.md)
+* [Languages and Localization](how-to-guide/languages-and-localization.md)
+* [Custom Email and SMS Templates](how-to-guide/custom-email-and-sms-templates.md)
 * [Troubleshoot](how-to-guide/troubleshoot/README.md)
   * [How to Fix SubtleCrypto: digest() undefined Error in Authgear SDK](how-to-guide/troubleshoot/how-to-fix-subtlecrypto-digest-undefined-error-in-authgear-sdk.md)
 
