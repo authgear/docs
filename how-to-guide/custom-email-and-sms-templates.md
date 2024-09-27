@@ -43,4 +43,15 @@ For `locale = zh-Hans` (Simplified Chinese)
 
 The reason for falling back to the above default SMS template is that services are required to register their SMS templates before they can deliver to Chinese numbers. Authgear has registered the default SMS template so that one will deliver without any further action on your side.
 
-Enterprise users who still wish to customize their SMS template for Chinese numbers can [contact us](https://www.authgear.com/schedule-demo) for more details on that.
+Enterprise users who still wish to customize their SMS template for Chinese numbers can [contact us](https://www.authgear.com/schedule-demo) for more details.
+
+### Important notice for sending SMS to Vietnamese phone numbers (+84)
+
+Due to the regulatory requirements from the local government, all SMS messages to Vietnam must include the application name in the message body. If your users in Vietnam experience difficulties receiving SMS, try adding `[Authgear]` at the begining of the SMS template. SMS without `[Authgear]` may be blocked by the mobile operators.  For example, your OTP message could appears like:
+
+```
+[Authgear] {code} is your {app-name} one-time password.
+Don't share it with anyone.
+```
+
+Enterprise users who still wish to customize the beginning part of the message for Vietnamese numbers can [contact us](https://www.authgear.com/schedule-demo) for more details.
