@@ -28,7 +28,7 @@ Make sure the option **Issue JWT as access token** is enabled in your **Applicat
 3. On the **App Configuration** dashboard, locate the "**Access token**" section.
 4. Make the toggle **Issue JWT as access token** switch on.
 
-<figure><img src="../../.gitbook/assets/image (8) (1).png" alt="" width="537"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28).png" alt="" width="537"><figcaption></figcaption></figure>
 
 ### Create a new Event Hook
 
@@ -38,7 +38,7 @@ With the use of Hooks, Authgear provides flexibility for adding custom logic to 
 2. **Add** a new **Blocking Event**.
 3. Choose the Block Hook **Type** as the _TypeScript_ and set the Event option to _JWT access token pre-create_. You will write a new Typescript function from scratch.
 
-<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
 
 4. Click on **Edit Script** under the **Config** option.
 5. Copy and paste the following into the editor:
@@ -88,7 +88,7 @@ This part explains how to retrieve an access token using **OpenID App** Endpoint
 
 Open your **OpenID Auth App** configuration, and find **Client ID**, **Client Secret**, and check **Authorization**, and **Token** endpoints. You will use them in the next steps.
 
-<img src="../../.gitbook/assets/image (5).png" alt="" data-size="original"> <img src="../../.gitbook/assets/image (3) (1).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (10).png" alt="" data-size="original"> <img src="../../.gitbook/assets/image (6).png" alt="" data-size="original">
 
 **Step 2: Construct the authorization endpoint URL**
 
@@ -104,7 +104,7 @@ Replace `<YOUR_AUTHGEAR_ENDPOINT>` with your Authgear server's domain, `YOUR_CLI
 
 Next, you need to redirect the user to the authorization endpoint. You can just put the URL in your browser and log in with a user credential you are interested to retrieve an access token for. After successful authentication and consent, the Authgear will redirect the user back to your specified redirect URI, including an **authorization code** as a query parameter. You will need the code in the next step
 
-<img src="../../.gitbook/assets/image (10).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (12).png" alt="" data-size="original">
 
 **Step 4: Obtain an access token**
 
@@ -130,7 +130,7 @@ curl --request POST \
 
 Finally, we can debug the access token using the [JWT Debugger tool](https://jwt.io/) to see if the custom field and value we added previously are there inside the JWT payload.
 
-<img src="../../.gitbook/assets/image (9).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (17).png" alt="" data-size="original">
 
 \\
 

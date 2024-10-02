@@ -41,7 +41,7 @@ From the Project listing, create a new Project or select an existing Project. Af
 ![Edit an application](../../.gitbook/assets/edit-application-1.png)
 
 {% hint style="info" %}
-If you want to validate JWT access token in your server, under **Access Token**, turn on **Issue JWT as access token**. If you will forward incoming requests to Authgear Resolver Endpoint for authentication, leave this unchecked. See comparisons in [Backend Integration](../backend-integration/).
+If you want to validate JWT access token in your server, under **Access Token**, turn on **Issue JWT as access token**. If you will forward incoming requests to Authgear Resolver Endpoint for authentication, leave this unchecked. See comparisons in [Backend Integration](../backend-api/backend-integration.md).
 {% endhint %}
 
 ![](../../.gitbook/assets/application-jwt.png)
@@ -275,8 +275,8 @@ authgear
 
 To protect your application server from unauthorized access. You will need to [integrate Authgear to your backend](https://docs.authgear.com/get-started/backend-api/backend-integration).
 
-{% content-ref url="../backend-integration/" %}
-[backend-integration](../backend-integration/)
+{% content-ref url="../backend-api/backend-integration.md" %}
+[backend-integration.md](../backend-api/backend-integration.md)
 {% endcontent-ref %}
 
 ## JavaScript SDK Reference

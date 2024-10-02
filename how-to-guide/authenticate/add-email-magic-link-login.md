@@ -23,4 +23,4 @@ To enable Email Login Links:
 3. Go to the "**Verification and OTP**" tab
 4. Under "**Email**", in the "**Verify email by**" field, select "**Login Link**"
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>

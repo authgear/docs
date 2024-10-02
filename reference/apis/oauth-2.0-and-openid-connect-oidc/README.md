@@ -8,8 +8,8 @@ description: >-
 
 
 
-{% content-ref url="../../tokens/userinfo.md" %}
-[userinfo.md](../../tokens/userinfo.md)
+{% content-ref url="userinfo.md" %}
+[userinfo.md](userinfo.md)
 {% endcontent-ref %}
 
 {% content-ref url="supported-scopes.md" %}

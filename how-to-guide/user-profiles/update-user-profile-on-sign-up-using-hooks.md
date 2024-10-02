@@ -8,7 +8,7 @@ Using [Hooks](../events-hooks/denohooks.md) you can put **extra information** in
 
 Here are easy steps to achieve this:
 
-**Step 1.** Make sure that you have an Authgear account. If you don't have one, you can [create it for free](https://accounts.portal.authgear.com/signup) on the Authgear website. Start by logging into your [Authgear dashboard](https://portal.authgear.com/).&#x20;
+**Step 1.** Make sure that you have an Authgear account. If you don't have one, you can [create it for free](https://accounts.portal.authgear.com/signup) on the Authgear website. Start by logging into your [Authgear dashboard](https://portal.authgear.com/).
 
 **Step 2.** Go to **User Profile** → **Custom Attributes** page.
 
@@ -64,4 +64,4 @@ return {
 
 #### Next steps
 
-Once you learned how to update user profiles, now you can discover different ways of [accessing user profiles](../integration/access-user-profiles.md) in Authgear.
+Once you learned how to update user profiles, now you can discover different ways of [accessing user profiles](access-user-profiles.md) in Authgear.

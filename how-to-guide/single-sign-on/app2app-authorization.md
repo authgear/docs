@@ -27,7 +27,7 @@ Demo of the App2App login flow
 
 An app can start the authentication flow by opening a link to another app, instead of using the authorization endpoint. The app which handles the link should validate the authentication request, then could return a valid authorization code. The valid code is then transferred to the original app using universal link. The initiating app can use that authorization code to perform code exchange for tokens with Authgear.
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption><p>App2App flow in iOS</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption><p>App2App flow in iOS</p></figcaption></figure>
 
 A detailed explanation on the technology can be found in [this specification](https://github.com/authgear/authgear-server/blob/main/docs/specs/app2app.md).
 
@@ -42,7 +42,7 @@ This is an Enterprise feature, please contact us for enabling the App2App flow i
 1. Go to the Application detail page of the authorizing app, i.e. the app which handles the app2app authentication requests.
 2. Scroll to the bottom and you will see the App2App config panel.
 3. Select Enable App2App login for this Application"\
-   <img src="../../.gitbook/assets/image (14).png" alt="" data-size="original">
+   <img src="../../.gitbook/assets/image (33).png" alt="" data-size="original">
 4. Migration mode offers a less secure mechanism which helps older user sessions to participate in App2App. DO NOT enable it unless there is migration problem.
 
 #### Configuration in the initiating app
