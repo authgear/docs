@@ -782,7 +782,7 @@ The resetPassword mutation lets you rest a user's password from the Admin API.
 resetPassword(input: ResetPasswordInput!): ResetPasswordPayload!
 ```
 
-**Example:**
+**Example 1:**
 
 {% tabs %}
 {% tab title="Query" %}
@@ -817,6 +817,21 @@ mutation {
 ```
 {% endtab %}
 {% endtabs %}
+
+**Example 2 (send new password to user):**
+
+You can include `sendPassword: true` and `setPasswordExpired: true` in the input for the  `resetPassword` mutation to send the new password to a user and set it as expired so they can set a new one the next time they log in. Here is an example of the mutation:
+
+```graphql
+mutation {
+  resetPassword(input: {userID: "<ENCODED USER ID>", password: "n3w-p4$s", sendPassword: true, setPasswordExpired: true}) {
+    user {
+      id
+      standardAttributes
+    }
+  }
+}
+```
 
 ### 2.10. revokeAllSessions
 

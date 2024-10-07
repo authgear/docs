@@ -141,7 +141,7 @@ Users can still log in to their new account if they lose or can't find the passw
 
 ## Create a New User from the Admin API
 
-Alternative to the above steps, you can create a new user account from the Admin API and have Authgear send them their password using the following Admin API query:
+Alternative to the above steps, you can create a new user account from the Admin API and have Authgear send them their password using the following Admin API mutation:
 
 ```graphql
 mutation {
@@ -154,14 +154,31 @@ mutation {
 }
 ```
 
-The input parameter of the createUser mutation includes the following objects and fields:
+The input parameter of the `createUser` mutation includes the following objects and fields:
 
 * `definition`: The value of this field is `loginID`. In loginID, you define the identity type using the `key` field and the actual value of the identity (eg. the user's email address) in the `value` field.
 * `password`: Enter the value for the password you wish to set for the user here.
 * `sendPassword`: Use this field by setting the value to `true` or `false` to enable or disable the automatic sending of password to users.&#x20;
 * `setPasswordExpired`: Set to `true` to force users to change their password on login.
 
-### Conclusion
+### Use the resetPassword Mutation to Send Password
+
+The `resetPassword` Admin API mutation also supports  `sendPassword` and  `setPasswordExpired` inputs. Hence, you can use it to set a password for a user you've already created and want to send them a new password and require them to change their password on their next log-in.
+
+Example:
+
+```graphql
+mutation {
+  resetPassword(input: {userID: "<ENCODED USER ID>", password: "n3w-p4$s", sendPassword: true, setPasswordExpired: true}) {
+    user {
+      id
+      standardAttributes
+    }
+  }
+}
+```
+
+## Conclusion
 
 The steps described in this post, show how you can customize the post account creation experience for accounts created for a user by an admin.&#x20;
 
