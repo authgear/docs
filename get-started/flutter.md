@@ -23,7 +23,7 @@ From the Project listing, create a new Project or select an existing Project. Af
 3. Input the name of your application and select **Native App** as the application type. Click "Save".
 4. You will see a list of guides that can help you for setting up, then click "Next".
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption><p>Create Application</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (18).png" alt=""><figcaption><p>Create Application</p></figcaption></figure>
 
 **Step 2: Configure the application**
 

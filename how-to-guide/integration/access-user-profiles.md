@@ -64,7 +64,7 @@ To view see user profile of a specific user:
 3. Choose a user you would like to view a profile.
 4. On the **User Details** page, you will see the **Profile** tab.
 
-<img src="../../.gitbook/assets/image (6).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (13).png" alt="" data-size="original">
 
 To manage access for standard attributes for all users:
 
@@ -196,11 +196,11 @@ Authgear provides an [Admin API](../../reference/apis/admin-api/) GraphQL endpoi
 3. Find a section called **GraphiQL Explorer.**
 4. Click on the **GraphiQL tool** link.
 
-<img src="../../.gitbook/assets/image (4) (1).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (8).png" alt="" data-size="original">
 
 The explorer will be opened in a separate browser tab.
 
-<img src="../../.gitbook/assets/image (3) (2).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (16).png" alt="" data-size="original">
 
 5. Search for a user by `email`and put in your query `standardAttributes` and `customAttributes`. For example:
 
@@ -291,7 +291,7 @@ curl -X GET \
 
 If you are using Postman, you can enable the Authorization type of OAuth2.0, provide the necessary information for getting the authorization code, obtaining an access token and use that token to request the Userinfo endpoint:
 
-![](<../../.gitbook/assets/image (11).png>)
+![](<../../.gitbook/assets/image (19).png>)
 
 </details>
 

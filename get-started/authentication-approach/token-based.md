@@ -42,28 +42,28 @@ Choose your platform below:
 [website.md](../single-page-app/website.md)
 {% endcontent-ref %}
 
-{% content-ref url="../native-mobile-app/react-native.md" %}
-[react-native.md](../native-mobile-app/react-native.md)
+{% content-ref url="../react-native.md" %}
+[react-native.md](../react-native.md)
 {% endcontent-ref %}
 
-{% content-ref url="../native-mobile-app/android/" %}
-[android](../native-mobile-app/android/)
+{% content-ref url="../android/" %}
+[android](../android/)
 {% endcontent-ref %}
 
-{% content-ref url="../native-mobile-app/ios.md" %}
-[ios.md](../native-mobile-app/ios.md)
+{% content-ref url="../ios.md" %}
+[ios.md](../ios.md)
 {% endcontent-ref %}
 
-{% content-ref url="../native-mobile-app/flutter.md" %}
-[flutter.md](../native-mobile-app/flutter.md)
+{% content-ref url="../flutter.md" %}
+[flutter.md](../flutter.md)
 {% endcontent-ref %}
 
-{% content-ref url="../native-mobile-app/xamarin.md" %}
-[xamarin.md](../native-mobile-app/xamarin.md)
+{% content-ref url="../xamarin.md" %}
+[xamarin.md](../xamarin.md)
 {% endcontent-ref %}
 
 ### 2. Backend Integration
 
-{% content-ref url="../backend-api/backend-integration.md" %}
-[backend-integration.md](../backend-api/backend-integration.md)
+{% content-ref url="../backend-integration/" %}
+[backend-integration](../backend-integration/)
 {% endcontent-ref %}

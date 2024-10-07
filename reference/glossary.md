@@ -139,7 +139,7 @@ A refresh token is a special token that can be used to obtain a new access token
 
 ### Roles
 
-Roles can be used to control access to certain parts of an application or API that's powered by Authgear.  Roles are returned using the `https://authgear.com/claims/user/roles` attribute in Authgear's JWT access token and [UserInfo](apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) as an array.&#x20;
+Roles can be used to control access to certain parts of an application or API that's powered by Authgear.  Roles are returned using the `https://authgear.com/claims/user/roles` attribute in Authgear's JWT access token and [UserInfo](tokens/userinfo.md) as an array.&#x20;
 
 The following is an example of how you can use roles. In a blog application with two roles (`admin` and `reader`), you can restrict access for editing and adding new posts to only users with the `admin` role. Check out our documentation on [roles and groups](../how-to-guide/user-management/manage-users-roles-and-groups.md) to learn more about managing roles in Authgear.
 

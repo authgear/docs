@@ -64,4 +64,4 @@ return {
 
 #### Next steps
 
-Once you learned how to update user profiles, now you can discover different ways of [accessing user profiles](access-user-profiles.md) in Authgear.
+Once you learned how to update user profiles, now you can discover different ways of [accessing user profiles](../integration/access-user-profiles.md) in Authgear.

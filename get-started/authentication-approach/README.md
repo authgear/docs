@@ -21,7 +21,7 @@ In Token-based authentication, Authgear returns the `access token` and `refresh 
 
 The client SDK will automatically renew the `access token` with the `refresh token` for you, so you don't have to worry about it.
 
-Your client app should call your backend with the access token in the Authorization header, and you can verify the access token by integrating Authgear with your backend. The HTTP requests can be authenticated by [**Forwarding to Authgear Resolver Endpoint**](../backend-api/nginx.md) or [**Validating JWT in your application server**](../backend-api/jwt.md).
+Your client app should call your backend with the access token in the Authorization header, and you can verify the access token by integrating Authgear with your backend. The HTTP requests can be authenticated by [**Forwarding to Authgear Resolver Endpoint**](../backend-integration/nginx.md) or [**Validating JWT in your application server**](../backend-integration/jwt.md).
 
 Request example:
 
@@ -41,7 +41,7 @@ This approach is suitable for **all types of websites**, including server-side r
 
 In Cookie-based authentication, Authgear returns `Set-Cookie` headers and sets cookies to the browser. The cookies are HTTP only and share under the same root domains. So you will need to setup the **custom domain** for Authgear, such as `identity.yourdomain.com`.
 
-In this setting, if you have multiple applications under `yourdomain.com`, all applications would share the same session cookie automatically. After that, you can verify the cookies by integrating Authgear with your backend. The HTTP requests _must_ be authenticated by [**Forwarding to Authgear Resolver Endpoint**](../backend-api/nginx.md).
+In this setting, if you have multiple applications under `yourdomain.com`, all applications would share the same session cookie automatically. After that, you can verify the cookies by integrating Authgear with your backend. The HTTP requests _must_ be authenticated by [**Forwarding to Authgear Resolver Endpoint**](../backend-integration/nginx.md).
 
 Request example:
 

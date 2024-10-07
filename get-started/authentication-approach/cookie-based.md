@@ -46,6 +46,6 @@ The following tutorials show you how to add user login to your website using Aut
 
 ### 2. Backend Integration
 
-{% content-ref url="../backend-api/backend-integration.md" %}
-[backend-integration.md](../backend-api/backend-integration.md)
+{% content-ref url="../backend-integration/" %}
+[backend-integration](../backend-integration/)
 {% endcontent-ref %}

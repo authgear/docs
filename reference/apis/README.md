@@ -109,12 +109,12 @@ The endpoint serves as a resolver to check the access token or cookie in the req
 
 See the list of `x-authgear-` headers in the specs [here](https://github.com/authgear/authgear-server/blob/master/docs/specs/api-resolver.md).
 
-See implementation examples [here](../../get-started/backend-api/nginx.md).
+See implementation examples [here](../../get-started/backend-integration/nginx.md).
 
 Should you choose to use Resolver Endpoints instead of JWT tokens to validate each API request, check out the following tutorial to learn how to go about that:
 
-{% content-ref url="../../get-started/backend-api/nginx.md" %}
-[nginx.md](../../get-started/backend-api/nginx.md)
+{% content-ref url="../../get-started/backend-integration/nginx.md" %}
+[nginx.md](../../get-started/backend-integration/nginx.md)
 {% endcontent-ref %}
 
 ## Other Special URLs
