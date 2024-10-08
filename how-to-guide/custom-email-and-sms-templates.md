@@ -26,7 +26,6 @@ For `locale = en` or other languages
 
 ```
 【Authgear】{code} is your {app-name} one-time password.
-Don't share it with anyone.
 ```
 
 For `locale = zh-Hant` (Traditional Chinese)
