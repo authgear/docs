@@ -1,25 +1,29 @@
 ---
 description: >-
-  Authgear provides a wide range of prebuilt frontend for the authentication
-  related features of your apps
+  Authgear offers prebuilt frontends for essential authentication features,
+  including user settings pages.
 ---
 
 # User Settings
+
+The User Settings page provides a prebuilt user interface for logged-in users of an Authgear project to view and edit their account settings.
+
+<figure><img src="../../.gitbook/assets/authgear-new-user-settings.png" alt=""><figcaption><p>user settings ui</p></figcaption></figure>
 
 ## Actions in the settings page
 
 The end-user can perform the following actions on the setting page:
 
 * Change their password.
-* Add or change their email, phone number or username.
+* Add or change their email, phone number, or username.
 * Connect or disconnect to identity providers.
-* Manage the signed in sessions.
+* Manage their signed-in sessions.
 * Enable or disable 2-step verification.
 * and many more.
 
 ## Open the settings page in websites
 
-Use the **open** method to open the built-in settings page
+Use the `open()` method of the Authgear Web SDK to open the built-in settings page.
 
 ```tsx
 import authgear, { Page } from "@authgear/web";
@@ -31,7 +35,7 @@ const openSettings = () = {
 
 ## Open the settings page with the SDK in mobile apps
 
-If you are working on a mobile apps, you can open the settings page using the SDK. When the end-user has signed in, the SDK provides a method to open the settings page in a webview.
+If you are working on a mobile app, you can open the settings page using any of our mobile SDKs. When the end-user has signed in, the SDK provides a method to open the settings page in a Webview.
 
 {% tabs %}
 {% tab title="React Native" %}
@@ -106,7 +110,19 @@ public void onClickOpenSettingsPage() {
 
 ## Back to my app button
 
-In web-based application, you may want to add the "Back to my app" button to the settings page so the user can navigate back to your website after changing the settings.
+In a web-based application, you may want to add the "Back to my app" button to the settings page so the user can navigate back to your website after changing the settings.
 
-1. Go to **Portal** > **UI Settings**
-2. Provide the URL in **Back to Your App Link** and click **Save**
+To enable the back button, navigate to **Branding** > **Design** in Authgear Portal.\
+Toggle the **Show “Back to your app” button in the settings page** switch on. Enter the destination URL for the 'Back to my app' button below the switch.
+
+Click **Save** to apply your new settings.
+
+<figure><img src="../../.gitbook/assets/authgear-design-user-settings-back.png" alt=""><figcaption></figcaption></figure>
+
+## Customize User Settings Page
+
+You can customize the look and feel of the User Settings page using the [UI design](branding.md) tool in Authgear Portal.
+
+Navigate to **Branding** > **Design** in Authgear Portal to customize the User Settings page.
+
+The theme (dark, light, or auto), logo, colors, border, etc. you set for AuthUI will also apply to the User Settings page.

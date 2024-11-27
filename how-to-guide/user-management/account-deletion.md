@@ -10,11 +10,11 @@ On Jan 22, 2022 [Apple decided](https://developer.apple.com/news/?id=i71db0mv) t
 
 ## Show "Delete Account" button in User Settings
 
-In the pre-built [**User Settings**](../built-in-ui/auth-ui.md) page, you can show a button for the end-users to initiate account deletion.
+In the pre-built [**User Settings**](../built-in-ui/auth-ui.md) page, you can show a button for the end-users to initiate account deletion. Users can access the **Delete Account** button under Advanced Settings in the User Settings page when you enable Account Deletion on your project.
 
 Enable this button in the **Advanced** -> **Account Deletion** page in the **Portal**
 
-!["Delete your account" button in the User Settings page](<../../.gitbook/assets/Delete Your Account Button.jpg>)
+!["Delete your account" button in the User Settings page](../../.gitbook/assets/authgear-user-settings-delete-account.png)
 
 Note that if you enable this feature, you have to prepare for encountering invalid session every time your users close User Settings in your mobile apps. If your users unfortunately decided to delete their account in User Settings, all their sessions will become invalid immediately.
 

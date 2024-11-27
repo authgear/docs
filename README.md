@@ -17,7 +17,7 @@ description: >-
 * Session management with Authgear Portals, and a pre-built setting page for users to control concurrent sessions.
 * Customizable UI with a **user-friendly low-code** dashboard.&#x20;
 * Various security features such as audit logs, brute force protection, smart account lockout, password policy, etc.
-* APIs for further integration and customizations. For example, build your own custom login and sign-up pages from the ground up powered by [Authentication Flow API](https://docs.authgear.com/\~/changes/anTCj6yoZ06s3pLJk5v8/reference/apis/authentication-flow-api).
+* APIs for further integration and customizations. For example, build your own custom login and sign-up pages from the ground up powered by [Authentication Flow API](https://docs.authgear.com/~/changes/anTCj6yoZ06s3pLJk5v8/reference/apis/authentication-flow-api).
 
 Most importantly, you can [get started](https://accounts.portal.authgear.com/signup) **with Authgear for free**.
 
@@ -28,7 +28,7 @@ Authgear contains the following high-level components:
 #### Authenticate on the Web/Mobile App
 
 * **Client App SDKs** - for developers to quickly implement authentication with Auth UI on your web and mobile applications. Check out [Start Building](get-started/start-building.md) for tutorials and API References.
-* **Auth UI** - is the default batteries included UI for login, signup and setting page. You can customize the style via the **Portal**, including the CSS and HTML of each page**.**
+* **Auth UI** - is the default batteries included UI for login, signup and setting page. You can customize the style via the **Portal**, including the CSS and HTML of each pag&#x65;**.**
 * [**Authentication Flow API**](how-to-guide/custom-ui/authentication-flow-api.md) - for developers to implement their own login, signup and reauthenticate UI (e.g. a mobile native view); or to define a customized login, signup and reauth flow.
 * [**Use Authgear as OpenID Connect Provider**](how-to-guide/authenticate/oidc-provider.md) - for developers to use Authgear with other software that already support OIDC login, you can use Authgear as an OpenID Connect Provider.
 

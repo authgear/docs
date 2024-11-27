@@ -265,7 +265,7 @@ The above code creates a basic login page with email and password fields and a s
 
 On the first line of the code, the value for the URL Query that Authgear adds to your custom UI URI is read and stored in the `$url_params` variable. This value is required to finish the authentication flow.
 
-Also in the above code, the form action points to a **form.php** with `$url_params` appended to the path**.** It is this form.php file that will process the form data and complete the login flow. We'll implement the file in a later step.
+Also in the above code, the form action points to a **form.php** with `$url_params` appended to the pat&#x68;**.** It is this form.php file that will process the form data and complete the login flow. We'll implement the file in a later step.
 
 The following screenshot shows the output of the custom login page on a browser:
 

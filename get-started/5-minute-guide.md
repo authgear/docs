@@ -46,17 +46,20 @@ The flow for sign-up and login will differ based on the login method you enable 
 
 After logging in from the previous step, you can **check out the Pre-Built User Settings Page**. This page is the default page where users of your project can edit their profile and manage security settings.
 
-<figure><img src="../.gitbook/assets/authgear-users-settings-3.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/authgear-new-user-settings (2).png" alt=""><figcaption></figcaption></figure>
 
-Click on the **More** link under **My profile** to view and edit profile attributes such as first name, last name,  photo, etc.
+Click on the **Edit Profile** to edit and view profile attributes such as first name, last name,  photo, etc.
 
-<figure><img src="../.gitbook/assets/authgear-users-settings-profile.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/authgear-new-user-settings-profile.png" alt=""><figcaption></figcaption></figure>
+
+Users can manage the identities (email address, phone number, or social media account) linked to their account under the **My Account** section of the User Settings page.
 
 The **Security** section of the User Settings page has the following options:
 
 * **Password:** users can change their password from here.
-* **2-step verification:** users can click on this option to view and manage 2-step authenticators for their account.&#x20;
+* **2-step verification:** users can click on this option to view and manage 2-step authenticators for their account. The option is only available when you enable 2FA for your project in **Authgear Portal** > **Authentication** > **2FA**.
 * **Signed-in device:** from this page, the user can view browsers and devices that their account is currently signed in on.
+* **Advanced Settings:** contains additional settings. For example, when you enable [Account Deletion](../how-to-guide/user-management/account-deletion.md) for your project, users can click on this link to access the **Delete Account** button.
 
 You can learn more about the User Settings page [here](../how-to-guide/built-in-ui/auth-ui.md).
 
