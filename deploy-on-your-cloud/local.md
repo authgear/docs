@@ -104,6 +104,7 @@ HTTP origin of authgear (default 'http://localhost:3000'):
 HTTP origin of portal (default 'http://portal.localhost:8000'):
 Phone OTP Mode (sms, whatsapp, whatsapp_sms) (default 'sms'):
 Would you like to turn off email verification? (In case you don't have SMTP credentials in your initial setup) [Y/N] (default 'false'): Y
+Select a service for searching (elasticsearch, postgresql) (default 'elasticsearch'):
 Database URL (default 'postgres://postgres:postgres@127.0.0.1:5432/postgres?sslmode=disable'): postgres://postgres:postgres@db:5432/postgres?sslmode=disable
 Database schema (default 'public'):
 Audit Database URL (default 'postgres://postgres:postgres@127.0.0.1:5432/postgres?sslmode=disable'): postgres://postgres:postgres@db:5432/postgres?sslmode=disable
@@ -117,11 +118,22 @@ config written to authgear.secrets.yaml
 
 `authgear.yaml` and `authgear.secrets.yaml` are generated in your working directory.
 
+### Use PostgreSQL as search service
+
+By default, Elasticsearch is used as the search service. Optionally, you can use PostgreSQL as the search service. Enter `postgresql` in the interactive prompt when you are asked to select a service for searching, followed by the search database configs.
+
+```
+Select a service for searching (elasticsearch, postgresql) (default 'elasticsearch'): postgresql
+...
+Search Database URL (default 'postgres://postgres:postgres@127.0.0.1:5432/postgres?sslmode=disable'): 
+Search Database schema (default 'public'):
+```
+
 ## Edit authgear.secrets.yaml
 
 The three services run in the same network. We have to ensure Authgear can connect to PostgreSQL and Redis.
 
-Since we do not have Elasticsearch in our docker-compose.yaml, we MUST remove the elasticsearch entry in `authgear.secrets.yaml`.
+Since we do not have Elasticsearch in our docker-compose.yaml, we MUST remove the elasticsearch entry in `authgear.secrets.yaml` if it exist.
 
 Edit `authgear.secrets.yaml` so that it looks like the following:
 
@@ -135,7 +147,11 @@ secrets:
     database_schema: public
     database_url: postgres://postgres:postgres@db:5432/postgres?sslmode=disable
   key: audit.db
-# Either remove or comment out this block.
+- data:
+    database_schema: public
+    database_url: postgres://postgres:postgres@db:5432/postgres?sslmode=disable
+  key: search.db
+# Either remove or comment out this block if it exist.
 # - data:
 #     elasticsearch_url: http://localhost:9200
 #   key: elasticsearch
@@ -166,6 +182,9 @@ Run the database migration:
 docker compose run --rm  authgear authgear database migrate up --database-url="postgres://postgres:postgres@db:5432/postgres?sslmode=disable" --database-schema="public"
 docker compose run --rm  authgear authgear audit database migrate up --database-url="postgres://postgres:postgres@db:5432/postgres?sslmode=disable" --database-schema="public"
 docker compose run --rm  authgear authgear images database migrate up --database-url="postgres://postgres:postgres@db:5432/postgres?sslmode=disable" --database-schema="public"
+
+# This is only needed if you use postgresql as the search service
+docker compose run --rm  authgear authgear search database migrate up --database-url="postgres://postgres:postgres@db:5432/postgres?sslmode=disable" --database-schema="public"
 ```
 
 ## Get it running

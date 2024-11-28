@@ -32,6 +32,8 @@ The database must have at least 5GB storage. The exact amount of storage depend 
 
 Authgear stores its main data in a PostgreSQL database, and log data in another PostgreSQL database. 2 separate PostgreSQL databases are required. It is strongly recommended that the PostgreSQL databases are not shared with other software. The database account must have full access to the PostgreSQL database it connects to. Authgear uses the `public` schema.
 
+If you decided to use PostgreSQL as the search service, an additional database is required.
+
 Do not make changes to the PostgreSQL databases, the schemas, the tables, the columns, or the rows.
 
 ### Redis requirements
@@ -40,7 +42,7 @@ Authgear stores user sessions and other ephemeral data in Redis. The requirement
 
 ### Elasticsearch requirements
 
-Authgear portal provides the search feature with Elasticsearch. A minimal setup of Elasticsearch consists of 3 Elasticsearch nodes. Each node requires 1 Core of CPU and 2GB of memory.
+Authgear portal provides the search feature with Elasticsearch or PostgresSQL. If you decided to use Elasticsearch, a minimal setup of Elasticsearch consists of 3 Elasticsearch nodes is required. Each node requires 1 Core of CPU and 2GB of memory.
 
 ### Web browser requirements
 
@@ -233,6 +235,11 @@ $ docker run --rm -it quay.io/theauthgear/authgear-server authgear audit databas
 $ docker run --rm -it quay.io/theauthgear/authgear-portal authgear-portal database migrate up \
   --database-url DATABASE_URL \
   --database-schema public
+  
+# Run this if you are using postgresql as search service
+$ docker run --rm -it quay.io/theauthgear/authgear-portal authgear search migrate up \
+  --search-database-url SEARCH_DATABASE_URL \
+  --search-database-schema public
 ```
 {% endtab %}
 
@@ -250,6 +257,11 @@ $ ./authgear audit database migrate up \
 $ ./authgear-portal database migrate up \
   --database-url DATABASE_URL \
   --database-schema public
+  
+# Run this if you are using postgresql as search service
+$ ./authgear search database migrate up \
+  --search-database-url SEARCH_DATABASE_URL \
+  --search-database-schema public
 ```
 {% endtab %}
 {% endtabs %}
@@ -334,11 +346,11 @@ Create the "accounts" app
 {% tabs %}
 {% tab title="Docker" %}
 ```
-$ docker run -v "$PWD"/resources:/app/resources quay.io/theauthgear/authgear-portal authgear-portal internal setup-portal ./resources/authgear \
+$ docker run -v "$PWD"/resources:/app/resources quay.io/theauthgear/authgear-portal authgear-portal internal configsource create ./resources/authgear \
   --database-url DATABASE_URL \
-  --database-schema public \
-  --default-authgear-domain accounts.myapp.com \
-  --custom-authgear-domain accounts.portal.myapp.com
+  --database-schema public
+
+// FIXME: There isn't any easy way to configure a custom domain from cli
 ```
 {% endtab %}
 
@@ -376,6 +388,8 @@ If there are breaking changes, migration usually will be provided as a subcomman
 New features usually require database migration to add new tables and new columns. You may need to [run database migration](helm.md#run-database-migration) before you run `helm upgrade`. We try hard to make sure the modification to the database is backward-compatible, which means older version of Authgear can run with a higher version of database schema.
 
 ## Helm chart values reference
+
+Please refer to [https://github.com/authgear/helm-charts/blob/master/authgear/values.yaml](https://github.com/authgear/helm-charts/blob/master/authgear/values.yaml)
 
 | Name                                                                | Type    | Required | Description                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
