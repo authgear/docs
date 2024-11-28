@@ -49,13 +49,10 @@ For more information about the OIDC API endpoint, please refer to the following 
 The related URLs are:
 
 * `/.well-known/openid-configuration`\
-  \
-  This endpoint serves as a JSON document containing the OpenID Connect configuration of your app. That includes the authorization endpoint, the token endpoint, and the JWKs endpoint. Here is [an example of how it looks](https://accounts.portal.authgear.com/.well-known/openid-configuration).
+  This endpoint serves a JSON document containing the OpenID Connect configuration of your Authgear project. That includes the authorization endpoint, the token endpoint, and the JWKs endpoint. Here is [an example of how it looks](https://accounts.portal.authgear.com/.well-known/openid-configuration).
 * `/.well-known/oauth-authorization-server`\
-  \
-  This endpoint serves a JSON document containing the authorization server metadata of your app. That includes the authorization endpoint, the token endpoint, and the JWKs endpoint. Here is [an example of how it looks](https://accounts.portal.authgear.com/.well-known/openid-configuration).
+  This endpoint serves a JSON document containing the authorization server metadata of your Authgear project. That includes the authorization endpoint, the token endpoint, and the JWKs endpoint. Here is [an example of how it looks](https://accounts.portal.authgear.com/.well-known/openid-configuration).
 * `/oauth2/userinfo`\
-  \
   The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated end user. When the client presents with a valid Access Token, the endpoint responds with the claims packaged in a JSON object. The claims are also the attributes of the [User Profile](../../how-to-guide/user-profiles/user-profile.md).
 
 ## Admin API
