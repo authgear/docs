@@ -47,17 +47,13 @@ Click the **Save** button to create the application.
 
 <figure><img src="../../.gitbook/assets/authgear-new-app-spa.png" alt=""><figcaption><p>create new client application</p></figcaption></figure>
 
+On the next screen, you'll see links to tutorials for different frameworks. Click **Next** to skip to the application configuration page.
+
 ### Configure Authorize Redirect URI
 
 The **Authorized Redirect URI** is a URL in you application where the user will be redirected to after login with Authgear. In this path, make a **finish authentication** call to complete the login process.&#x20;
 
-For this tutorial, add `http://localhost:4000/auth-redirect` to Authorize Redirect URIs.
-
-### Configure Post Logout Redirect URI
-
-The **Post Logout Redirect URI** is the URL users will be redirected after they have logged out. The URL must be whitelisted.
-
-For this tutorial, add `http://localhost:4000/` to Post Logout Redirect URIs.
+Go to the URI section of the Authgear client application you just created and add a new **Authorized Redirect URI**. For this tutorial, add `http://localhost:4000/auth-redirect` to Authorize Redirect URIs.
 
 Click **Save** to keep all client app configuration changes before proceeding to the next steps.
 
@@ -71,102 +67,33 @@ In this section, we'll create a simple React application and connect it to Authg
 
 Here are some recommended steps to scaffold a React project. You can skip this part if you are adding Authgear to an existing project. See [#install-authgear-sdk-to-the-project](react.md#install-authgear-sdk-to-the-project "mention") in the next section.
 
-#### Install basic project dependencies
+#### Create a new React project using Vite
 
-Create the project folder and install the dependencies. We will use `parcel` as the build tool and the `react-router-dom`, `react` , and `react-dom` packages. Also, we will use TypeScript in this tutorial.&#x20;
+Run the following command from your preferred folder to create a new React project:
 
 ```bash
-# Create a new folder for your project
-mkdir my-app
-# Move into the project directory
+# Create a new project using vite
+npm create vite@latest my-app -- --template react-ts 
+```
+
+Next, run the following commands to open the new project directory and install the dependencies:
+
+```sh
 cd my-app
-# Create source folder
-mkdir src
-# Create a brand new package.json file
-npm init -y
-# Install parcel
-npm install --save-dev --save-exact parcel
-# Install react, react-dom and react router
-npm install --save-exact react react-dom react-router-dom
-# Install TypeScript and related types
-npm install --save-dev --save-exact typescript @types/react @types/react-dom @types/react-router-dom
+npm install
 ```
 
-#### Add script for launching the app
+#### Change port
 
-In the `package.json` file, add these two lines to the `script` section
-
-```bash
-"start": "parcel serve --port 4000 --no-cache ./src/index.html",
-"build": "parcel build --no-cache ./src/index.html"
-```
-
-The `start` script runs the app in development mode on port 4000. The `build` script build the app for production to the `dist/` folder.
-
-#### Create the `index.html` file
-
-In `src/`, create a new file called `index.html` for `parcel` to bundle the app:&#x20;
-
-`src/index.html`:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Authgear React Tutorial Demo App</title>
-  </head>
-  <body>
-    <div id="react-app-root"></div>
-    <script type="module" src="./index.tsx"></script>
-  </body>
-</html>
+In the `package.json` file, update the value of `dev` field in the `script.dev` section to:
 
 ```
-
-#### Create the `App.tsx` file
-
-Create a new file called `App.tsx` with simply showing `Hello World` in the screen:&#x20;
-
-```javascript
-// src/App.tsx
-import React from "react";
-
-const App: React.FC = () => {
-  return <div>Hello World</div>;
-};
-
-export default App;
-
+"dev": "vite --port 4000",
 ```
 
-#### Create the `index.tsx` file
+This will enable the `npm run dev` command run the app in development mode on port 4000.&#x20;
 
-Create a new file called `index.tsx` as the entry point of the application.
-
-```tsx
-// src/index.tsx
-import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
-
-async function init() {
-  try {
-   // initialization code
-  } finally {
-    createRoot(document.getElementById("react-app-root")!).render(<App />);
-  }
-}
-
-init().catch((e) => {
-  // Error handling
-  console.error(e)
-});
- 
-```
-
-The file structure in your project is now:
+The file structure in your project should look like this now:
 
 ```bash
 my-app
@@ -174,13 +101,13 @@ my-app
 │   └── (...)
 ├── package-lock.json
 ├── package.json
+├── index.html
 └── src
     ├── App.tsx
-    ├── index.html
-    └── index.tsx
+    └── main.tsx
 ```
 
-Run `npm start` now to run the project and you will see "Hello World" when you open `http://localhost:4000` on a web browser.
+Run `npm run dev` now to run the project and you will see the default "Vite + React" page when you open `http://localhost:4000` on a web browser.
 
 ### Step 2: Install Authgear SDK to the project
 
@@ -190,14 +117,12 @@ Run the following command within your React project directory to install the Aut
 npm install --save --save-exact @authgear/web
 ```
 
-In `src/index.tsx` , import `authgear` and call the `configure` function to initialize an Authgear instance on application loads.
+In `src/main.tsx` , import `authgear` and call the `configure` function to initialize an Authgear instance on application loads.
 
 ```tsx
-// src/index.tsx
-import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
-import authgear from "@authgear/web";
+import { createRoot } from 'react-dom/client'
+import App from './App.tsx'
+import authgear from "@authgear/web"
 
 async function init() {
   try {
@@ -208,7 +133,7 @@ async function init() {
       sessionType: "refresh_token",
     });
   } finally {
-    createRoot(document.getElementById("react-app-root")!).render(<App />);
+    createRoot(document.getElementById("root")!).render(<App />);
   }
 }
 
@@ -223,7 +148,7 @@ The Authgear container instance takes `endpoint` and `clientID` as parameters. T
 It is recommended to render the app after `configure()` resolves. So by the time the app is rendered, Authgear is ready to use.&#x20;
 
 {% hint style="info" %}
-Run **`npm start`** now and you should see a page with "Hello World" and no error message in the console if Authgear SDK is configured successfully
+Run **`npm run dev`** now and you should see the default page again and no error message in the console if Authgear SDK is configured successfully
 {% endhint %}
 
 ### Step 3: Implement the Context Provider
@@ -283,7 +208,6 @@ const UserContextProvider: React.FC<UserContextProviderProps> = ({
 };
 
 export default UserContextProvider;
-
 ```
 
 ### Step 4: Implement the Auth Redirect
@@ -334,10 +258,16 @@ export default AuthRedirect;
 {% hint style="info" %}
 Since in React 18, useEffect will be fired twice in development mode, we need to implement a [cleanup function](https://beta.reactjs.org/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) to stop it from firing twice. We will use an `useRef` Hook to stop the user token from being sent twice to the Authgear Endpoint.
 
-Without a cleanup function, an`useEffect`Hook will be fired twice and hence `finishAuthentication() will` send the token back to Authgear Endpoint for two times, which the second one will result in "Invalid Token" error since the token can only be used once.
+Without a cleanup function, an`useEffect`Hook will be fired twice and hence `finishAuthentication()` will send the token back to Authgear Endpoint for two times, which the second one will result in "Invalid Token" error since the token can only be used once.
 {% endhint %}
 
 ### Step 5: Add Routes and Context Provider to the App
+
+First, install `react-router-dom` using the following command:
+
+```sh
+npm install --save-exact react-router-dom
+```
 
 Next, we will add a "Home" page. Create a `Home.tsx` component file the `src/` folder.&#x20;
 
@@ -366,7 +296,6 @@ const App: React.FC = () => {
 }
 
 export default App;
-
 </code></pre>
 
 The file structure should now look like
@@ -378,8 +307,7 @@ src
 ├── Home.tsx
 ├── context
 │   └── UserProvider.tsx
-├── index.html
-└── index.tsx
+└── main.tsx
 ```
 
 ### Step 6: Add a Login button
@@ -421,7 +349,7 @@ export default Home;
 
 ```
 
-You can now run **`npm start`** and you will be redirected to the Authgear Login page when you click the Login button.
+You can now run **`npm run dev`** and you will be redirected to the Authgear Login page when you click the Login button.
 
 ![User will be redirected to the Authgear login page by clicking the login button](../../.gitbook/assets/authgear-authui-login.png)
 
