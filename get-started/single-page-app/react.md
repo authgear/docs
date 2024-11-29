@@ -57,7 +57,7 @@ Go to the URI section of the Authgear client application you just created and ad
 
 Click **Save** to keep all client app configuration changes before proceeding to the next steps.
 
-![Configure Authorized Redirect URIs and Post Logout Redirect URIs.](../../.gitbook/assets/authgear-react-app-config.png)
+<figure><img src="../../.gitbook/assets/image (39).png" alt="" width="375"><figcaption><p>Configure Authorized Redirect URIs</p></figcaption></figure>
 
 ## Add Authgear to React App
 
