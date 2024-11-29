@@ -317,14 +317,14 @@ First, we will import the Authgear dependency and the React Hook that we will us
 ```tsx
 // src/Home.tsx
 import React, { useEffect, useState, useCallback, useContext } from 'react';
-import authgear from '@authgear/web';
+import authgear, { PromptOption } from '@authgear/web';
 
 const Home: React.FC = () => {
   const startLogin = useCallback(() => {
     authgear
       .startAuthentication({
         redirectURI: 'http://localhost:4000/auth-redirect',
-        prompt: 'login'
+        prompt: PromptOption.Login,
       })
       .then(
         () => {
@@ -366,7 +366,7 @@ Make use of `isLoggedIn` from the `UserContext` to control the components on the
 ```tsx
 // src/Home.tsx  
 import React, { useEffect, useState, useCallback, useContext } from "react";
-import authgear from "@authgear/web";
+import authgear, { PromptOption } from "@authgear/web";
 import { UserContext } from "./context/UserProvider";
 
 const Home: React.FC = () => {
@@ -396,7 +396,7 @@ const Home: React.FC = () => {
     authgear
       .startAuthentication({
         redirectURI: "http://localhost:4000/auth-redirect",
-        prompt: "login",
+        prompt: PromptOption.Login,
       })
       .then(
         () => {
@@ -497,7 +497,7 @@ This is the resulting `Home.tsx`:
 // src/Home.tsx
 import React, { useEffect, useState, useCallback, useContext } from "react";
 import { UserContext } from "./context/UserProvider";
-import authgear, { Page } from "@authgear/web";
+import authgear, { Page, PromptOption } from "@authgear/web";
 
 const Home: React.FC = () => {
   const [greetingMessage, setGreetingMessage] = useState<string>("");
@@ -526,7 +526,7 @@ const Home: React.FC = () => {
     authgear
       .startAuthentication({
         redirectURI: "http://localhost:4000/auth-redirect",
-        prompt: "login",
+        prompt: PromptOption.Login,
       })
       .then(
         () => {
