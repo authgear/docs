@@ -44,6 +44,10 @@ Authgear stores user sessions and other ephemeral data in Redis. The requirement
 
 Authgear portal provides the search feature with Elasticsearch or PostgresSQL. If you decided to use Elasticsearch, a minimal setup of Elasticsearch consists of 3 Elasticsearch nodes is required. Each node requires 1 Core of CPU and 2GB of memory.
 
+{% hint style="info" %}
+For projects expecting more than 10,000 users, ElasticSearch is recommended for optimal search performance. In addition, when using PostgreSQL search, the result will not include a total count of matching items.
+{% endhint %}
+
 ### Web browser requirements
 
 Authgear supports the following web browsers:

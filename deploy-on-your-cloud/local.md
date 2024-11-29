@@ -129,6 +129,10 @@ Search Database URL (default 'postgres://postgres:postgres@127.0.0.1:5432/postgr
 Search Database schema (default 'public'):
 ```
 
+{% hint style="info" %}
+For projects expecting more than 10,000 users, ElasticSearch is recommended for optimal search performance. In addition, when using PostgreSQL search, the result will not include a total count of matching items.
+{% endhint %}
+
 ## Edit authgear.secrets.yaml
 
 The three services run in the same network. We have to ensure Authgear can connect to PostgreSQL and Redis.
