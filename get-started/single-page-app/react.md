@@ -14,19 +14,6 @@ Follow this :clock1: **15-minute** tutorial to create a simple app using React w
 **Check out and clone** [<mark style="color:orange;">**the Sample Project on GitHub**</mark>](https://github.com/authgear/authgear-example-react)**.**
 {% endhint %}
 
-**Table of Content**
-
-* [Setup Application in Authgear](react.md#setup-application-in-authgear)
-* [Create a simple React project](react.md#step-1-create-a-simple-react-project)
-* [Install Authgear SDK to the project](react.md#step-2-install-authgear-sdk-to-the-project)
-* [Implement Context Provider](react.md#step-3-implement-the-context-provider)
-* [Implement the Auth Redirect page](react.md#step-4-implement-the-auth-redirect)
-* [Add a Login button](react.md#step-6-add-a-login-button)
-* [Show the user information](react.md#step-7-show-the-user-information)
-* [Add a Logout button](react.md#step-8-add-an-logout-button)
-* [Open User Settings](react.md#step-9-open-user-settings)
-* [Calling an API](react.md#finally-calling-an-api)
-
 ## Setup Application in Authgear
 
 To use Authgear's features, you'll need an account and a Project. Sign up for a free account at [https://portal.authgear.com/](https://portal.authgear.com/) and create a new Project to get started.
@@ -128,8 +115,8 @@ async function init() {
   try {
     // configure Authgear container instance
     await authgear.configure({
-      endpoint: "<your_app_endpoint>",
-      clientID: "<your_client_id>",
+      endpoint: import.meta.env.VITE_AUTHGEAR_ENDPOINT,
+      clientID: import.meta.env.VITE_AUTHGEAR_CLIENT_ID,
       sessionType: "refresh_token",
     });
   } finally {
@@ -143,7 +130,13 @@ init().catch((e) => {
 });
 ```
 
-The Authgear container instance takes `endpoint` and `clientID` as parameters. They can be obtained from the configuration page for the application created in [#setup-application-in-authgear](react.md#setup-application-in-authgear "mention").
+The Authgear container instance takes `endpoint` and `clientID` as parameters. They can be obtained from the configuration page for the application created in [#setup-application-in-authgear](react.md#setup-application-in-authgear "mention"). Create a `.env` file in the root directory of your project and add your Authgear client application configuration using the following fields:
+
+```properties
+VITE_AUTHGEAR_CLIENT_ID=<CLIENT_ID>
+VITE_AUTHGEAR_ENDPOINT=<AUTHGEAR_ENDPOINT>
+VITE_AUTHGEAR_REDIRECT_URL=http://localhost:4000/auth-redirect
+```
 
 It is recommended to render the app after `configure()` resolves. So by the time the app is rendered, Authgear is ready to use.&#x20;
 
@@ -323,7 +316,7 @@ const Home: React.FC = () => {
   const startLogin = useCallback(() => {
     authgear
       .startAuthentication({
-        redirectURI: 'http://localhost:4000/auth-redirect',
+        redirectURI: import.meta.env.VITE_AUTHGEAR_REDIRECT_URL,
         prompt: PromptOption.Login,
       })
       .then(
