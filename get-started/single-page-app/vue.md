@@ -4,59 +4,58 @@ description: Follow this quickstart tutorial to add authentication to your Vue a
 
 # Vue
 
-Authgear helps you add user logins to your Vue apps. It provides prebuilt login page and user settings page that accelerate the development.
+Authgear helps you add user logins to your Vue apps. It provides a prebuilt login page and user settings page that accelerate the development.
 
-Follow this :clock1: **15 minutes** tutorial to create a simple app using Vue with Authgear SDK.
+Follow this :clock1: **15-minute** tutorial to create a simple app using Vue with Authgear SDK.
 
 {% hint style="info" %}
 **Check out and clone** [<mark style="color:orange;">**the Sample Project on GitHub**</mark>](https://github.com/authgear/authgear-example-vue)**.**
 {% endhint %}
 
-**Table of Content**
-
-* [Setup Application in Authgear](vue.md#setup-application-in-authgear)
-* [Create a simple Vue project](vue.md#step-1-create-a-simple-vue-project)
-* [Create routes for the project](vue.md#step-2-create-routes-for-the-project)
-* [Install Authgear SDK to the project](vue.md#step-3-install-authgear-sdk-to-the-project)
-* [Implement Context Provider](vue.md#step-4-implement-the-context-provider)
-* [Implement the Auth Redirect page](vue.md#step-5-implement-the-auth-redirect)
-* [Add a Login button](vue.md#step-7-add-a-login-button)
-* [Show the user information](vue.md#step-8-show-the-user-information)
-* [Add a Logout button](vue.md#step-9-add-a-logout-button)
-* [Open User Settings](vue.md#step-10-open-user-settings)
-* [Calling an API](vue.md#finally-calling-an-api)
-
 ## Setup Application in Authgear
 
-Signup for an account in [https://portal.authgear.com/](https://portal.authgear.com/) and create a Project.
+You need an Authgear account and a project to use Authgear. Sign up for a free account at [https://portal.authgear.com/](https://portal.authgear.com/) and create a Project.
 
 After that, we will need to create an Application in the Project Portal.
 
 ### Create an application in the Portal
 
-1. Go to **Applications** on the left menu bar.
-2. Click **⊕Add Application** in the top tool bar.
-3. Input the name of your application, e.g. "MyAwesomeApp".
-4. Select **Single Page Application** as the application type
-5. Click "Save" to create the application
+In this step, we'll create an Authgear client application in the Authgear Portal. We'll use the configuration for this application in later steps to connect our Vue application to Authgear.&#x20;
+
+To create a client application navigate to **Applications** on the left menu bar in Authgear Portal.
+
+<figure><img src="../../.gitbook/assets/authgear-nav-applications.png" alt=""><figcaption><p>portal navigate to applications</p></figcaption></figure>
+
+Next, click **⊕Add Application** in the top toolbar to open the **New Application** page.
+
+Input the name of your application, e.g. "MyAwesomeApp" then select **Single Page Application** as the Application Type.
+
+Click **Save** to create the application.
+
+<figure><img src="../../.gitbook/assets/authgear-new-app-spa.png" alt=""><figcaption><p>create new client application</p></figcaption></figure>
+
+On the next screen, you'll see links to tutorials for different frameworks. Click **Next** to skip to the application configuration page
 
 ### Configure Authorize Redirect URI
 
-The Redirect URI is a URL in you application where the user will be redirected to after login with Authgear. In this path, make a **finish authentication** call to complete the login process.
+The Redirect URI is a URL in your application where the user will be redirected to after login with Authgear. In this path, make a **finish authentication** call to complete the login process.
 
-For this tutorial, add `http://localhost:4000/auth-redirect` to Authorize Redirect URIs.
+Scroll to the URI section of the configuration page for the client application you created in the last step. For this tutorial, add `http://localhost:4000/auth-redirect` to Authorize Redirect URIs.
 
-### Configure Post Logout Redirect URI
+Click the **Save** button to save your changes before you proceed.
 
-The Post Logout Redirect URI is the URL users will be redirected after they have logged out. The URL must be whitelisted.
+<figure><img src="../../.gitbook/assets/image (39).png" alt="" width="375"><figcaption><p>Configure Authorized Redirect URIs</p></figcaption></figure>
 
-For this tutorial, add `http://localhost:4000/` to Post Logout Redirect URIs.
+## Add Authgear to Vue App
 
-**Save** the configuration before next steps.
+In this section, we'll add Authgear to a Vue application and use the Authgear JavaScript SDK to implement the following features:
 
-![Configure Authorized Redirect URIs and Post Logout Redirect URIs.](../../.gitbook/assets/application-config-spa-react.jpg)
+* User Login/Sign-up
+* Read logged-in user's info
+* Open User Settings page
+* End user session using a Logout button
 
-## Step 1: Create a simple Vue project
+### Step 1: Create a simple Vue project
 
 Here are some recommended steps to scaffold a Vue project. You can skip this part if you are adding Authgear to an existing project. See [#step-3-install-authgear-sdk-to-the-project](vue.md#step-3-install-authgear-sdk-to-the-project "mention") in the next section.
 
@@ -97,7 +96,7 @@ After doing so, when you run `npm run dev` , the server will be running on port 
 
 #### Create the `Home.vue` file
 
-Create a new file called `Home.vue` in the `src/components` folder with simply showing `Hello World` on the screen.
+Create a new file called `Home.vue` in the `src/components` folder with simply showing `Hello World` on the screen. Add the follow code to `Home.vue`:
 
 ```tsx
 // src/components/Home.vue
@@ -108,7 +107,7 @@ Create a new file called `Home.vue` in the `src/components` folder with simply s
 
 #### Edit the `App.vue` file
 
-The `App.vue` file is generated by `Vite` already but some sections might not being needed for this tutorial.
+The `App.vue` file is generated by `Vite` already but some sections of it might not be needed for this tutorial. Edit the content of `App.vue` to the following:
 
 ```tsx
 // src/components/App.vue
@@ -123,7 +122,7 @@ import Home from "./components/Home.vue";
 
 #### Delete unnecessary files
 
-Some of the files might not being used and thus can be deleted. You can perform the following script to delete these files:
+Some of the files might not be used and thus can be deleted. You can perform the following script to delete these files:
 
 ```bash
 rm -rf src/assets src/components/HelloWorld.vue
@@ -149,9 +148,9 @@ my-app
     └── (...)
 ```
 
-Run `npm run dev` now to run the project and you will see default page with the title `Vite + Vue` and a count button on `http://localhost:4000`.
+Run `npm run dev` now to run the project and you will see the default page with the title `Vite + Vue` and a "Hello World" message on `http://localhost:4000`.
 
-## Step 2: Create routes for the project
+### Step 2: Create routes for the project
 
 Create a `AuthRedirect.vue` file in the `src/components` folder with the same content as `src/components/Home.vue` at this moment.
 
@@ -179,7 +178,7 @@ export const router = createRouter({
 });
 ```
 
-## Step 3: Install Authgear SDK to the project
+### Step 3: Install Authgear SDK to the project
 
 Run the following command within your Vue project directory to install the Authgear Web SDK
 
@@ -187,7 +186,7 @@ Run the following command within your Vue project directory to install the Authg
 npm install --save-exact @authgear/web
 ```
 
-In `src/main.ts` , import `authgear` and call the `configure` function to initialize an Authgear instance on application loads. We will also import `router` and use it to build routes for us.
+In `src/main.ts` , import `authgear` and call the `configure` function to initialize an Authgear instance on application loads. We will also import `router` and use it to build routes for us. Your `main.ts` file should look like this:
 
 ```typescript
 // src/main.ts
@@ -203,8 +202,8 @@ async function init() {
   try {
     // configure Authgear container instance
     await authgear.configure({
-      endpoint: "<your_app_endpoint>",
-      clientID: "<your_client_id>",
+      endpoint: import.meta.env.VITE_AUTHGEAR_ENDPOINT,
+      clientID: import.meta.env.VITE_AUTHGEAR_CLIENT_ID,
       sessionType: "refresh_token",
     });
   } finally {
@@ -219,22 +218,30 @@ init().catch((e) => {
 });
 ```
 
-The Authgear container instance takes `endpoint` and `clientID` as parameters. They can be obtained from the application page created in [#setup-application-in-authgear](vue.md#setup-application-in-authgear "mention").
+The Authgear container instance takes `endpoint` and `clientID` as parameters. They can be obtained from the application page created in [#setup-application-in-authgear](vue.md#setup-application-in-authgear "mention").&#x20;
 
-It is recommend to render the app after `configure()` resolves. So by the time the app is rendered, Authgear is ready to use.
+Create a `.env` file in the root directory of your project and add your Authgear client application configuration using the following fields:
+
+```properties
+VITE_AUTHGEAR_CLIENT_ID=<CLIENT_ID>
+VITE_AUTHGEAR_ENDPOINT=<AUTHGEAR_ENDPOINT>
+VITE_AUTHGEAR_REDIRECT_URL=http://localhost:4000/auth-redirect
+```
+
+It is recommended to render the app after `configure()` resolves. So by the time the app is rendered, Authgear is ready to use.
 
 {% hint style="info" %}
 Run **`npm run dev`** now and you should see the same page and no error message in the console if Authgear SDK is configured successfully
 {% endhint %}
 
-## Step 4: Implement the Context Provider
+### Step 4: Implement the Context Provider
 
-Since we want to reference the logged in state in anywhere of the app, let's put the state in a **context provider** with `UserProvider.vue` in the `/src/contexts` folder.
+Since we want to reference the logged-in state everywhere in the app, let's put the state in a **context provider** with `UserProvider.vue` in the `/src/contexts` folder.
 
-In `UserProvider.vue`, it will have a `isLoggedIn` boolean value. The `isLoggedIn` boolean state can be auto updated using the `onSessionStateChange` callback. This callback can be stored in `delegate` which is in the local SDK container.
+In `UserProvider.vue`, will have a `isLoggedIn` boolean value. The `isLoggedIn` boolean state can be auto-updated using the `onSessionStateChange` callback. This callback can be stored in `delegate` which is in the local SDK container.
 
 ```tsx
-// src/context/UserProvider.vue
+// src/contexts/UserProvider.vue
 <script lang="ts">
 import {
   defineComponent,
@@ -286,15 +293,15 @@ export default defineComponent({
 
 ```
 
-## Step 5: Implement the Auth Redirect
+### Step 5: Implement the Auth Redirect
 
-Next, we will add an "AuthRedirect" page for handling the authentication result after the user have been authenticated by Authgear.
+Next, we will add an "AuthRedirect" page for handling the authentication result after the user has been authenticated by Authgear.
 
 Create the `AuthRedirect.vue` component file in the `src/components/` folder.
 
 Call the Authgear `finishAuthentication()` function in the Auth Redirect component to send a token back to Authgear server in exchange for access token and refresh token. Don't worry about the technical jargons, `finishAuthentication()` will do all the hard work for you and and save the authentication data.
 
-When the authentication is finished, the `isLoggedIn` state from the UserContextProvider will automatic set to `true`. Finally, navigate back to root (`/`) which is our Home page.
+When the authentication is finished, the `isLoggedIn` state from the UserContextProvider will automatically be set to `true`. Finally, navigate back to root (`/`) which is our Home page.
 
 The final `AuthRedirect.vue` will look like this
 
@@ -321,9 +328,9 @@ onMounted(() => {
 
 ```
 
-## Step 6: Apply Routes and Context Provider to the App
+### Step 6: Apply Routes and Context Provider to the App
 
-As we have already configure the routes in the previous section, we can simply add `<router-view />` tag to the `App.vue`. We can then Import **UserProvider** and wrap the `router-view` with it.
+As we have already configured the routes in the previous section, we can simply add `<router-view />` tag to the `App.vue`. We can then Import **UserProvider** and wrap the `router-view` with it.
 
 Your final `App.vue` should look like this:
 
@@ -355,20 +362,20 @@ src
     └── Home.vue
 ```
 
-## Step 7: Add a Login button
+### Step 7: Add a Login button
 
-First we will import the Authgear dependency. Then add the login button which will call `startAuthentication(ConfigureOptions)` through `startLogin` callback on click. This will redirect the user to the login page.
+First, we will import the Authgear dependency. Then add the login button which will call `startAuthentication(ConfigureOptions)` through `startLogin` callback on click. This will redirect the user to the login page.
 
 ```tsx
 // src/components/Home.vue
 <script setup lang="ts">
-import authgear from "@authgear/web";
+import authgear, { PromptOption } from "@authgear/web";
 
 const startLogin = () => {
   authgear
     .startAuthentication({
-      redirectURI: "http://localhost:4000/auth-redirect",
-      prompt: "login",
+      redirectURI: import.meta.env.VITE_AUTHGEAR_REDIRECT_URL,
+      prompt: PromptOption.Login,
     })
     .then(
       () => {
@@ -390,11 +397,11 @@ const startLogin = () => {
 
 You can now run **`npm run dev`** and you will be redirected to the Authgear Login page when you click the Login button.
 
-![User will be redirected to the Authgear login page by clicking the login button](../../.gitbook/assets/spa-react-sample-login.png)
+![User will be redirected to the Authgear login page by clicking the login button](../../.gitbook/assets/authgear-authui-login.png)
 
-## Step 8: Show the user information
+### Step 8: Show the user information
 
-The Authgear SDK helps you get the information of the logged in users easily.
+The Authgear SDK helps you get the information of the logged-in users easily.
 
 In the last step, the user is successfully logged in so let's try to print the user ID (sub) of the user in the Home page.
 
@@ -407,7 +414,7 @@ The Login button can be also rendered conditionally which only visible if the us
 ```tsx
 // src/components/Home.vue  
 <script setup lang="ts">
-import authgear from "@authgear/web";
+import authgear, { PromptOption } from "@authgear/web";
 import { inject, onMounted, ref } from "vue";
 import { UserStateSymbol } from "../contexts/UserProvider.vue";
 
@@ -436,8 +443,8 @@ onMounted(() => {
 const startLogin = () => {
   authgear
     .startAuthentication({
-      redirectURI: "http://localhost:4000/auth-redirect",
-      prompt: "login",
+      redirectURI: import.meta.env.VITE_AUTHGEAR_REDIRECT_URL,
+      prompt: PromptOption.Login,
     })
     .then(
       () => {
@@ -464,11 +471,11 @@ const startLogin = () => {
 
 Run the app again, the User ID (sub) of the user should be printed on the Home page.
 
-## Step 9: Add a Logout button
+### Step 9: Add a Logout button
 
-Finally, let's add an Logout button when user is logged in.
+Finally, let's add a Logout button when a user is logged in.
 
-In `Home.vue`, we will add a conditional elements in the template:
+In `Home.vue`, we will add the following conditional elements in the template:
 
 ```tsx
 <div v-if="isLoggedIn">
@@ -495,15 +502,15 @@ const logout = () => {
 };
 ```
 
-Run the app again, we can now logout by clicking the logout button.
+Run the app again, we can now log out by clicking the **Logout** button.
 
-## Step 10: Open User Settings
+### Step 10: Open User Settings
 
-Authgear provide a built-in UI for the users to set their attributes and change security settings.
+Authgear provides a built-in UI for the users to set their attributes and change security settings.
 
-Use the `open` function to open the setting page at `<your_app_endpoint>/settings`
+Use the `open` function to open the settings page at `<your_app_endpoint>/settings`
 
-In `Home.vue` append a conditional link to the logout button section.
+In `Home.vue` append a conditional link to the logout button section like this:
 
 ```tsx
 <div v-if="isLoggedIn">
@@ -523,19 +530,19 @@ In `Home.vue` append a conditional link to the logout button section.
 And add the `userSetting` callback:
 
 ```tsx
-import authgear, { Page } from "@authgear/web";
+import authgear, { PromptOption, Page } from "@authgear/web";
 
 const userSetting = async () => {
   await authgear.open(Page.Settings);
 };
 ```
 
-This the the resulting `Home.vue`:
+This is the resulting `Home.vue`:
 
 ```tsx
 // src/components/Home.vue
 <script setup lang="ts">
-import authgear, { Page } from "@authgear/web";
+import authgear, { PromptOption, Page } from "@authgear/web";
 import { inject, onMounted, ref } from "vue";
 import { UserStateSymbol } from "../contexts/UserProvider.vue";
 
@@ -564,8 +571,8 @@ onMounted(() => {
 const startLogin = () => {
   authgear
     .startAuthentication({
-      redirectURI: "http://localhost:4000/auth-redirect",
-      prompt: "login",
+      redirectURI: import.meta.env.VITE_AUTHGEAR_REDIRECT_URL,
+      prompt: PromptOption.Login,
     })
     .then(
       () => {
@@ -621,15 +628,15 @@ const userSetting = async () => {
 
 ```
 
-![Show the User ID, a link to User Settings and a logout button after login](../../.gitbook/assets/spa-vue-sample-screenshot.png)
+![Show the User ID, a link to User Settings and a logout button after login](../../.gitbook/assets/authgear-vue-demo.png)
 
 ## Next steps, Calling an API
 
-To access restricted resources on your backend application server, the HTTP requests should include the access token in their Authorization headers. The Web SDK provides a `fetch` function which automatically handle this, or you can get the token with `authgear.accessToken`.
+To access restricted resources on your backend application server, the HTTP requests should include the access token in their Authorization headers. The Web SDK provides a `fetch` function which automatically handles this, or you can get the token with `authgear.accessToken`.
 
 #### Option 1: Using fetch function provided by Authgear SDK
 
-Authgear SDK provides the `fetch` function for you to call your application server. This `fetch` function will include the Authorization header in your application request, and handle refresh access token automatically. The `authgear.fetch` implements [fetch](https://fetch.spec.whatwg.org/).
+Authgear SDK provides the `fetch` function for you to call your application server. This `fetch` function will include the Authorization header in your application request, and handle the refresh access token automatically. The `authgear.fetch` implements [fetch](https://fetch.spec.whatwg.org/).
 
 ```javascript
 authgear
