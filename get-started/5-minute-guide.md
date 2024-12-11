@@ -4,7 +4,7 @@ description: A quick guide on getting started with Authgear
 
 # 5-Minute Guide
 
-&#x20;Authgear makes it easy to add user authentication and authorization to any application. In this guide, we'll show you how to get started with Authgear in 5 minutes.
+Authgear makes it easy to add user authentication and authorization to any application. In this guide, we'll show you how to get started with Authgear in 5 minutes.
 
 ### Video Guide
 
@@ -22,9 +22,7 @@ An Authgear project is similar to a container that holds all your users, setting
 
 You can create multiple projects under one account based on your needs. When you create multiple projects, each project is isolated from the others. For example, you can create **Project 1** for your e-commerce business and **Project 2** for a fitness club you organize. **Project 1** and **Project 2** will not share the same users or settings.
 
-To create an additional project, log in to your Authgear account then click on the Create Project button.&#x20;
-
-<figure><img src="../.gitbook/assets/authgear-portal-projects-2.png" alt=""><figcaption></figcaption></figure>
+To create an additional project, log in to your Authgear account then click on the "Create Project" button.&#x20;
 
 ### 3. Testing your signup/login page
 
@@ -32,7 +30,7 @@ Now that you have created a project in Authgear, you're ready to integrate Authg
 
 Before any integration, you can try out the signup flow for your project from the "Getting Started" page.&#x20;
 
-<figure><img src="../.gitbook/assets/authgear-getting-started.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
 
 You should be greeted with the AuthUI Login/Sign-up page. Use the form to create a new user account under your project.&#x20;
 
@@ -82,7 +80,7 @@ Click on **Users** to view a list of all the users in your project.  Click on a 
 
 You can also add new users to your project from the User Management page. To do that, click on the **Create User** button on the right.
 
-<figure><img src="../.gitbook/assets/authgear-user-management.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (43).png" alt=""><figcaption></figcaption></figure>
 
 ### 7. Continue Exploring Authgear
 
