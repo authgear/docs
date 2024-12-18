@@ -91,14 +91,14 @@ Your users can update their profile from this settings page by following the ste
 
 First, within your application, provide a link to the user settings page for your Authgear project. The URL should look like this: `https://<YOUR_AUTHGEAR_ENDPOINT>/settings`. Note that users can not access this link directly without logging in first.
 
-After a user logs in and visits the settings page, they can view their profile photo and other details. To access the edit profile page, the user should click on the **More** link under the **My profile** card.
+After a user logs in and visits the settings page, they can view their profile photo and other details.&#x20;
 
-<figure><img src="../../.gitbook/assets/authgear-ui-settings.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-new-user-settings (2).png" alt=""><figcaption></figcaption></figure>
 
-On the edit profile page, the user can set their profile photo and update other details for their profile.
+Users can click on the **Edit Profile** button to update profile details such as name, gender, photo, and more.
 
-<figure><img src="../../.gitbook/assets/authgear-ui-settings-profile.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-new-user-settings-profile.png" alt=""><figcaption><p>user settings edit profile ui</p></figcaption></figure>
 
-To edit an attribute, the user should click on the edit icon beside that attribute.
+To edit a profile attribute, the user should click on that attribute.
 
-<figure><img src="../../.gitbook/assets/authgear-ui-profile-name.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-new-user-settings-editing-attribute (1).png" alt=""><figcaption><p>user settings editing attribute </p></figcaption></figure>
