@@ -43,7 +43,6 @@
   * [Add WhatsApp OTP Login](how-to-guide/authenticate/whatsapp-otp-login.md)
   * [Add Email Magic Link Login](how-to-guide/authenticate/add-email-magic-link-login.md)
   * [Add Biometric Login](how-to-guide/authenticate/biometric.md)
-  * [Add Ethereum & NFT Login](how-to-guide/authenticate/web3.md)
   * [Add Anonymous Users](how-to-guide/authenticate/anonymous-users.md)
   * [Add authentication to any web page](how-to-guide/authenticate/add-authentication-to-any-web-page.md)
   * [Enable Two-Factor Authentication (2FA)](how-to-guide/authenticate/enable-two-factor-authentication-2fa.md)
