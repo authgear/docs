@@ -10,7 +10,7 @@ Authgear Enterprise Plan offers self-managed options for customers to run the wh
 
 ### Deployment Options
 
-* Depending on [backend-integration.md](../../get-started/backend-api/backend-integration.md "mention") approach, Authgear Resolvers is not needed if your backend self-validate user cookies or JWT.
+* Depending on [backend-api](../../get-started/backend-api/ "mention") approach, Authgear Resolvers is not needed if your backend self-validate user cookies or JWT.
 * Supports custom SMS and email gateways.
 * Redis is required to store user session, its recommended to use managed redis so session data can be persistent and users can keep their session in event of redis restart.
 * Optional storage services:

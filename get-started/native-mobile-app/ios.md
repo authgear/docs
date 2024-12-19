@@ -215,8 +215,8 @@ authgear.logout { result in
 
 To protect your application server from unauthorized access. You will need to **integrate your backend with Authgear**.
 
-{% content-ref url="../backend-api/backend-integration.md" %}
-[backend-integration.md](../backend-api/backend-integration.md)
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
 {% endcontent-ref %}
 
 ## iOS SDK Reference
@@ -225,4 +225,4 @@ For detailed documentation on the iOS SDK, visit [iOS SDK Reference](https://aut
 
 ### Footnote
 
-\[^1]: For further instruction on setting up custom URI scheme in iOS, see [https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app) \[^2]: For more explanation on JWT, see [https://en.wikipedia.org/wiki/JSON\_Web\_Token](https://en.wikipedia.org/wiki/JSON\_Web\_Token)
+\[^1]: For further instruction on setting up custom URI scheme in iOS, see [https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app) \[^2]: For more explanation on JWT, see [https://en.wikipedia.org/wiki/JSON\_Web\_Token](https://en.wikipedia.org/wiki/JSON_Web_Token)

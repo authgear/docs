@@ -47,6 +47,7 @@ Client-side SDKs are designed for developers to quickly implement authentication
   * [React Native](native-mobile-app/react-native.md)
   * [Flutter](native-mobile-app/flutter.md)
   * [Capacitor (Ionic)](native-mobile-app/ionic-sdk.md)
+  * [Xamarin](native-mobile-app/xamarin.md)
   * [Others](native-mobile-app/using-authgear-without-sdk-client-side.md)
 
 ### Validate JWT in your backend server

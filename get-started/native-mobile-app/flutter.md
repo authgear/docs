@@ -263,8 +263,8 @@ await authgear.logout();
 
 To protect your application server from unauthorized access. You will need to **integrate your backend with Authgear**.
 
-{% content-ref url="../backend-api/backend-integration.md" %}
-[backend-integration.md](../backend-api/backend-integration.md)
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
 {% endcontent-ref %}
 
 ## Flutter SDK Reference
@@ -275,4 +275,4 @@ For detailed documentation on the Flutter SDK, visit [Flutter SDK Reference](htt
 
 \[^1]: For futher instruction on setting up custom URI scheme in Flutter, see [https://docs.flutter.dev/development/ui/navigation/deep-linking](https://docs.flutter.dev/development/ui/navigation/deep-linking)
 
-\[^2]: For more explanation on JWT, see [https://en.wikipedia.org/wiki/JSON\_Web\_Token](https://en.wikipedia.org/wiki/JSON\_Web\_Token)
+\[^2]: For more explanation on JWT, see [https://en.wikipedia.org/wiki/JSON\_Web\_Token](https://en.wikipedia.org/wiki/JSON_Web_Token)

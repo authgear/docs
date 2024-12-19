@@ -29,13 +29,9 @@
   * [Express](get-started/regular-web-app/express.md)
   * [PHP](get-started/regular-web-app/php.md)
   * [Python Flask App](get-started/regular-web-app/python-flask-app.md)
-* [Backend/API](get-started/backend-api/README.md)
-  * [Backend Integration](get-started/backend-api/backend-integration.md)
+* [Backend/API Integration](get-started/backend-api/README.md)
   * [Validate JWT in your application server](get-started/backend-api/jwt.md)
   * [Forward Authentication to Authgear Resolver Endpoint](get-started/backend-api/nginx.md)
-* [Choose your authentication approach](get-started/authentication-approach/README.md)
-  * [Token-based (Native mobile or Single-page app)](get-started/authentication-approach/token-based.md)
-  * [Cookie-based (Website or Single-page app)](get-started/authentication-approach/cookie-based.md)
 
 ## How-To Guides <a href="#how-to-guide" id="how-to-guide"></a>
 

@@ -354,8 +354,8 @@ httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer
 
 To protect your application server from unauthorized access. You will need to **integrate your backend with Authgear**.
 
-{% content-ref url="../backend-api/backend-integration.md" %}
-[backend-integration.md](../backend-api/backend-integration.md)
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
 {% endcontent-ref %}
 
 ## Xamarin SDK Reference
@@ -364,4 +364,4 @@ For detailed documentation on the Xamarin SDK, visit [Xamarin SDK Reference](htt
 
 ### Footnote
 
-\[^1]: For further instruction on setting up custom URI scheme in Xamarin, see [https://www.xamarinhelp.com/uri-scheme/](https://www.xamarinhelp.com/uri-scheme/) \[^2]: For more explanation on JWT, see [https://en.wikipedia.org/wiki/JSON\_Web\_Token](https://en.wikipedia.org/wiki/JSON\_Web\_Token)
+\[^1]: For further instruction on setting up custom URI scheme in Xamarin, see [https://www.xamarinhelp.com/uri-scheme/](https://www.xamarinhelp.com/uri-scheme/) \[^2]: For more explanation on JWT, see [https://en.wikipedia.org/wiki/JSON\_Web\_Token](https://en.wikipedia.org/wiki/JSON_Web_Token)

@@ -492,10 +492,10 @@ authgearClient
 
 ## Next steps
 
-To protect your application server from unauthorized access. You will need to [integrate Authgear to your backend](https://docs.authgear.com/get-started/backend-api/backend-integration).
+To protect your application server from unauthorized access. You will need to [integrate Authgear to your backend](../backend-api/).
 
-{% content-ref url="../backend-api/backend-integration.md" %}
-[backend-integration.md](../backend-api/backend-integration.md)
+{% content-ref url="../backend-api/" %}
+[backend-api](../backend-api/)
 {% endcontent-ref %}
 
 ## JavaScript SDK Reference

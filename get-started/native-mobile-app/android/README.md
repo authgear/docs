@@ -34,7 +34,7 @@ From the Project listing, create a new Project or select an existing Project. Af
 ![Edit an application](../../../.gitbook/assets/edit-application-app.png)
 
 {% hint style="info" %}
-If you wish to [validate JSON Web Token (JWT) in your own application server](https://github.com/authgear/docs/blob/master/get-started/backend-integration/jwt/README.md), turn on "Issue JWT as access token".\[^2] If you wish to [forward authentication requests to Authgear Resolver Endpoint](https://github.com/authgear/docs/blob/master/get-started/backend-integration/nginx/README.md), leave this unchecked. See comparisons in [Backend Integration](../../backend-api/backend-integration.md).
+If you wish to [validate JSON Web Token (JWT) in your own application server](https://github.com/authgear/docs/blob/master/get-started/backend-integration/jwt/README.md), turn on "Issue JWT as access token".\[^2] If you wish to [forward authentication requests to Authgear Resolver Endpoint](https://github.com/authgear/docs/blob/master/get-started/backend-integration/nginx/README.md), leave this unchecked. See comparisons in [Backend Integration](broken-reference).
 {% endhint %}
 
 ![](../../../.gitbook/assets/application-jwt.png)
@@ -281,10 +281,10 @@ class MyAwesomeViewModel extends AndroidViewModel {
 
 ## **Next steps** <a href="#secure-your-application-server-with-authgear" id="secure-your-application-server-with-authgear"></a>
 
-To protect your application server from unauthorized access. You will need to **integrate your backend with Authgear**.
+To protect your application server from unauthorized access. You will need to [integrate Authgear to your backend](../../backend-api/).
 
-{% content-ref url="../../backend-api/backend-integration.md" %}
-[backend-integration.md](../../backend-api/backend-integration.md)
+{% content-ref url="../../backend-api/" %}
+[backend-api](../../backend-api/)
 {% endcontent-ref %}
 
 ## Android SDK Reference
@@ -293,4 +293,4 @@ For detailed documentation on the Flutter SDK, visit [Android SDK Reference](htt
 
 ### Footnote
 
-\[^1]: For further instruction on setting up custom URI scheme in Android, see [https://developer.android.com/training/app-links/deep-linking](https://developer.android.com/training/app-links/deep-linking) \[^2]: For more explanation on JWT, see [https://en.wikipedia.org/wiki/JSON\_Web\_Token](https://en.wikipedia.org/wiki/JSON\_Web\_Token)
+\[^1]: For further instruction on setting up custom URI scheme in Android, see [https://developer.android.com/training/app-links/deep-linking](https://developer.android.com/training/app-links/deep-linking) \[^2]: For more explanation on JWT, see [https://en.wikipedia.org/wiki/JSON\_Web\_Token](https://en.wikipedia.org/wiki/JSON_Web_Token)
