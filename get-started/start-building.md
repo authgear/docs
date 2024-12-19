@@ -1,5 +1,5 @@
 ---
-description: Choose your application type for a getting-started guide
+description: Choose the integration approach based on application type
 layout:
   title:
     visible: true
