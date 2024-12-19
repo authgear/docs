@@ -85,6 +85,6 @@ If your application is a traditional web app running on a server, you can levera
 
 When implementing identity management for your enterprise software, Authgear provides robust single sign-on (SSO) capabilities that seamlessly connect your workforce. Enterprise applications typically support standard authentication protocols like OpenID Connect (OIDC) and Security Assertion Markup Language (SAML)
 
-* [Integration with OIDC Protocol](../how-to-guide/authenticate/oidc-provider.md)
+* [Integration with OIDC Protocol](../how-to-guide/single-sign-on/oidc-provider.md)
 * [Integration with SAML 2.0 Protocol](../how-to-guide/single-sign-on/single-sign-on-with-saml/)
 

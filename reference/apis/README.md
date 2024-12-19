@@ -42,8 +42,8 @@ For more information about the OIDC API endpoint, please refer to the following 
 [oauth-2.0-and-openid-connect-oidc](oauth-2.0-and-openid-connect-oidc/)
 {% endcontent-ref %}
 
-{% content-ref url="../../how-to-guide/authenticate/oidc-provider.md" %}
-[oidc-provider.md](../../how-to-guide/authenticate/oidc-provider.md)
+{% content-ref url="../../how-to-guide/single-sign-on/oidc-provider.md" %}
+[oidc-provider.md](../../how-to-guide/single-sign-on/oidc-provider.md)
 {% endcontent-ref %}
 
 The related URLs are:
