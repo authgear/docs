@@ -15,22 +15,26 @@ layout:
 
 # Regular Web App
 
-If you have a traditional web application like **Java EE, Express, PHP, GO, Laravel, or** [**ASP.NET**](http://asp.net/) **Core MVC** and you want to integrate authentication features.
+If your application is a traditional web app running on a server, for example, **Java EE, Express, PHP, GO, Laravel, or** [**ASP.NET**](http://asp.net/) **Core MVC,** you can leverage the OpenID Connect (OIDC) protocol to authenticate users via Authgear. A wide range of plug-and-play libraries can be found that simplify the integration process. These libraries handle crucial tasks such as authentication requests, session management, and redirecting users back to your application seamlessly.
 
-{% content-ref url="java-spring-boot.md" %}
-[java-spring-boot.md](java-spring-boot.md)
+{% content-ref url="express.md" %}
+[express.md](express.md)
 {% endcontent-ref %}
 
 {% content-ref url="next.js.md" %}
 [next.js.md](next.js.md)
 {% endcontent-ref %}
 
-{% content-ref url="asp.net-core-mvc.md" %}
-[asp.net-core-mvc.md](asp.net-core-mvc.md)
+{% content-ref url="python-flask-app.md" %}
+[python-flask-app.md](python-flask-app.md)
 {% endcontent-ref %}
 
-{% content-ref url="express.md" %}
-[express.md](express.md)
+{% content-ref url="java-spring-boot.md" %}
+[java-spring-boot.md](java-spring-boot.md)
+{% endcontent-ref %}
+
+{% content-ref url="asp.net-core-mvc.md" %}
+[asp.net-core-mvc.md](asp.net-core-mvc.md)
 {% endcontent-ref %}
 
 {% content-ref url="laravel.md" %}
@@ -39,8 +43,4 @@ If you have a traditional web application like **Java EE, Express, PHP, GO, Lara
 
 {% content-ref url="php.md" %}
 [php.md](php.md)
-{% endcontent-ref %}
-
-{% content-ref url="python-flask-app.md" %}
-[python-flask-app.md](python-flask-app.md)
 {% endcontent-ref %}
