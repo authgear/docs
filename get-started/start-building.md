@@ -15,21 +15,75 @@ layout:
 
 # Start Building
 
-## Single Page Application
+## Integration Approaches
 
-Step-by-step guide for JavaScript applications that run in the browser.
+There are 3 different high-level approaches to integrating Authgear with your applications:
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>React</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-react-2.png">framework-react-2.png</a></td><td><a href="single-page-app/react.md">react.md</a></td></tr><tr><td><strong>JavaScript (Web)</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-js.png">framework-js.png</a></td><td><a href="single-page-app/website.md">website.md</a></td></tr><tr><td><strong>Angular</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-angular.png">framework-angular.png</a></td><td><a href="single-page-app/angular.md">angular.md</a></td></tr><tr><td><strong>Vue</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-vue.png">framework-vue.png</a></td><td><a href="single-page-app/vue.md">vue.md</a></td></tr></tbody></table>
+1. **Mobile apps or single-page web applications:**\
+   The frontend clients integrate with Authgear’s SDKs, which handle full login flow and session management. It’s important to validate the session in your backend server.
+2. **Regular Web Application:**\
+   Traditional server-side rendered web apps that run on the server can use OIDC protocol to authenticate with Authgear. The application server has full control over the session storage.
+3. **Software built by others:** \
+   Integrate with other OIDC/SAML compatible applications like WordPress, Salesforce for Single Sign-On.
 
-## Native/Mobile Apps
+## **Mobile apps or single-page web applications**
 
-Step-by-step guide on how to use Authgear to add user authentication to your mobile application.
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Android</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-android.png">framework-android.png</a></td><td><a href="native-mobile-app/android/">android</a></td></tr><tr><td><strong>iOS</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-ios.png">framework-ios.png</a></td><td><a href="native-mobile-app/ios.md">ios.md</a></td></tr><tr><td><strong>React Native</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-rn.png">framework-rn.png</a></td><td><a href="native-mobile-app/react-native.md">react-native.md</a></td></tr><tr><td><strong>Flutter</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-flutter.png">framework-flutter.png</a></td><td><a href="native-mobile-app/flutter.md">flutter.md</a></td></tr><tr><td><strong>Ionic</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-ionic.png">framework-ionic.png</a></td><td><a href="native-mobile-app/ionic-sdk.md">ionic-sdk.md</a></td></tr><tr><td><strong>Xamarin</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-xamarin.png">framework-xamarin.png</a></td><td><a href="native-mobile-app/xamarin.md">xamarin.md</a></td></tr></tbody></table>
+### Client-side SDKs
 
-## Regular Web App
+Client-side SDKs are designed for developers to quickly implement authentication with Auth UI on your web and mobile applications. After login, it returns the user data for your apps. It can open a hosted [pre-built account settings page](../how-to-guide/built-in-ui/auth-ui.md) for the user to manage their own account. The SDKs manage session token storage automatically and have built-in token ownership protection ([DPoP](https://oauth.net/2/dpop/)) against stolen refresh tokens.
 
-Guides for using Authgear in web applications that run on the server side.
+**Check out the following guides for your specific framework:**
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Java (Spring Boot)</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-java.png">framework-java.png</a></td><td><a href="regular-web-app/java-spring-boot.md">java-spring-boot.md</a></td></tr><tr><td><strong>Express</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-express.png">framework-express.png</a></td><td><a href="regular-web-app/express.md">express.md</a></td></tr><tr><td><strong>Laravel</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-laravel.png">framework-laravel.png</a></td><td><a href="regular-web-app/laravel.md">laravel.md</a></td></tr><tr><td><strong>Next.js</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-nextjs.png">framework-nextjs.png</a></td><td><a href="regular-web-app/next.js.md">next.js.md</a></td></tr><tr><td><strong>PHP</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-php.png">framework-php.png</a></td><td><a href="regular-web-app/php.md">php.md</a></td></tr><tr><td><strong>Python (Flask App)</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-python.png">framework-python.png</a></td><td><a href="regular-web-app/python-flask-app.md">python-flask-app.md</a></td></tr><tr><td><strong>ASP.NET Core MVC</strong></td><td></td><td></td><td><a href="../.gitbook/assets/framework-asp.png">framework-asp.png</a></td><td><a href="regular-web-app/asp.net-core-mvc.md">asp.net-core-mvc.md</a></td></tr></tbody></table>
+* Frontend JS SDK
+  * [React](single-page-app/react.md)
+  * [Vue](single-page-app/vue.md)
+  * [Angular](single-page-app/angular.md)
+  * [Vanilla JS](single-page-app/website.md)
+* Mobile SDKs
+  * [iOS](native-mobile-app/ios.md)
+  * [Android](native-mobile-app/android/)
+  * [React Native](native-mobile-app/react-native.md)
+  * [Flutter](native-mobile-app/flutter.md)
+  * [Capacitor (Ionic)](native-mobile-app/ionic-sdk.md)
+  * [Others](native-mobile-app/using-authgear-without-sdk-client-side.md)
+
+### Validate JWT in your backend server
+
+After the frontend integration is complete, every request sent from your application to the backend server should include the Authgear session in its header. JWKS should be used to validate the requests and decode user information from the JWT access token. See [Validate JWT in your application server](backend-api/jwt.md) for details and code examples.
+
+### Customization
+
+You can [customize the look and feel of Authgear prebuilt UI](../how-to-guide/built-in-ui/branding.md) to match your branding. [Events and hooks](../how-to-guide/events-hooks/) can be used to stay notified and add functionality during the authentication process.&#x20;
+
+### User Management through backend server
+
+The Authgear Admin API enables comprehensive user management via a GraphQL endpoint for your backend server. The server can perform operations including searching for users, updating user details, deleting user accounts, and disabling user access.&#x20;
+
+For detailed implementation instructions and API capabilities, refer to the [Admin API ](../reference/apis/admin-api/)guide.
+
+### Custom UI
+
+If you wish to use a custom UI instead of the pre-built UI for signup and login, you need to deploy another server and complete the signup/login process using Authentication Flow API. See [Custom UI ](../how-to-guide/custom-ui/)for in-depth instructions.
+
+## Regular Web Application
+
+If your application is a traditional web app running on a server, you can leverage the OpenID Connect (OIDC) protocol to authenticate users via Authgear. A wide range of plug-and-play libraries can be found that simplify the integration process. These libraries handle crucial tasks such as authentication requests, session management, and redirecting users back to your application seamlessly.
+
+**See the following tutorials for your specific application framework:**
+
+* [Next JS](regular-web-app/next.js.md)
+* [Express JS](regular-web-app/express.md)
+* [PHP (Laravel)](regular-web-app/laravel.md)
+* [Python (Flask)](regular-web-app/python-flask-app.md)
+* [ASP.NET Core MVC](regular-web-app/asp.net-core-mvc.md)
+* [Java (Spring Boot)](regular-web-app/java-spring-boot.md)
+
+## Software built by others
+
+When implementing identity management for your enterprise software, Authgear provides robust single sign-on (SSO) capabilities that seamlessly connect your workforce. Enterprise applications typically support standard authentication protocols like OpenID Connect (OIDC) and Security Assertion Markup Language (SAML)
+
+* [Integration with OIDC Protocol](../how-to-guide/authenticate/oidc-provider.md)
+* [Integration with SAML 2.0 Protocol](../how-to-guide/single-sign-on/single-sign-on-with-saml/)
 

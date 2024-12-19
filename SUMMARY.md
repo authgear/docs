@@ -20,6 +20,7 @@
   * [React Native SDK](get-started/native-mobile-app/react-native.md)
   * [Ionic SDK](get-started/native-mobile-app/ionic-sdk.md)
   * [Xamarin SDK](get-started/native-mobile-app/xamarin.md)
+  * [Using Authgear without SDK (Client side)](get-started/native-mobile-app/using-authgear-without-sdk-client-side.md)
 * [Regular Web App](get-started/regular-web-app/README.md)
   * [Java Spring Boot](get-started/regular-web-app/java-spring-boot.md)
   * [Next.js](get-started/regular-web-app/next.js.md)
