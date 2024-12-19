@@ -16,8 +16,6 @@ This guide is only for cookie-based authentication in local development setups. 
 
 Authgear sets a cookie in the browser inside the project domain. When running your application on `localhost`, the browser will not see the cookies because the website is not in the subdomain of the domain in which the cookies are set. Therefore, the browser will not be able to authenticate itself.
 
-You can learn more [here](broken-reference).
-
 ## Setup a new Authgear project
 
 > For local development, it is highly recommended to create a new application on Authgear before continuing to the rest of the guide.
