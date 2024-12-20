@@ -19,6 +19,12 @@ If your API or backend service needs authentication, you can validate the sessio
 
 There are different approaches to verify the requests based on whether you validate JWT (JSON Web Tokens) in your server, or forward authentication to Authgear Resolver Endpoint.
 
+|                           | Validate JSON Web Token (JWT) in your application server                                                                                                                   | Forward Authentication to Authgear Resolver Endpoint                                                                    |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Reliability               | <p><strong>Medium</strong><br>JWT only updates when expire. That means before the token expiry, your application may see the user is valid even they has been disabled</p> | <p><strong>High</strong><br>Update near real-time, based on your reserve proxy cache setting</p>                        |
+| Integration difficulties  | <p><strong>Easy</strong><br>You only need to add code in your application to validate and decode JWT</p>                                                                   | <p><strong>Medium</strong><br>Need to setup extra reverse proxy to resolve authentication information</p>               |
+| Transportation of session | **Access Token** in `Authorization` header                                                                                                                                 | <p><strong>Session ID</strong> in Cookies or <br><strong>Access Token</strong> in <code>Authorization</code> header</p> |
+
 ## Simple: Validate JWT in your server
 
 Authgear uses [JSON Web Token (JWT)](https://jwt.io/?_gl=1*1ybgym6*rollup_ga*MTI1NDM1NjUwMy4xNjg3NzEyNTIz*rollup_ga_F1G3E656YZ*MTY5MTEzNjEzNS45NS4xLjE2OTExMzYxNDguNDcuMC4w*_ga*MTI1NDM1NjUwMy4xNjg3NzEyNTIz*_ga_QKMSDV5369*MTY5MTEzNjEzNS44Ny4xLjE2OTExMzYxNDguNDcuMC4w&_ga=2.165043391.1472871049.1691063710-1254356503.1687712523) for secure data transmission, authentication, and authorization.&#x20;
@@ -82,7 +88,7 @@ sequenceDiagram
 
 
 
-Instead of validating the access token in the backend, your server or a reverse proxy forwards the request to an [Authgear Resolver Endpoint](nginx.md#authgear-resolver-endpoint). This endpoint resolves and verifies the access token in the **Authorization Header** of the request.
+Instead of validating the access token in the backend, a reverse proxy forwards the request to an [Authgear Resolver Endpoint](nginx.md#authgear-resolver-endpoint). This endpoint resolves and verifies the access token in the **Authorization Header** of the request.
 
 ### Forward Cookie in HTTP header
 
@@ -116,11 +122,3 @@ Request example:
 > Host: yourdomain.com
 > cookie: session=<AUTHGEAR_SESSION_ID>
 ```
-
-### Comparison
-
-|                           | Validate JSON Web Token (JWT) in your application server                                                                                                                   | Forward Authentication to Authgear Resolver Endpoint                                                                    |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Reliability               | <p><strong>Medium</strong><br>JWT only updates when expire. That means before the token expiry, your application may see the user is valid even they has been disabled</p> | <p><strong>High</strong><br>Update near real-time, based on your reserve proxy cache setting</p>                        |
-| Integration difficulties  | <p><strong>Easy</strong><br>You only need to add code in your application to validate and decode JWT</p>                                                                   | <p><strong>Medium</strong><br>Need to setup extra reverse proxy to resolve authentication information</p>               |
-| Transportation of session | **Access Token** in `Authorization` header                                                                                                                                 | <p><strong>Session ID</strong> in Cookies or <br><strong>Access Token</strong> in <code>Authorization</code> header</p> |

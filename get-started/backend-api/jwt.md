@@ -10,7 +10,7 @@ In this section, we will go through how to decode the JWT token to obtain the cu
 
 Before we start, make sure the option **Issue JWT as access token** is enabled in your Application settings in the Portal.&#x20;
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>Enable this option in application settings in the portal</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt="" width="375"><figcaption><p>Enable this option in application settings in the portal</p></figcaption></figure>
 
 With the **Issue JWT as access token** option turned on in your application, Authgear will issue JWT as access tokens. The incoming HTTP requests should include the access token in their `Authorization` headers. Without setting the reverse proxy, your backend server can use your Authgear **JWKS** to verify the request and decode user information from the JWT access token.
 
@@ -20,15 +20,17 @@ This Discovery endpoint serves as a JSON document containing the OpenID Connect 
 
 `https://<YOUR_AUTHGEAR_ENDPOINT>/.well-known/openid-configuration`&#x20;
 
+The JSON Web Key Sets (JWKS) endpoint can be found in `jwks_uri` in the configuration.
+
+**OpenID Connect Configuration JSON Example**
+
 Here is [an example of how it looks](https://accounts.portal.authgear.com/.well-known/openid-configuration).
-
-The JSON Web Key Sets (JWKS) endpoint can be found in `jwk_url` in the configuration.
-
-**OpenID Connect Configuration JSON**
 
 ```json
 {
-    "jwks_uri": "..."
+    "issuer": "https://project-id.authgear.cloud",
+    "authorization_endpoint": "https://project-id.authgear.cloud/oauth2/authorize",
+    "jwks_uri": "https://project-id.authgear.cloud/oauth2/jwks", // the JWKS endpoint
     ...
 }
 ```
