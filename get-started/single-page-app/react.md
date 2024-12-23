@@ -52,7 +52,7 @@ In this section, we'll create a simple React application and connect it to Authg
 
 ### Step 1: Create a simple React project
 
-Here are some recommended steps to scaffold a React project. You can skip this part if you are adding Authgear to an existing project. See [#install-authgear-sdk-to-the-project](react.md#install-authgear-sdk-to-the-project "mention") in the next section.
+Here are some recommended steps to scaffold a React project. You can skip this part if you are adding Authgear to an existing project. See [#step-2-install-authgear-sdk-to-the-project](react.md#step-2-install-authgear-sdk-to-the-project "mention") in the next section.
 
 #### Create a new React project using Vite
 
