@@ -22,19 +22,13 @@ After that, we will need to create an Application in the Project Portal.
 
 ### Create an application in the Portal
 
-To create a client application, first, go to **Applications** on the left menu bar in Authgear Portal.
+To create a client application, go to **Applications** on the left menu bar in the Authgear Portal.
 
-<figure><img src="../../.gitbook/assets/authgear-nav-applications.png" alt=""><figcaption><p>portal navigate to applications</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-nav-applications.png" alt="" width="375"><figcaption><p>portal navigate to applications</p></figcaption></figure>
 
 Next, click **⊕Add Application** in the top toolbar.
 
-Input the name of your application, e.g. "MyAwesomeApp", then select **Single Page Application** as the Application Type.
-
-Click the **Save** button to create the application.
-
-<figure><img src="../../.gitbook/assets/authgear-new-app-spa.png" alt=""><figcaption><p>create new client application</p></figcaption></figure>
-
-On the next screen, you'll see links to tutorials for different frameworks. Click **Next** to skip to the application configuration page.
+Enter the name of your application, e.g. "MyAwesomeApp", then select **Single Page Application** as the Application Type. Click the **Save** button to create the application.
 
 ### Configure Authorize Redirect URI
 
@@ -56,7 +50,7 @@ Here are some recommended steps to scaffold a React project. You can skip this p
 
 #### Create a new React project using Vite
 
-Run the following command from your preferred folder to create a new React project:
+Run the following command from your preferred folder to create a new React project with Vite:
 
 ```bash
 # Create a new project using vite
@@ -352,7 +346,7 @@ The Authgear SDK helps you get the information of the logged-in users easily.
 
 In the last step, the user is successfully logged in, so let's try to print the user ID (sub) of the user on the Home page.
 
-In `Home.tsx`, we will add a simple Loading splash and a greeting message printing the Sub ID. We will add two conditional elements such that they are only shown when user is logged in. We can also change the login button to show only if the user is not logged in.&#x20;
+In `Home.tsx`, we will add a simple loading splash and a greeting message printing the Sub ID. We will add two conditional elements such that they are only shown when user is logged in. We can also change the login button to show only if the user is not logged in.&#x20;
 
 Make use of `isLoggedIn` from the `UserContext` to control the components on the page. Fetch the user info by `fetchInfo()` and access its `sub` property.
 

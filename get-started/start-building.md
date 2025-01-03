@@ -36,12 +36,12 @@ Client-side SDKs are designed for developers to quickly implement authentication
 
 **Check out the following guides for your specific framework:**
 
-* Frontend JS SDK
+* Guides for Frontend JS SDK
   * [React](single-page-app/react.md)
   * [Vue](single-page-app/vue.md)
   * [Angular](single-page-app/angular.md)
   * [Vanilla JS](single-page-app/website.md)
-* Mobile SDKs
+* Guides for Mobile SDKs
   * [iOS](native-mobile-app/ios.md)
   * [Android](native-mobile-app/android/)
   * [React Native](native-mobile-app/react-native.md)
