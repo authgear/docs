@@ -70,7 +70,7 @@ If you wish to use a custom UI instead of the pre-built UI for signup and login,
 
 ## Regular Web Applications
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 If your application is a traditional web app running on a server, you can leverage the OpenID Connect (OIDC) protocol to authenticate users via Authgear. A wide range of plug-and-play libraries can be found that simplify the integration process. These libraries handle crucial tasks such as authentication requests, session management, and redirecting users back to your application seamlessly.
 

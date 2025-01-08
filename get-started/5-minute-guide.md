@@ -8,7 +8,7 @@ Authgear makes it easy to add user authentication and authorization to any appli
 
 ### Video Guide
 
-{% embed url="https://www.youtube.com/watch?ab_channel=Oursky&v=dxnd9TjHiJU" %}
+{% embed url="https://www.youtube.com/watch?v=gnCXywMZ1Sk" %}
 
 ### 1. Create Authgear account&#x20;
 
