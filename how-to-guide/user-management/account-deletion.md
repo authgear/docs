@@ -191,4 +191,4 @@ You may listen to the following events to integrate the deletion behavior to you
 
 * `user.pre_schedule_deletion`
 
-See the event details in [Webhooks](https://github.com/authgear/docs/blob/master/integrate/broken-reference/README.md).
+See the event details in [Webhooks](../events-hooks/webhooks.md).

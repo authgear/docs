@@ -216,7 +216,7 @@ The value of `SessionState` can be `UNKNOWN`, `NO_SESSION` or `AUTHENTICATED`. I
 
 ## Fetching User Info
 
-In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI). Use the `fetchUserInfo` function to obtain the user info, see [example](https://github.com/authgear/docs/blob/master/get-started/integrate/user-profile.md#userinfo-endpoint).
+In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI). Use the `fetchUserInfo` function to obtain the user info, see [example](../../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
 
 ## Using the Access Token in HTTP Requests
 

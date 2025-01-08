@@ -32,12 +32,6 @@ From the Project listing, create a new Project or select an existing Project. Af
 3. Click "Save" in the top tool bar and keep the **Client ID**. You can also obtain it again from the Applications list later.
 
 ![Edit an application](../../.gitbook/assets/edit-application-app.png)
-
-{% hint style="info" %}
-If you wish to [validate JSON Web Token (JWT) in your own application server](https://github.com/authgear/docs/blob/master/backend-integration/jwt/README.md), turn on "Issue JWT as access token".\[^2] If you wish to [forward authentication requests to Authgear Resolver Endpoint](https://github.com/authgear/docs/blob/master/backend-integration/nginx/README.md), leave this unchecked. See comparisons in [Backend Integration](https://github.com/authgear/docs/blob/master/backend-integration/README.md).
-{% endhint %}
-
-![](../../.gitbook/assets/application-jwt.png)
 {% endtab %}
 
 {% tab title="authgear.yaml (self-deployed)" %}
@@ -215,8 +209,8 @@ authgear.logout { result in
 
 To protect your application server from unauthorized access. You will need to **integrate your backend with Authgear**.
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="../backend-api/" %}
+[backend-api](../backend-api/)
 {% endcontent-ref %}
 
 ## iOS SDK Reference
