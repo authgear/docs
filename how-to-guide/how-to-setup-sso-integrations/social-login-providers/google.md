@@ -21,10 +21,11 @@ After creating a new project, you will need to configure the OAuth consent scree
 1. Go to <img src="../../../.gitbook/assets/Google-hamburger-menu.png" alt="" data-size="line"> -> **APIs & services** -> **Credentials**
 2. Click **Create Credentials** -> **OAuth client ID**
 3. Choose **Web application** in **Application type** and assign a name as reference. You should _always choose Web application_ here regardless of the platform of the app you are creating. It is because this OAuth Client ID is used by your Authgear services, which is a web application in Google’s classification.
-4. Add `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/google` to **redirect URIs**.
-5. After creating a client ID, you will see the client ID under the **OAuth 2.0 Client IDs** section of the **Credentials** page.
+4. In **Authorized JavaScript origins**, add your Authgear endpoint, e.g. `https://myproject.authgear.cloud`
+5. In **Authorized redirect URIs**, add `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/google`. For example, `https://myproject.authgear.cloud/sso/oauth2/callback/google`
+6. After creating a client ID, you will see the client ID under the **OAuth 2.0 Client IDs** section of the **Credentials** page.
 
-![OAuth Client ID in the Credentials page](../../../.gitbook/assets/GCP\_create\_client\_id.png)
+![OAuth Client ID in the Credentials page](../../../.gitbook/assets/GCP_create_client_id.png)
 
 {% hint style="info" %}
 Redirect URI has the form of `/sso/oauth2/callback/:alias`. The `alias` is used as the identifier of OAuth provider. You can configure the `alias` in Authgear Portal.
@@ -38,7 +39,7 @@ You can find more details in [official Google Cloud Platform doc](https://suppor
 
 After creating an OAuth client, click the name of OAuth client to view the details.
 
-![Get your OAuth Client ID and Secret in the details page](../../../.gitbook/assets/gcp\_client\_details.png)
+![Get your OAuth Client ID and Secret in the details page](../../../.gitbook/assets/gcp_client_details.png)
 
 You will need the values of **Client ID**, **Client secret** to configure Google Sign In.
 
@@ -53,6 +54,6 @@ You will need the values of **Client ID**, **Client secret** to configure Google
 
 Your end-users can now sign in with Google on Authgear pre-built Log In and Sign Up page. Existing end-users can connect their account to Google in the [User Settings](../../built-in-ui/auth-ui.md) page.
 
-!["Sign in with Google" in Log in and Sign up page](../../../.gitbook/assets/google\_sign\_in.png)
+!["Sign in with Google" in Log in and Sign up page](../../../.gitbook/assets/google_sign_in.png)
 
-![Your end-users can connect to their Google account in User Settings page](../../../.gitbook/assets/connect\_with\_google.png)
+![Your end-users can connect to their Google account in User Settings page](../../../.gitbook/assets/connect_with_google.png)
