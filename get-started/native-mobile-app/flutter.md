@@ -27,7 +27,7 @@ From the Project listing, create a new Project or select an existing Project. Af
 
 **Step 2: Configure the application**
 
-1. In your IDE, define a custom URI scheme that the users will be redirected back to your app after they have authenticated with Authgear, e.g. `com.myapp.example://host/path`.\[^1]
+1. In your IDE, define a custom URI scheme that the users will be redirected back to your app after they have authenticated with Authgear, e.g. `com.example.myapp://host/path`.\[^1]
 2. Head back to Authgear Portal, fill in the Redirect URI that you have defined in the previous steps.
 3. Click "Save" in the top tool bar and keep the **Client ID**. You can also obtain it again from the Applications list later.
 
@@ -95,7 +95,7 @@ Add the following `<activity>` entry to the `AndroidManifest.xml` of your app. T
                 <!-- Configure data to be the exact redirect URI your app uses. -->
                 <!-- Here, we are using com.authgear.example://host/path as configured in authgear.yaml. -->
                 <!-- NOTE: The redirectURI supplied in AuthenticateOptions *has* to match as well -->
-                <data android:scheme="com.myapp.example"
+                <data android:scheme="com.example.myapp"
                     android:host="host"
                     android:pathPrefix="/path"/>
             </intent-filter>
@@ -138,7 +138,7 @@ In `Info.plist`, add the matching redirect URI by adding the key `CFBundleURLTyp
                       <string>Editor</string>
                       <key>CFBundleURLSchemes</key>
                       <array>
-                              <string>com.myapp.example</string>
+                              <string>com.example.myapp</string>
                               <!-- Put the redirect URI your app uses here. -->
                       </array>
               </dict>
@@ -257,8 +257,8 @@ await authgear.logout();
 
 To protect your application server from unauthorized access. You will need to **integrate your backend with Authgear**.
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="../backend-api/" %}
+[backend-api](../backend-api/)
 {% endcontent-ref %}
 
 ## Flutter SDK Reference
