@@ -10,8 +10,7 @@ To configure "Sign in with Apple" for Authgear, you will need to fulfil the foll
 4. Set up [Sender Policy Framework](https://en.wikipedia.org/wiki/Sender_Policy_Framework)(SPF) for your domain.
 5. Set up [DomainKeys Identified Mail](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail)(DKIM) for your domain.
 6. Create an "App ID" by adding a new "Identifier" [here](https://developer.apple.com/account/resources/identifiers/list), choose app IDs, enable "Sign in with Apple" enabled.
-7. Create a "Services ID" by adding a new "Identifier" [here](https://developer.apple.com/account/resources/identifiers/list), choose service IDs, enable "Sign in with Apple".\
-
+7. Create a "Services ID" by adding a new "Identifier" [here](https://developer.apple.com/account/resources/identifiers/list), choose service IDs, enable "Sign in with Apple".
 8.  Click "Configure" the Next to "Sign in with Apple". In "Primary App ID" field, select app ID created above.
 
     <figure><img src="../../../.gitbook/assets/image (46).png" alt=""><figcaption><p>Select here to see Services IDs</p></figcaption></figure>
@@ -26,7 +25,7 @@ Redirect URI has the form of `/sso/oauth2/callback/:alias`. The `alias` is used 
 
 1. In the portal, go to **Authentication > Social / Enterprise Login**.
 2. Enable **Sign in with Apple**.
-3. Fill in the **Client ID** with the **Service ID** obtained above.
+3. In **Client ID**, add the identifier of the **Services ID** you created in Apple. Not the ID of the App ID or the Client ID of your Authgear Application.
 4. In **Apple Developer Portal**, view key information of the "Key" created above.
 5. Jot down the **Key ID** and download the key text file (`.p8` file).
 6. Copy the content in the key text file to **Client Secret** text area in **Authgear Portal.**.
