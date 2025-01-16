@@ -7,13 +7,16 @@ To configure "Sign in with Apple" for Authgear, you will need to fulfil the foll
 1. Register an Apple Developer Account. Apple Enterprise Account does not support "Sign in with Apple"
 2. Register your own domain.
 3. Your domain must be able to send and receive emails.
-4. Set up [Sender Policy Framework](https://en.wikipedia.org/wiki/Sender\_Policy\_Framework)(SPF) for your domain.
-5. Set up [DomainKeys Identified Mail](https://en.wikipedia.org/wiki/DomainKeys\_Identified\_Mail)(DKIM) for your domain.
+4. Set up [Sender Policy Framework](https://en.wikipedia.org/wiki/Sender_Policy_Framework)(SPF) for your domain.
+5. Set up [DomainKeys Identified Mail](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail)(DKIM) for your domain.
 6. Create an "App ID" by adding a new "Identifier" [here](https://developer.apple.com/account/resources/identifiers/list), choose app IDs, enable "Sign in with Apple" enabled.
-7. Create a "Services ID" by adding a new "Identifier" [here](https://developer.apple.com/account/resources/identifiers/list), choose service IDs, enable "Sign in with Apple".
-8. Click "Configure" the Next to "Sign in with Apple". In "Primary App ID" field, select app ID created above.
+7. Create a "Services ID" by adding a new "Identifier" [here](https://developer.apple.com/account/resources/identifiers/list), choose service IDs, enable "Sign in with Apple".\
+
+8.  Click "Configure" the Next to "Sign in with Apple". In "Primary App ID" field, select app ID created above.
+
+    <figure><img src="../../../.gitbook/assets/image (46).png" alt=""><figcaption><p>Select here to see Services IDs</p></figcaption></figure>
 9. Fill in and verify the domain created above, add `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/apple` to **Return URLs**
-10. Create a "Key" following [this guide](https://help.apple.com/developer-account/#/devcdfbb56a3) with "Sign in with Apple" enabled. Click "Configure" next to "Sign in with Apple" and select "Primary App ID" with app ID created above. Keep the private key safe, you need to provide this later.
+10. Create a "Key" following [this guide](https://developer.apple.com/help/account/manage-keys/create-a-private-key) with "Sign in with Apple" enabled. Click "Configure" next to "Sign in with Apple" and select "Primary App ID" with app ID created above. Keep the private key safe, you need to provide this later.
 
 {% hint style="info" %}
 Redirect URI has the form of `/sso/oauth2/callback/:alias`. The `alias` is used as the identifier of OAuth provider. You can configure the `alias` in Authgear Portal.
