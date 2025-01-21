@@ -12,9 +12,16 @@ On Jan 22, 2022 [Apple decided](https://developer.apple.com/news/?id=i71db0mv) t
 
 In the pre-built [**User Settings**](../built-in-ui/auth-ui.md) page, you can show a button for the end-users to initiate account deletion. Users can access the **Delete Account** button under Advanced Settings in the User Settings page when you enable Account Deletion on your project.
 
-Enable this button in the **Advanced** -> **Account Deletion** page in the **Portal**
+
 
 !["Delete your account" button in the User Settings page](../../.gitbook/assets/authgear-user-settings-delete-account.png)
+
+Enable this button by:
+
+1. Go to **Advanced** -> **Account Deletion** page in the **Portal**
+2. Enable the button and press **Save**
+
+<figure><img src="../../.gitbook/assets/image (47).png" alt="" width="375"><figcaption></figcaption></figure>
 
 Note that if you enable this feature, you have to prepare for encountering invalid session every time your users close User Settings in your mobile apps. If your users unfortunately decided to delete their account in User Settings, all their sessions will become invalid immediately.
 
@@ -54,6 +61,8 @@ await authgear.FetchUserInfoAsync();
 You can now open the account deletion directly from Authgear SDKs. The account deletion page will be opened in a WebView.
 
 <figure><img src="../../.gitbook/assets/authgear-reactn-deletion-page.png" alt="" width="188"><figcaption></figcaption></figure>
+
+You must enable the button in **Portal -> Advanced** -> **Account Deletion** before calling the function.
 
 The following code examples show how to open the account deletion page from Authgear SDKs:&#x20;
 
