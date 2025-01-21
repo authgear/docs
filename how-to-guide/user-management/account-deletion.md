@@ -62,7 +62,8 @@ The following code examples show how to open the account deletion page from Auth
 ```typescript
 authgear
   .deleteAccount({
-    redirectURI: "<POST_DELETE_REDIRECT_URI>",
+    redirectURI: "<POST_DELETE_REDIRECT_URI>", 
+    //the same redirectURI as in authentication
     colorScheme: colorScheme as ColorScheme,
   })
 ```
@@ -72,14 +73,16 @@ authgear
 ```dart
 _authgear.deleteAccount(
         redirectURI: "<POST_DELETE_REDIRECT_URI>",
-      );
+        //the same redirectURI as in authentication
+ );
 ```
 {% endtab %}
 
 {% tab title="Android" %}
 ```java
 SettingsActionOptions options = new SettingsActionOptions(
-        "<AUTHGEAR_REDIRECT_URI>"
+        "<POST_DELETE_REDIRECT_URI>"
+        //the same redirectURI as in authentication
 );
 options.setColorScheme(getColorScheme());
 mAuthgear.deleteAccount(options, new OnOpenSettingsActionListener() {
@@ -100,10 +103,11 @@ mAuthgear.deleteAccount(options, new OnOpenSettingsActionListener() {
 {% endtab %}
 
 {% tab title="iOS" %}
-```
+```swift
 authgear?.deleteAccount(
     colorScheme: self.colorScheme,
-    redirectURI: "<AUTHGEAR_REDIRECT_URI>"
+    redirectURI: "<POST_DELETE_REDIRECT_URI>"
+    //the same redirectURI as in authentication
 ) { result in
     switch result {
     case .success:
