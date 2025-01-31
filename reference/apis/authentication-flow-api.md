@@ -936,11 +936,12 @@ In order to continue with the flow, redirect the user to the OAuth provider's au
 
 Once the user successfully grants your application authorization on the OAuth provider's site, they will get an authorization code. This code is usually returned by the provider in your OAuth redirect URL as a `code` query parameter.
 
-Next, send the authorization code in your next HTTP request to the Authentication Flow API in your input like this:
+Next, send the **authorization code** and the **complete query string** that was added to your redirect URI by the OAuth provider in your next HTTP request to the Authentication Flow API in your input like this:
 
 ```
 {
-  "code": "<AUTHORIZATION CODE FROM OAUTH PROVIDER>"
+  "code": "<AUTHORIZATION CODE FROM OAUTH PROVIDER>",
+  "query": "<COMPLETE QUERY STRING FROM THE REDIRECT URL>"
 }
 ```
 
@@ -1091,7 +1092,7 @@ Usage in input (for login flow):
 
 To reference this authentication, use its index in `options` array.
 
-The rest of the steps for implementing `primary_oob_otp_sms` in a login flow is similar to [primary\_oob\_otp\_email](authentication-flow-api.md#id-4.2-authentication-primary\_oob\_otp\_email). The major difference is the change in the `channel` from `email` to `sms`.
+The rest of the steps for implementing `primary_oob_otp_sms` in a login flow is similar to [primary\_oob\_otp\_email](authentication-flow-api.md#id-4.2-authentication-primary_oob_otp_email). The major difference is the change in the `channel` from `email` to `sms`.
 
 Usage in input(for signup flow):
 
