@@ -12,7 +12,7 @@ This guide provides instructions on integrating Authgear with a Flutter app. Sup
 Follow this guide to add Authgear to your Flutter app in 🕐 10 minutes.
 
 {% hint style="info" %}
-You can find the full code for the demo app for this tutorial in the Github repo [here](https://github.com/authgear/authgear-example-flutter).
+You can find the full code for the demo app for this tutorial in the Github repo [here](https://github.com/authgear/authgear_example_flutter).
 {% endhint %}
 
 ## Setup Application in Authgear
