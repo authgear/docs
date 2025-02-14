@@ -465,6 +465,10 @@ The createIdentity mutation creates a new identity for a user.
 createIdentity(input: CreateIdentityInput!): CreateIdentityPayload!
 ```
 
+{% hint style="info" %}
+Note: To use any loginID key, you must first enable the corresponding Login Method in your Authgear Portal. For example, enable Mobile login method to create an identity using phone number.
+{% endhint %}
+
 **Example:**
 
 {% tabs %}
@@ -1270,7 +1274,11 @@ mutation {
 
 ### 2.20. updateUser
 
-You can use this mutation to update an existing user's details. You can update standard attributes such as email and phone for the user. Or you can modify custom fields using the `customAttributes` argument.
+You can use this mutation to update an existing user's details. You can update standard attributes such as email, phone, family\_name, given\_name, and gender for the user. Or you can modify custom fields using the `customAttributes` argument.
+
+{% hint style="info" %}
+**Note:** To update the `email`, `phone` or `username` standard attribute for a user using this mutation, you must first add the new value to the user's Identities. See [createIdentity](api-queries-and-mutations.md#id-2.2.-createidentity) mutation and [updateIdentity](api-queries-and-mutations.md#id-2.19.-updateidentity).
+{% endhint %}
 
 **Schema:**
 
