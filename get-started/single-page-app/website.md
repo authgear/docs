@@ -393,9 +393,7 @@ Save all changes in your code, and rerun your app on a web browser. This time, c
 
 <figure><img src="../../.gitbook/assets/authgear-authui-login.png" alt=""><figcaption></figcaption></figure>
 
-### Step 8: User Settings
-
-Authgear offers a pre-built User Settings page that your users can use to view and modify their profile details and security settings.
+### Step 8: Additional Actions
 
 To add a User Settings button to your app, add the following tag to your index.html just below the Logout button:
 
@@ -421,7 +419,7 @@ Save your work and run your app again. When you click on the User Settings butto
 
 ### Step 9: Additional Actions
 
-#### Get the Logged-In State
+#### Get the Logged In State
 
 When you start launching the application. You may want to know if the user has logged in. (e.g. Redirect users to log in if they haven't logged in). The `sessionState` reflects the user logged-in state in the SDK local state. That means even the`sessionState` is `AUTHENTICATED`, the session may be invalid if it is revoked remotely. After initializing the Authgear SDK, call `fetchUserInfo` to update the `sessionState` as soon as it is proper to do so.
 
