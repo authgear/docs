@@ -53,7 +53,6 @@ Here are some recommended steps to scaffold a React project. You can skip this p
 Run the following command from your preferred folder to create a new React project with Vite:
 
 ```bash
-# Create a new project using vite
 npm create vite@latest my-app -- --template react-ts 
 ```
 
@@ -142,7 +141,7 @@ Run **`npm run dev`** now and you should see the default page again and no error
 
 Since we want to reference the logged-in state everywhere in the app, let's put the state in a **context provider** with `UserProvider.tsx` in the `/src/context` folder.&#x20;
 
-In `UserProvider.tsx`, there will be a `isLoggedIn` boolean and a `setIsLoggedIn` function. The  `isLoggedIn` boolean state can be auto-updated using the `onSessionStateChange` callback. This callback can be stored in `delegate` which is in the local SDK container.&#x20;
+The `UserProvider.tsx` file will have an `isLoggedIn` boolean and a `setIsLoggedIn` function. The  `isLoggedIn` boolean state can be auto-updated using the `onSessionStateChange` callback. This callback can be stored in `delegate` which is in the local SDK container.&#x20;
 
 ```tsx
 // src/context/UserProvider.tsx
@@ -201,9 +200,15 @@ export default UserContextProvider;
 
 Next, we will add an "AuthRedirect" page for handling the authentication result after the user has been authenticated by Authgear.
 
+First, install `react-router-dom` using the following command:
+
+```sh
+npm install --save-exact react-router-dom
+```
+
 Create the `AuthRedirect.tsx` component file in the `src/` folder.&#x20;
 
-Call the Authgear `finishAuthentication()` function in the Auth Redirect component to send a token back to Authgear server in exchange for an access token and a refresh token. Don't worry about the technical jargons, `finishAuthentication()` will do all the hard work for you and and save the authentication data.
+Call the Authgear `finishAuthentication()` function in the Auth Redirect component to send a token back to Authgear server in exchange for an access token and a refresh token. Don't worry about the technical jargons, `finishAuthentication()` will do all the hard work for you and save the authentication data.
 
 When the authentication is finished, the `isLoggedIn` state from the UserContextProvider will be automatically set to `true`.  Finally, navigate back to root (`/`) which is our Home page.
 
@@ -250,13 +255,7 @@ Without a cleanup function, an`useEffect`Hook will be fired twice and hence `fin
 
 ### Step 5: Add Routes and Context Provider to the App
 
-First, install `react-router-dom` using the following command:
-
-```sh
-npm install --save-exact react-router-dom
-```
-
-Next, we will add a "Home" page. Create a `Home.tsx` component file the `src/` folder.&#x20;
+Now, we will add a "Home" page. Create a `Home.tsx` component file the `src/` folder.&#x20;
 
 Then import **Home** and **AuthRedirect** as routes. And Import **UserContextProvider** and wrap the routes with it.
 
@@ -299,7 +298,7 @@ src
 
 ### Step 6: Add a Login button
 
-First, we will import the Authgear dependency and the React Hook that we will use to `Home.tsx`. Then add the login button which will call `startAuthentication(ConfigureOptions)` through the `startLogin` callback on click. This will redirect the user to the login page.
+First, we will import the Authgear dependency and the React Hook that we will use to `Home.tsx`. Then add the login button which will call `startAuthentication(ConfigureOptions)` through the `startLogin` on click callback. This will redirect the user to the login page.
 
 ```tsx
 // src/Home.tsx
@@ -420,7 +419,21 @@ Run the app again, the User ID (sub) of the user should be printed on the Home p
 
 Now, let's add a Logout button that is displayed when the user is logged in.&#x20;
 
-In `Home.tsx`, we will add the following conditional elements below the conditional elements for the Login button :
+In `Home.tsx`, we will use conditional elements to show a Logout button only for a user that is currently logged in.
+
+Find the following line in Home.tsx:
+
+```tsx
+{!isLoggedIn && (
+        <div>
+          <button type="button" onClick={startLogin}>
+            Login
+          </button>
+        </div>
+)}
+```
+
+&#x20;Add the following code on a new line just after the above line:
 
 ```tsx
 {isLoggedIn && (
@@ -430,7 +443,7 @@ In `Home.tsx`, we will add the following conditional elements below the conditio
 )}
 ```
 
-And add the `logout` callback:
+Then, add the `logout` callback:
 
 ```tsx
 const logout = useCallback(() => {
