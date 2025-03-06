@@ -66,22 +66,29 @@ In this section, we'll create a simple web page and use the Authgear Web JavaScr
 For this guide, we'll create a basic web application with only one page. Follow these steps to set up the application. First, create a new directory on your computer for the project. You can do this in a terminal using the following commands:
 
 ```bash
-# Create new directory for web project
 mkdir my-webapp
-# Move into the project folder
 cd my-webapp
 ```
 
 ### Step 2: Create Web Server
 
-We'll create an Express.js server in the web project directory so that we can access the HTML page in a web browser using `http://localhost:3000`. Run the following commands from the root of your web project directory to install Express:
+We'll create an Express.js server in the web project directory so that we can access the HTML page in a web browser using `http://localhost:3000`. Run the following commands from the root of your web project directory to install Express.
+
+First, generate a package.json file in your project directory:
 
 ```bash
-# Generate package.json
 npm init -y
-# Install Express npm package
+```
+
+Install the Express npm package:
+
+```bash
 npm install express
-# Install Nodemon (Used to add hot road to JavaScript development)
+```
+
+Install Nodemon (used for adding hot road to JavaScript development):
+
+```sh
 npm install -D nodemon
 ```
 

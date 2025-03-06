@@ -61,16 +61,26 @@ Here are some recommended steps to scaffold a Vue project. You can skip this par
 
 #### Install basic project dependencies
 
-Create the project folder and install the dependencies. We will use `vite` as the build tool and the `vue-router` package. Also, we will use TypeScript in this tutorial.
+Create the project folder and install the dependencies. We will use [Vite](https://vite.dev/guide/cli.html) as the build tool and the `vue-router` package. Also, we will use TypeScript in this tutorial.
+
+Run the following commands to create a new project:
+
+Create project and move into the project directory:
+
+```sh
+npm create vite@latest my-app -- --template vue-ts
+cd my-app
+```
+
+Install dependencies:
 
 ```bash
-# Create a brand new project using vite
-npm create vite@latest my-app -- --template vue-ts
-# Move into the project directory
-cd my-app
-# Install dependencies
 npm install
-# Install vue-router
+```
+
+Install Vue router:
+
+```
 npm install --save-exact vue-router
 ```
 
