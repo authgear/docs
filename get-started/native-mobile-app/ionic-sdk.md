@@ -10,6 +10,11 @@ In this post, you'll learn how to use Authgear with your Ionic project using the
 You can find the full code for the demo app for this tutorial in [this Github repo](https://github.com/authgear/authgear-example-ionic)
 {% endhint %}
 
+The following are the minimum versions of Android and iOS your native app can target based on the requirement of Capacitor v7:
+
+* iOS 14
+* Android 6 (API level 23)
+
 ### Objectives (What we'll build)
 
 At the end of this tutorial, we'll build an Ionic app that can do the following:
