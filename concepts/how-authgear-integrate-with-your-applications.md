@@ -1,10 +1,10 @@
 ---
-description: This concept document are to explain how the SDKs work.
+hidden: true
 ---
 
 # How Authgear integrate with your applications
 
-{% hint style="info" %}
+{% hint style="success" %}
 For simplicity, you should use Authgear SDKs (JS, iOS, Android) to integrate your application with Authgear.
 {% endhint %}
 
