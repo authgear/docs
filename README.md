@@ -14,6 +14,7 @@ description: >-
 * Support biometric login on mobile, Passkeys, and Multi-Factor Authentication (MFA) such as SMS/email-based verification and authenticator apps with TOTP.
 * A user management portal, like password resets, account locking, scheduled deletion or anonymization, and user profile management.
 * Single Sign-On (SSO) provides a single unified experience for your customers to log into multiple web/mobile apps, including Web2Web, Web2App, and App2App SSO.
+* Enable [SSO with SAML](how-to-guide/single-sign-on/single-sign-on-with-saml/) for your users to log into multiple web applications easily.
 * Session management with Authgear Portals, and a pre-built setting page for users to control concurrent sessions.
 * Customizable UI with a **user-friendly low-code** dashboard.&#x20;
 * Various security features such as audit logs, brute force protection, smart account lockout, password policy, etc.
