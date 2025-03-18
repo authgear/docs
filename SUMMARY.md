@@ -125,6 +125,7 @@
 * [Directly accessing Authgear Endpoint](how-to-guide/directly-accessing-authgear-endpoint.md)
 * [Troubleshoot](how-to-guide/troubleshoot/README.md)
   * [How to Fix SubtleCrypto: digest() undefined Error in Authgear SDK](how-to-guide/troubleshoot/how-to-fix-subtlecrypto-digest-undefined-error-in-authgear-sdk.md)
+  * [How to Fix CORS Error](how-to-guide/troubleshoot/how-to-fix-cors-error.md)
 
 ## Concepts
 
