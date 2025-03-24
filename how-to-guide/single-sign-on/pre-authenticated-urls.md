@@ -10,7 +10,7 @@ Pre-authenticated URLs is a feature that enables single sign-on (SSO)  from a mo
 
 An example use case for a pre-authenticated URL is opening a web application in a WebView.
 
-### Pre-requisites
+### Prerequisites
 
 &#x20;To use pre-authenticated URLs, you must have the following:
 
@@ -19,7 +19,7 @@ An example use case for a pre-authenticated URL is opening a web application in 
 
 ## How to Implement Pre-authentication URLs in your application
 
-### Step 1: Enable SSO in Native App client
+### Step 1: Enable SSO in Native Client App
 
 First, ensure your mobile application uses an Authgear application with the **Native App**.
 

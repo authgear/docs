@@ -16,11 +16,11 @@ Before we dive into the step-by-step guide, here are some key things you should 
 * **Inputs**: You can pass values to Authentication Flow API using the `input` or `batch_input` parameters in your HTTP request body. Use the `batch_input` to send multiple values as in an array and `input` when you are passing only 1 value.&#x20;
 * **Finish Redirect URI**: A URL that you can use to redirect back to your app at the end of the authentication flow.
 
-### Pre-requisites
+### Prerequisites
 
 To follow along with the example in this post, you should have the following:
 
-* PHP installed on your local machine.
+* PHP is installed on your local machine.
 * [Composer](https://getcomposer.org/) installed on your computer.
 * A code editor like VS Code, Sublime, Atom, or any editor you use for PHP development.
 * An Authgear account. You can create one for free [here](https://www.authgear.com/).
@@ -68,8 +68,6 @@ http://localhost:8081/login.php
 
 Alternatively, can use  [CloudFlare Tunnel](https://developers.cloudflare.com/pages/how-to/preview-with-cloudflare-tunnel/) to get a public URL for your PHP application that's running locally. Then, enter the public URL from CloudFlare as your Custom UI URI.
 
-With that, we're done with the required configuration on the Authgear Portal. In the next part, we'll design some custom UI and implement the Authentication Flow API.
-
 #### Step 4: Enable Email + Password Login Option and Disable 2FA
 
 For our example app in this tutorial, users will be using their email and password to log in. Hence, you are required to enable this option in the Authgear Portal.
@@ -83,6 +81,8 @@ For our example app in this tutorial, users will be using their email and passwo
 Also, disable 2FA (if enabled) so that the authentication flow does not include an extra step which our demo app will not cover.  You can disable 2FA Requirements in **Authentication** > **2FA** in the Authgear Portal.
 
 <figure><img src="../../.gitbook/assets/authgear-config-2fa (1).png" alt=""><figcaption></figcaption></figure>
+
+With that, we're done with the required configuration on the Authgear Portal. In the next part, we'll design some custom UI and implement the Authentication Flow API.
 
 ### Part 2: Implementing Authentication Flow API
 

@@ -65,7 +65,7 @@ To learn more detailed information about the User Import API (such as endpoints,
 
 In this section, you can find code for a simple example of using the User Import API to add multiple users to an Authgear project.
 
-### Pre-requisites
+### Prerequisites
 
 To follow this example and be able to run the code on your local machine, you must have the following:
 

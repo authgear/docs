@@ -10,7 +10,7 @@ The Service Provider (SP) trust the Identity Provider to handle the process of u
 
 In this guide, you'll learn how to set up SAML with Authgear as an Identity Provider (IdP) and Salesforce as the Service Provider (SP) in SAML.
 
-### Pre-requisites
+### Prerequisites
 
 * An Authgear account. [Sign up](https://authgear.com) for free.
 * A Salesforce account.

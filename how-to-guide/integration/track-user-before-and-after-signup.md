@@ -6,7 +6,7 @@ description: Learn how to track a user that signs up from a particular source or
 
 In this guide, you'll learn how to track users from a particular source before and after they sign up. For example, knowing how many people sign up for your application through a signup link that you have included in a blog post or an email campaign.
 
-### Pre-requisites
+### Prerequisites
 
 To follow this guide, you need to have the following:
 

@@ -15,7 +15,7 @@ Authgear supports multiple ways to allow users to log in to apps such as passwor
 * How to get user info from Authgear using OAuth 2.0 access code.
 * Link user info from Authgear with Laravel's default Breeze authentication.
 
-### Pre-requisites
+### Prerequisites
 
 To follow along with the example, you should have the following in place:
 

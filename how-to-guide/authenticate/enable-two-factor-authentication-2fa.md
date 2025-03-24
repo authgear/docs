@@ -10,7 +10,7 @@ When you enable MFA on your application, Authgear will require your users to pre
 
 In this post, you'll learn how to enable MFA or 2FA for your Authgear project and how to configure 2FA grace period.
 
-### Pre-requisites
+### Prerequisites
 
 * An Authgear account. Create one for free [here](https://www.authgear.com/).
 * An Authgear Project.

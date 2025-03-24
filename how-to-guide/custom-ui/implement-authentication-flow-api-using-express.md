@@ -20,11 +20,11 @@ Before we continue, it's important for you to familiarize yourself with the foll
 
 **Note**: In order to follow this tutorial and implement the example app, you need to enable a login method that supports "Email and Password" under **Authentication** > **Login Methods** in Authgear Portal. Also, disable 2FA Requirements from **Authentication** > **2FA** in Authgear Portal.
 
-### Pre-requisites
+### Prerequisites
 
 In order to follow along with the example in this post, you should have the following:
 
-* Node.js installed on your local machine.
+* [Node.js](https://nodejs.org/) is installed on your local machine.
 * A code editor such as VS Code, Sublime, Atom, etc.
 * An Authgear account. You can create one for free [here](https://www.authgear.com/).
 * Be familiar with CLI tools like npm.
@@ -86,8 +86,6 @@ To set the custom UI URI, scroll to the **Custom UI** section on your applicatio
 **Note**: For our example app, you must include the `/login` path in the URL so that the user is redirected straight to our login route.
 
 <figure><img src="../../.gitbook/assets/authgear-config-app-custom-ui-url-2.png" alt=""><figcaption></figcaption></figure>
-
-That concludes all the configuration requirements in the Authgear portal for this example.
 
 #### Step 4: Enable Email + Password Login Option and Disable 2FA
 

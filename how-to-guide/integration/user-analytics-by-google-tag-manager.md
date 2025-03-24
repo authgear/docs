@@ -16,7 +16,7 @@ Tags can help you track traffic and user behavior on your website or application
 
 In this guide, we will show you how to add Google Tag Manager to your Authgear project and send data to Google Analytics. You can also configure Google Tag Manager to send data from your Authgear project to other marketing tags from providers like Facebook.
 
-### Pre-requisites
+### Prerequisites
 
 In order to setup Google Tag Manager and Google Analytics with Authgear, you need to have the following:
 

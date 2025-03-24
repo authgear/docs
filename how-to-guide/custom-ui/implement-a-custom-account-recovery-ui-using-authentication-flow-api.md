@@ -19,11 +19,11 @@ At the end of this guide we'll build a custom account recovery UI using Express.
 * Provide a UI for the user to enter and verify the recovery code.
 * Finally, a UI for the user to set a new password for their account.
 
-### Pre-requisites
+### Prerequisites
 
 To follow this guide, you should have the following:
 
-* [Node.js](https://nodejs.org/) installed on your local machine.
+* [Node.js](https://nodejs.org/) is installed on your local machine.
 * A code editor like VS Code, Sublime, Atom, or any editor you already use for JavaScript development.
 * Be comfortable working with CLI tools like NPM.
 * Last but not least, an Authgear account. Sign up for free [here](http://authgear.com/).

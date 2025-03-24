@@ -27,7 +27,7 @@ The final UI for the app we'll build should look like this:
 
 <figure><img src="../../.gitbook/assets/authgear-ionic-example-app.png" alt=""><figcaption><p>authgear ionic example app landing page</p></figcaption></figure>
 
-### Pre-requisites
+### Prerequisites
 
 To follow this guide seamlessly, make sure to have the following:
 

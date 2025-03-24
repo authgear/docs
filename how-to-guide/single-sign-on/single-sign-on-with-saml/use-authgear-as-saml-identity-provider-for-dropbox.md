@@ -10,7 +10,7 @@ Security Assertion Markup Language (SAML) is a standard that allows an Identity 
 
 In this post, you'll learn how to set up Authgear as an Identity Provider and Dropbox as a Service Provider.
 
-### Pre-requisites
+### Prerequisites
 
 * An Authgear account. Sign up for free.
 * A Dropbox Business Advanced account.

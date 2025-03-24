@@ -19,7 +19,7 @@ At the end of this post, you'll learn the following:
 * How to use a refresh token
 * And finally how to log users out and revoke access tokens.
 
-### Pre-requisites
+### Prerequisites
 
 To follow along, you'll need the following:
 
