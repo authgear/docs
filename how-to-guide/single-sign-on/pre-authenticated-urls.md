@@ -58,7 +58,7 @@ The URL in `YOUR_WEB_APP_URI` should be a page on the web application that calls
 In the web application, initialize the SDK as following:
 
 ```typescript
-import authgear, { Page, PromptOption } from "@authgear/web";
+import authgear, { PromptOption } from "@authgear/web";
 
 authgear.configure({
     endpoint: "AUTHGEAR_ENDPOINT",
@@ -71,7 +71,7 @@ authgear.configure({
 And in the web application URI, trigger authentication as following. Note here `prompt: PromptOption.None` is used to skip the SSO continue screen. &#x20;
 
 ```typescript
-import authgear, { Page, PromptOption } from "@authgear/web";
+import authgear, { PromptOption } from "@authgear/web";
 
 authgear.startAuthentication({
   redirectURI: import.meta.env.VITE_AUTHGEAR_REDIRECT_URL,
