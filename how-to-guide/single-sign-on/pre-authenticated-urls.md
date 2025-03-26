@@ -42,7 +42,7 @@ Next, add an allowed origin to the web application client in Authgear. Navigate 
 
 The Pre-Authenticated URL is a link that the Authgear SDK can generate for a mobile client that has the Pre-Authenticated URLs feature enabled. Your mobile application can open the Pre-Authenticated URL in a web view for users to start browsing the origin in an authenticated state.
 
-To generate the Pre-Authenticated URL, call the `makePreAuthenticatedURL(`) method of the Authgear SDK as shown below:
+To generate the Pre-Authenticated URL, call the `makePreAuthenticatedURL()` method of the Authgear SDK as shown below:
 
 ```javascript
 const url = await authgear.makePreAuthenticatedURL({
@@ -53,7 +53,41 @@ const url = await authgear.makePreAuthenticatedURL({
 
 The `makePreAuthenticatedURL()` method accepts an object as a parameter. Inside the object, you should provide your web application's client ID and redirect URI.
 
-The URL in `YOUR_WEB_APP_URI` should be a page on the web application that calls the `authenticate()` method of Authgear SDK with `isSSOEnabled: true` (or a page that initiates an authorization request) .&#x20;
+The URL in `YOUR_WEB_APP_URI` should be a page on the web application that calls the have the SDK configured to `isSSOEnabled: true` , and initiate the authentication.
+
+In the web application, initialize the SDK as following:
+
+```typescript
+import authgear, { Page, PromptOption } from "@authgear/web";
+
+authgear.configure({
+    endpoint: "AUTHGEAR_ENDPOINT",
+    clientID: "CLIENT_ID",
+    sessionType: "refresh_token",
+    isSSOEnabled: true
+});
+```
+
+And in the web application URI, trigger authentication as following. Note here `prompt: PromptOption.None` is used to skip the SSO continue screen. &#x20;
+
+```typescript
+import authgear, { Page, PromptOption } from "@authgear/web";
+
+authgear.startAuthentication({
+  redirectURI: import.meta.env.VITE_AUTHGEAR_REDIRECT_URL,
+  prompt: PromptOption.None // use "None" to skip the continue screen
+})
+.then(
+  () => {
+    // started authentication, user should be redirected to Authgear
+   },
+  (err) => {
+    // failed to start authorization
+  }
+);
+```
+
+In a normal login flow, for example the user browser the web page in the browser rather than from a link in the native app, the prompt should not be used because it will hinder the user from opening the login page. Only use this prompt when an SSO session is surely set in the browser, for instance in conjunction with this Pre-authentication URL feature.
 
 ### Step 4: Open Pre-Authenticated URL in a WebView
 
@@ -66,7 +100,3 @@ Linking.openURL(url).catch(err =>
       console.error("Couldn't load page", err),
     );
 ```
-
-The user will see a "Continue Screen" and will not need to enter their credentials again to log in.
-
-<figure><img src="../../.gitbook/assets/authgear-preauthUrl.png" alt="" width="188"><figcaption></figcaption></figure>
