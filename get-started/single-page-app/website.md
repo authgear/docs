@@ -400,9 +400,9 @@ Save all changes in your code, and rerun your app on a web browser. This time, c
 
 <figure><img src="../../.gitbook/assets/authgear-authui-login.png" alt=""><figcaption></figcaption></figure>
 
-### Step 8: Additional Actions
+### Step 8: Open User Settings Page
 
-To add a User Settings button to your app, add the following tag to your index.html just below the Logout button:
+To add a User Settings button to your app, add the following tag to your `index.html` just below the Logout button:
 
 ```html
 <button id="btn-settings" disabled="true" onclick="openUserSettings()">User Settings</button>
