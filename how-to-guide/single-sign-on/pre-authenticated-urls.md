@@ -19,20 +19,23 @@ An example use case for a pre-authenticated URL is opening a web application in 
 
 ## How to Implement Pre-authentication URLs in your application
 
-### Step 1: Enable SSO in Native Client App
+### Step 1: Enable SSO & Pre-authenticated URLs in Native Client App
 
-First, ensure your mobile application uses an Authgear application with the **Native App**.
+First, ensure your mobile application uses an Authgear application with the **Native App**. Enable both SSO and "preAuthenticatedURL" to allow pre-authenticated URLs to work.
 
-Your application must also enable SSO to allow pre-authenticated URLs to work. You can enable SSO by `isSSOEnabled: true` in the `configure()` method of Authgear SDK.
-
-```typescript
+{% tabs %}
+{% tab title="Ionic" %}
+```javascript
 authgear
   .configure({
     clientID: '<CLIENT_ID>',
     endpoint: '<AUTHGEAR_PROJECT_URL>',
     isSSOEnabled: true,
+    preAuthenticatedURLEnabled: true
   })
 ```
+{% endtab %}
+{% endtabs %}
 
 ### Step 2: Add Allowed Origin to Web App Client
 
@@ -44,18 +47,50 @@ The Pre-Authenticated URL is a link that the Authgear SDK can generate for a mob
 
 To generate the Pre-Authenticated URL, call the `makePreAuthenticatedURL()` method of the Authgear SDK as shown below:
 
+{% tabs %}
+{% tab title="Ionic" %}
 ```javascript
 const url = await authgear.makePreAuthenticatedURL({
     webApplicationClientID: "YOUR_WEB_APP_CLIENT_ID", // Replace with you web app client id
     webApplicationURI: "YOUR_WEB_APP_URI", // Replace with you web app uri
   });
 ```
+{% endtab %}
+{% endtabs %}
 
-The `makePreAuthenticatedURL()` method accepts an object as a parameter. Inside the object, you should provide your web application's client ID and redirect URI.
+The `makePreAuthenticatedURL()` method accepts an object as a parameter. Inside the object, you should provide your web application's client ID and web app URI.
 
-The URL in `YOUR_WEB_APP_URI` should be a page on the web application that calls the have the SDK configured to `isSSOEnabled: true` , and initiate the authentication.
+### Step 4: Open Pre-Authenticated URL in a WebView
 
-In the web application, initialize the SDK as following:
+After the `makePreAuthenticatedURL()` return the URL, your mobile application should open the URL in a WebView. From there, users should be able to continue their current authenticated session (from the mobile app) on the web application.
+
+{% tabs %}
+{% tab title="Ionic" %}
+The following code sample shows how to open the pre-authenticated URL using the `Browser.open()` method in Ionic.
+
+<pre class="language-javascript"><code class="lang-javascript"><strong>Browser.open({ url: url }).catch(err =>
+</strong>      console.error("Couldn't load page", err),
+);
+</code></pre>
+{% endtab %}
+
+{% tab title="React Native" %}
+The following code sample shows how to open the pre-authenticated URL using the `Linking.openURL()` method of React Native.
+
+<pre><code><strong>Linking.openURL(url).catch(err =>
+</strong>      console.error("Couldn't load page", err),
+);
+</code></pre>
+{% endtab %}
+{% endtabs %}
+
+### Step 5: Get authenticated state in the web application
+
+The pre-authenticated URL is opened in the browser via the native app. In the web application, trigger authentication with the injected SSO session and get the authenticated state.
+
+{% tabs %}
+{% tab title="Web" %}
+In the web application, enable SSO to allow pre-authenticated URLs to work. You can initialize the SDK as following
 
 ```typescript
 import authgear, { PromptOption } from "@authgear/web";
@@ -88,15 +123,5 @@ authgear.startAuthentication({
 ```
 
 In a normal login flow, for example the user browses the web page in the browser rather than from a link in the native app, the prompt should not be used because it will hinder the user from opening the login page. Only use this prompt when an SSO session is surely set in the browser, for instance in conjunction with this Pre-authentication URL feature.
-
-### Step 4: Open Pre-Authenticated URL in a WebView
-
-After the `makePreAuthenticatedURL()` return the URL, your mobile application should open the URL in a WebView. From there, users should be able to continue their current authenticated session (from the mobile app) on the web application.
-
-The following code sample shows how to open the pre-authenticated URL using the `Linking.openURL()` method of React Native.
-
-```javascript
-Linking.openURL(url).catch(err =>
-      console.error("Couldn't load page", err),
-    );
-```
+{% endtab %}
+{% endtabs %}
