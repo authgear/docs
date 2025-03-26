@@ -14,8 +14,8 @@ An example use case for a pre-authenticated URL is opening a web application in 
 
 &#x20;To use pre-authenticated URLs, you must have the following:
 
-* An Authgear application of type Native app.
-* A second Authgear application that has pre-authentication URLs enabled.
+* A native app using Authgear as authentication
+* A web application using the same Authgear project as authentication
 
 ## How to Implement Pre-authentication URLs in your application
 
