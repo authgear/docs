@@ -122,6 +122,8 @@ authgear.startAuthentication({
 );
 ```
 
+<div align="center"><figure><img src="../../.gitbook/assets/image (50).png" alt="" width="188"><figcaption><p>Use prompt parameter to skip the SSO Continue Screen</p></figcaption></figure></div>
+
 In a normal login flow, for example the user browses the web page in the browser rather than from a link in the native app, the prompt should not be used because it will hinder the user from opening the login page. Only use this prompt when an SSO session is surely set in the browser, for instance in conjunction with this Pre-authentication URL feature.
 {% endtab %}
 {% endtabs %}
