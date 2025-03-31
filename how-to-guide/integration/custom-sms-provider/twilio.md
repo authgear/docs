@@ -13,6 +13,10 @@ By configuring your Authgear project to use Twilio as a custom SMS provider, you
 * A Twilio account
 * An Authgear project with the Custom SMS Gateway feature enabled.
 
+{% hint style="info" %}
+**Note:** Your project must be on an enterprise plan to use the Custom SMS Provider feature. [Contact us](https://www.authgear.com/schedule-demo) for more details.
+{% endhint %}
+
 ### Step 1: Enable Custom SMS Gateway
 
 To get started, log in to Authgear Portal, then navigate to **Advanced** > **Custom SMS Gateway**.
