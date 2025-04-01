@@ -30,11 +30,11 @@ To use Authgear services, you’ll need to have an application set up in the Aut
 
 To set up the application, navigate to the [Authgear Portal UI](https://portal.authgear.com/) and select **Applications** on the left-hand navigation bar. Use the interactive selector to create a new **Authgear OIDC Client application** or select an existing application that represents the project you want to integrate with.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Every application in Authgear is assigned an alphanumeric, unique client ID that your application code will use to call Authgear APIs through the Authlib client library in the Flask app. Record the generated Authgear Issuer `Domain` (for example, `example-auth.authgear-apps.com`), `CLIENT ID`, `CLIENT SECRET` from the output. You will use these values in Part 2 for the Flask app config.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Step 2: Configure **Redirect URI**
 
