@@ -14,6 +14,10 @@ Follow this guide to add Authgear to your React Native app in 🕐 10 minutes.
 You can find the full code for the demo app for this tutorial in the Github repo [here](https://github.com/authgear/authgear-example-react-native).
 {% endhint %}
 
+{% hint style="info" %}
+React Native have opt-in support for the [New Architecture](https://reactnative.dev/docs/new-architecture-intro) since 0.68. Given that the New Architecture is still considered as unstable, we do not support it at the moment.
+{% endhint %}
+
 ## Video Guide for React Native
 
 {% embed url="https://www.youtube.com/watch?v=jCzqVrTzk_o" %}
