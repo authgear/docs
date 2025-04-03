@@ -6,9 +6,25 @@ In this guide, you'll learn how to migrate users from your old authentication sy
 
 For this guide, we'll be referring to the source code for a demo Express.js app. The demo app is an application that is moving new users sign ups from an old authentication system to Authgear.
 
+### When to use Rolling Migration
+
+The following are some scenarios where you could use the rolling:
+
+* When you want to use Authgear and your old authentication system at the same time.
+* When you want to move only a portion of your users to Authgear. E.g., new users, users from a certain region or location, or users who require specific features from Authgear.
+* When you want to move your users gradually and reduce downtime and any other concerns related to migration in your app.
+
+#### **Pros**
+
+* Rolling deployment allows a slow transition with controllable user impact or downtime.
+
+#### **Cons**
+
+* It allows you to indefinitely support your old authentication system.
+
 ### Step 1: Deploy Middleware to Support Authgear Session and Old Authentication System
 
-The first step for setting up rolling migration is to implement a middleware or server-side logic that supports both Authgear session and your old authentication provider.&#x20;
+The first step for setting up rolling migration is to implement a middleware and server-side logic that supports both Authgear session and your old authentication provider.&#x20;
 
 To do this, implement code to verify both access tokens (sessions) from your old authentication system and Authgear:
 

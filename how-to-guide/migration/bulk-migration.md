@@ -2,9 +2,24 @@
 
 The bulk migration strategy allows you to move all your user data to Authgear at once using the [User Import API](../../reference/apis/user-import-api.md). Bulk migration is ideal when you want to stop using your old authentication system immediately and start using Authgear.
 
-Once you import your users, you'll need to implement a middleware or server-side logic that uses Authgear user sessions to protect resources. As a result, all users will be logged out and will be required to log in again using Authgear's authentication flow.
+Once you import your users, you'll need to implement a middleware and server-side logic that uses Authgear user sessions to protect resources. As a result, all users will be logged out and will be required to log in again using Authgear's authentication flow.
 
 In this guide, you'll learn how to move your user data from your old authentication provider to Authgear using the bulk migration strategy.
+
+### When to use Bulk Migration
+
+The following is a possible scenario where you could use the bulk migration strategy to move user data to Authgear.
+
+* When you are ready to stop using your old authentication system at once and move to Authgear. In that case, you can disable signups on the old system, export your user data, and proceed with the complete steps for bulk migration.
+
+#### **Pros**
+
+* Bulk migration is the most straightforward approach.
+* It allows you to migrate all your users at once and stop using your old system as quickly as possible.
+
+#### Cons
+
+* It requires some downtime while you are moving from the old system to Authgear.
 
 ### Step 1: Export User Data from Old System
 
@@ -107,14 +122,14 @@ The above JavaScript code imports the data from our example `users` table using 
 
 Learn more about using the Import User API [here](../user-management/import-users-using-user-import-api.md).
 
-### Step 4: Use Authgear Session in Middleware or Server-side Logic
+### Step 4: Use Authgear Session in Middleware and Server-side Logic
 
 Now that you have successfully imported your users to Authgear, you can start using Authgear session to protect the pages in your application.
 
-To do this, implement a middleware or server-side logic that uses Authgear session.
+To do this, implement a middleware and server-side logic that uses Authgear session.
 
 {% hint style="info" %}
-**Note:** Deploying the middleware or server-side logic that uses Authgear session means all users will be logged out and be required to log in again [using Authgear's authentication flow](broken-reference).
+**Note:** Deploying the middleware and server-side logic that uses Authgear session means all users will be logged out and be required to log in again [using Authgear's authentication flow](broken-reference).
 {% endhint %}
 
 The following is an example of a simple Express.js application with a middleware that uses Authgear session:
