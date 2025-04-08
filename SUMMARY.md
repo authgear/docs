@@ -126,6 +126,7 @@
 * [Migration](how-to-guide/migration/README.md)
   * [Bulk migration](how-to-guide/migration/bulk-migration.md)
   * [Rolling migration](how-to-guide/migration/rolling-migration.md)
+  * [Zero-downtime migration](how-to-guide/migration/zero-downtime-migration.md)
 * [Troubleshoot](how-to-guide/troubleshoot/README.md)
   * [How to Fix SubtleCrypto: digest() undefined Error in Authgear SDK](how-to-guide/troubleshoot/how-to-fix-subtlecrypto-digest-undefined-error-in-authgear-sdk.md)
   * [How to Fix CORS Error](how-to-guide/troubleshoot/how-to-fix-cors-error.md)

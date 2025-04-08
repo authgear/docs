@@ -4,11 +4,11 @@ With rolling migration, you can gradually transfer user data from your old syste
 
 In this guide, you'll learn how to migrate users from your old authentication system to Authgear using the rolling migration approach.
 
-For this guide, we'll be referring to the source code for a demo Express.js app. The demo app is an application that is moving new users sign ups from an old authentication system to Authgear.
+For this guide, we'll be referring to the source code for a demo Express.js app. The demo app is an application that is moving new user sign-ups from an old authentication system to Authgear.
 
 ### When to use Rolling Migration
 
-The following are some scenarios where you could use the rolling:
+The following are some scenarios where you could use the rolling migration:
 
 * When you want to use Authgear and your old authentication system at the same time.
 * When you want to move only a portion of your users to Authgear. E.g., new users, users from a certain region or location, or users who require specific features from Authgear.
