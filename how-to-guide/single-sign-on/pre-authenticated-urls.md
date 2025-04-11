@@ -21,7 +21,7 @@ An example use case for a pre-authenticated URL is opening a web application in 
 
 ### Step 1: Enable SSO & Pre-authenticated URLs in Native Client App
 
-First, ensure your mobile application uses an Authgear application with the **Native App**. Enable both SSO and "preAuthenticatedURL" to allow pre-authenticated URLs to work.
+First, ensure your mobile application uses an Authgear application with the **Native App**. Enable "preAuthenticatedURL" to allow pre-authenticated URLs to work.
 
 {% tabs %}
 {% tab title="Ionic" %}
@@ -29,8 +29,6 @@ First, ensure your mobile application uses an Authgear application with the **Na
 authgear
   .configure({
     clientID: '<CLIENT_ID>',
-    endpoint: '<AUTHGEAR_PROJECT_URL>',
-    isSSOEnabled: true,
     preAuthenticatedURLEnabled: true
   })
 ```
