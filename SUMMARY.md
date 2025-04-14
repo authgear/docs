@@ -32,6 +32,8 @@
 * [Backend/API Integration](get-started/backend-api/README.md)
   * [Validate JWT in your application server](get-started/backend-api/jwt.md)
   * [Forward Authentication to Authgear Resolver Endpoint](get-started/backend-api/nginx.md)
+* [AI Coding tools](get-started/ai-coding-tools/README.md)
+  * [Cursor/Windsurf](get-started/ai-coding-tools/cursor-windsurf.md)
 
 ## How-To Guides <a href="#how-to-guide" id="how-to-guide"></a>
 
