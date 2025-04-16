@@ -22,7 +22,6 @@ The next step is to create `docker-compose.yaml` to setup PostgreSQL, Redis, and
 You can start with the following `docker-compose.yaml`:
 
 ```yaml
-version: "3"
 services:
   db:
     image: postgres-pg-partman:latest
@@ -72,9 +71,9 @@ touch postgres/Dockerfile
 Copy the following contents to `postgres/Dockerfile`
 
 ```Dockerfile
-FROM postgres:12.3
+FROM postgres:16.8
 
-ENV PARTMAN_VERSION 4.5.1
+ENV PARTMAN_VERSION 5.2.4
 
 RUN apt-get update && apt-get install -y \
 	unzip \
@@ -83,7 +82,10 @@ RUN apt-get update && apt-get install -y \
 	wget \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN wget https://github.com/pgpartman/pg_partman/archive/v${PARTMAN_VERSION}.zip -O pg_partman-${PARTMAN_VERSION}.zip && unzip pg_partman-${PARTMAN_VERSION}.zip && cd pg_partman-${PARTMAN_VERSION} && make NO_BGW=1 install
+RUN wget https://github.com/pgpartman/pg_partman/archive/v${PARTMAN_VERSION}.zip -O pg_partman-${PARTMAN_VERSION}.zip \
+    && unzip pg_partman-${PARTMAN_VERSION}.zip \
+    && cd pg_partman-${PARTMAN_VERSION} \
+    && make NO_BGW=1 install
 ```
 
 ## Create authgear.yaml and authgear.secrets.yaml
