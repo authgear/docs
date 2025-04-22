@@ -190,7 +190,7 @@ docker compose run --rm  authgear authgear audit database migrate up --database-
 docker compose run --rm  authgear authgear images database migrate up --database-url="postgres://postgres:postgres@db:5432/postgres?sslmode=disable" --database-schema="public"
 
 # This is only needed if you use postgresql as the search service
-docker compose run --rm  authgear authgear search database migrate up --database-url="postgres://postgres:postgres@db:5432/postgres?sslmode=disable" --database-schema="public"
+docker compose run --rm  authgear authgear search database migrate up --search-database-url="postgres://postgres:postgres@db:5432/postgres?sslmode=disable" --search-database-schema="public"
 ```
 
 ## Get it running
