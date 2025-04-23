@@ -8,11 +8,17 @@ description: >-
 
 ## Overview
 
-You can use create an Anonymous User account for the guests in your apps, so they can carry out interactions just like a normal user. For example, guests can post comments and save preferences in your social platform before setting email and password. The user session will persist even if the app has been closed.
+You can use the Anonymous Users feature to create an anonymous user account for the guests in your apps so that they can carry out interactions just like a normal user. For example, guests can post comments and save preferences in your social platform before setting their email and password. The user session will persist even if the app has been closed.
 
-This improves the app experience because the user does not need to set up authenticators until further down the user journey, while still enjoying most of the app features. For app developers, the ability to create and assign Anonymous User also makes it easier to link the activities of an individual before and after sign-up.
+This improves the app experience because the user does not need to set up authenticators until further down the user journey, while still enjoying most of the app features. For app developers, the ability to create and assign Anonymous Users also makes it easier to link the activities of an individual before and after sign-up.
 
-## Enable Anonymous User for your project
+{% hint style="info" %}
+**Note**: The Anonymous Users feature will only work for Authgear Client Applications of type: Native App, Single Page Application, and Traditional Web Application.&#x20;
+
+**OIDC/SAML Client Application type does not** support Anonymous Users. Hence, your application using this client application type will get an error when you try to create anonymous users.
+{% endhint %}
+
+## Enable Anonymous Users for your project
 
 1. In the portal, go to **Authentication > Anonymous Users**.
 2. Turn on **Enable anonymous users.**
@@ -108,7 +114,7 @@ After "signing up" as an anonymous user, you can [retrieve the "UserInfo" object
 
 ### Promotion of an Anonymous User
 
-`promoteAnonymousUser` function can be called to promote an anonymous user to a regular user with login ID (e.g. email, phone number) and authenticators (e.g. password). The end-user will be prompted a sign up page to complete the promotion. The `sub` of an end-user will remain the same after promotion.
+The `promoteAnonymousUser` function can be called to promote an anonymous user to a regular user. You'll call the function with a login ID (e.g., email, phone number) and authenticators (e.g., password). The end-user will be prompted with a sign-up page to complete the promotion. The `sub` of the end-user will remain the same after the promotion.
 
 {% tabs %}
 {% tab title="React Native" %}
@@ -220,9 +226,9 @@ On Mobile SDKs, creating an anonymous user will create a key-pair. The key-pair 
 
 ### Web apps and websites
 
-On the Web SDK, there will be no key-pair created. Therefore the end-user will not be able to login to the same Anonymous User after the their session become invalid. For cookie-based authentication, it is controlled by the "idle timeout" and "session lifetime" of the **Cookie**. For token-based authentication, it is controlled by the "idle timeout" and "token lifetime" of the **Refresh Token**.
+On the Web SDK, there will be no key-pair created. Therefore, the end-user will not be able to login to the same Anonymous User after their session becomes invalid. For cookie-based authentication, it is controlled by the "idle timeout" and "session lifetime" of the **Cookie**. For token-based authentication, it is controlled by the "idle timeout" and "token lifetime" of the **Refresh Token**.
 
-In other words, The anonymous user account lifetime is the same as the logged-in session lifetime.
+In other words, the anonymous user account lifetime is the same as the logged-in session lifetime.
 
 To adjust the lifetime settings, change the timeouts and lifetimes in **Portal** > **Applications** accordingly.
 
