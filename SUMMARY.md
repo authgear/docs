@@ -62,6 +62,7 @@
   * [Single Sign-On with SAML](how-to-guide/single-sign-on/single-sign-on-with-saml/README.md)
     * [Use Authgear as SAML Identity Provider for Salesforce](how-to-guide/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-salesforce.md)
     * [Use Authgear as SAML Identity Provider for Dropbox](how-to-guide/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-dropbox.md)
+    * [SAML Attribute Mapping](how-to-guide/single-sign-on/single-sign-on-with-saml/saml-attribute-mapping.md)
 * [Social Login / Enterprise Login Providers](how-to-guide/how-to-setup-sso-integrations/README.md)
   * [Social Login Providers](how-to-guide/how-to-setup-sso-integrations/social-login-providers/README.md)
     * [Connect Apps to Apple](how-to-guide/how-to-setup-sso-integrations/social-login-providers/apple.md)
