@@ -98,6 +98,7 @@
   * [Custom SMS Provider](how-to-guide/integration/custom-sms-provider/README.md)
     * [Twilio](how-to-guide/integration/custom-sms-provider/twilio.md)
     * [Webhook/Custom Script](how-to-guide/integration/custom-sms-provider/webhook-custom-script.md)
+  * [Integrate Authgear with Firebase](how-to-guide/integration/integrate-authgear-with-firebase.md)
 * [Monitor](how-to-guide/monitor/README.md)
   * [Audit Log For Users Activities](how-to-guide/monitor/audit-log.md)
   * [Audit Log for Admin API and Portal](how-to-guide/monitor/audit-log-for-admin-api-and-portal.md)
