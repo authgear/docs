@@ -127,6 +127,8 @@
 * [Languages and Localization](how-to-guide/languages-and-localization.md)
 * [Custom Email and SMS Templates](how-to-guide/custom-email-and-sms-templates.md)
 * [Directly accessing Authgear Endpoint](how-to-guide/directly-accessing-authgear-endpoint.md)
+* [Authgear ONCE](how-to-guide/authgear-once/README.md)
+  * [Authgear ONCE installation guide for Vultr](how-to-guide/authgear-once/authgear-once-installation-guide-for-vultr.md)
 * [Migration](how-to-guide/migration/README.md)
   * [Bulk migration](how-to-guide/migration/bulk-migration.md)
   * [Rolling migration](how-to-guide/migration/rolling-migration.md)
