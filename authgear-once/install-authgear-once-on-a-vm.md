@@ -1,8 +1,8 @@
 ---
-description: Overview of Authgear ONCE
+description: General guide on installing Authgear ONCE
 ---
 
-# Authgear ONCE
+# Install Authgear ONCE on a VM
 
 Authgear ONCE is an easy-install version of Authgear that can run on any Linux server.&#x20;
 
@@ -12,7 +12,16 @@ Anyone can purchase a one-time license for Authgear ONCE and install it on any p
 
 ## Getting Started with Authgear ONCE
 
-You can get started with Authgear ONCE in these four (4) steps:
+### Prerequisites
+
+You need to have the following in order to install Authgear ONCE:
+
+* A valid Authgear ONCE license.
+* A virtual machine with a public IP address and running a Linux server.
+* A domain name
+* Sendgrid account or SMTP server to handle sending of system emails.
+
+You can get started with Authgear ONCE in these 4 steps:
 
 ### 1. Get Authgear ONCE License
 
@@ -28,8 +37,8 @@ Also, the machine should have Docker installed and have a public IP address. We 
 
 See our guides for setting up Authgear ONCE various cloud providers for more details:
 
-{% content-ref url="authgear-once-installation-guide-for-vultr.md" %}
-[authgear-once-installation-guide-for-vultr.md](authgear-once-installation-guide-for-vultr.md)
+{% content-ref url="install-authgear-once-on-vultr.md" %}
+[install-authgear-once-on-vultr.md](install-authgear-once-on-vultr.md)
 {% endcontent-ref %}
 
 ### 3. Configure Domain Name
@@ -40,19 +49,11 @@ Then, add the public IP address for your VM as **A** records on your domain.
 
 The following are the A records you should configure to get started with Authgear ONCE using the default sub-domains:
 
-| Type | Name                     | Value         | Usage                                          |
-| ---- | ------------------------ | ------------- | ---------------------------------------------- |
-| A    | auth                     | IP of your VM | The authentication endpoint                    |
-| A    | authgear-portal          | IP of your VM | The admin portal for CIAM functions            |
-| A    | authgear-portal-accounts | IP of your VM | A domain for logging into the Authgear portal. |
+<table><thead><tr><th width="74.5546875">Type</th><th>Name</th><th>Value</th><th>Usage</th></tr></thead><tbody><tr><td>A</td><td>auth</td><td>IP of your VM</td><td>The authentication endpoint</td></tr><tr><td>A</td><td>authgear-portal</td><td>IP of your VM</td><td>The admin portal for CIAM functions</td></tr><tr><td>A</td><td>authgear-portal-accounts</td><td>IP of your VM</td><td>A domain for logging into the Authgear portal.</td></tr></tbody></table>
 
 ### 4. Run the Installation Script
 
-With an Authgear ONCE license, a VM with Docker, and a domain name with the correct A records ready, you can now proceed to run the ONCE installation script.
-
-The installation process is interactive and only requires you to respond to a few prompts.&#x20;
-
-The command for running the installation script is included in the email sent to you after the purchase of your ONCE license. Access your VM via SSH or a custom console your cloud provider offers, then paste the installation command. The command should look like this:
+Access your VM via SSH or a custom console your cloud provider offers, then paste the installation command (the installation script is included in the email sent to you after the purchase of your ONCE license). The command should look like this:
 
 ```sh
 /bin/sh -c "$(curl -fsSL https://once-license.authgear.com/install/YOUR-AUTHGEAR-ONCE-LICENSE-KEY)"
@@ -60,7 +61,7 @@ The command for running the installation script is included in the email sent to
 
 Once the installation is complete, log in to `authgear-portal.your-domain.com`  to access the admin Portal for your new Authgear ONCE instance.
 
-<figure><img src="../../.gitbook/assets/once-onboard.png" alt=""><figcaption><p>onboarding screen in Authgear Portal</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/once-onboard.png" alt=""><figcaption><p>onboarding screen in Authgear Portal</p></figcaption></figure>
 
 ## Conclusion
 

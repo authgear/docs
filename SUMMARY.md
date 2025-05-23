@@ -127,8 +127,6 @@
 * [Languages and Localization](how-to-guide/languages-and-localization.md)
 * [Custom Email and SMS Templates](how-to-guide/custom-email-and-sms-templates.md)
 * [Directly accessing Authgear Endpoint](how-to-guide/directly-accessing-authgear-endpoint.md)
-* [Authgear ONCE](how-to-guide/authgear-once/README.md)
-  * [Authgear ONCE installation guide for Vultr](how-to-guide/authgear-once/authgear-once-installation-guide-for-vultr.md)
 * [Migration](how-to-guide/migration/README.md)
   * [Bulk migration](how-to-guide/migration/bulk-migration.md)
   * [Rolling migration](how-to-guide/migration/rolling-migration.md)
@@ -150,6 +148,12 @@
 * [Bot Protection](security/bot-protection.md)
 * [Non-HTTP scheme redirect URI](security/redirect-uri.md)
 * [Password Strength](security/password-strength.md)
+
+## Authgear ONCE
+
+* [What is Authgear ONCE](authgear-once/what-is-authgear-once.md)
+* [Install Authgear ONCE on a VM](authgear-once/install-authgear-once-on-a-vm.md)
+* [Install Authgear ONCE on Vultr](authgear-once/install-authgear-once-on-vultr.md)
 
 ## Reference
 
