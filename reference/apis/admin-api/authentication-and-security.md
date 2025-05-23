@@ -20,7 +20,7 @@ Accessing the Admin API GraphQL endpoint requires your server to generate a vali
 
 #### Sample code to generate the JWT
 
-Here is the sample code of how to generate the JWT with the private key.
+Here is the sample code on how to generate the JWT with the private key.
 
 {% tabs %}
 {% tab title="Go" %}
@@ -172,6 +172,109 @@ app.get('/', (request, response) => {
 app.listen(port, () => {
     console.log("server started on port " + port);
 });
+```
+{% endtab %}
+
+{% tab title="Java" %}
+The following example is a basic Spring Boot application.
+
+First, install the [JJWT](https://github.com/jwtk/jjwt) package by adding the following to the dependency block:
+
+```gradle
+dependencies {
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+}
+```
+
+Then, implement your Java code like this:
+
+```java
+import java.io.InputStream;
+import java.security.KeyFactory;
+import java.security.PrivateKey;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Base64;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.jsonwebtoken.Jwts;
+
+@SpringBootApplication
+@RestController
+public class DemoApplication {
+
+	private static PrivateKey privateKey;
+
+	static {
+		try {
+			// Load the private key from the PEM file (assuming it's in the classpath)
+			ClassPathResource resource = new ClassPathResource("key.pem"); // store your downloaded Admin API key.pem in
+																			// the resources folder.
+			InputStream inputStream = resource.getInputStream();
+			byte[] keyBytes = FileCopyUtils.copyToByteArray(inputStream);
+			String privateKeyPEM = new String(keyBytes, "UTF-8");
+
+			// Clean PEM string (remove header, footer, and newlines)
+			privateKeyPEM = privateKeyPEM
+					.replace("-----BEGIN PRIVATE KEY-----", "")
+					.replace("-----END PRIVATE KEY-----", "")
+					.replaceAll("\\n", "");
+
+			// Decode the PEM string to get the raw key bytes
+			byte[] decodedKey = Base64.getDecoder().decode(privateKeyPEM);
+
+			// Generate the private key object from the bytes
+			KeyFactory keyFactory = KeyFactory.getInstance("RSA"); // Use RSA
+			PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decodedKey);
+			privateKey = keyFactory.generatePrivate(keySpec);
+		} catch (Exception e) {
+			// Handle the exception appropriately (e.g., log, throw a more specific
+			// exception)
+			System.err.println("Error loading or parsing private key: " + e.getMessage());
+			throw new RuntimeException("Failed to initialize private key", e);
+		}
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
+
+	@GetMapping("/generateJwt")
+	public String generateJwt() {
+
+		String kid = ""; // The key ID for your Admin API Key. Can be found in
+																// Authgear Portal under Advanced > Admin API.
+		String projectId = ""; // Your Authgear project ID. You can find this in Authgear Portal.
+		int expirationInMinutes = 15; // how long the JWT will be valid for.
+
+		Date now = new Date();
+		Date expiration = new Date(now.getTime() + 30 * expirationInMinutes * 1000);
+
+		Map<String, Object> claims = new HashMap<>();
+		claims.put("aud", projectId);
+		claims.put("iat", now);
+		claims.put("exp", expiration);
+		String jwt = Jwts.builder()
+				.header()
+				.add("kid", kid)
+				.and()
+				.claims(claims)
+				.signWith(privateKey, Jwts.SIG.RS256)
+				.compact();
+
+		return "{\"jwt\": \"" + jwt + "\"}";
+	}
+}
 ```
 {% endtab %}
 
