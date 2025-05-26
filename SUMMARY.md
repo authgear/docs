@@ -154,6 +154,7 @@
 * [What is Authgear ONCE](authgear-once/what-is-authgear-once.md)
 * [Install Authgear ONCE on a VM](authgear-once/install-authgear-once-on-a-vm.md)
 * [Install Authgear ONCE on Vultr](authgear-once/install-authgear-once-on-vultr.md)
+* [Install Authgear ONCE on Amazon Web Services (AWS)](authgear-once/install-authgear-once-on-amazon-web-services-aws.md)
 
 ## Reference
 
