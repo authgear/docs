@@ -44,7 +44,7 @@ Store these in .env for initializing Authgear:
 - Redirect URL is http://localhost:4000/auth-redirect
 ```
 
-To show the login status in the home page, use the following prompt to change the appearance of the logged in status and add a button to the [pre-built user settings page](../../how-to-guide/built-in-ui/auth-ui.md).
+To show the login status in the home page, use the following prompt to change the appearance of the logged in status and add a button to the [pre-built user settings page](../../design/built-in-ui/auth-ui.md).
 
 {% code overflow="wrap" %}
 ```

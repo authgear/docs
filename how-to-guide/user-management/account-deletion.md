@@ -10,7 +10,7 @@ On Jan 22, 2022 [Apple decided](https://developer.apple.com/news/?id=i71db0mv) t
 
 ## Show "Delete Account" button in User Settings
 
-In the pre-built [**User Settings**](../built-in-ui/auth-ui.md) page, you can show a button for the end-users to initiate account deletion. Users can access the **Delete Account** button under Advanced Settings in the User Settings page when you enable Account Deletion on your project.
+In the pre-built [**User Settings**](../../design/built-in-ui/auth-ui.md) page, you can show a button for the end-users to initiate account deletion. Users can access the **Delete Account** button under Advanced Settings in the User Settings page when you enable Account Deletion on your project.
 
 
 

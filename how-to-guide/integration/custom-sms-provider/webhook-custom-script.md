@@ -62,7 +62,7 @@ The following is the structure of the JSON payload for custom SMS webhook and cu
 * `to` is the phone number of the receiver.
 * The `body` field contains the actual message.
 * `app_id`: is the identifier for the Authgear project sending the SMS.
-* `template_name`: the value shows the specific sms template type that is used for composing the message `body`. For example, verification\_sms.txt when a verification SMS is sent using the verification template set in [**Email/SMS Templates**](../../custom-email-and-sms-templates.md) in Authgear portal.
+* `template_name`: the value shows the specific sms template type that is used for composing the message `body`. For example, verification\_sms.txt when a verification SMS is sent using the verification template set in [**Email/SMS Templates**](../../../design/custom-email-and-sms-templates.md) in Authgear portal.
 * `language_tag`: a tag specifying the language of the message.
 * `template_variables`: this is an object with all the variables that are used to add dynamic content such as OTP `code`, the `app_name` of your app, etc, to the SMS template.
 

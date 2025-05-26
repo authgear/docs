@@ -1,28 +1,28 @@
 # What is User Profile
 
-The user profiles contain information about your end-users such as name, email, addresses, and their unique identifier. You can manage the profiles via the Portal & Admin API. The end-users can also manage their own profile through the Profile section in the [User Setting page](../built-in-ui/auth-ui.md) provided by the AuthUI.
+The user profiles contain information about your end-users such as name, email, addresses, and their unique identifier. You can manage the profiles via the Portal & Admin API. The end-users can also manage their own profile through the Profile section in the [User Setting page](../../design/built-in-ui/auth-ui.md) provided by the AuthUI.
 
 The complete information in the user profiles is a combination of standard attributes and custom attributes. Attributes are a way of grouping the fields of the user profile information. With standard attributes containing common fields, you'll find in a user profile, hence the names of these fields are set by Authgear. You set custom fields on the other hand based on the unique needs of your project.
 
 ## Standard Attributes
 
-The following attributes are built-in supported by Authgear. They are the set of [**Standard Claims** defined by the OIDC specifications](https://openid.net/specs/openid-connect-core-1\_0.html#StandardClaims). Some of them are default hidden from the Admin Portal and end-users. Their visibility and mutability can be configured through the Admin Portal.
+The following attributes are built-in supported by Authgear. They are the set of [**Standard Claims** defined by the OIDC specifications](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims). Some of them are default hidden from the Admin Portal and end-users. Their visibility and mutability can be configured through the Admin Portal.
 
-| Attribute name | Default Visibility | Format                                                                                     |
-| -------------- | ------------------ | ------------------------------------------------------------------------------------------ |
-| Name           | Hidden             | String                                                                                     |
-| Given Name     | Editable           | String                                                                                     |
-| Family Name    | Editable           | String                                                                                     |
-| Middle Name    | Hidden             | String                                                                                     |
-| Nickname       | Hidden             | String                                                                                     |
-| Profile        | Hidden             | URL String                                                                                 |
-| Picture        | Editable           | URL String                                                                                 |
-| Website        | Hidden             | URL String                                                                                 |
-| Gender         | Editable           | `male`, `female` or Custom String                                                          |
-| Birthdate      | Editable           | Date in YYYY-MM-DD                                                                         |
-| Timezone       | Editable           | [tz database zone name](https://en.wikipedia.org/wiki/List\_of\_tz\_database\_time\_zones) |
-| Language       | Editable           | BCP47 language tag enabled by the project                                                  |
-| Address        | Hidden             | JSON Object                                                                                |
+| Attribute name | Default Visibility | Format                                                                                |
+| -------------- | ------------------ | ------------------------------------------------------------------------------------- |
+| Name           | Hidden             | String                                                                                |
+| Given Name     | Editable           | String                                                                                |
+| Family Name    | Editable           | String                                                                                |
+| Middle Name    | Hidden             | String                                                                                |
+| Nickname       | Hidden             | String                                                                                |
+| Profile        | Hidden             | URL String                                                                            |
+| Picture        | Editable           | URL String                                                                            |
+| Website        | Hidden             | URL String                                                                            |
+| Gender         | Editable           | `male`, `female` or Custom String                                                     |
+| Birthdate      | Editable           | Date in YYYY-MM-DD                                                                    |
+| Timezone       | Editable           | [tz database zone name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| Language       | Editable           | BCP47 language tag enabled by the project                                             |
+| Address        | Hidden             | JSON Object                                                                           |
 
 ### Standard Attributes that are coupled with Identities
 
@@ -57,7 +57,7 @@ You can define a set of custom attributes in the user profile. They are returned
 
 Go to **Portal** > **User Profile** > **Custom Attributes** and click **Add New Attribute**
 
-The custom attribute name should consist of lowercase letters (a-z), digits (0-9) and underscore (\_) only. It must start with lowercase letters (a-z), and NOT end with an underscore (_\__). The default display name will be the attribute name split with underscore and in title case. e.g. `my_string` will render as `My String` in the [AuthUI Settings page](../built-in-ui/auth-ui.md).
+The custom attribute name should consist of lowercase letters (a-z), digits (0-9) and underscore (\_) only. It must start with lowercase letters (a-z), and NOT end with an underscore (_\__). The default display name will be the attribute name split with underscore and in title case. e.g. `my_string` will render as `My String` in the [AuthUI Settings page](../../design/built-in-ui/auth-ui.md).
 
 Authgear supports the following attribute types:
 
@@ -80,7 +80,7 @@ Deleting custom attributes is not supported. You can change the name and access 
 
 ### Custom attribute order
 
-You can arrange the attribute order by drag-and-drop the handle in the custom attribute configuration in the Portal. This will control the order of how the attributes are shown to the end-users in the [AuthUI User Settings page](../built-in-ui/auth-ui.md).
+You can arrange the attribute order by drag-and-drop the handle in the custom attribute configuration in the Portal. This will control the order of how the attributes are shown to the end-users in the [AuthUI User Settings page](../../design/built-in-ui/auth-ui.md).
 
 ## User Profile Configuration
 
@@ -102,7 +102,7 @@ The session bearer is someone who has a valid session cookie or a valid access t
 
 ### The End-user
 
-The end-user can view or edit the standard attributes through the Profile section in the [User Setting page](../built-in-ui/auth-ui.md) provided by the AuthUI.
+The end-user can view or edit the standard attributes through the Profile section in the [User Setting page](../../design/built-in-ui/auth-ui.md) provided by the AuthUI.
 
 ## Profiles from Third-party Identity Providers
 
