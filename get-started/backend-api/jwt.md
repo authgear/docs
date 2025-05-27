@@ -368,6 +368,197 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 {% endtab %}
 
+{% tab title="Java" %}
+The following example uses Spring Boot.
+
+### Step 1: Install dependencies
+
+Add the following dependencies to your build.gradle file:
+
+```gradle
+dependencies {
+	implementation("com.nimbusds:nimbus-jose-jwt:10.2")
+	implementation("org.json:json:20250107")
+}
+```
+
+Then add the following imports to the top of your  controller file:
+
+```java
+import com.nimbusds.jose.jwk.JWKSet;
+import com.nimbusds.jose.jwk.RSAKey;
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.List;
+```
+
+### Step 2: Get JWKS Endpoint
+
+Implement the following method to fetch the JWKS URI:
+
+```java
+
+private static String fetchJwksUri(String baseAddress) throws Exception {
+	String docUrl = baseAddress + "/.well-known/openid-configuration";
+	HttpURLConnection conn = (HttpURLConnection) new URL(docUrl).openConnection();
+	conn.setRequestMethod("GET");
+
+	try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+		StringBuilder response = new StringBuilder();
+		String line;
+		while ((line = reader.readLine()) != null) {
+			response.append(line);
+		}
+
+		String jwksUri = new org.json.JSONObject(response.toString()).getString("jwks_uri");
+		if (jwksUri == null || jwksUri.isEmpty()) {
+			throw new Exception("Failed to fetch JWKS URI.");
+		}
+		return jwksUri;
+	}
+}
+```
+
+### Step 3: Get Signing Key
+
+Get the signing key from the JWK using the following method:
+
+```java
+private static RSAKey getSigningKeyFromJwks(String jwksUri, String token) throws Exception {
+	JWKSet jwkSet = JWKSet.load(new URL(jwksUri));
+	List<com.nimbusds.jose.jwk.JWK> keys = jwkSet.getKeys();
+
+	SignedJWT signedJWT = SignedJWT.parse(token);
+	String keyId = signedJWT.getHeader().getKeyID();
+
+	return keys.stream()
+			.filter(jwk -> jwk.getKeyID().equals(keyId))
+			.findFirst()
+			.map(jwk -> (RSAKey) jwk)
+			.orElse(null);
+}
+```
+
+### Step 4: Validate JWT
+
+To demonstrate how to validate a JWT, we'll implement a `validateJWT` endpoint in a Spring Boot application. The endpoint will read access tokens from the bearer authorization header.
+
+It will call the `fetchJwksUri()` and `getSigningKeyFromJwks()` from steps 1 and 2 to get the JWK URI and signing key required to parse the JWT.
+
+```java
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.List;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.nimbusds.jose.jwk.JWKSet;
+import com.nimbusds.jose.jwk.RSAKey;
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
+
+
+@SpringBootApplication
+@RestController
+public class DemoApplication {
+
+	//paste implementation for fetchJwksUri() method below this line.
+	
+	
+	//paste implemetation of getSigningKeyFromJwks() method below this line.
+
+	private static final String BASE_ADDRESS = ""; //place your authgear app endpoint here
+
+	@GetMapping("/validateJwt")
+	public Object validateJwt(@RequestHeader("Authorization") String authorizationHeader) {
+		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+			return new ResponseMessage("authorization header not found");
+		}
+
+		String token = authorizationHeader.substring(7); // Extract token
+
+		try {
+			// Fetch JWKS URI dynamically
+			String jwksUri = fetchJwksUri(BASE_ADDRESS);
+
+			// Get signing key from JWKS
+			RSAKey signingKey = getSigningKeyFromJwks(jwksUri, token);
+			if (signingKey == null) {
+				return new ResponseMessage("JWT decode failed: Signing key not found");
+			}
+
+			// Validate and decode JWT
+			SignedJWT signedJWT = SignedJWT.parse(token);
+			JWTClaimsSet claimsSet = signedJWT.getJWTClaimsSet();
+
+			return new ResponseMessage("Hello!", claimsSet.toJSONObject());
+
+		} catch (Exception e) {
+			return new ResponseMessage("JWT decode failed: " + e.getMessage());
+		}
+	}
+
+	private static String fetchJwksUri(String baseAddress) throws Exception {
+		String docUrl = baseAddress + "/.well-known/openid-configuration";
+		HttpURLConnection conn = (HttpURLConnection) new URL(docUrl).openConnection();
+		conn.setRequestMethod("GET");
+
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+			StringBuilder response = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				response.append(line);
+			}
+
+			String jwksUri = new org.json.JSONObject(response.toString()).getString("jwks_uri");
+			if (jwksUri == null || jwksUri.isEmpty()) {
+				throw new Exception("Failed to fetch JWKS URI.");
+			}
+			return jwksUri;
+		}
+	}
+
+	private static RSAKey getSigningKeyFromJwks(String jwksUri, String token) throws Exception {
+		JWKSet jwkSet = JWKSet.load(new URL(jwksUri));
+		List<com.nimbusds.jose.jwk.JWK> keys = jwkSet.getKeys();
+
+		SignedJWT signedJWT = SignedJWT.parse(token);
+		String keyId = signedJWT.getHeader().getKeyID();
+
+		return keys.stream()
+				.filter(jwk -> jwk.getKeyID().equals(keyId))
+				.findFirst()
+				.map(jwk -> (RSAKey) jwk)
+				.orElse(null);
+	}
+
+	static class ResponseMessage {
+		public String message;
+		public Object user_data;
+
+		public ResponseMessage(String message) {
+			this.message = message;
+		}
+
+		public ResponseMessage(String message, Object user_data) {
+			this.message = message;
+			this.user_data = user_data;
+		}
+	}
+}
+
+```
+{% endtab %}
+
 {% tab title="PHP" %}
 ### Step 1: Install Packages
 
@@ -444,6 +635,10 @@ echo json_encode($decoded);
 
 {% endtab %}
 {% endtabs %}
+
+
+
+
 
 ### Check the validity of JWT
 
