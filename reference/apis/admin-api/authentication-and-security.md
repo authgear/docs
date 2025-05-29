@@ -278,6 +278,86 @@ public class DemoApplication {
 ```
 {% endtab %}
 
+{% tab title="ASP.NET" %}
+The following example shows an ASP.NET Core API.\
+First, install the required dependency:
+
+```sh
+dotnet add package System.IdentityModel.Tokens.Jwt
+```
+
+Next, create the following field variables for your project's ID, `kid`, the path to your private key (.pem file), and the validity of the JWT.
+
+```csharp
+private const string ProjectId = ""; // Replace with actual project ID
+private const string KeyId = ""; // Replace with key ID from the portal
+private const int ExpiryMinutes = 5;
+private const string PrivateKeyPath = "key.pem"; // Path to PEM file
+```
+
+Then, implement a `GetPrivateKey` method that will get the private key from your .pem file.
+
+```csharp
+private RSA GetPrivateKey(string privateKeyPem)
+{
+    var rsa = RSA.Create();
+    rsa.ImportFromPem(privateKeyPem.ToCharArray());
+    return rsa;
+}
+```
+
+Implement a `GenerateJwt` method. This method will use the private key and `kid` to generate a JWT.
+
+```csharp
+private string GenerateJwt(RSA privateKey)
+{
+    DateTime now = DateTime.UtcNow;
+
+    var securityKey = new RsaSecurityKey(privateKey)
+    {
+        KeyId = KeyId // Set the Key ID
+    };
+
+    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.RsaSha256);
+
+    var descriptor = new SecurityTokenDescriptor
+    {
+        Audience = ProjectId,
+        IssuedAt = now,
+        Expires = now.AddMinutes(ExpiryMinutes),
+        SigningCredentials = credentials
+    };
+
+    var tokenHandler = new JwtSecurityTokenHandler();
+    var token = tokenHandler.CreateToken(descriptor);
+    return tokenHandler.WriteToken(token);
+}
+```
+
+Finally, in your route method, read the .pem file and get a private key, then call the `GenerateJwt()` method to generate a JWT.
+
+```csharp
+[HttpGet(Name = "Jwt")]
+public IActionResult GenerateJwt()
+{
+    try
+    {
+        // Read private key from file
+        string privateKeyPem = System.IO.File.ReadAllText(PrivateKeyPath);
+        RSA privateKey = GetPrivateKey(privateKeyPem);
+
+        // Generate JWT
+        string token = GenerateJwt(privateKey);
+        return Ok(new { token });
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(new { message = $"Error generating JWT: {ex.Message}" });
+    }
+}
+```
+{% endtab %}
+
 {% tab title="PHP" %}
 First, install the Firebase PHP JWT package using this command:
 
@@ -319,6 +399,10 @@ echo $jwt;
 ```
 {% endtab %}
 {% endtabs %}
+
+
+
+
 
 #### Example of the JWT header
 
