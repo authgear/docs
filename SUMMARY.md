@@ -106,7 +106,7 @@
   * [Event List](how-to-guide/events-hooks/event-list.md)
   * [Webhooks](how-to-guide/events-hooks/webhooks.md)
   * [JavaScript / TypeScript Hooks](how-to-guide/events-hooks/denohooks.md)
-  * [Only Allow Signups from Inside the Corporate Network using Hooks](how-to-guide/events-hooks/only-allow-signups-from-inside-the-corporate-network-using-hooks.md)
+  * [Example: Only Allow Signups from Inside the Corporate Network using Hooks](how-to-guide/events-hooks/only-allow-signups-from-inside-the-corporate-network-using-hooks.md)
 * [Mobile Apps](how-to-guide/mobile-apps/README.md)
   * [Use SDK to make authorized API calls to backend](how-to-guide/mobile-apps/using-sdk-to-call-your-application-server.md)
   * [Force authentication on app launch](how-to-guide/mobile-apps/force-authentication-on-app-launch.md)
