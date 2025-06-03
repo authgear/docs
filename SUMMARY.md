@@ -134,7 +134,7 @@
   * [Webhooks](customization/events-hooks/webhooks.md)
   * [JavaScript / TypeScript Hooks](customization/events-hooks/denohooks.md)
   * [Example: Only Allow Signups from Inside the Corporate Network using Hooks](customization/events-hooks/only-allow-signups-from-inside-the-corporate-network-using-hooks.md)
-* [UI Customization](customization/ui-customization/built-in-ui/README.md)
+* [UI Customization](customization/ui-customization/README.md)
   * [Built-in UI](customization/ui-customization/built-in-ui/README.md)
     * [Branding in Auth UI](customization/ui-customization/built-in-ui/branding.md)
     * [User Settings](customization/ui-customization/built-in-ui/auth-ui.md)
