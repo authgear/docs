@@ -6,7 +6,7 @@
 
 * [5-Minute Guide](get-started/5-minute-guide.md)
 * [Start Building](get-started/start-building.md)
-* [Tutorials](get-started/tutorials/single-page-app/README.md)
+* [Tutorials](get-started/tutorials/README.md)
   * [Core Concepts](get-started/tutorials/core-concepts/README.md)
     * [Identity Fundamentals](get-started/tutorials/core-concepts/identity-fundamentals.md)
     * [Authgear use cases](get-started/tutorials/core-concepts/authgear-use-cases.md)
