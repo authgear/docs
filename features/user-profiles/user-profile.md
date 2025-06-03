@@ -26,7 +26,7 @@ The following attributes are built-in supported by Authgear. They are the set of
 
 ### Standard Attributes that are coupled with Identities
 
-The following attributes are coupled with the [identities](../../concepts/user-identity-and-authenticator.md#identity) owned by the end-user. They represent the email addresses, phone numbers, or usernames the end-users are using to authenticate themselves on Authgear. If the end-user uses a third-party identity provider for authentication, these attributes will be coupled with the corresponding attributes returned by the provider.
+The following attributes are coupled with the [identities](../../get-started/core-concepts/user-identity-and-authenticator.md#identity) owned by the end-user. They represent the email addresses, phone numbers, or usernames the end-users are using to authenticate themselves on Authgear. If the end-user uses a third-party identity provider for authentication, these attributes will be coupled with the corresponding attributes returned by the provider.
 
 The standard attributes coupled with identities are listed below:
 

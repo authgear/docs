@@ -235,7 +235,7 @@ The following are some attributes that are usually in the userInfo object. Other
 
 | Key         | Type      | Description                                                                                                                                                                                                       |
 | ----------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| isAnonymous | _boolean_ | Indicate if the user is anonymous, i.e. no [identity](../../concepts/user-identity-and-authenticator.md#identity) or [authenticator](../../concepts/user-identity-and-authenticator.md#authenticator) is provided |
+| isAnonymous | _boolean_ | Indicate if the user is anonymous, i.e. no [identity](../../get-started/core-concepts/user-identity-and-authenticator.md#identity) or [authenticator](../../get-started/core-concepts/user-identity-and-authenticator.md#authenticator) is provided |
 | isVerified  | _boolean_ | Indicate if the user completed the verification requirement                                                                                                                                                       |
 | sub         | _string_  | Unique identifier of the user in your Authgear project                                                                                                                                                            |
 

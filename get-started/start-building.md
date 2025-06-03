@@ -20,7 +20,7 @@ layout:
 There are 3 different high-level approaches to integrating Authgear with your applications:
 
 1. **Mobile apps or single-page web applications:**\
-   The frontend clients integrate with Authgear’s SDKs, which handle full login flow and session management. It’s important to validate the session in your backend server.
+   The frontend clients integrate with Authgear's SDKs, which handle full login flow and session management. It's important to validate the session in your backend server.
 2. **Regular Web Applications:**\
    Traditional server-side rendered web apps that run on the server can use OIDC protocol to authenticate with Authgear. The application server has full control over the session storage.
 3. **Software built by others:** \
@@ -103,4 +103,3 @@ When implementing identity management for your enterprise software, Authgear pro
 
 * [Integration with OIDC Protocol](../how-to-guide/single-sign-on/oidc-provider.md)
 * [Integration with SAML 2.0 Protocol](../how-to-guide/single-sign-on/single-sign-on-with-saml/)
-
