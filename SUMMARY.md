@@ -5,13 +5,13 @@
 ## Get Started
 
 * [5-Minute Guide](get-started/5-minute-guide.md)
-* [Core Concepts](get-started/core-concepts/identity-fundamentals.md)
-  * [Identity Fundamentals](get-started/core-concepts/identity-fundamentals.md)
-  * [Authgear use cases](get-started/core-concepts/authgear-use-cases.md)
-  * [User, Identity and Authenticator](get-started/core-concepts/user-identity-and-authenticator.md)
-  * [How Authgear integrate with your applications](get-started/core-concepts/how-authgear-integrate-with-your-applications.md)
 * [Start Building](get-started/start-building.md)
 * [Tutorials](get-started/tutorials/single-page-app/README.md)
+  * [Core Concepts](get-started/core-concepts/identity-fundamentals.md)
+    * [Identity Fundamentals](get-started/core-concepts/identity-fundamentals.md)
+    * [Authgear use cases](get-started/core-concepts/authgear-use-cases.md)
+    * [User, Identity and Authenticator](get-started/core-concepts/user-identity-and-authenticator.md)
+    * [How Authgear integrate with your applications](get-started/core-concepts/how-authgear-integrate-with-your-applications.md)
   * [Single-Page App](get-started/tutorials/single-page-app/README.md)
     * [JavaScript (Web)](get-started/tutorials/single-page-app/website.md)
     * [React](get-started/tutorials/single-page-app/react.md)
