@@ -6,12 +6,12 @@
 
 * [5-Minute Guide](get-started/5-minute-guide.md)
 * [Start Building](get-started/start-building.md)
-* [Core Concepts](concepts/identity-fundamentals.md)
-  * [Identity Fundamentals](concepts/identity-fundamentals.md)
-  * [Authgear use cases](concepts/authgear-use-cases.md)
-  * [User, Identity and Authenticator](concepts/user-identity-and-authenticator.md)
-  * [How Authgear integrate with your applications](concepts/how-authgear-integrate-with-your-applications.md)
 * [Tutorials](get-started/tutorials/single-page-app/README.md)
+  * [Core Concepts](get-started/tutorials/core-concepts/README.md)
+    * [Identity Fundamentals](get-started/tutorials/core-concepts/identity-fundamentals.md)
+    * [Authgear use cases](get-started/tutorials/core-concepts/authgear-use-cases.md)
+    * [User, Identity and Authenticator](get-started/tutorials/core-concepts/user-identity-and-authenticator.md)
+    * [How Authgear integrate with your applications](get-started/tutorials/core-concepts/how-authgear-integrate-with-your-applications.md)
   * [Single-Page App](get-started/tutorials/single-page-app/README.md)
     * [JavaScript (Web)](get-started/tutorials/single-page-app/website.md)
     * [React](get-started/tutorials/single-page-app/react.md)
@@ -88,8 +88,8 @@
   * [Force authentication on app launch](integration/mobile-apps/force-authentication-on-app-launch.md)
   * [Customize the Login Pop-up / Disable the login alert box](integration/mobile-apps/using-webview-to-open-the-authgear-ui.md)
 * [Integrate Authgear with Firebase](integration/integrate-authgear-with-firebase.md)
-* [User Analytics by Google Tag Manager](integration/user-analytics-by-google-tag-manager/README.md)
-  * [Track User Before and After Signup](integration/user-analytics-by-google-tag-manager/track-user-before-and-after-signup.md)
+* [User Analytics by Google Tag Manager](integration/user-analytics-by-google-tag-manager/user-analytics-by-google-tag-manager.md)
+* [Track User Before and After Signup](integration/user-analytics-by-google-tag-manager/track-user-before-and-after-signup.md)
 * [Directly accessing Authgear Endpoint](integration/directly-accessing-authgear-endpoint.md)
 
 ## Features
