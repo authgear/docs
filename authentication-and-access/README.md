@@ -1,4 +1,4 @@
-# Auth & Access
+# Authentication & Access
 
 This section covers authentication methods, single sign-on (SSO), and identity provider integrations for Authgear.
 

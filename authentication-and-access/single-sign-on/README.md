@@ -18,19 +18,5 @@ There are multiple ways to achieve Single Sign-on, with various pros-and-cons:
 | SSO from a Mobile App to Website                | [Pre-Authenticated URLs](pre-authenticated-urls.md)                                                                                       | Open a URL from Mobile App and pass the user session along, based on OIDC Token Exchange                      |
 | SSO between Mobile Apps from the same publisher | <p>Keychain Sharing / Android Account Manager<br><br>(<a href="https://www.authgear.com/schedule-demo">Contact us</a> if you need it)</p> | Requires both apps published by the same publisher from App Store.                                            |
 
-## SAML Single Sign-On
 
-Security Assertion Markup Language (SAML) is a standard for exchanging security information between businesses. Authgear supports the SAML protocol, allowing you to set up third-party services like Salesforce, Dropbox, Figma, etc. to trust Authgear with the user authentication process.
-
-{% content-ref url="saml-attribute-mapping.md" %}
-[saml-attribute-mapping.md](saml-attribute-mapping.md)
-{% endcontent-ref %}
-
-{% content-ref url="use-authgear-as-saml-identity-provider-for-salesforce.md" %}
-[use-authgear-as-saml-identity-provider-for-salesforce.md](use-authgear-as-saml-identity-provider-for-salesforce.md)
-{% endcontent-ref %}
-
-{% content-ref url="use-authgear-as-saml-identity-provider-for-dropbox.md" %}
-[use-authgear-as-saml-identity-provider-for-dropbox.md](use-authgear-as-saml-identity-provider-for-dropbox.md)
-{% endcontent-ref %}
 
