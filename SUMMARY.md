@@ -190,6 +190,14 @@
 * [Install Authgear ONCE on Amazon Web Services (AWS)](authgear-once/install-authgear-once-on-amazon-web-services-aws.md)
 * [Install Authgear ONCE on Vultr](authgear-once/install-authgear-once-on-vultr.md)
 
+## Client App SDKs
+
+* [Javascript SDK Reference](https://authgear.github.io/authgear-sdk-js/docs/)
+* [iOS SDK Reference](https://authgear.github.io/authgear-sdk-ios/)
+* [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
+* [Flutter SDK Reference](https://authgear.github.io/authgear-sdk-flutter/)
+* [Xamarin SDK Reference](https://authgear.github.io/authgear-sdk-xamarin/)
+
 ## API Reference
 
 * [API Reference Overview](api-reference/README.md)
