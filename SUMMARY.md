@@ -66,6 +66,7 @@
   * [Force Authgear to Show Login Page](authentication-and-access/single-sign-on/force-authgear-to-show-login-page.md)
   * [Single Sign-On with OIDC](authentication-and-access/single-sign-on/oidc-provider.md)
   * [SAML Attribute Mapping](authentication-and-access/single-sign-on/saml-attribute-mapping.md)
+* [Single Sign-On with SAML](authentication-and-access/single-sign-on/single-sign-on-with-saml/README.md)
   * [Use Authgear as SAML Identity Provider for Salesforce](authentication-and-access/single-sign-on/use-authgear-as-saml-identity-provider-for-salesforce.md)
   * [Use Authgear as SAML Identity Provider for Dropbox](authentication-and-access/single-sign-on/use-authgear-as-saml-identity-provider-for-dropbox.md)
 * [Social/Enterprise Login Providers Overview](authentication-and-access/social-enterprise-login-providers/README.md)
