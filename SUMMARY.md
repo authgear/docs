@@ -97,21 +97,21 @@
 ## Admin
 
 * [Monitor](features/monitor/README.md)
-  * [Analytics](features/monitor/analytics.md)
-  * [Audit Log for Admin API and Portal](features/monitor/audit-log-for-admin-api-and-portal.md)
   * [Audit Log For Users Activities](features/monitor/audit-log.md)
+  * [Audit Log for Admin API and Portal](features/monitor/audit-log-for-admin-api-and-portal.md)
+  * [Analytics](features/monitor/analytics.md)
 * [User Management](features/user-management/README.md)
   * [Account Deletion](features/user-management/account-deletion.md)
-  * [Export Users using the User Export API](features/user-management/export-users-using-the-user-export-api.md)
-  * [How to Handle Password While Creating Accounts for Users](features/user-management/how-to-handle-password-while-creating-accounts-for-users.md)
   * [Import Users using User Import API](features/user-management/import-users-using-user-import-api.md)
+  * [Export Users using the User Export API](features/user-management/export-users-using-the-user-export-api.md)
   * [Manage Users Roles and Groups](features/user-management/manage-users-roles-and-groups.md)
+  * [How to Handle Password While Creating Accounts for Users](features/user-management/how-to-handle-password-while-creating-accounts-for-users.md)
 * [User Profiles](features/user-profiles/README.md)
+  * [What is User Profile](features/user-profiles/user-profile.md)
   * [Access User Profiles](features/user-profiles/access-user-profiles.md)
+  * [Update User Profiles](features/user-profiles/update-user-profiles.md)
   * [Profile Custom Attributes](features/user-profiles/profile-custom-attributes.md)
   * [Update user profile on sign-up using Hooks](features/user-profiles/update-user-profile-on-sign-up-using-hooks.md)
-  * [Update User Profiles](features/user-profiles/update-user-profiles.md)
-  * [What is User Profile](features/user-profiles/user-profile.md)
 
 ## Migration
 
