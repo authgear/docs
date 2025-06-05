@@ -180,11 +180,10 @@
 * [Billing FAQ](api-reference/billing-faq.md)
 
 ## Concepts
-* [Core Concepts](concepts/README.md)
-  * [Identity Fundamentals](concepts/identity-fundamentals.md)
-  * [Authgear use cases](concepts/authgear-use-cases.md)
-  * [User, Identity and Authenticator](concepts/user-identity-and-authenticator.md)
-  * [How Authgear integrate with your applications](concepts/how-authgear-integrate-with-your-applications.md)
+* [Identity Fundamentals](concepts/identity-fundamentals.md)
+* [Authgear use cases](concepts/authgear-use-cases.md)
+* [User, Identity and Authenticator](concepts/user-identity-and-authenticator.md)
+* [How Authgear integrate with your applications](concepts/how-authgear-integrate-with-your-applications.md)
 
 ## Authgear ONCE
 
