@@ -161,7 +161,7 @@
 
 * [Deployment Overview](deployment/README.md)
 * [Local Development](deployment/local-development/local.md)
-* [Production Deployment](deployment/production-deployment/helm.md)
+* [Production Deployment](deployment/production-deployment/README.md)
   * [Deploy with Helm chart](deployment/production-deployment/helm.md)
   * [Authenticating HTTP request with Nginx](deployment/production-deployment/auth-nginx.md)
 * [Configuration](deployment/configuration/README.md)
