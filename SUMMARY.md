@@ -124,8 +124,9 @@
 * [Custom Domain](customization/custom-domain.md)
 * [Custom Providers](customization/custom-providers/README.md)
   * [Custom Email Provider](customization/custom-providers/custom-email-provider.md)
-  * [Twilio](customization/custom-providers/twilio.md)
-  * [Webhook/Custom Script](customization/custom-providers/webhook-custom-script.md)
+  * [Custom SMS Provider](customization/custom-providers/custom-sms-provider.md)
+    * [Twilio](customization/custom-providers/twilio.md)
+    * [Webhook/Custom Script](customization/custom-providers/webhook-custom-script.md)
 * [Events and Hooks](customization/events-hooks/README.md)
   * [Event List](customization/events-hooks/event-list.md)
   * [Webhooks](customization/events-hooks/webhooks.md)
@@ -146,7 +147,7 @@
     * [Manually Link OAuth Provider using Account Management API](customization/ui-customization/custom-ui/manually-link-oauth-provider-using-account-management-api.md)
     * [Implement a custom account recovery UI using Authentication Flow API](customization/ui-customization/custom-ui/implement-a-custom-account-recovery-ui-using-authentication-flow-api.md)
   * [Languages and Localization](customization/ui-customization/languages-and-localization.md)
-  * [Custom Email and SMS Templates](customization/ui-customization/custom-email-and-sms-templates.md)
+* [Custom Email and SMS Templates](customization/ui-customization/custom-email-and-sms-templates.md)
 
 ## Security
 
@@ -154,43 +155,6 @@
 * [Bot Protection](security/bot-protection.md)
 * [Non-HTTP scheme redirect URI](security/redirect-uri.md)
 * [Password Strength](security/password-strength.md)
-
-## Deployment
-
-* [Run with Docker](deployment/local-development/local.md)
-* [Production Deployment](deployment/production-deployment/README.md)
-* [Deploy with Helm chart](deployment/production-deployment/helm.md)
-* [Authenticating HTTP request with Nginx](deployment/production-deployment/auth-nginx.md)
-* [Configuration](deployment/configuration/README.md)
-  * [Environment Variables](deployment/configuration/env.md)
-  * [authgear.yaml](deployment/configuration/authgear.yaml.md)
-  * [authgear.secrets.yaml](deployment/configuration/authgear.secrets.yaml.md)
-* [Architecture Guides](deployment/architecture-guides/README.md)
-  * [AWS Reference Architecture](deployment/architecture-guides/aws-reference-architecture.md)
-  * [Azure Reference Architecture](deployment/architecture-guides/azure-reference-architecture.md)
-  * [Google Cloud Reference Architecture](deployment/architecture-guides/google-cloud-reference-architecture.md)
-  * [Throughput Scaling Reference](deployment/architecture-guides/throughput-scaling-reference.md)
-
-## Troubleshooting
-
-* [How to Fix SubtleCrypto: digest() undefined Error in Authgear SDK](troubleshooting/how-to-fix-subtlecrypto-digest-undefined-error-in-authgear-sdk.md)
-* [How to Fix CORS Error](troubleshooting/how-to-fix-cors-error.md)
-
-## Authgear ONCE
-
-* [Authgear ONCE Overview](authgear-once/README.md)
-* [What is Authgear ONCE](authgear-once/what-is-authgear-once.md)
-* [Install Authgear ONCE on a VM](authgear-once/install-authgear-once-on-a-vm.md)
-* [Install Authgear ONCE on Amazon Web Services (AWS)](authgear-once/install-authgear-once-on-amazon-web-services-aws.md)
-* [Install Authgear ONCE on Vultr](authgear-once/install-authgear-once-on-vultr.md)
-
-## Client App SDKs
-
-* [Javascript SDK Reference](https://authgear.github.io/authgear-sdk-js/docs/)
-* [iOS SDK Reference](https://authgear.github.io/authgear-sdk-ios/)
-* [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
-* [Flutter SDK Reference](https://authgear.github.io/authgear-sdk-flutter/)
-* [Xamarin SDK Reference](https://authgear.github.io/authgear-sdk-xamarin/)
 
 ## Reference
 
@@ -219,3 +183,41 @@
   * [Account Lockout](api-reference/rate-limits/account-lockout.md)
 * [Glossary](api-reference/glossary.md)
 * [Billing FAQ](api-reference/billing-faq.md)
+
+## Authgear ONCE
+
+* [Authgear ONCE Overview](authgear-once/README.md)
+* [What is Authgear ONCE](authgear-once/what-is-authgear-once.md)
+* [Install Authgear ONCE on a VM](authgear-once/install-authgear-once-on-a-vm.md)
+* [Install Authgear ONCE on Amazon Web Services (AWS)](authgear-once/install-authgear-once-on-amazon-web-services-aws.md)
+* [Install Authgear ONCE on Vultr](authgear-once/install-authgear-once-on-vultr.md)
+
+## Client App SDKs
+
+* [Javascript SDK Reference](https://authgear.github.io/authgear-sdk-js/docs/)
+* [iOS SDK Reference](https://authgear.github.io/authgear-sdk-ios/)
+* [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
+* [Flutter SDK Reference](https://authgear.github.io/authgear-sdk-flutter/)
+* [Xamarin SDK Reference](https://authgear.github.io/authgear-sdk-xamarin/)
+
+
+## Deployment
+
+* [Run with Docker](deployment/local-development/local.md)
+* [Production Deployment](deployment/production-deployment/README.md)
+* [Deploy with Helm chart](deployment/production-deployment/helm.md)
+* [Authenticating HTTP request with Nginx](deployment/production-deployment/auth-nginx.md)
+* [Configuration](deployment/configuration/README.md)
+  * [Environment Variables](deployment/configuration/env.md)
+  * [authgear.yaml](deployment/configuration/authgear.yaml.md)
+  * [authgear.secrets.yaml](deployment/configuration/authgear.secrets.yaml.md)
+* [Architecture Guides](deployment/architecture-guides/README.md)
+  * [AWS Reference Architecture](deployment/architecture-guides/aws-reference-architecture.md)
+  * [Azure Reference Architecture](deployment/architecture-guides/azure-reference-architecture.md)
+  * [Google Cloud Reference Architecture](deployment/architecture-guides/google-cloud-reference-architecture.md)
+  * [Throughput Scaling Reference](deployment/architecture-guides/throughput-scaling-reference.md)
+
+## Troubleshooting
+
+* [How to Fix SubtleCrypto: digest() undefined Error in Authgear SDK](troubleshooting/how-to-fix-subtlecrypto-digest-undefined-error-in-authgear-sdk.md)
+* [How to Fix CORS Error](troubleshooting/how-to-fix-cors-error.md)
