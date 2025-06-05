@@ -160,9 +160,6 @@
 ## Reference
 
 * [APIs](api-reference/apis/README.md)
-  * [Authentication Flow API](api-reference/apis/authentication-flow-api.md)
-  * [User Import API](api-reference/apis/user-import-api.md)
-  * [User Export API](api-reference/apis/user-export-api.md)
   * [Admin API](api-reference/apis/admin-api/README.md)
     * [Authentication and Security](api-reference/apis/admin-api/authentication-and-security.md)
     * [API Schema](api-reference/apis/admin-api/api-schema.md)
@@ -174,9 +171,12 @@
       * [Search for users](api-reference/apis/admin-api/api-examples/search-for-users.md)
       * [Update user's picture](api-reference/apis/admin-api/api-examples/update-users-picture.md)
       * [Update user's standard attributes](api-reference/apis/admin-api/api-examples/update-users-standard-attributes.md)
+  * [Authentication Flow API](api-reference/apis/authentication-flow-api.md)
   * [OAuth 2.0 and OpenID Connect (OIDC)](api-reference/apis/oauth-2.0-and-openid-connect-oidc/README.md)
     * [Supported Scopes](api-reference/apis/oauth-2.0-and-openid-connect-oidc/supported-scopes.md)
     * [UserInfo](api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md)
+  * [User Import API](api-reference/apis/user-import-api.md)
+  * [User Export API](api-reference/apis/user-export-api.md)
 * [Tokens](api-reference/tokens/README.md)
   * [JWT Access Token](api-reference/tokens/jwt-access-token.md)
   * [Refresh Token](api-reference/tokens/refresh-token.md)
