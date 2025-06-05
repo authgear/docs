@@ -43,7 +43,6 @@
 
 ## Authentication and Access
 
-* [Authentication and Access Overview](authentication-and-access/README.md)
 * [Authentication](authentication-and-access/authentication/README.md)
   * [Add Passkeys Login](authentication-and-access/authentication/passkeys.md)
   * [Add WhatsApp OTP Login](authentication-and-access/authentication/whatsapp-otp-login.md)
@@ -85,7 +84,6 @@
 
 ## Integration
 
-* [Integration Overview](integration/README.md)
 * [Use SDK to make authorized API calls to backend](integration/using-sdk-to-call-your-application-server.md)
 * [Add custom fields to a JWT Access Token](integration/add-custom-fields-to-a-jwt-access-token.md)
 * [Mobile Apps](integration/mobile-apps/README.md)
@@ -155,7 +153,6 @@
 
 ## Security
 
-* [Security Overview](security/README.md)
 * [Brute-force Protection](security/brute-force-protection.md)
 * [Bot Protection](security/bot-protection.md)
 * [Non-HTTP scheme redirect URI](security/redirect-uri.md)
@@ -202,7 +199,6 @@
 
 ## API Reference
 
-* [API Reference Overview](api-reference/README.md)
 * [APIs](api-reference/apis/README.md)
   * [Authentication Flow API](api-reference/apis/authentication-flow-api.md)
   * [User Import API](api-reference/apis/user-import-api.md)
