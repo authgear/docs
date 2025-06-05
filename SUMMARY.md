@@ -160,10 +160,10 @@
 ## Deployment
 
 * [Deployment Overview](deployment/README.md)
-* [Local Development](deployment/local-development/local.md)
+* [Run with Docker](deployment/local-development/local.md)
 * [Production Deployment](deployment/production-deployment/README.md)
-  * [Deploy with Helm chart](deployment/production-deployment/helm.md)
-  * [Authenticating HTTP request with Nginx](deployment/production-deployment/auth-nginx.md)
+* [Deploy with Helm chart](deployment/production-deployment/helm.md)
+* [Authenticating HTTP request with Nginx](deployment/production-deployment/auth-nginx.md)
 * [Configuration](deployment/configuration/README.md)
   * [Environment Variables](deployment/configuration/env.md)
   * [authgear.yaml](deployment/configuration/authgear.yaml.md)
