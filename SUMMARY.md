@@ -94,9 +94,8 @@
 * [Track User Before and After Signup](integration/track-user-before-and-after-signup.md)
 * [Directly accessing Authgear Endpoint](integration/directly-accessing-authgear-endpoint.md)
 
-## Features
+## Admin
 
-* [Features Overview](features/README.md)
 * [Monitor](features/monitor/README.md)
   * [Analytics](features/monitor/analytics.md)
   * [Audit Log for Admin API and Portal](features/monitor/audit-log-for-admin-api-and-portal.md)
@@ -197,7 +196,7 @@
 * [Flutter SDK Reference](https://authgear.github.io/authgear-sdk-flutter/)
 * [Xamarin SDK Reference](https://authgear.github.io/authgear-sdk-xamarin/)
 
-## API Reference
+## Reference
 
 * [APIs](api-reference/apis/README.md)
   * [Authentication Flow API](api-reference/apis/authentication-flow-api.md)
