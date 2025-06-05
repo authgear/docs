@@ -115,14 +115,12 @@
 
 ## Migration
 
-* [Migration Overview](migration/README.md)
 * [Bulk migration](migration/bulk-migration.md)
 * [Rolling migration](migration/rolling-migration.md)
 * [Zero-downtime migration](migration/zero-downtime-migration.md)
 
 ## Customization
 
-* [Customization Overview](customization/README.md)
 * [Custom Domain](customization/custom-domain.md)
 * [Custom Providers](customization/custom-providers/README.md)
   * [Custom Email Provider](customization/custom-providers/custom-email-provider.md)
@@ -159,7 +157,6 @@
 
 ## Deployment
 
-* [Deployment Overview](deployment/README.md)
 * [Run with Docker](deployment/local-development/local.md)
 * [Production Deployment](deployment/production-deployment/README.md)
 * [Deploy with Helm chart](deployment/production-deployment/helm.md)
@@ -176,9 +173,8 @@
 
 ## Troubleshooting
 
-* [Troubleshooting Overview](troubleshooting/README.md)
-* [How to Fix CORS Error](troubleshooting/how-to-fix-cors-error.md)
 * [How to Fix SubtleCrypto: digest() undefined Error in Authgear SDK](troubleshooting/how-to-fix-subtlecrypto-digest-undefined-error-in-authgear-sdk.md)
+* [How to Fix CORS Error](troubleshooting/how-to-fix-cors-error.md)
 
 ## Authgear ONCE
 
