@@ -45,7 +45,7 @@ Support is available via Discord. We are also happy to help with the basics over
 
 #### How do I migrate my current authentication system to Authgear ONCE?
 
-We offer an Import API for you to import users from an existing authentication system to Authgear ONCE. You can easily migrate from Auth0, Okta, and PingIdentity. See [our docs](../migration/) for more information.
+We offer an Import API for you to import users from an existing authentication system to Authgear ONCE. You can easily migrate from Auth0, Okta, and PingIdentity. See [our docs](../how-to-guide/migration/) for more information.
 
 #### How difficult is implementation?
 
