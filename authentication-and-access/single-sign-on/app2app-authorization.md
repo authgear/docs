@@ -14,7 +14,7 @@ The App2App mechanism allows one app to authenticate the user using another apps
 This is an Enterprise feature, please contact us for using the App2App flow in your project at [https://www.authgear.com/talk-with-us](https://www.authgear.com/talk-with-us)
 {% endhint %}
 
-Please note that this is not the Single Sign-on feature, if your are offering multiple apps under the same brand and wish the users to use a shared login session among their apps in the device, you may want to use [Single Sign-on](broken-reference) instead. App2app should be used when:
+Please note that this is not the Single Sign-on feature, if your are offering multiple apps under the same brand and wish the users to use a shared login session among their apps in the device, you may want to use [Single Sign-on](./) instead. App2app should be used when:
 
 * The session cannot be shared via the browser cookies
 * The session cannot be shared via a common token storage
