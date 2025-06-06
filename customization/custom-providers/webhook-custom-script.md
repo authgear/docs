@@ -6,7 +6,7 @@ description: >-
 
 # Webhook/Custom Script
 
-Webhook and Custom JavaScript/TypeScript are some of the ways you can configure your Authgear project to [use Custom SMS Providers](broken-reference).
+Webhook and Custom JavaScript/TypeScript are some of the ways you can configure your Authgear project to [use Custom SMS Providers](custom-sms-provider.md).
 
 In this guide, you'll learn how to switch from the default SMS provider to just about any third-party SMS provider.
 

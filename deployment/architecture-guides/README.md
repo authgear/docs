@@ -26,7 +26,7 @@ Authgear Enterprise Plan offers self-managed options for customers to run the wh
 
 ### Deployment Options
 
-* Depending on [Broken link](broken-reference "mention") approach, Authgear Resolvers is not needed if your backend self-validate user cookies or JWT.
+* Depending on [backend-api](../../get-started/backend-api/ "mention") approach, Authgear Resolvers is not needed if your backend self-validate user cookies or JWT.
 * It's recommended to use managed redis, postgresql and elasticsearch to reduce maintenance overhead.
 * Persistent redis is optional — the advantage of persistent redis is users can keep their session in the event of redis restart or downtime.
 * User profile image is disabled by default, if enabled an S3-Compatible Object Storage is required.

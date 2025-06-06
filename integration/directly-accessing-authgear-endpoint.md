@@ -22,7 +22,7 @@ Instead of the default error message, you can show a link to redirect the user a
 
 ## Cookie-based Authentication
 
-If you are using [Cookie-based authentication](broken-reference), you can set Authgear to render the signup/login page even when the user is accessing the Endpoint URL directly. And therefore these options are only available when [custom domain](../customization/custom-domain.md) is enabled.&#x20;
+If you are using [Cookie-based authentication](directly-accessing-authgear-endpoint.md#cookie-based-authentication), you can set Authgear to render the signup/login page even when the user is accessing the Endpoint URL directly. And therefore these options are only available when [custom domain](../customization/custom-domain.md) is enabled.&#x20;
 
 When user access the endpoint directly, they will be redirected to the `/login` page. After login, the user will be directed to the [User Settings](../customization/ui-customization/built-in-ui/auth-ui.md) page (`/settings`).
 
