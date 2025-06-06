@@ -22,7 +22,7 @@ If authentication is successful, the `/oauth2/authorize` returns an `access toke
 
 The SDKs will automatically renew the `access token` with the `refresh token` for you, so you don't have to worry about it.
 
-Your app should call your backend with the access token on the Authorization header, and you can verify the access token with`[your app name].authgear.com/_resolver/resolve` ([more details here](broken-reference)); Alternatively, the access token is a JWT signed token which you can verify locally on your backend too.
+Your app should call your backend with the access token on the Authorization header, and you can verify the access token with`[your app name].authgear.com/_resolver/resolve` ([more details here](../get-started/backend-api/nginx.md)); Alternatively, the access token is a JWT signed token which you can verify locally on your backend too.
 
 Finally, the application could call `[your app name].authgear.com/oauth2/revoke` to logout.
 

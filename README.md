@@ -59,7 +59,7 @@ Authgear contains the following high-level components:
 * [**Two-Factor Authentication (2FA)**](authentication-and-access/authentication/enable-two-factor-authentication-2fa.md) - Enable 2FA in your Authgear project.
 * [**Email Magic Link Login**](authentication-and-access/authentication/add-email-magic-link-login.md) - Allow users to log in without a password using a magic link.
 * [**Passkeys Login**](authentication-and-access/authentication/passkeys.md) - Set up passkey for your project.
-* [**Social Login / Enterprise Login**](broken-reference) - Allow users to log in to your application using their existing account with a social media site or enterprise login provider.
+* [**Social Login / Enterprise Login**](authentication-and-access/social-enterprise-login-providers/) - Allow users to log in to your application using their existing account with a social media site or enterprise login provider.
 
 #### Customize User Interface (UI)
 

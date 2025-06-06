@@ -30,7 +30,7 @@ Authgear provides the following groups of APIs:
 * [**User Import API**](user-import-api.md)**:** this is an API that supports the bulk import of users from another system to an Authgear project.
 * [**User Export API**](user-export-api.md): an API that allows you to export user data from an Authgear project into a file in CSV or ndjson format.
 * [**Authentication Flow (Auth Flow) API**](authentication-flow-api.md): for developing a customized Web or Mobile Native Auth UI instead of the default user interface provided by Authgear.
-* [**Resolver Endpoint**](broken-reference): for API Gateway or Servers to check the validity of access tokens or cookies in the request header.
+* [**Resolver Endpoint**](../../get-started/backend-api/nginx.md): for API Gateway or Servers to check the validity of access tokens or cookies in the request header.
 
 Here are all of the special paths with each group of the API above.
 
@@ -53,7 +53,7 @@ The related URLs are:
 * `/.well-known/oauth-authorization-server`\
   This endpoint serves a JSON document containing the authorization server metadata of your Authgear project. That includes the authorization endpoint, the token endpoint, and the JWKs endpoint. Here is [an example of how it looks](https://accounts.portal.authgear.com/.well-known/openid-configuration).
 * `/oauth2/userinfo`\
-  The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated end user. When the client presents with a valid Access Token, the endpoint responds with the claims packaged in a JSON object. The claims are also the attributes of the [User Profile](broken-reference).
+  The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated end user. When the client presents with a valid Access Token, the endpoint responds with the claims packaged in a JSON object. The claims are also the attributes of the [User Profile](../../admin/user-profiles/).
 
 ## Admin API
 
@@ -125,7 +125,7 @@ The endpoint serves as a resolver to check the access token or cookie in the req
 
 See the list of `x-authgear-` headers in the specs [here](https://github.com/authgear/authgear-server/blob/master/docs/specs/api-resolver.md).
 
-See implementation examples [here](broken-reference).
+See implementation examples [here](../../get-started/backend-api/nginx.md).
 
 Should you choose to use Resolver Endpoints instead of JWT tokens to validate each API request, check out the following tutorial to learn how to go about that:
 
