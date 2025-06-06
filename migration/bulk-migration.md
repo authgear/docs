@@ -201,7 +201,7 @@ app.listen(port, () => {
 
 ```
 
-This example app uses the "Bearer \<access token>" to protect the `/protected` route. Learn more about [verifying access tokens and using Authgear in your backend here.](broken-reference)&#x20;
+This example app uses the "Bearer \<access token>" to protect the `/protected` route. Learn more about [verifying access tokens and using Authgear in your backend here.](../get-started/backend-api/jwt.md)&#x20;
 
 ### Step 5: Authenticate Your Users with Authgear
 
@@ -210,12 +210,12 @@ Update your app to allow users to log back in using Authgear's authentication fl
 You can use any of our SDKs for the following platforms to integrate Authgear into your app seamlessly:
 
 * [React](../get-started/single-page-app/react.md)
-* [React Native](broken-reference)
-* [JavaScript](broken-reference)
+* [React Native](../get-started/native-mobile-app/react-native.md)
+* [JavaScript](../get-started/single-page-app/website.md)
 * [Vue](../get-started/single-page-app/vue.md)
-* [Android](broken-reference)
-* [iOS](broken-reference)
-* [Flutter](broken-reference)
+* [Android](../get-started/native-mobile-app/android/)
+* [iOS](../get-started/native-mobile-app/ios.md)
+* [Flutter](../get-started/native-mobile-app/flutter.md)
 * [Ionic](../get-started/native-mobile-app/ionic-sdk.md)
 
 Or manually add Authgear as an [OAuth 2.0 provider](../get-started/regular-web-app/).
