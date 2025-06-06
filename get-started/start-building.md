@@ -20,7 +20,7 @@ layout:
 There are 3 different high-level approaches to integrating Authgear with your applications:
 
 1. **Mobile apps or single-page web applications:**\
-   The frontend clients integrate with Authgear’s SDKs, which handle full login flow and session management. It’s important to validate the session in your backend server.
+   The frontend clients integrate with Authgear's SDKs, which handle full login flow and session management. It's important to validate the session in your backend server.
 2. **Regular Web Applications:**\
    Traditional server-side rendered web apps that run on the server can use OIDC protocol to authenticate with Authgear. The application server has full control over the session storage.
 3. **Software built by others:** \
@@ -32,7 +32,7 @@ There are 3 different high-level approaches to integrating Authgear with your ap
 
 ### Client-side SDKs
 
-Client-side SDKs are designed for developers to quickly implement authentication with Auth UI on your web and mobile applications. After login, it returns the user data for your apps. It can open a hosted [pre-built account settings page](../design/built-in-ui/auth-ui.md) for the user to manage their own account. The SDKs manage session token storage automatically and have built-in token ownership protection ([DPoP](https://oauth.net/2/dpop/)) against stolen refresh tokens.
+Client-side SDKs are designed for developers to quickly implement authentication with Auth UI on your web and mobile applications. After login, it returns the user data for your apps. It can open a hosted [pre-built account settings page](../customization/ui-customization/built-in-ui/auth-ui.md) for the user to manage their own account. The SDKs manage session token storage automatically and have built-in token ownership protection ([DPoP](https://oauth.net/2/dpop/)) against stolen refresh tokens.
 
 **Check out the following guides for your specific framework:**
 
@@ -56,17 +56,17 @@ After the frontend integration is complete, every request sent from your applica
 
 ### Customization
 
-You can [customize the look and feel of Authgear prebuilt UI](../design/built-in-ui/branding.md) to match your branding. [Events and hooks](../how-to-guide/events-hooks/) can be used to stay notified and add functionality during the authentication process.&#x20;
+You can [customize the look and feel of Authgear prebuilt UI](../customization/ui-customization/built-in-ui/branding.md) to match your branding. [Events and hooks](../customization/events-hooks/) can be used to stay notified and add functionality during the authentication process.&#x20;
 
 ### User Management through backend server
 
 The Authgear Admin API enables comprehensive user management via a GraphQL endpoint for your backend server. The server can perform operations including searching for users, updating user details, deleting user accounts, and disabling user access.&#x20;
 
-For detailed implementation instructions and API capabilities, refer to the [Admin API ](../reference/apis/admin-api/)guide.
+For detailed implementation instructions and API capabilities, refer to the [Admin API ](../api-reference/apis/admin-api/)guide.
 
 ### Custom UI
 
-If you wish to use a custom UI instead of the pre-built UI for signup and login, you need to deploy another server and complete the signup/login process using Authentication Flow API. See [Custom UI ](../design/custom-ui/)for in-depth instructions.
+If you wish to use a custom UI instead of the pre-built UI for signup and login, you need to deploy another server and complete the signup/login process using Authentication Flow API. See [Custom UI ](../customization/ui-customization/custom-ui/)for in-depth instructions.
 
 ## Regular Web Applications
 
@@ -85,17 +85,17 @@ If your application is a traditional web app running on a server, you can levera
 
 ### Customization
 
-You can [customize the look and feel of Authgear prebuilt UI](../design/built-in-ui/branding.md) to match your branding. [Events and hooks](../how-to-guide/events-hooks/) can be used to stay notified and add functionality during the authentication process.&#x20;
+You can [customize the look and feel of Authgear prebuilt UI](../customization/ui-customization/built-in-ui/branding.md) to match your branding. [Events and hooks](../customization/events-hooks/) can be used to stay notified and add functionality during the authentication process.&#x20;
 
 ### User Management
 
 The Authgear Admin API enables comprehensive user management via a GraphQL endpoint for your server. The server can perform operations including searching for users, updating user details, deleting user accounts, and disabling user access.&#x20;
 
-For detailed implementation instructions and API capabilities, refer to the [Admin API ](../reference/apis/admin-api/)guide.
+For detailed implementation instructions and API capabilities, refer to the [Admin API ](../api-reference/apis/admin-api/)guide.
 
 ### Custom UI
 
-If you wish to use a custom UI instead of the pre-built UI for signup and login, you need to deploy another server and complete the signup/login process using Authentication Flow API. See [Custom UI ](../design/custom-ui/)for in-depth instructions.
+If you wish to use a custom UI instead of the pre-built UI for signup and login, you need to deploy another server and complete the signup/login process using Authentication Flow API. See [Custom UI ](../customization/ui-customization/custom-ui/)for in-depth instructions.
 
 ## Software built by others
 
@@ -103,4 +103,3 @@ When implementing identity management for your enterprise software, Authgear pro
 
 * [Integration with OIDC Protocol](../how-to-guide/single-sign-on/oidc-provider.md)
 * [Integration with SAML 2.0 Protocol](../how-to-guide/single-sign-on/single-sign-on-with-saml/)
-
