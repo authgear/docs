@@ -12,7 +12,7 @@ In this guide, you'll make a simple website server to host the SPA app using [Ex
 
 * Before we start, ensure you have Node.js installed in your system. If not, download and install it from the [official website](https://nodejs.org/en/download/).
 * **An Authgear account:** You need an Authgear account to follow this guide. If you don't have one, you can[ create it for free](https://accounts.portal.authgear.com/signup) on the Authgear website.
-* **A Registered App:** You need a registered application type (Single Page Application) in Authgear. Follow the [setup application](broken-reference) guide and skip [installing the Authgear Web SDK](broken-reference) part. You will retrieve the Authgear Web SDK from Authgear's CDN using IIFE(Immediately-invoked Function Expression) bundle and reference a script in our HTML directly.
+* **A Registered App:** You need a registered application type (Single Page Application) in Authgear. Follow the [setup application](../../get-started/single-page-app/website.md#setup-application-in-authgear) guide and skip [installing the Authgear Web SDK](../../get-started/single-page-app/website.md#step-4-install-authgear-web-javascript-sdk) part. You will retrieve the Authgear Web SDK from Authgear's CDN using IIFE(Immediately-invoked Function Expression) bundle and reference a script in our HTML directly.
 
 ### Create a basic web server
 
