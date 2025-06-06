@@ -48,7 +48,7 @@ Enter an application name (for example: "My App") and select `OIDC/SAML Client A
 On the next screen, you'll see links to tutorials for different frameworks. Click **Next** to skip to the application configuration page.
 
 {% hint style="info" %}
-Note the Client ID and Client Secret for your new application as you'll use in a later step to configure your Express app.&#x20;
+Note the Client ID and Client Secret for your new application as you'll use in a later step to configure your Express app.
 {% endhint %}
 
 ### Configure Authorize Redirect URI
@@ -87,7 +87,7 @@ cd my-express-app
 
 Next, install the Express npm package and other dependency packages like `axios`, `nodemon`, `session`, and `dotenv`.
 
-We'll be using the `axios` library to make HTTP requests in the example app. We'll also use `nodemon` to add hot reload to our development environment. Run the following commands from the root of your Express project directory to install Express and other dependencies:&#x20;
+We'll be using the `axios` library to make HTTP requests in the example app. We'll also use `nodemon` to add hot reload to our development environment. Run the following commands from the root of your Express project directory to install Express and other dependencies:
 
 ```sh
 # Generate package.json
@@ -106,7 +106,7 @@ npm install -D nodemon
 
 #### Create `app.js` file
 
-Once Express  and the other dependencies are installed, create a new `app.js` file in the root of your project folder and add the following code to the file:
+Once Express and the other dependencies are installed, create a new `app.js` file in the root of your project folder and add the following code to the file:
 
 ```javascript
 //app.js
@@ -242,7 +242,7 @@ app.get("/auth-redirect", async(req, res) => {
 
 The above code sends an HTTP POST request to the token endpoint (`https://<AUTHGEAR_ENDPOINT>/oauth2/token`). The authorization code we got from the previous step is sent along with other client credentials in the HTTP request body. The header should contain `"Content-Type": "application/x-www-form-urlencoded"`
 
-A valid access token is returned in the response to the HTTP(S) request in `response.data.access_token`. In the above code sample, we've saved this access token temporally using express-session so we can access it from `"/"` route after redirecting the user.&#x20;
+A valid access token is returned in the response to the HTTP(S) request in `response.data.access_token`. In the above code sample, we've saved this access token temporally using express-session so we can access it from `"/"` route after redirecting the user.
 
 We can now use this access token to make authenticated requests to protected resources in our app or from the Authgear User Info endpoint. In the next step, we'll attempt to get the current user's info from Authgear using the access token.
 
@@ -295,7 +295,7 @@ app.get("/", async (req, res) => {
 });
 ```
 
-Here our app sends another HTTP(S) request, but this time to the user info endpoint and the request type is GET. The access token is sent as a _Bearer_ authorization header.&#x20;
+Here our app sends another HTTP(S) request, but this time to the user info endpoint and the request type is GET. The access token is sent as a _Bearer_ authorization header.
 
 At this point, save all changes and restart the application. Try logging in all over again, at the end you should be greeted with "Welcome \[your email address]" and a dump of the response from the UserInfo endpoint if the access token in your authorization header is valid.
 
@@ -328,7 +328,7 @@ app.get("/logout", async (req, res) => {
 });
 ```
 
-Finally, place a link to the logout route below the `</prev>`  tag  using the following code:
+Finally, place a link to the logout route below the `</prev>` tag using the following code:
 
 ```html
 <a href="/logout">Logout</a>
@@ -336,7 +336,7 @@ Finally, place a link to the logout route below the `</prev>`  tag  using the fo
 
 ### Step 6: Refresh Access Token
 
-An access token is usually only valid for a short period. However, you can use the refresh token, also included in the response from the token endpoint in [step 3](express.md#step-3-exchange-authorization-code-for-access-token) to request a new access token.&#x20;
+An access token is usually only valid for a short period. However, you can use the refresh token, also included in the response from the token endpoint in [step 3](express.md#step-3-exchange-authorization-code-for-access-token) to request a new access token.
 
 {% hint style="info" %}
 Note that you must include `offline_access` in the scope parameter of your authorization request to get a refresh token from Authgear.
@@ -399,15 +399,15 @@ Finally, find the following line in the `app.get("/", ...)` route:
 const accessToken = req.session.access_token;
 ```
 
-Replace the above line with the following code:&#x20;
+Replace the above line with the following code:
 
 ```javascript
 const accessToken = await refreshAccessTokenIfExpired(req.session.refresh_token, req.session.expire_at, req);
 ```
 
-Now our Express app gets an access token by first calling the new `refreshAccessTokenIfExpired()` method. If the current access token is expired, the method will make a request to Authgear's token endpoint for a new access token. This request needs to have a `grant_type` of  `refresh_token`, and the `refresh_token` should be included in the POST request body.
+Now our Express app gets an access token by first calling the new `refreshAccessTokenIfExpired()` method. If the current access token is expired, the method will make a request to Authgear's token endpoint for a new access token. This request needs to have a `grant_type` of `refresh_token`, and the `refresh_token` should be included in the POST request body.
 
-See more about refreshing access tokens [here](../../reference/tokens/refresh-token.md).&#x20;
+See more about refreshing access tokens [here](../../api-reference/tokens/refresh-token.md).
 
 ## Next steps, Calling an API <a href="#next-steps-calling-an-api" id="next-steps-calling-an-api"></a>
 

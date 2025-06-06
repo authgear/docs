@@ -4,7 +4,7 @@ description: >-
   SDK.
 ---
 
-# How to Use the OAuth 2.0 State Parameter
+# Use the OAuth 2.0 State Parameter
 
 The [OAuth 2.0 framework](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.1) includes an optional `state` parameter. The value of the `state` parameter can be any random string or number defined by a client application (e.g. a web or mobile that uses Authgear for user authentication) before making an authorization request. In fact, the `state` parameter is added to the authorization URL as a URL query.&#x20;
 
@@ -30,7 +30,7 @@ Another possible use of the `state` parameter is analytics and tracking user beh
 
 You can also use the value you specify in the `state` parameter in an analytic tool [Mixpanel](https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users) (for example, as `id` in the `identify(id)` function) to track user's behavior pre-login and post-login.
 
-To learn more about using the state parameter for tracking user behavior, see our detailed guide [here](../integration/track-user-before-and-after-signup.md).
+To learn more about using the state parameter for tracking user behavior, see our detailed guide [here](../../integration/track-user-before-and-after-signup.md).
 
 ### 3. Security: To Prevent Cross-site Request Forgery (CSRF)
 

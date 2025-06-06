@@ -6,7 +6,7 @@ description: >-
 
 # Webhook/Custom Script
 
-Webhook and Custom JavaScript/TypeScript are some of the ways you can configure your Authgear project to [use Custom SMS Providers](./).
+Webhook and Custom JavaScript/TypeScript are some of the ways you can configure your Authgear project to [use Custom SMS Providers](broken-reference).
 
 In this guide, you'll learn how to switch from the default SMS provider to just about any third-party SMS provider.
 
@@ -25,7 +25,7 @@ To enable Custom SMS Gateway, log in to Authgear Portal, and navigate to **Advan
 
 Toggle the **Enable Custom SMS Gateway** switch on to enable Custom SMS Provider.
 
-<figure><img src="../../../.gitbook/assets/authgear-custom-sms.png" alt=""><figcaption><p>authgear custom sms gateway</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-custom-sms.png" alt=""><figcaption><p>authgear custom sms gateway</p></figcaption></figure>
 
 ### Step 2: Select SMS Gateway Provider
 
@@ -62,7 +62,7 @@ The following is the structure of the JSON payload for custom SMS webhook and cu
 * `to` is the phone number of the receiver.
 * The `body` field contains the actual message.
 * `app_id`: is the identifier for the Authgear project sending the SMS.
-* `template_name`: the value shows the specific sms template type that is used for composing the message `body`. For example, verification\_sms.txt when a verification SMS is sent using the verification template set in [**Email/SMS Templates**](../../../design/custom-email-and-sms-templates.md) in Authgear portal.
+* `template_name`: the value shows the specific sms template type that is used for composing the message `body`. For example, verification\_sms.txt when a verification SMS is sent using the verification template set in [**Email/SMS Templates**](../ui-customization/custom-email-and-sms-templates.md) in Authgear portal.
 * `language_tag`: a tag specifying the language of the message.
 * `template_variables`: this is an object with all the variables that are used to add dynamic content such as OTP `code`, the `app_name` of your app, etc, to the SMS template.
 
@@ -72,7 +72,7 @@ For Webhook, follow these steps to configure the options:
 
 * **Webhook Endpoint:** enter the full URL for the page in your application that will receive the payload from Authgear's webhook request and use it to send the SMS.
 * **JSON Payload Sample:** this section shows the structure of the JSON payload. The key payload includes a `to` and a `body` field.
-* **Webhook Signature Secret Key:** this field displays your project's Webhook Signature Secret Key. Each webhook event request includes a signature to confirm it comes from Authgear. We recommend that you verify this signature to confirm that the request is actually from your Authgear project before proceeding. See [Verifying Signature](../../events-hooks/webhooks.md#verifying-signature).
+* **Webhook Signature Secret Key:** this field displays your project's Webhook Signature Secret Key. Each webhook event request includes a signature to confirm it comes from Authgear. We recommend that you verify this signature to confirm that the request is actually from your Authgear project before proceeding. See [Verifying Signature](../events-hooks/webhooks.md#verifying-signature).
 * **Timeout:** enter a value between 1 to 60. Use a number close to the maximum if your webhook requires more time to respond.
 
 #### Custom JS/TS

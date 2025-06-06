@@ -15,7 +15,7 @@ layout:
     visible: true
 ---
 
-# Admin API Examples
+# API Queries and Mutations
 
 Authgear provides a GraphQL API that you can use to manage users and other resources right from your application or using the GraphiQL Explorer in **Authgear Portal** > **Advanced** > **Admin API**.
 
@@ -258,7 +258,7 @@ query {
 
 ### 1.5 groups
 
-The groups query returns a list of all [groups](../../../how-to-guide/user-management/manage-users-roles-and-groups.md) in an Authgear project. It will return nothing if no group has been created yet. Groups can be a field in the `roles` query.
+The groups query returns a list of all [groups](../../../admin/user-management/manage-users-roles-and-groups.md) in an Authgear project. It will return nothing if no group has been created yet. Groups can be a field in the `roles` query.
 
 **Schema:**
 
@@ -325,7 +325,7 @@ query {
 
 ### 1.6 roles
 
-You can use this query to get all the roles available in an Authgear project. The roles query will return nothing if no roles have been created for the Authgear project. Roles can also be a field in the node of the `groups` query. See [Manage Users Roles and Groups](../../../how-to-guide/user-management/manage-users-roles-and-groups.md) to learn more about roles and groups.
+You can use this query to get all the roles available in an Authgear project. The roles query will return nothing if no roles have been created for the Authgear project. Roles can also be a field in the node of the `groups` query. See [Manage Users Roles and Groups](../../../admin/user-management/manage-users-roles-and-groups.md) to learn more about roles and groups.
 
 **Schema:**
 

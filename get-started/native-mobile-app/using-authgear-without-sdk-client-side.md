@@ -77,10 +77,10 @@ const authorizationURL = endpoint.toString() + "?" + params.toString();
 {% endtabs %}
 
 * “S256” is supported in code\_challenge\_method.
-* The `code_verifier` is a string of length between 43 and 128 generated on the client side. It should be unique for each authorization request. The `code_challenge` is a SHA-256 hash of the verifier.&#x20;
-* The state parameter is optional. Authgear will include the value of the state parameter when redirecting the user back to the client application. Learn more at [how-to-use-the-oauth-2.0-state-parameter.md](../../how-to-guide/authenticate/how-to-use-the-oauth-2.0-state-parameter.md "mention")
+* The `code_verifier` is a string of length between 43 and 128 generated on the client side. It should be unique for each authorization request. The `code_challenge` is a SHA-256 hash of the verifier.
+* The state parameter is optional. Authgear will include the value of the state parameter when redirecting the user back to the client application. Learn more at [how-to-use-the-oauth-2.0-state-parameter.md](../../authentication-and-access/authentication/how-to-use-the-oauth-2.0-state-parameter.md "mention")
 * After login, the user will be redirected to `[redirect_uri]?code=[AUTH_CODE]`, the `AUTH_CODE` is needed in the next step
-* See the supported scopes at [supported-scopes.md](../../reference/apis/oauth-2.0-and-openid-connect-oidc/supported-scopes.md "mention")
+* See the supported scopes at [supported-scopes.md](../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/supported-scopes.md "mention")
 
 ### Handling Callback
 
@@ -120,16 +120,15 @@ const responseJSON = await response.json();
 {% endtab %}
 {% endtabs %}
 
-* Include the `code_verifier` used for generating the `code_challenge` to prove both requests come from the same client.&#x20;
+* Include the `code_verifier` used for generating the `code_challenge` to prove both requests come from the same client.
 * The response may contain the ID token, the access token and the refresh token depending on the `scope` supplied by the previous step.
 
 ### Logout
 
 When the user logs out, revoke the refresh token by making a POST request to the `revocation_endpoint` with the refresh token in the body in `application/x-www-form-urlencoded` as content-type. The endpoint looks like `https://AUTHGEAR_ENDPOINT/oauth2/revoke`, it can be found in OpenID Connect configuration document.
 
-Then clear the access token and refresh token stored locally in your app.&#x20;
+Then clear the access token and refresh token stored locally in your app.
 
 ### Verifying JWT Access Token
 
 Include the access token in the Authorization headers of the frontend requests to verify your user’s identity. Follow this guide to learn about validating the JWT in your application server [jwt.md](../backend-api/jwt.md "mention")
-

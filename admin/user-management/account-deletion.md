@@ -10,7 +10,7 @@ On Jan 22, 2022 [Apple decided](https://developer.apple.com/news/?id=i71db0mv) t
 
 ## Show "Delete Account" button in User Settings
 
-In the pre-built [**User Settings**](../../design/built-in-ui/auth-ui.md) page, you can show a button for the end-users to initiate account deletion. Users can access the **Delete Account** button under Advanced Settings in the User Settings page when you enable Account Deletion on your project.
+In the pre-built [**User Settings**](../../customization/built-in-ui/auth-ui.md) page, you can show a button for the end-users to initiate account deletion. Users can access the **Delete Account** button under Advanced Settings in the User Settings page when you enable Account Deletion on your project.
 
 
 
@@ -149,7 +149,7 @@ Alternatively, if you did not enable the "Delete Account" button in **User Setti
 
 ### Schedule Deletion
 
-Your backend server can invoke the mutation `scheduleAccountDeletion` with the [Admin API](../../reference/apis/admin-api/) to initiate the account deletion.
+Your backend server can invoke the mutation `scheduleAccountDeletion` with the [Admin API](../../api-reference/apis/admin-api/) to initiate the account deletion.
 
 Here is an example:
 
@@ -173,7 +173,7 @@ mutation {
 
 ### Immediate Deletion
 
-Your backend server can invoke the mutation `scheduleAccountDeletion` with the [Admin API](../../reference/apis/admin-api/) to initiate the account deletion.
+Your backend server can invoke the mutation `scheduleAccountDeletion` with the [Admin API](../../api-reference/apis/admin-api/) to initiate the account deletion.
 
 Here is an example:
 
@@ -204,4 +204,4 @@ You may listen to the following events to integrate the deletion behavior to you
 
 * `user.pre_schedule_deletion`
 
-See the event details in [Webhooks](../events-hooks/webhooks.md).
+See the event details in [Webhooks](../../customization/events-hooks/webhooks.md).

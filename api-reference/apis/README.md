@@ -30,7 +30,7 @@ Authgear provides the following groups of APIs:
 * [**User Import API**](user-import-api.md)**:** this is an API that supports the bulk import of users from another system to an Authgear project.
 * [**User Export API**](user-export-api.md): an API that allows you to export user data from an Authgear project into a file in CSV or ndjson format.
 * [**Authentication Flow (Auth Flow) API**](authentication-flow-api.md): for developing a customized Web or Mobile Native Auth UI instead of the default user interface provided by Authgear.
-* [**Resolver Endpoint**](../../get-started/backend-api/nginx.md): for API Gateway or Servers to check the validity of access tokens or cookies in the request header.
+* [**Resolver Endpoint**](broken-reference): for API Gateway or Servers to check the validity of access tokens or cookies in the request header.
 
 Here are all of the special paths with each group of the API above.
 
@@ -42,8 +42,8 @@ For more information about the OIDC API endpoint, please refer to the following 
 [oauth-2.0-and-openid-connect-oidc](oauth-2.0-and-openid-connect-oidc/)
 {% endcontent-ref %}
 
-{% content-ref url="../../how-to-guide/single-sign-on/oidc-provider.md" %}
-[oidc-provider.md](../../how-to-guide/single-sign-on/oidc-provider.md)
+{% content-ref url="../../authentication-and-access/single-sign-on/oidc-provider.md" %}
+[oidc-provider.md](../../authentication-and-access/single-sign-on/oidc-provider.md)
 {% endcontent-ref %}
 
 The related URLs are:
@@ -53,7 +53,7 @@ The related URLs are:
 * `/.well-known/oauth-authorization-server`\
   This endpoint serves a JSON document containing the authorization server metadata of your Authgear project. That includes the authorization endpoint, the token endpoint, and the JWKs endpoint. Here is [an example of how it looks](https://accounts.portal.authgear.com/.well-known/openid-configuration).
 * `/oauth2/userinfo`\
-  The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated end user. When the client presents with a valid Access Token, the endpoint responds with the claims packaged in a JSON object. The claims are also the attributes of the [User Profile](../../how-to-guide/user-profiles/user-profile.md).
+  The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated end user. When the client presents with a valid Access Token, the endpoint responds with the claims packaged in a JSON object. The claims are also the attributes of the [User Profile](broken-reference).
 
 ## Admin API
 
@@ -71,8 +71,8 @@ The path for the Admin API is:
 
 To learn more about using the User Import API, see the following documentation page:
 
-{% content-ref url="../../how-to-guide/user-management/import-users-using-user-import-api.md" %}
-[import-users-using-user-import-api.md](../../how-to-guide/user-management/import-users-using-user-import-api.md)
+{% content-ref url="../../admin/user-management/import-users-using-user-import-api.md" %}
+[import-users-using-user-import-api.md](../../admin/user-management/import-users-using-user-import-api.md)
 {% endcontent-ref %}
 
 The path for the User Import API:
@@ -89,8 +89,8 @@ Use this endpoint to query the status of an existing user import task.
 
 See the following documentation for a detailed on how to use the User Export API:
 
-{% content-ref url="../../how-to-guide/user-management/export-users-using-the-user-export-api.md" %}
-[export-users-using-the-user-export-api.md](../../how-to-guide/user-management/export-users-using-the-user-export-api.md)
+{% content-ref url="../../admin/user-management/export-users-using-the-user-export-api.md" %}
+[export-users-using-the-user-export-api.md](../../admin/user-management/export-users-using-the-user-export-api.md)
 {% endcontent-ref %}
 
 Paths for the User Export API:
@@ -107,8 +107,8 @@ Use the above endpoint to check when an existing export process is complete and 
 
 You can find a detailed overview of the Authentication Flow API in the following documentation:
 
-{% content-ref url="../../design/custom-ui/authentication-flow-api.md" %}
-[authentication-flow-api.md](../../design/custom-ui/authentication-flow-api.md)
+{% content-ref url="../../customization/custom-ui/authentication-flow-api.md" %}
+[authentication-flow-api.md](../../customization/custom-ui/authentication-flow-api.md)
 {% endcontent-ref %}
 
 The path for the Authentication Flow API is:
@@ -125,12 +125,12 @@ The endpoint serves as a resolver to check the access token or cookie in the req
 
 See the list of `x-authgear-` headers in the specs [here](https://github.com/authgear/authgear-server/blob/master/docs/specs/api-resolver.md).
 
-See implementation examples [here](../../get-started/backend-api/nginx.md).
+See implementation examples [here](broken-reference).
 
 Should you choose to use Resolver Endpoints instead of JWT tokens to validate each API request, check out the following tutorial to learn how to go about that:
 
-{% content-ref url="../../get-started/backend-api/nginx.md" %}
-[nginx.md](../../get-started/backend-api/nginx.md)
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
 {% endcontent-ref %}
 
 ## Other Special URLs

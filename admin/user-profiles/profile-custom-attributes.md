@@ -12,7 +12,7 @@ The first is the standard attributes which are basically common profile fields s
 
 The second type is the custom attributes an Authgear user can set for their project. This allows you to add custom fields to the profiles of your users. For example, you can add a Post Code custom attribute to your Authgear so users can provide this data for their profile.&#x20;
 
-All custom attributes are returned in the [UserInfo](../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) response under the `custom_attributes` field.
+All custom attributes are returned in the [UserInfo](../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) response under the `custom_attributes` field.
 
 In this post, you'll learn how to add new custom attributes to your Authgear project. You'll also learn how to manage existing custom attributes.
 

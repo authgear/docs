@@ -83,7 +83,7 @@ Custom Attributes allow you to add extra fields to the user attributes. Custom a
 
 Groups is an access management feature in Authgear that makes it possible to create one or more groups, add [roles](glossary.md#roles) to the groups, and add users to the groups.
 
-If a user is in a group, all the roles for that group are returned for their profile. See our [roles and group documentation](../how-to-guide/user-management/manage-users-roles-and-groups.md) to learn more about using groups.
+If a user is in a group, all the roles for that group are returned for their profile. See our [roles and group documentation](../admin/user-management/manage-users-roles-and-groups.md) to learn more about using groups.
 
 ### JWT
 
@@ -141,7 +141,7 @@ A refresh token is a special token that can be used to obtain a new access token
 
 Roles can be used to control access to certain parts of an application or API that's powered by Authgear.  Roles are returned using the `https://authgear.com/claims/user/roles` attribute in Authgear's JWT access token and [UserInfo](apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) as an array.&#x20;
 
-The following is an example of how you can use roles. In a blog application with two roles (`admin` and `reader`), you can restrict access for editing and adding new posts to only users with the `admin` role. Check out our documentation on [roles and groups](../how-to-guide/user-management/manage-users-roles-and-groups.md) to learn more about managing roles in Authgear.
+The following is an example of how you can use roles. In a blog application with two roles (`admin` and `reader`), you can restrict access for editing and adding new posts to only users with the `admin` role. Check out our documentation on [roles and groups](../admin/user-management/manage-users-roles-and-groups.md) to learn more about managing roles in Authgear.
 
 ### SDK
 

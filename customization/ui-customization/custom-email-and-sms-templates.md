@@ -8,7 +8,7 @@ Authgear allows you to modify the default Email/SMS template content for sending
 
 To set a custom email or SMS template, log in to Authgear Portal then navigate to **Branding** > **Email/SMS Templates**.
 
-<figure><img src="../.gitbook/assets/authgear-custom-email-template.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-custom-email-template.png" alt=""><figcaption></figcaption></figure>
 
 You can edit the Email/SMS Templates for each language you have enabled for your application.
 

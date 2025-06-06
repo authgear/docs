@@ -43,7 +43,7 @@ Enter your app name on the next screen and finish the app creation process.
 {% hint style="info" %}
 Redirect URI has the form of `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/:alias`. The `alias` is used as the identifier of OAuth provider. You can configure the `alias` in Authgear Portal.
 
-See [Your Authgear Endpoint](../../../reference/glossary.md#your-authgear-endpoint) for instructions on how to get the value for `YOUR_AUTHGEAR_ENDPOINT`.
+See [Your Authgear Endpoint](../../../api-reference/glossary.md#your-authgear-endpoint) for instructions on how to get the value for `YOUR_AUTHGEAR_ENDPOINT`.
 {% endhint %}
 
 ## Step 3: Configure Login with Facebook in Authgear Portal
@@ -67,6 +67,6 @@ You will need the **App ID** and **App Secret** to configure Facebook Login so, 
 
 🎉 Done! You have just added Facebook Login to your apps!
 
-Your end-users can now sign in with Facebook on Authgear's pre-built Log In and Sign Up page. Existing end-users can connect their account to Facebook in the [User Settings](../../../design/built-in-ui/auth-ui.md) page.
+Your end-users can now sign in with Facebook on Authgear's pre-built Log In and Sign Up page. Existing end-users can connect their account to Facebook in the [User Settings](../../../customization/built-in-ui/auth-ui.md) page.
 
 ![Your end-users can connect to their Facebook account in User Settings page](../../../.gitbook/assets/connect_with_facebook.png)

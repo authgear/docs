@@ -12,7 +12,7 @@ In this guide, you'll make a simple website server to host the SPA app using [Ex
 
 * Before we start, ensure you have Node.js installed in your system. If not, download and install it from the [official website](https://nodejs.org/en/download/).
 * **An Authgear account:** You need an Authgear account to follow this guide. If you don't have one, you can[ create it for free](https://accounts.portal.authgear.com/signup) on the Authgear website.
-* **A Registered App:** You need a registered application type (Single Page Application) in Authgear. Follow the [setup application](../../get-started/single-page-app/website.md#setup-application-in-authgear) guide and skip [installing the Authgear Web SDK](../../get-started/single-page-app/website.md#install-the-authgear-web-sdk) part. You will retrieve the Authgear Web SDK from Authgear's CDN using IIFE(Immediately-invoked Function Expression) bundle and reference a script in our HTML directly.
+* **A Registered App:** You need a registered application type (Single Page Application) in Authgear. Follow the [setup application](broken-reference) guide and skip [installing the Authgear Web SDK](broken-reference) part. You will retrieve the Authgear Web SDK from Authgear's CDN using IIFE(Immediately-invoked Function Expression) bundle and reference a script in our HTML directly.
 
 ### Create a basic web server
 
@@ -230,15 +230,7 @@ Let’s breakdown down `app.js` code in the previous section and understand how 
 
 Go ahead and create a new user or log in using an email (we specified the Passwordless Email login method in the first part). When you try to log in with your email, you should receive a [magic link](https://docs.authgear.com/strategies/email-login-link) to your email box to confirm login operation.
 
-<div>
-
-<figure><img src="../../.gitbook/assets/Untitled (11).png" alt=""><figcaption></figcaption></figure>
-
- 
-
-<figure><img src="../../.gitbook/assets/Untitled (10).png" alt=""><figcaption></figcaption></figure>
-
-</div>
+<div><figure><img src="../../.gitbook/assets/Untitled (11).png" alt=""><figcaption></figcaption></figure> <figure><img src="../../.gitbook/assets/Untitled (10).png" alt=""><figcaption></figcaption></figure></div>
 
 After authenticating successfully, you will be redirected to the page you were before.
 

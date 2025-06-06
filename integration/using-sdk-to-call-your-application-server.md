@@ -15,7 +15,7 @@ If you are using **Cookie-based authentication** in your web application, you ca
 ## Overview
 
 1. To determine which user is calling your server, you will need to include the Authorization header in every request that send to your application server.
-2. On your Backend/API, you will need to set up [Backend integration](../../get-started/backend-api/nginx.md). Authgear will help you to handle the Authorization header to determine whether the incoming HTTP request is authenticated or not.
+2. On your Backend/API, you will need to set up [Backend integration](broken-reference). Authgear will help you to handle the Authorization header to determine whether the incoming HTTP request is authenticated or not.
 
 In the below section, we will explain how to set up SDK to for the purpose of making authorized API calls to your backend.
 
@@ -307,7 +307,7 @@ httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer
 
 ## Handle revoked sessions
 
-If the session is revoked from the management portal, the client will call your Backend API with an invalid access token. Your application server can check that by looking at the [resolver headers](../../get-started/backend-api/nginx.md).
+If the session is revoked from the management portal, the client will call your Backend API with an invalid access token. Your application server can check that by looking at the [resolver headers](broken-reference).
 
 For example, you application may return HTTP status code 401 for unauthorized requests. Depending on your application flow, you may want to show your user login page again or reset the SDK `sessionState` to `NO_SESSION` locally. To clear the `sessionState`, you can use `clearSessionState` function.
 

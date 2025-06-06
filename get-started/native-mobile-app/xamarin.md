@@ -315,7 +315,7 @@ The value of `SessionState` can be `Unknown`, `NoSession` or `Authenticated`. In
 
 ## Fetching User Info
 
-In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI). Use the `FetchUserInfoAsync` function to obtain the user info, see [example](../../how-to-guide/user-profiles/user-profile.md#userinfo-endpoint).
+In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI). Use the `FetchUserInfoAsync` function to obtain the user info, see [example](broken-reference).
 
 ## Logout
 
@@ -348,8 +348,8 @@ httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer
 
 To protect your application server from unauthorized access. You will need to **integrate your backend with Authgear**.
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="broken-reference/" %}
+[broken-reference](broken-reference/)
 {% endcontent-ref %}
 
 ## Xamarin SDK Reference

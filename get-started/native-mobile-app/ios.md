@@ -62,7 +62,7 @@ For the purpose of this guide, we'll create a new project in Xcode. Skip this st
 To create a new project, open Xcode and navigate to **File** > **New** > **Project**. Create your new project with the following details:
 
 * **Project Name:** `my_demo_app`
-* choose `SwiftUI` as **Interface** Leave other fields unchanged and proceed to create the project.&#x20;
+* choose `SwiftUI` as **Interface** Leave other fields unchanged and proceed to create the project.
 
 <figure><img src="../../.gitbook/assets/xcode-new-project.png" alt="" width="375"><figcaption><p>Xcode new project</p></figcaption></figure>
 
@@ -72,7 +72,7 @@ The Authgear iOS SDK makes it easy to interact with Authgear services from your 
 
 To add Authgear SDK to your project, in Xcode navigate to **File** > **Add Package Dependencies** and enter `https://github.com/authgear/authgear-sdk-ios.git` in the Package URL text field.
 
-Click **Add Package** to proceed.&#x20;
+Click **Add Package** to proceed.
 
 <figure><img src="../../.gitbook/assets/xcode-add-authgear.png" alt="" width="563"><figcaption><p>Xcode package manager</p></figcaption></figure>
 
@@ -337,8 +337,6 @@ Add a new URL scheme with the following details:
     &#x3C;/dict>
 &#x3C;/plist>
 </code></pre>
-
-
 {% endtab %}
 {% endtabs %}
 
@@ -369,7 +367,7 @@ Now clicking on the Logout button will call Authgear SDK's logout method and end
 
 ### Step 8: Show the user information
 
-In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI). Use the `fetchUserInfo` function to obtain the user info, see [example](../../how-to-guide/user-profiles/user-profile.md#userinfo-endpoint).
+In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI). Use the `fetchUserInfo` function to obtain the user info, see [example](broken-reference).
 
 The Authgear SDK can return the current user's details via the UserInfo object. The authenticate method returns this userInfo object as demonstrated earlier in our app's `startAuthentication()` method. You can also call the SDK's `.fetchUserInfo()` method to get the UserInfo object.
 
@@ -419,7 +417,7 @@ Now call the new `getCurrentUser()` method in the `.onAppear()` modifier of the 
 }
 ```
 
-This will make your app refresh the access token and greet users who are already logged in with their `sub` (a unique user  ID) when the launch the app. You can read other user attributes like email address, phone number, full name, etc. from [userInfo](../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
+This will make your app refresh the access token and greet users who are already logged in with their `sub` (a unique user ID) when the launch the app. You can read other user attributes like email address, phone number, full name, etc. from [userInfo](../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
 
 ### Step 9: Open User Settings page
 
@@ -435,7 +433,7 @@ func openUserSettings() {
 
 ## Get the Logged In State
 
-When you start launching the application. You may want to know if the user has logged in. (e.g. Show users a Login button if they haven't logged in).&#x20;
+When you start launching the application. You may want to know if the user has logged in. (e.g. Show users a Login button if they haven't logged in).
 
 The `sessionState` reflects the user logged-in state in the SDK local state. That means even if the `sessionState` is `.authenticated`, the session may be invalid if it is revoked remotely. Hence, after initializing the Authgear SDK, call `fetchUserInfo` to update the `sessionState` as soon as it is proper to do so. We demonstrated how to use `sessionState`, and `fetchUserInfo`, to get a user's true logged-in state and retrieve their UserInfo in [Step 8](ios.md#step-8-show-the-user-information).
 

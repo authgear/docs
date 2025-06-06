@@ -1,10 +1,10 @@
 # SAML Attribute Mapping
 
-By default, only the `sub` field of the [UserInfo](../../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) is included in the SAML assertion. To include other fields like users' email address, phone number, etc., you can set up SAML Attribute Mapping for the fields.
+By default, only the `sub` field of the UserInfo is included in the SAML assertion. To include other fields like users' email address, phone number, etc., you can set up SAML Attribute Mapping for the fields.
 
 SAML Attribute Mapping allows you to configure your Authgear client application to include additional fields in the SAML assertion. This is a great way to pass additional data from Authgear to your SAML application that depends on Authgear as an Identity Provider.
 
-Authgear supports using SAML attribute mapping to include additional fields in the SAML assertion using any field in the user profile attributes (UserInfo).&#x20;
+Authgear supports using SAML attribute mapping to include additional fields in the SAML assertion using any field in the user profile attributes (UserInfo).
 
 There's also support for a template that can be used to customize the values of the fields before including them in the SAML assertion. For example, the template `{{.preferred_username}}@example.com` will return the `preferred_username` field from the UserInfo prepended to '@example.com'.
 
@@ -12,9 +12,9 @@ There's also support for a template that can be used to customize the values of 
 To enable SAML Attribute Mapping for your Authgear project, [please contact support](https://www.authgear.com/schedule-demo).
 {% endhint %}
 
-### Example of SAML Attribute Mapping
+#### Example of SAML Attribute Mapping
 
-```
+```yaml
 attributes:
       definitions:
       - name: family_name
@@ -42,6 +42,4 @@ The above example creates three SAML attributes (`family_name`, `given_name`, `p
 
 The value for `pointer` refers to a user profile attribute in the UserInfo object.
 
-From an attribute that uses a template, the value in between the `{{}}` also refers to a user profile attribute in the UserInfo object.\
-
-
+From an attribute that uses a template, the value in between the `{{}}` also refers to a user profile attribute in the UserInfo object.\\

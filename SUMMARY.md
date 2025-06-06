@@ -59,10 +59,10 @@
   * [SSO between Mobile Apps / Websites](authentication-and-access/single-sign-on/sso-with-mobile-app-web-spa.md)
   * [Force Authgear to Show Login Page](authentication-and-access/single-sign-on/force-authgear-to-show-login-page.md)
   * [Single Sign-On with OIDC](authentication-and-access/single-sign-on/oidc-provider.md)
-  * [SAML Attribute Mapping](authentication-and-access/single-sign-on/saml-attribute-mapping.md)
   * [Single Sign-On with SAML](authentication-and-access/single-sign-on/single-sign-on-with-saml/README.md)
-    * [Use Authgear as SAML Identity Provider for Salesforce](authentication-and-access/single-sign-on/use-authgear-as-saml-identity-provider-for-salesforce.md)
-    * [Use Authgear as SAML Identity Provider for Dropbox](authentication-and-access/single-sign-on/use-authgear-as-saml-identity-provider-for-dropbox.md)
+    * [Use Authgear as SAML Identity Provider for Salesforce](authentication-and-access/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-salesforce.md)
+    * [Use Authgear as SAML Identity Provider for Dropbox](authentication-and-access/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-dropbox.md)
+    * [SAML Attribute Mapping](authentication-and-access/single-sign-on/single-sign-on-with-saml/saml-attribute-mapping.md)
 * [Social/Enterprise Login Providers Overview](authentication-and-access/social-enterprise-login-providers/README.md)
   * [Social Login Providers](authentication-and-access/social-enterprise-login-providers/social-login-providers/README.md)
     * [Connect Apps to Apple](authentication-and-access/social-enterprise-login-providers/social-login-providers/apple.md)
@@ -89,6 +89,34 @@
 * [Track User Before and After Signup](integration/track-user-before-and-after-signup.md)
 * [Directly accessing Authgear Endpoint](integration/directly-accessing-authgear-endpoint.md)
 
+## Customization
+
+* [Custom Domain](customization/custom-domain.md)
+* [Custom Email Provider](customization/custom-providers/custom-email-provider.md)
+* [Custom SMS Provider](customization/custom-providers/custom-sms-provider.md)
+  * [Twilio](customization/custom-providers/twilio.md)
+  * [Webhook/Custom Script](customization/custom-providers/webhook-custom-script.md)
+* [Events and Hooks](customization/events-hooks/README.md)
+  * [Event List](customization/events-hooks/event-list.md)
+  * [Webhooks](customization/events-hooks/webhooks.md)
+  * [JavaScript / TypeScript Hooks](customization/events-hooks/denohooks.md)
+  * [Example: Only Allow Signups from Inside the Corporate Network using Hooks](customization/events-hooks/only-allow-signups-from-inside-the-corporate-network-using-hooks.md)
+* [Built-in UI](customization/built-in-ui/README.md)
+  * [Branding in Auth UI](customization/built-in-ui/branding.md)
+  * [User Settings](customization/built-in-ui/auth-ui.md)
+  * [Privacy Policy & Terms of Service Links](customization/built-in-ui/privacy-policy-terms-of-service.md)
+  * [Customer Support Link](customization/built-in-ui/customer-support-link.md)
+  * [Custom Text](customization/built-in-ui/localization.md)
+* [Custom UI](customization/custom-ui/README.md)
+  * [Authentication Flow API](customization/custom-ui/authentication-flow-api.md)
+  * [Implement Authentication Flow API using Express](customization/custom-ui/implement-authentication-flow-api-using-express.md)
+  * [Implement Authentication Flow API using PHP](customization/custom-ui/implement-authentication-flow-api-using-php.md)
+  * [Add Custom Login/Signup UI to Native Apps](customization/custom-ui/add-custom-login-signup-ui-to-native-apps.md)
+  * [Manually Link OAuth Provider using Account Management API](customization/custom-ui/manually-link-oauth-provider-using-account-management-api.md)
+  * [Implement a custom account recovery UI using Authentication Flow API](customization/custom-ui/implement-a-custom-account-recovery-ui-using-authentication-flow-api.md)
+* [Languages and Localization](customization/languages-and-localization.md)
+* [Custom Email and SMS Templates](customization/ui-customization/custom-email-and-sms-templates.md)
+
 ## Admin
 
 * [Monitor](admin/monitor/README.md)
@@ -109,39 +137,11 @@
   * [Update user profile on sign-up using Hooks](admin/user-profiles/update-user-profile-on-sign-up-using-hooks.md)
 
 ## Migration
+
 * [Migration](migration/README.md)
 * [Bulk migration](migration/bulk-migration.md)
 * [Rolling migration](migration/rolling-migration.md)
 * [Zero-downtime migration](migration/zero-downtime-migration.md)
-
-## Customization
-
-* [Custom Domain](customization/custom-domain.md)
-* [Custom Email Provider](customization/custom-providers/custom-email-provider.md)
-* [Custom SMS Provider](customization/custom-providers/custom-sms-provider.md)
-  * [Twilio](customization/custom-providers/twilio.md)
-  * [Webhook/Custom Script](customization/custom-providers/webhook-custom-script.md)
-* [Events and Hooks](customization/events-hooks/README.md)
-  * [Event List](customization/events-hooks/event-list.md)
-  * [Webhooks](customization/events-hooks/webhooks.md)
-  * [JavaScript / TypeScript Hooks](customization/events-hooks/denohooks.md)
-  * [Example: Only Allow Signups from Inside the Corporate Network using Hooks](customization/events-hooks/only-allow-signups-from-inside-the-corporate-network-using-hooks.md)
-* [UI Customization](customization/ui-customization/README.md)
-  * [Built-in UI](customization/ui-customization/built-in-ui/README.md)
-    * [Branding in Auth UI](customization/ui-customization/built-in-ui/branding.md)
-    * [User Settings](customization/ui-customization/built-in-ui/auth-ui.md)
-    * [Privacy Policy & Terms of Service Links](customization/ui-customization/built-in-ui/privacy-policy-terms-of-service.md)
-    * [Customer Support Link](customization/ui-customization/built-in-ui/customer-support-link.md)
-    * [Custom Text](customization/ui-customization/built-in-ui/localization.md)
-  * [Custom UI](customization/ui-customization/custom-ui/README.md)
-    * [Authentication Flow API](customization/ui-customization/custom-ui/authentication-flow-api.md)
-    * [Implement Authentication Flow API using Express](customization/ui-customization/custom-ui/implement-authentication-flow-api-using-express.md)
-    * [Implement Authentication Flow API using PHP](customization/ui-customization/custom-ui/implement-authentication-flow-api-using-php.md)
-    * [Add Custom Login/Signup UI to Native Apps](customization/ui-customization/custom-ui/add-custom-login-signup-ui-to-native-apps.md)
-    * [Manually Link OAuth Provider using Account Management API](customization/ui-customization/custom-ui/manually-link-oauth-provider-using-account-management-api.md)
-    * [Implement a custom account recovery UI using Authentication Flow API](customization/ui-customization/custom-ui/implement-a-custom-account-recovery-ui-using-authentication-flow-api.md)
-  * [Languages and Localization](customization/ui-customization/languages-and-localization.md)
-* [Custom Email and SMS Templates](customization/ui-customization/custom-email-and-sms-templates.md)
 
 ## Security
 
@@ -178,19 +178,19 @@
 * [Glossary](api-reference/glossary.md)
 * [Billing FAQ](api-reference/billing-faq.md)
 
-## Concepts
-* [Identity Fundamentals](concepts/identity-fundamentals.md)
-* [Authgear use cases](concepts/authgear-use-cases.md)
-* [User, Identity and Authenticator](concepts/user-identity-and-authenticator.md)
-* [How Authgear integrate with your applications](concepts/how-authgear-integrate-with-your-applications.md)
-
 ## Authgear ONCE
 
-* [Authgear ONCE Overview](authgear-once/README.md)
 * [What is Authgear ONCE](authgear-once/what-is-authgear-once.md)
 * [Install Authgear ONCE on a VM](authgear-once/install-authgear-once-on-a-vm.md)
 * [Install Authgear ONCE on Amazon Web Services (AWS)](authgear-once/install-authgear-once-on-amazon-web-services-aws.md)
 * [Install Authgear ONCE on Vultr](authgear-once/install-authgear-once-on-vultr.md)
+
+## Concepts
+
+* [Identity Fundamentals](concepts/identity-fundamentals.md)
+* [Authgear use cases](concepts/authgear-use-cases.md)
+* [User, Identity and Authenticator](concepts/user-identity-and-authenticator.md)
+* [How Authgear integrate with your applications](concepts/how-authgear-integrate-with-your-applications.md)
 
 ## Client App SDKs
 
@@ -199,7 +199,6 @@
 * [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
 * [Flutter SDK Reference](https://authgear.github.io/authgear-sdk-flutter/)
 * [Xamarin SDK Reference](https://authgear.github.io/authgear-sdk-xamarin/)
-
 
 ## Deployment
 

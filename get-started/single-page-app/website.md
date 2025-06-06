@@ -4,7 +4,7 @@ description: Integrate Authgear to your website with the Web SDK
 
 # JavaScript (Web)
 
-In this guide, you'll learn how to integrate Authgear into your website using the [Token Approach](https://docs.authgear.com/get-started/authentication-approach/token-based). In the token approach, the Authgear server returns an access token and a refresh token to your SPA application after successful user authentication.&#x20;
+In this guide, you'll learn how to integrate Authgear into your website using the [Token Approach](https://docs.authgear.com/get-started/authentication-approach/token-based). In the token approach, the Authgear server returns an access token and a refresh token to your SPA application after successful user authentication.
 
 Your application can send the access token in subsequent HTTP requests to access protected resources.
 
@@ -47,7 +47,7 @@ First, decide the paths in your website that users will be redirected to after t
 
 To run the demo app in this tutorial offline, scroll to the URIs section of your client application page add the following URI:
 
-Under **Authorized Redirect URIs** add `http://localhost:3000/` &#x20;
+Under **Authorized Redirect URIs** add `http://localhost:3000/`
 
 {% hint style="info" %}
 Note that the trailing "/" in the above URLs must be included.
@@ -172,9 +172,9 @@ yarn add @authgear/web --exact
 
 We recommend that you use the npm package to add Authgear to your web application when you're using build tools like Vite and Webpack, and when building with frameworks like React, Vue, Angular, etc.
 
-The easiest way to add a JavaScript library such as the Authgear SDK to a generic Single Page Application (a basic `.html` file page), is to use a CDN. Hence, we'll use the CDN method to add the Authgear Web JavaScript SDK to our demo application for this tutorial.&#x20;
+The easiest way to add a JavaScript library such as the Authgear SDK to a generic Single Page Application (a basic `.html` file page), is to use a CDN. Hence, we'll use the CDN method to add the Authgear Web JavaScript SDK to our demo application for this tutorial.
 
-To install the Authgear SDK, add the Authgear SDK CDN \<script> tag to `index.html`  on a new line just before the `</body>` . Your index.html should look like this at this point:
+To install the Authgear SDK, add the Authgear SDK CDN \<script> tag to `index.html` on a new line just before the `</body>` . Your index.html should look like this at this point:
 
 ```html
 <!DOCTYPE html>
@@ -214,7 +214,7 @@ To test your progress so far save your files then run the `npm run dev` command.
 
 ### Step 5: Initialize Authgear SDK
 
-Create a new `public/js` directory in the root of your project directory.&#x20;
+Create a new `public/js` directory in the root of your project directory.
 
 Create a new file called `app.js` in the `public/js` directory. Add the following content to `app.js`:
 
@@ -262,7 +262,7 @@ Finally, link `app.js` in `index.html` using `<script src="js/app.js"></script>`
 
 ### Step 6: Start the authentication flow
 
-When the user clicks login/signup on your website, make a **start authorization** call to redirect them to the login/signup page (AuthUI).&#x20;
+When the user clicks login/signup on your website, make a **start authorization** call to redirect them to the login/signup page (AuthUI).
 
 In this step, we'll implement the `login()` function that is called when the **Log in** button is pressed.
 
@@ -286,8 +286,6 @@ const login = async () => {
 };
 ```
 
-
-
 {% hint style="info" %}
 Make sure you have added `http://localhost:3000/` as an Authorized Redirect URI in the portal for your Authgear client application. Note that the last "/" in the URL is required.
 {% endhint %}
@@ -298,7 +296,7 @@ After the user authenticates on the login page, the user will be redirected to t
 
 Once authorization succeeds, the application should be able to display user info and access protected resources.
 
-To handle the redirect after authentication, we'll call the Authgear SDK's `finishAuthentication()` function when there's a code parameter in the URL of the current page. To do that, update the `window.onload` callback in app.js to the following:&#x20;
+To handle the redirect after authentication, we'll call the Authgear SDK's `finishAuthentication()` function when there's a code parameter in the URL of the current page. To do that, update the `window.onload` callback in app.js to the following:
 
 ```javascript
 window.onload = async () => {
@@ -458,7 +456,7 @@ In some cases, you may need to obtain current user info through the SDK. (e.g. D
 authgearClient.fetchUserInfo();
 ```
 
-See more user info [examples](../../how-to-guide/user-profiles/user-profile.md#userinfo-endpoint).
+See more user info [examples](broken-reference).
 
 #### Log the user out
 

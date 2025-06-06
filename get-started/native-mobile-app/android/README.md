@@ -36,7 +36,7 @@ You will see a list of guides that can help you for setting up, then click "Next
 
 ### **Step 2: Configure the application**
 
-Define a custom URI scheme that Authgear will use to redirect users back to your app after they have authenticated. The scheme should be based on the package name for your Android app. For the demo app, we'll be creating in this guide the scheme is:  `com.example.authgeardemo://host/path`. To learn more about setting up a custom URI scheme in Android, see the official documentation [here](https://developer.android.com/training/app-links/deep-linking).
+Define a custom URI scheme that Authgear will use to redirect users back to your app after they have authenticated. The scheme should be based on the package name for your Android app. For the demo app, we'll be creating in this guide the scheme is: `com.example.authgeardemo://host/path`. To learn more about setting up a custom URI scheme in Android, see the official documentation [here](https://developer.android.com/training/app-links/deep-linking).
 
 Head back to Authgear Portal, and add the URL scheme you have defined as a Redirect URI. For our demo app, add the following URI:
 
@@ -164,7 +164,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 }
 ```
 
-Replace `<CLIENT_ID>` and `<ENDPOINT>` with the values from the configuration page of your  Authgear client application.&#x20;
+Replace `<CLIENT_ID>` and `<ENDPOINT>` with the values from the configuration page of your Authgear client application.
 
 The complete code for `MainActivity.kt` at this point should look like this:
 
@@ -199,9 +199,9 @@ Import any class that shows as unresolved.
 
 ### Step 4: Add Login Button
 
-In this step, we'll add a login button that when the user taps on will open the login/sign-up page.&#x20;
+In this step, we'll add a login button that when the user taps on will open the login/sign-up page.
 
-Open `res/layout/activity_main.xml`  and delete the default "Hello World!" TextView.
+Open `res/layout/activity_main.xml` and delete the default "Hello World!" TextView.
 
 Switch to the code view of `activity_main.xml` and add the login button and a TextView inside the root view (ConstraintsLayout).
 
@@ -307,7 +307,7 @@ class MainActivity : AppCompatActivity() {
 
 ### Step 5: Start the authentication flow
 
-Create a `startLogin()` method in the `MainActivity.kt`  inside `class MainActivity : AppCompatActivity(){}`. This method will  call the Authgear SDK's `authenticate()` method to start a new authentication flow.
+Create a `startLogin()` method in the `MainActivity.kt` inside `class MainActivity : AppCompatActivity(){}`. This method will call the Authgear SDK's `authenticate()` method to start a new authentication flow.
 
 ```java
 fun startLogin() {
@@ -332,7 +332,7 @@ fun startLogin() {
 
 Next, implement the `updateUi()` method that was called in `startLogin()`. This function will update the Views on the screen when the user's logged-in state changes.
 
-The `updateUi()` method also calls the `fetchUserInfo()` method of the Authgear SDK. This will return the [User Info](../../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) of the current user such as their email address, name, etc.
+The `updateUi()` method also calls the `fetchUserInfo()` method of the Authgear SDK. This will return the [User Info](../../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) of the current user such as their email address, name, etc.
 
 ```kotlin
 fun updateUi(authgear: Authgear) {
@@ -482,7 +482,7 @@ The value of `SessionState` can be `UNKNOWN`, `NO_SESSION` or `AUTHENTICATED`. I
 
 #### Fetching User Info
 
-In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI as we did in [step 5](./#step-5-start-the-authentication-flow)). Use the `fetchUserInfo` function to obtain the user info, see [example](../../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
+In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI as we did in [step 5](./#step-5-start-the-authentication-flow)). Use the `fetchUserInfo` function to obtain the user info, see [example](../../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
 
 #### Using the Access Token in HTTP Requests
 

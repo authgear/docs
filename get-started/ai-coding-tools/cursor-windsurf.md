@@ -20,7 +20,7 @@ There are two values you will need for the subsequent steps:
 * **Client ID**: An ID to identify your application application with Authgear
 * **Endpoint:** The URL to identify your Authgear project and allow your application to connect to it.
 
-Under “Authorized Redirect URIs,” add the URL of your local environment with `/auth-redirect` appended. For example, if your frontend application runs on port 4000, use: `http://localhost:4000/auth-redirect` there.&#x20;
+Under “Authorized Redirect URIs,” add the URL of your local environment with `/auth-redirect` appended. For example, if your frontend application runs on port 4000, use: `http://localhost:4000/auth-redirect` there.
 
 Save your changes.
 
@@ -44,7 +44,7 @@ Store these in .env for initializing Authgear:
 - Redirect URL is http://localhost:4000/auth-redirect
 ```
 
-To show the login status in the home page, use the following prompt to change the appearance of the logged in status and add a button to the [pre-built user settings page](../../design/built-in-ui/auth-ui.md).
+To show the login status in the home page, use the following prompt to change the appearance of the logged in status and add a button to the [pre-built user settings page](../../customization/built-in-ui/auth-ui.md).
 
 {% code overflow="wrap" %}
 ```

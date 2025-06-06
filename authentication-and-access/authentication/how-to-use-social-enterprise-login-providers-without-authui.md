@@ -4,7 +4,7 @@ description: >-
   page without opening AuthUI login page.
 ---
 
-# How to Use Social/Enterprise Login Providers Without AuthUI
+# Use Social/Enterprise Login Providers Without AuthUI
 
 You can use Authgear's `x_oauth_provider_alias` parameter to add social/enterprise login to your application without showing any AuthUI pages. To do this, you must enable the **Social/Enterprise only** login method for your project in Authgear Portal.
 
@@ -39,7 +39,7 @@ To add a new provider, log in to Authgear Portal, select your project, then navi
 
 Next, click on the **Edit** button, then enter the **Client ID** and **Client Secret** for the Social/Entreprise login provider then click **Save**. Also, note the value for **Alias** as you'll use it in a later step.
 
-See our guide [here](../how-to-setup-sso-integrations/social-login-providers/facebook.md) for instructions on how to get a Client ID and Client Secret for Facebook Login.
+See our guide [here](../social-enterprise-login-providers/social-login-providers/facebook.md) for instructions on how to get a Client ID and Client Secret for Facebook Login.
 
 <figure><img src="../../.gitbook/assets/authgear-social-provider-add.png" alt=""><figcaption></figcaption></figure>
 

@@ -8,7 +8,7 @@ description: >-
 
 In this section, we will go through how to decode the JWT token to obtain the currently logged-in user.
 
-Before we start, make sure the option **Issue JWT as access token** is enabled in your Application settings in the Portal.&#x20;
+Before we start, make sure the option **Issue JWT as access token** is enabled in your Application settings in the Portal.
 
 <figure><img src="../../.gitbook/assets/image (1) (1).png" alt="" width="375"><figcaption><p>Enable this option in application settings in the portal</p></figcaption></figure>
 
@@ -18,7 +18,7 @@ With the **Issue JWT as access token** option turned on in your application, Aut
 
 This Discovery endpoint serves as a JSON document containing the OpenID Connect configuration of your app. It includes the authorization endpoint, the token endpoint, and the JWKS endpoint.
 
-`https://<YOUR_AUTHGEAR_ENDPOINT>/.well-known/openid-configuration`&#x20;
+`https://<YOUR_AUTHGEAR_ENDPOINT>/.well-known/openid-configuration`
 
 The JSON Web Key Sets (JWKS) endpoint can be found in `jwks_uri` in the configuration.
 
@@ -41,14 +41,14 @@ Follow this step-by-step example to verify and decode the JWT token.
 
 {% tabs %}
 {% tab title="Python" %}
-### Step 1: Install packages
+#### Step 1: Install packages
 
 ```bash
 pip install cryptography
 pip install PyJWT
 ```
 
-### Step 2: Find the JSON Web Key Sets (JWKS) endpoint
+#### Step 2: Find the JSON Web Key Sets (JWKS) endpoint
 
 Define a function to find the JWKS endpoint from the OpenID Connect configuration. Use your Authgear endpoint as the `base_address`
 
@@ -69,7 +69,7 @@ def fetch_jwks_uri(base_address):
     return jwks_uri
 ```
 
-### Step 3: Get the JWT token from the Authorization header
+#### Step 3: Get the JWT token from the Authorization header
 
 Define a function to extract the access token from the Authorization header in the incoming request. It should look like `Authorization: Bearer <access_token>`.
 
@@ -86,7 +86,7 @@ def parse_header(authz_header):
     return parts[1]
 ```
 
-### Step 4: Verify and decode the JWT token
+#### Step 4: Verify and decode the JWT token
 
 Here we show an example of using the Flask web framework to guard a path. You may need to adjust some of the codes to suit your technologies.
 
@@ -135,13 +135,13 @@ def hello():
 {% endtab %}
 
 {% tab title="Node.js" %}
-### Step 1: Install dependencies
+#### Step 1: Install dependencies
 
 ```bash
 npm install --save axios jwks-rsa jsonwebtoken
 ```
 
-### Step 2: Find the JWKS Endpoint
+#### Step 2: Find the JWKS Endpoint
 
 Use the following method to get the JWKS URI (you'll need to URI to extract the public signing key from a JWT).
 
@@ -154,7 +154,7 @@ const getJwksUri = async (appUrl) => {
 }
 ```
 
-### Step 3: Extract JWT from Request Header
+#### Step 3: Extract JWT from Request Header
 
 Use the following code to extract only the token part from a `Bearer [token]` authorization header in your Express app:
 
@@ -179,7 +179,7 @@ app.get('/', async (req, res) => {
 }
 ```
 
-### Step 4: Decode Access Token
+#### Step 4: Decode Access Token
 
 Next, decode the access token so that you can extract the JWT `kid` from the result. You'll need this \`kid to get the public signing key. Use the following code to decode the JWT:
 
@@ -187,7 +187,7 @@ Next, decode the access token so that you can extract the JWT `kid` from the res
 const decoded_access_token = node_jwt.decode(access_token, {complete: true});
 ```
 
-### Step 5: Get JWT Signing Keys and Verify the JWT
+#### Step 5: Get JWT Signing Keys and Verify the JWT
 
 Use the following code to extract the JWT public keys then verify the JWT using the keys:
 
@@ -371,7 +371,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {% tab title="Java" %}
 The following example uses Spring Boot.
 
-### Step 1: Install dependencies
+#### Step 1: Install dependencies
 
 Add the following dependencies to your build.gradle file:
 
@@ -382,7 +382,7 @@ dependencies {
 }
 ```
 
-Then add the following imports to the top of your  controller file:
+Then add the following imports to the top of your controller file:
 
 ```java
 import com.nimbusds.jose.jwk.JWKSet;
@@ -397,7 +397,7 @@ import java.net.URL;
 import java.util.List;
 ```
 
-### Step 2: Get JWKS Endpoint
+#### Step 2: Get JWKS Endpoint
 
 Implement the following method to fetch the JWKS URI:
 
@@ -424,7 +424,7 @@ private static String fetchJwksUri(String baseAddress) throws Exception {
 }
 ```
 
-### Step 3: Get Signing Key
+#### Step 3: Get Signing Key
 
 Get the signing key from the JWK using the following method:
 
@@ -444,7 +444,7 @@ private static RSAKey getSigningKeyFromJwks(String jwksUri, String token) throws
 }
 ```
 
-### Step 4: Validate JWT
+#### Step 4: Validate JWT
 
 To demonstrate how to validate a JWT, we'll implement a `validateJWT` endpoint in a Spring Boot application. The endpoint will read access tokens from the bearer authorization header.
 
@@ -560,7 +560,7 @@ public class DemoApplication {
 {% endtab %}
 
 {% tab title="PHP" %}
-### Step 1: Install Packages
+#### Step 1: Install Packages
 
 First, install the dependencies required by running these com
 
@@ -572,7 +572,7 @@ composer require firebase/php-jwt
 composer require guzzlehttp/guzzle
 ```
 
-### Step 2: Find the JWKS Endpoint&#x20;
+#### Step 2: Find the JWKS Endpoint
 
 Create a function that finds the JWKS endpoint from your Authgear application endpoint using the following code:
 
@@ -596,7 +596,7 @@ function getJwksUri($appUrl) {
 }
 ```
 
-### Step 3: Get Signing Key
+#### Step 3: Get Signing Key
 
 Add the following code to your application to get the JWT signing key:
 
@@ -612,7 +612,7 @@ $parsedKey = JWK::parseKey($jwks, "RS256");
 $signingKey = $parsedKey->getKeyMaterial();
 ```
 
-### Step 4: Extract the JWT From the Request Header
+#### Step 4: Extract the JWT From the Request Header
 
 To extract the access token from the HTTP request use the following code:
 
@@ -623,7 +623,7 @@ $authorizationHeader = $_SERVER['HTTP_AUTHORIZATION'];
 $jwt = (explode(" ", $authorizationHeader))[1];
 ```
 
-### Step 5: Validate and Decode JWT
+#### Step 5: Validate and Decode JWT
 
 Finally, decode the JWT signing key.
 
@@ -631,20 +631,14 @@ Finally, decode the JWT signing key.
 $decoded = JWT::decode($jwt, new Key($signingKey, 'RS256'));
 echo json_encode($decoded);
 ```
-
-
 {% endtab %}
 {% endtabs %}
 
-
-
-
-
 ### Check the validity of JWT
 
-The `auth_time` claim in an **OIDC ID token** represents the time **when the user authentication occurred**. Extract the `auth_time` claim from the token, which should represent the time of the original authentication in seconds. If the difference between the current time and `auth_time` exceeds your threshold (for example, 5 minutes), initiate the [re-authentication](../../how-to-guide/authenticate/reauthentication.md) process.
+The `auth_time` claim in an **OIDC ID token** represents the time **when the user authentication occurred**. Extract the `auth_time` claim from the token, which should represent the time of the original authentication in seconds. If the difference between the current time and `auth_time` exceeds your threshold (for example, 5 minutes), initiate the [re-authentication](../../authentication-and-access/authentication/reauthentication.md) process.
 
-See an example of how to verify the signature of the ID token, and then validate the claims `auth_time` inside [here](../../how-to-guide/authenticate/reauthentication.md#backend-integration).
+See an example of how to verify the signature of the ID token, and then validate the claims `auth_time` inside [here](../../authentication-and-access/authentication/reauthentication.md#backend-integration).
 
 ## Decode user from cookies
 
@@ -653,4 +647,3 @@ Validating JWT in your application server is _currently_ only available for **To
 {% hint style="info" %}
 For Cookie-based authentication, JWT in cookies is not supported yet. [You can track the issue here](https://github.com/authgear/authgear-server/issues/1180).
 {% endhint %}
-

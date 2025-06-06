@@ -273,6 +273,6 @@ The following table shows all attributes and their update behavior for reference
 
 The following is a detailed guide with examples of using the User Import API to bulk import users and check the status of tasks.
 
-{% content-ref url="../../how-to-guide/user-management/import-users-using-user-import-api.md" %}
-[import-users-using-user-import-api.md](../../how-to-guide/user-management/import-users-using-user-import-api.md)
+{% content-ref url="../../admin/user-management/import-users-using-user-import-api.md" %}
+[import-users-using-user-import-api.md](../../admin/user-management/import-users-using-user-import-api.md)
 {% endcontent-ref %}

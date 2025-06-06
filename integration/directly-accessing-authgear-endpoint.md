@@ -22,9 +22,9 @@ Instead of the default error message, you can show a link to redirect the user a
 
 ## Cookie-based Authentication
 
-If you are using [Cookie-based authentication](../get-started/backend-api/#forward-cookie-in-http-header), you can set Authgear to render the signup/login page even when the user is accessing the Endpoint URL directly. And therefore these options are only available when [custom domain](integration/custom-domain.md) is enabled.&#x20;
+If you are using [Cookie-based authentication](broken-reference), you can set Authgear to render the signup/login page even when the user is accessing the Endpoint URL directly. And therefore these options are only available when [custom domain](../customization/custom-domain.md) is enabled.&#x20;
 
-When user access the endpoint directly, they will be redirected to the `/login` page. After login, the user will be directed to the [User Settings](../design/built-in-ui/auth-ui.md) page (`/settings`).
+When user access the endpoint directly, they will be redirected to the `/login` page. After login, the user will be directed to the [User Settings](../customization/built-in-ui/auth-ui.md) page (`/settings`).
 
 {% hint style="info" %}
 This is only applicable for cookie-based authentication. If you integrate Authgear with the SDKs, OIDC or SAML protocols, the user should not access the endpoint URL directly in their browser. The authentication should be triggered from the flows.
@@ -32,7 +32,7 @@ This is only applicable for cookie-based authentication. If you integrate Authge
 
 ### **Show the login page and redirect to the hosted settings page**
 
-When the user accesses the endpoint URL directly in their browser, show the authentication page. After the user is authenticated, they are redirected to the hosted [User Settings](../design/built-in-ui/auth-ui.md) page which they can manage their account.
+When the user accesses the endpoint URL directly in their browser, show the authentication page. After the user is authenticated, they are redirected to the hosted [User Settings](../customization/built-in-ui/auth-ui.md) page which they can manage their account.
 
 ### **Show the login page and redirect to a custom URL**
 
