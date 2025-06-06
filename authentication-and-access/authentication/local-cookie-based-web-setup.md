@@ -165,4 +165,4 @@ In the above examples, nginx will also authenticate requests by creating sub-req
 
 Now visit the website through `https://<yourapp>.authgear.cloud`, and the browser will be able to send requests with the authorization cookies.
 
-For implementing login and logout logic in your website, please refer to [Web SDK](broken-reference).
+For implementing login and logout logic in your website, please refer to [Web SDK](../../get-started/single-page-app/website.md).

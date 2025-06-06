@@ -129,8 +129,8 @@ See implementation examples [here](../../get-started/backend-api/nginx.md).
 
 Should you choose to use Resolver Endpoints instead of JWT tokens to validate each API request, check out the following tutorial to learn how to go about that:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="../../get-started/backend-api/nginx.md" %}
+[nginx.md](../../get-started/backend-api/nginx.md)
 {% endcontent-ref %}
 
 ## Other Special URLs
