@@ -30,7 +30,7 @@ Authgear contains the following high-level components:
 
 * **Client App SDKs** - for developers to quickly implement authentication with Auth UI on your web and mobile applications. Check out [Start Building](get-started/start-building.md) for tutorials and API References.
 * **Auth UI** - is the default batteries included UI for login, signup and setting page. You can customize the style via the **Portal**, including the CSS and HTML of each pag&#x65;**.**
-* [**Authentication Flow API**](customization/custom-ui/authentication-flow-api.md) - for developers to implement their own login, signup and reauthenticate UI (e.g. a mobile native view); or to define a customized login, signup and reauth flow.
+* [**Authentication Flow API**](customization/ui-customization/custom-ui/authentication-flow-api.md) - for developers to implement their own login, signup and reauthenticate UI (e.g. a mobile native view); or to define a customized login, signup and reauth flow.
 * [**Use Authgear as OpenID Connect Provider**](authentication-and-access/single-sign-on/oidc-provider.md) - for developers to use Authgear with other software that already support OIDC login, you can use Authgear as an OpenID Connect Provider.
 
 #### Backend Authentication and Integrations
@@ -40,7 +40,7 @@ Authgear contains the following high-level components:
 * [**Events and Hooks**](customization/events-hooks/) - call external web endpoint or use the hosted type-script to customize the behaviour of Authgear. E.g. blocking certain type of sign up, or call external endpoint for each login.
 * [**User Import API**](admin/user-management/import-users-using-user-import-api.md) - Import multiple users from another service to your project.
 * [**Export User API**](admin/user-management/export-users-using-the-user-export-api.md) - Export user data from Authgear into a CSV or [ndjosn](https://github.com/ndjson/ndjson-spec) file.
-* [**Link OAuth Provider using Account Management API**](customization/custom-ui/manually-link-oauth-provider-using-account-management-api.md) - Link an OAuth provider to a user's account without AuthUI.
+* [**Link OAuth Provider using Account Management API**](customization/ui-customization/custom-ui/manually-link-oauth-provider-using-account-management-api.md) - Link an OAuth provider to a user's account without AuthUI.
 
 #### Management Portal
 
@@ -63,8 +63,8 @@ Authgear contains the following high-level components:
 
 #### Customize User Interface (UI)
 
-* [**Customize Built-in UI**](customization/built-in-ui/branding.md) - Customize the look and feel of AuthUI to match your branding.
-* [**Language and Localization**](customization/languages-and-localization.md) - Change the language for display texts.
+* [**Customize Built-in UI**](customization/ui-customization/built-in-ui/branding.md) - Customize the look and feel of AuthUI to match your branding.
+* [**Language and Localization**](customization/ui-customization/languages-and-localization.md) - Change the language for display texts.
 
 #### User Management
 

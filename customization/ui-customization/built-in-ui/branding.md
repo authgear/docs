@@ -12,7 +12,7 @@ In this guide, you'll learn how to use all the customization options available.
 
 To open the new Authgear Design page, log in to the Authgear Portal and navigate to **Branding** > **Design**.
 
-<figure><img src="../../.gitbook/assets/authgear-design-3.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-design-3.png" alt=""><figcaption></figcaption></figure>
 
 The Design page is divided into 2 columns. The left column shows a preview of your customizations in real time. The right column is the menu with all the customization options for different UI elements (e.g. Name, Logo, Favicon).
 
@@ -68,7 +68,7 @@ Under the Links section, you'll find options to set the text color for links in 
 
 **Link decoration:** You can use this option to add the `underline` text-decoration to links that are displayed in AuthUI.
 
-<figure><img src="../../.gitbook/assets/authgear-design-underline-link.png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-design-underline-link.png" alt="" width="375"><figcaption></figcaption></figure>
 
 
 

@@ -32,7 +32,7 @@ There are 3 different high-level approaches to integrating Authgear with your ap
 
 ### Client-side SDKs
 
-Client-side SDKs are designed for developers to quickly implement authentication with Auth UI on your web and mobile applications. After login, it returns the user data for your apps. It can open a hosted [pre-built account settings page](../customization/built-in-ui/auth-ui.md) for the user to manage their own account. The SDKs manage session token storage automatically and have built-in token ownership protection ([DPoP](https://oauth.net/2/dpop/)) against stolen refresh tokens.
+Client-side SDKs are designed for developers to quickly implement authentication with Auth UI on your web and mobile applications. After login, it returns the user data for your apps. It can open a hosted [pre-built account settings page](../customization/ui-customization/built-in-ui/auth-ui.md) for the user to manage their own account. The SDKs manage session token storage automatically and have built-in token ownership protection ([DPoP](https://oauth.net/2/dpop/)) against stolen refresh tokens.
 
 **Check out the following guides for your specific framework:**
 
@@ -56,7 +56,7 @@ After the frontend integration is complete, every request sent from your applica
 
 ### Customization
 
-You can [customize the look and feel of Authgear prebuilt UI](../customization/built-in-ui/branding.md) to match your branding. [Events and hooks](../customization/events-hooks/) can be used to stay notified and add functionality during the authentication process.
+You can [customize the look and feel of Authgear prebuilt UI](../customization/ui-customization/built-in-ui/branding.md) to match your branding. [Events and hooks](../customization/events-hooks/) can be used to stay notified and add functionality during the authentication process.
 
 ### User Management through backend server
 
@@ -66,7 +66,7 @@ For detailed implementation instructions and API capabilities, refer to the [Adm
 
 ### Custom UI
 
-If you wish to use a custom UI instead of the pre-built UI for signup and login, you need to deploy another server and complete the signup/login process using Authentication Flow API. See [Custom UI ](../customization/custom-ui/)for in-depth instructions.
+If you wish to use a custom UI instead of the pre-built UI for signup and login, you need to deploy another server and complete the signup/login process using Authentication Flow API. See [Custom UI ](../customization/ui-customization/custom-ui/)for in-depth instructions.
 
 ## Regular Web Applications
 
@@ -85,7 +85,7 @@ If your application is a traditional web app running on a server, you can levera
 
 ### Customization
 
-You can [customize the look and feel of Authgear prebuilt UI](../customization/built-in-ui/branding.md) to match your branding. [Events and hooks](../customization/events-hooks/) can be used to stay notified and add functionality during the authentication process.
+You can [customize the look and feel of Authgear prebuilt UI](../customization/ui-customization/built-in-ui/branding.md) to match your branding. [Events and hooks](../customization/events-hooks/) can be used to stay notified and add functionality during the authentication process.
 
 ### User Management
 
@@ -95,7 +95,7 @@ For detailed implementation instructions and API capabilities, refer to the [Adm
 
 ### Custom UI
 
-If you wish to use a custom UI instead of the pre-built UI for signup and login, you need to deploy another server and complete the signup/login process using Authentication Flow API. See [Custom UI ](../customization/custom-ui/)for in-depth instructions.
+If you wish to use a custom UI instead of the pre-built UI for signup and login, you need to deploy another server and complete the signup/login process using Authentication Flow API. See [Custom UI ](../customization/ui-customization/custom-ui/)for in-depth instructions.
 
 ## Software built by others
 

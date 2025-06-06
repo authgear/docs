@@ -107,8 +107,8 @@ Use the above endpoint to check when an existing export process is complete and 
 
 You can find a detailed overview of the Authentication Flow API in the following documentation:
 
-{% content-ref url="../../customization/custom-ui/authentication-flow-api.md" %}
-[authentication-flow-api.md](../../customization/custom-ui/authentication-flow-api.md)
+{% content-ref url="../../customization/ui-customization/custom-ui/authentication-flow-api.md" %}
+[authentication-flow-api.md](../../customization/ui-customization/custom-ui/authentication-flow-api.md)
 {% endcontent-ref %}
 
 The path for the Authentication Flow API is:

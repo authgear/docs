@@ -80,7 +80,7 @@ To continue and finish the authentication flow, you can send the value for `stat
 
 To help you understand the structure of the Authentication Flow API HTTP(S) request, here is an example of an actual request in Postman:
 
-<figure><img src="../../.gitbook/assets/authflow-api-postman.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authflow-api-postman.png" alt=""><figcaption></figcaption></figure>
 
 **Request body:**
 
@@ -134,13 +134,13 @@ You may send more requests just like this second request depending on the number
 
 To use the Authentication Flow API to build your custom UI, you need to configure a Custom UI URI in the Authgear portal. This URI should point to your custom authentication page.
 
-For more details about the Authentication Flow API endpoints, inputs, response, and more visit the [API reference page](../../api-reference/apis/authentication-flow-api.md).
+For more details about the Authentication Flow API endpoints, inputs, response, and more visit the [API reference page](../../../api-reference/apis/authentication-flow-api.md).
 
 ### How the Authentication Flow API Works
 
 The following flowchart shows the steps in a simple Authentication Flow API implementation:
 
-<figure><img src="../../.gitbook/assets/authflow-api-flowchart.png" alt=""><figcaption><p>flowchart showing how authentication flow API works</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authflow-api-flowchart.png" alt=""><figcaption><p>flowchart showing how authentication flow API works</p></figcaption></figure>
 
 #### Step 1: Make Authorization Request
 

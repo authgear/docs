@@ -18,7 +18,7 @@ You can add a customer support link in the Portal.
 
 The value will be used as the `href` of `<a>` HTML tag. It can be a URL or a `mailto:` link.
 
-![Contact customer support in the 2-step verification screen](../../.gitbook/assets/mfa-customer-support.png)
+![Contact customer support in the 2-step verification screen](../../../.gitbook/assets/mfa-customer-support.png)
 
 ## Customize the label
 

@@ -456,7 +456,7 @@ In some cases, you may need to obtain current user info through the SDK. (e.g. D
 authgearClient.fetchUserInfo();
 ```
 
-See more user info [examples](broken-reference).
+See more user info [examples](../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
 
 #### Log the user out
 

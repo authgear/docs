@@ -20,7 +20,7 @@ If you do not already have an Authgear application, login to Authgear Portal and
 
 Enter your application name and select **Native App** as **Application Type** then click the **Save** button to continue.
 
-<figure><img src="../../.gitbook/assets/authgear-create-native-app (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-create-native-app (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Step 2: Set Authorized Redirect URI
 
@@ -30,7 +30,7 @@ For our example Flutter app, this URI will start with the package name for our a
 
 To set the Redirect URI, scroll down to the **Authorized Redirect URI** under the **URIs** section of your application configuration page. Enter the correct URI for your application then click **Save**.
 
-<figure><img src="../../.gitbook/assets/authgear-config-app-native.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-config-app-native.png" alt=""><figcaption></figcaption></figure>
 
 **Note**: You can find the package name for your Flutter app in `android/app/build.gradle` under `android > namespace`.
 
@@ -40,7 +40,7 @@ Setting a value for Custom UI URI in Authgear Portal will redirect users of your
 
 To set the Custom UI URI, scroll down to the **Custom UI** section on your application configuration page in the Authgear Portal. Then, add the URL to your custom login/signup page in the **Custom UI URI** text field.
 
-<figure><img src="../../.gitbook/assets/authgear-config-app-custom-ui-url-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-config-app-custom-ui-url-2.png" alt=""><figcaption></figcaption></figure>
 
 This URL is a publicly accessible link on the web that hosts the code that implements your custom UI and does the actual interaction with the Authentication Flow API. Check out our examples for implementing custom login and signup UI pages using [PHP](implement-authentication-flow-api-using-php.md) and [JavaScript(Express)](implement-authentication-flow-api-using-express.md) to learn more.
 

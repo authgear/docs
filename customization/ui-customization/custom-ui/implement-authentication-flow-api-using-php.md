@@ -40,7 +40,7 @@ Enter a name for your application and set the **Application Type** as **OIDC Cli
 
 **Note**: You can select any Application Type on the Portal depending on the nature of your client application that will be interacting with Authgear and your Custom UI.
 
-<figure><img src="../../.gitbook/assets/authgear-app-config-oidc.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-app-config-oidc.png" alt=""><figcaption></figcaption></figure>
 
 #### Step 2: Add Authorized Redirect URIs
 
@@ -48,7 +48,7 @@ In this step, you'll add redirect URIs to your application. An Authorized Redire
 
 To add a new URI, scroll down to the **URIs** section on the configuration page for the application you created in the previous step. Next, click on the **Add URI** button then enter a valid URL for your application. For this example, enter `http://localhost:8081/` as a redirect URI.
 
-<figure><img src="../../.gitbook/assets/authgear-config-redirect-php.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-config-redirect-php.png" alt=""><figcaption></figcaption></figure>
 
 Once you're done, save the changes to continue.
 
@@ -58,7 +58,7 @@ The value for the Custom UI URI should be a link (absolute URL) to your custom l
 
 Now, still within the configuration page for your application, scroll down to the **Custom UI** section and add a link to your custom login page.
 
-<figure><img src="../../.gitbook/assets/authgear-config-app-custom-ui-url.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-config-app-custom-ui-url.png" alt=""><figcaption></figcaption></figure>
 
 If you're testing your custom UI on a browser on the same device that you'll be using to serve the PHP code, you can enter your `localhost` URL  in Custom UI URI. For example, you can use the following URL if you will run the PHP code on your local machine using port 8081 :
 
@@ -74,13 +74,13 @@ For our example app in this tutorial, users will be using their email and passwo
 
 &#x20;To do that,  enable the "Email + Password" option under **Authentication** > **Login Methods**.&#x20;
 
-<figure><img src="../../.gitbook/assets/authgear-login-methods (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-login-methods (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
 Also, disable 2FA (if enabled) so that the authentication flow does not include an extra step which our demo app will not cover.  You can disable 2FA Requirements in **Authentication** > **2FA** in the Authgear Portal.
 
-<figure><img src="../../.gitbook/assets/authgear-config-2fa (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-config-2fa (1).png" alt=""><figcaption></figcaption></figure>
 
 With that, we're done with the required configuration on the Authgear Portal. In the next part, we'll design some custom UI and implement the Authentication Flow API.
 
@@ -269,7 +269,7 @@ Also in the above code, the form action points to a **form.php** with `$url_para
 
 The following screenshot shows the output of the custom login page on a browser:
 
-<figure><img src="../../.gitbook/assets/Screenshot 2023-11-16 at 15.48.07.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Screenshot 2023-11-16 at 15.48.07.png" alt=""><figcaption></figcaption></figure>
 
 #### Step 3: Implement Login Flow
 
@@ -461,7 +461,7 @@ To create the UI for the signup page, add the following code to the signup.php f
 
 The above code implements a signup form that includes fields for users to enter their email and password and a submit button. The value for the `<input type="hidden">` is the `state_token` returned from the previous. You need this `state_token` to proceed with the flow.
 
-<figure><img src="../../.gitbook/assets/Screenshot 2023-11-16 at 15.49.01.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Screenshot 2023-11-16 at 15.49.01.png" alt=""><figcaption></figcaption></figure>
 
 #### Step 7: Complete Signup Flow
 

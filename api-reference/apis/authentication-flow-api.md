@@ -8,7 +8,7 @@ description: >-
 
 Welcome to the API reference for the Authentication Flow API. On this page, you'll find a complete list of all the actions supported by the API.
 
-For an overview of what the Authentication Flow API is, see this post [here](../../customization/custom-ui/authentication-flow-api.md).
+For an overview of what the Authentication Flow API is, see this post [here](../../customization/ui-customization/custom-ui/authentication-flow-api.md).
 
 ## 1.0 Introduction
 

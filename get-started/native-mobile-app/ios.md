@@ -367,7 +367,7 @@ Now clicking on the Logout button will call Authgear SDK's logout method and end
 
 ### Step 8: Show the user information
 
-In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI). Use the `fetchUserInfo` function to obtain the user info, see [example](broken-reference).
+In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI). Use the `fetchUserInfo` function to obtain the user info, see [example](../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
 
 The Authgear SDK can return the current user's details via the UserInfo object. The authenticate method returns this userInfo object as demonstrated earlier in our app's `startAuthentication()` method. You can also call the SDK's `.fetchUserInfo()` method to get the UserInfo object.
 

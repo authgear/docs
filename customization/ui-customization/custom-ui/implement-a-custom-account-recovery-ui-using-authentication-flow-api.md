@@ -34,7 +34,7 @@ Using custom UI in your Authgear application requires setting the value for Cust
 
 To set this value, log in to the Authgear Portal and navigate to **Applications** then select your application. Next, in your application's configuration page, scroll down to the Custom UI section and enter the URL for your custom UI.
 
-<figure><img src="../../.gitbook/assets/authgear-config-app-custom-ui-url-2 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-config-app-custom-ui-url-2 (1).png" alt=""><figcaption></figcaption></figure>
 
 For the example in this post, we'll be using CloudFlare Tunnel to expose the custom UI we'll be building so that we can have a public URL to enter in the **Custom UI URI** field in our Authgear application configuration.
 
@@ -139,7 +139,7 @@ The above code refers to a `rawURLQuery()` and `initRecovery()` functions that w
 
 The form we created using the above code looks like this:
 
-<figure><img src="../../.gitbook/assets/authflow-example-recovery-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authflow-example-recovery-1.png" alt=""><figcaption></figcaption></figure>
 
 Look for the following line of code in your **app.js** file:
 
@@ -381,7 +381,7 @@ app.get('/verifyRecovery', async (req, res) => {
 
 Here is what the verify recovery code page looks like:
 
-<figure><img src="../../.gitbook/assets/authflow-example-recovery-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authflow-example-recovery-2.png" alt=""><figcaption></figcaption></figure>
 
 Next, add a new `verifyRecoveryCode()` function to app.js using the following code:
 
@@ -491,7 +491,7 @@ app.get('/setPassword', async (req, res) => {
 
 The above code will implement a page that looks like this:
 
-<figure><img src="../../.gitbook/assets/authflow-example-recovery-3.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authflow-example-recovery-3.png" alt=""><figcaption></figcaption></figure>
 
 Add a new `recoverySetPassword()` function to app.js using the following code:
 

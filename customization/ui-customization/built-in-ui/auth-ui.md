@@ -8,7 +8,7 @@ description: >-
 
 The User Settings page provides a prebuilt user interface for logged-in users of an Authgear project to view and edit their account settings.
 
-<figure><img src="../../.gitbook/assets/authgear-new-user-settings.png" alt=""><figcaption><p>user settings ui</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-new-user-settings.png" alt=""><figcaption><p>user settings ui</p></figcaption></figure>
 
 ## Actions in the settings page
 
@@ -117,7 +117,7 @@ Toggle the **Show “Back to your app” button in the settings page** switch on
 
 Click **Save** to apply your new settings.
 
-<figure><img src="../../.gitbook/assets/authgear-design-user-settings-back.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-design-user-settings-back.png" alt=""><figcaption></figcaption></figure>
 
 ## Customize User Settings Page
 

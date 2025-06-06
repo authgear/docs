@@ -2,7 +2,7 @@
 
 You can add a privacy policy and a terms of service link to the sign up page.&#x20;
 
-<img src="../../.gitbook/assets/privacy-terms-links-signup.png" alt="" data-size="original">&#x20;
+<img src="../../../.gitbook/assets/privacy-terms-links-signup.png" alt="" data-size="original">&#x20;
 
 ## Change in the Portal
 

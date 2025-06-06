@@ -104,7 +104,7 @@ Requires you to provide your own translation. Enable a language and customize th
 
 </details>
 
-<figure><img src="../.gitbook/assets/authgear-languages.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-languages.png" alt=""><figcaption></figcaption></figure>
 
 ### 2. Set Primary Language
 
@@ -116,10 +116,10 @@ Use the Language dropdown in the Primary Language subsection of Languages in the
 
 You can add more languages using custom translation.json. To do this, first enable the language from the **Custom Translation** subsection of Languages in the portal. For example, enable a language such as Czech, Danish, or Estonian from the custom translation subsection and then proceed to write the translation.
 
-<figure><img src="../.gitbook/assets/authgear-custom-language-list.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-custom-language-list.png" alt=""><figcaption></figcaption></figure>
 
 Next, go to **Branding** > **Custom Text** in Authgear Portal. Then, select the language you wish to add from the dropdown at the top right corner.
 
 Enter the [appropriate key-value pair](https://github.com/authgear/authgear-server/blob/2a6f1bfbb9b8/resources/authgear/templates/en/translation.json) in the **translation.json** text field to translate different UI texts for the language. See [Custom Text](built-in-ui/localization.md) to learn more about editing **translation.json**.
 
-<figure><img src="../.gitbook/assets/authgear-custom-text-cz-example.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-custom-text-cz-example.png" alt=""><figcaption></figcaption></figure>
