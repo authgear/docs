@@ -11,7 +11,7 @@ SAML allows the Identity Provider and Service Provider to authenticate and autho
 * **The Service Provider (SP)**: In SAML, this is the service that trust the Identity Provider to handle the process of user authentication.
 * **The Identity Provider (IdP)**: handles user authentication and notifies the Service Provider once the user is authenticated.
 
-<figure><img src="../../.gitbook/assets/saml-flowchart.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/saml-flowchart.png" alt=""><figcaption></figcaption></figure>
 
 Authgear supports the SAML protocol. Hence, you can set up third-party services like Salesforce, Dropbox, Figma, etc. to trust Authgear with the user authentication process.
 
@@ -19,8 +19,8 @@ Authgear supports the SAML protocol. Hence, you can set up third-party services 
 
 See the following guides for some popular service providers:
 
-* [use-authgear-as-saml-identity-provider-for-salesforce.md](../../authentication-and-access/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-salesforce.md "mention")
-* [use-authgear-as-saml-identity-provider-for-dropbox.md](../../authentication-and-access/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-dropbox.md "mention")
+* [use-authgear-as-saml-identity-provider-for-salesforce.md](use-authgear-as-saml-identity-provider-for-salesforce.md "mention")
+* [use-authgear-as-saml-identity-provider-for-dropbox.md](use-authgear-as-saml-identity-provider-for-dropbox.md "mention")
 
 ## How to Set up SAML in Authgear
 
@@ -32,13 +32,13 @@ The following steps show more details on how to set up an OIDC/SAML Client Appli
 
 Log in to Authgear Portal, then click on Applications from the navigation menu.
 
-<figure><img src="../../.gitbook/assets/authgear-nav-applications.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-nav-applications.png" alt=""><figcaption></figcaption></figure>
 
 Click on Add Application to create a new client application. Or select an existing client application with the `OIDC/SAML Client` type.
 
 Enter a **Name** for the application and select OIDC/SAML Client Application as the **Application Type**.
 
-<figure><img src="../../.gitbook/assets/authgear-new-app-saml.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-new-app-saml.png" alt=""><figcaption></figcaption></figure>
 
 Click **Save** to proceed.
 
@@ -48,7 +48,7 @@ By default, the SAML 2.0 Configuration is disabled for the client application.
 
 Click on the SAML 2.0 tab then toggle **SAML 2.0 Support** switch to enable SAML 2.0.
 
-<figure><img src="../../.gitbook/assets/authgear-saml-tab (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-saml-tab (1).png" alt=""><figcaption></figcaption></figure>
 
 You'll be required to enter at least one **Allowed Assertion Consumer Service URLs (ACS URLs)** before you can save your changes. Hence, get an **ACS URL** from the Service Provider you plan to use.
 

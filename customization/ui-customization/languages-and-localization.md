@@ -120,6 +120,6 @@ You can add more languages using custom translation.json. To do this, first enab
 
 Next, go to **Branding** > **Custom Text** in Authgear Portal. Then, select the language you wish to add from the dropdown at the top right corner.
 
-Enter the [appropriate key-value pair](https://github.com/authgear/authgear-server/blob/2a6f1bfbb9b8/resources/authgear/templates/en/translation.json) in the **translation.json** text field to translate different UI texts for the language. See [Custom Text](../ui-customization/built-in-ui/localization.md) to learn more about editing **translation.json**.
+Enter the [appropriate key-value pair](https://github.com/authgear/authgear-server/blob/2a6f1bfbb9b8/resources/authgear/templates/en/translation.json) in the **translation.json** text field to translate different UI texts for the language. See [Custom Text](built-in-ui/localization.md) to learn more about editing **translation.json**.
 
 <figure><img src="../../.gitbook/assets/authgear-custom-text-cz-example.png" alt=""><figcaption></figcaption></figure>

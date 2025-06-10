@@ -4,7 +4,7 @@ The zero-downtime migration approach is much like bulk migration but without use
 
 To exchange a valid access token from your old system, implement a migration endpoint that calls the **CreateSession** mutation of Authgear's Admin API.
 
-<figure><img src="../../.gitbook/assets/authgear-zero-dt-migration.png" alt=""><figcaption><p>flow of zero-downtime migration</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/authgear-zero-dt-migration.png" alt=""><figcaption><p>flow of zero-downtime migration</p></figcaption></figure>
 
 ### When to use Zero-downtime Migration
 
@@ -37,9 +37,9 @@ The actual operations required to do this will vary depending on your old authen
 
 ### Step 2: Import User Data to Authgear
 
-Import the user data you have already exported from your legacy system into Authgear using the [User Import API](../../reference/apis/user-import-api.md).
+Import the user data you have already exported from your legacy system into Authgear using the [User Import API](../reference/apis/user-import-api.md).
 
-Your user data must be reformatted using the [User Import API Schema](../../reference/apis/user-import-api.md#input-format).
+Your user data must be reformatted using the [User Import API Schema](../reference/apis/user-import-api.md#input-format).
 
 Once you have formatted your user data, send the JSON data in an HTTPS request to the `_api/admin/users/import` endpoint of the User Import API.
 
@@ -71,10 +71,10 @@ Now, implement an endpoint in your application that will verify the access token
 Our migration endpoint for the demo Express.js app in this guide uses the user's email address as a login ID. This is because we are assuming we have set `email` as the identifier. This identifier is set during the bulk import of user data to Authgear. If you set `phone` as the identifier, you can use the user's phone number as login ID instead.
 
 {% hint style="info" %}
-For the rest of this step, we will be making HTTPS requests to the Admin API GraphQL endpoint. A valid Admin API JWT is required for this. See [Authenticate Admin API](../../reference/apis/admin-api/authentication-and-security.md) to learn more.
+For the rest of this step, we will be making HTTPS requests to the Admin API GraphQL endpoint. A valid Admin API JWT is required for this. See [Authenticate Admin API](../reference/apis/admin-api/authentication-and-security.md) to learn more.
 {% endhint %}
 
-After you have verified the access token, use the user's login ID to call [the Admin API](../../reference/apis/admin-api/)'s `getUserByLoginID` query.
+After you have verified the access token, use the user's login ID to call [the Admin API](../reference/apis/admin-api/)'s `getUserByLoginID` query.
 
 ```javascript
 const admin_api_endpoint = appUrl + "/_api/admin/graphql";

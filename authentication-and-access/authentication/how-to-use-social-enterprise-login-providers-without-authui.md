@@ -19,7 +19,7 @@ In this post, you'll learn how to use the `x_oauth_provider_alias` parameter to 
 * In this post, we'll walk through the steps for adding only the social/enterprise login method to an Authgear application.
 * We'll use the Authgear SDK for React Native to set the `x_oauth_provider_alias` parameter and show how to use `x_oauth_provider_alias` without the SDK in an example Express app.&#x20;
 
-<figure><img src="../.gitbook/assets/x_oauth_provider_alias sequence.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/x_oauth_provider_alias sequence.png" alt=""><figcaption></figcaption></figure>
 
 The sequence diagram above demonstrates the flow for using `x_oauth_provider_alias` to skip AuthUI.
 
@@ -39,9 +39,9 @@ To add a new provider, log in to Authgear Portal, select your project, then navi
 
 Next, click on the **Edit** button, then enter the **Client ID** and **Client Secret** for the Social/Entreprise login provider then click **Save**. Also, note the value for **Alias** as you'll use it in a later step.
 
-See our guide [here](../authentication-and-access/social-enterprise-login-providers/social-login-providers/facebook.md) for instructions on how to get a Client ID and Client Secret for Facebook Login.
+See our guide [here](../social-enterprise-login-providers/social-login-providers/facebook.md) for instructions on how to get a Client ID and Client Secret for Facebook Login.
 
-<figure><img src="../.gitbook/assets/authgear-social-provider-add.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-social-provider-add.png" alt=""><figcaption></figcaption></figure>
 
 ### Step 2: Enable Social/Enterprise Only Login Method
 
@@ -49,7 +49,7 @@ An important step for making Authgear to skip AuthUI is to enable the Social/Ent
 
 To enable Social/Enterprise only, navigate to **Authentication** > **Login Methods**. Next, select the **Social/Enterprise only** Login Method and click **Save**.
 
-<figure><img src="../.gitbook/assets/authgear-enable-social-login-method.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-enable-social-login-method.png" alt=""><figcaption></figcaption></figure>
 
 ### Step 3: Set x\_oauth\_provider\_alias Parameter
 

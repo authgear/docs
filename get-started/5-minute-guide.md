@@ -57,7 +57,7 @@ The **Security** section of the User Settings page has the following options:
 * **Password:** users can change their password from here.
 * **2-step verification:** users can click on this option to view and manage 2-step authenticators for their account. The option is only available when you enable 2FA for your project in **Authgear Portal** > **Authentication** > **2FA**.
 * **Signed-in device:** from this page, the user can view browsers and devices that their account is currently signed in on.
-* **Advanced Settings:** contains additional settings. For example, when you enable [Account Deletion](../admin-and-operations/user-management/account-deletion.md) for your project, users can click on this link to access the **Delete Account** button.
+* **Advanced Settings:** contains additional settings. For example, when you enable [Account Deletion](../admin/user-management/account-deletion.md) for your project, users can click on this link to access the **Delete Account** button.
 
 You can learn more about the User Settings page [here](../customization/ui-customization/built-in-ui/auth-ui.md).
 

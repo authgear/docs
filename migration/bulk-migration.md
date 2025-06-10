@@ -1,6 +1,6 @@
 # Bulk migration
 
-The bulk migration strategy allows you to move all your user data to Authgear at once using the [User Import API](../../reference/apis/user-import-api.md). Bulk migration is ideal when you want to stop using your old authentication system immediately and start using Authgear.
+The bulk migration strategy allows you to move all your user data to Authgear at once using the [User Import API](../reference/apis/user-import-api.md). Bulk migration is ideal when you want to stop using your old authentication system immediately and start using Authgear.
 
 Once you import your users, you'll need to implement a middleware and server-side logic that uses Authgear user sessions to protect resources. As a result, all users will be logged out and will be required to log in again using Authgear's authentication flow.
 
@@ -38,7 +38,7 @@ You can export users from any authentication system, including your own custom-b
 
 ### Step 2: Reformat User Data into Support JSON Format
 
-Reformat your exported user data to a JSON document that follows the [Import User API schema](../../reference/apis/user-import-api.md).&#x20;
+Reformat your exported user data to a JSON document that follows the [Import User API schema](../reference/apis/user-import-api.md).&#x20;
 
 You can then use the reformatted JSON document with the Import API to import your user data.
 
@@ -118,9 +118,9 @@ fetch(`${appUrl}/_api/admin/users/import`, options)
 
 ```
 
-The above JavaScript code imports the data from our example `users` table using the Import User API. The API requires a valid [Admin API JWT](../../reference/apis/admin-api/authentication-and-security.md) for authentication.&#x20;
+The above JavaScript code imports the data from our example `users` table using the Import User API. The API requires a valid [Admin API JWT](../reference/apis/admin-api/authentication-and-security.md) for authentication.&#x20;
 
-Learn more about using the Import User API [here](../user-management/import-users-using-user-import-api.md).
+Learn more about using the Import User API [here](../admin/user-management/import-users-using-user-import-api.md).
 
 ### Step 4: Use Authgear Session in Middleware and Server-side Logic
 
@@ -201,7 +201,7 @@ app.listen(port, () => {
 
 ```
 
-This example app uses the "Bearer \<access token>" to protect the `/protected` route. Learn more about [verifying access tokens and using Authgear in your backend here.](../../get-started/backend-api/jwt.md)&#x20;
+This example app uses the "Bearer \<access token>" to protect the `/protected` route. Learn more about [verifying access tokens and using Authgear in your backend here.](../get-started/backend-api/jwt.md)&#x20;
 
 ### Step 5: Authenticate Your Users with Authgear
 
@@ -209,15 +209,15 @@ Update your app to allow users to log back in using Authgear's authentication fl
 
 You can use any of our SDKs for the following platforms to integrate Authgear into your app seamlessly:
 
-* [React](../../get-started/single-page-app/react.md)
-* [React Native](../../get-started/native-mobile-app/react-native.md)
-* [JavaScript](../../get-started/single-page-app/website.md)
-* [Vue](../../get-started/single-page-app/vue.md)
-* [Android](../../get-started/native-mobile-app/android/)
-* [iOS](../../get-started/native-mobile-app/ios.md)
-* [Flutter](../../get-started/native-mobile-app/flutter.md)
-* [Ionic](../../get-started/native-mobile-app/ionic-sdk.md)
+* [React](../get-started/single-page-app/react.md)
+* [React Native](../get-started/native-mobile-app/react-native.md)
+* [JavaScript](../get-started/single-page-app/website.md)
+* [Vue](../get-started/single-page-app/vue.md)
+* [Android](../get-started/native-mobile-app/android/)
+* [iOS](../get-started/native-mobile-app/ios.md)
+* [Flutter](../get-started/native-mobile-app/flutter.md)
+* [Ionic](../get-started/native-mobile-app/ionic-sdk.md)
 
-Or manually add Authgear as an [OAuth 2.0 provider](../../get-started/regular-web-app/).
+Or manually add Authgear as an [OAuth 2.0 provider](../get-started/regular-web-app/).
 
 Done! Now, your user can log in to your app and use the same user account from your old authentication provider.

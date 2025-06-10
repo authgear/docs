@@ -299,4 +299,4 @@ See a detailed explanation of the structure and fields included in the response 
 
 Authgear WebHooks makes it possible to embed the standard attributes and custom attributes for a user's profile into the OIDC JSON Web Token (JWT). Hence, you access both profile attributes in the JWT returned to your OIDC client without making another call to the UserInfo endpoint.
 
-See our post about how to [Add custom fields to a JWT Access Token](../../admin/integration/add-custom-fields-to-a-jwt-access-token.md) to learn more.
+See our post about how to [Add custom fields to a JWT Access Token](../integration/add-custom-fields-to-a-jwt-access-token.md) to learn more.

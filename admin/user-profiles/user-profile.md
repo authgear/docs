@@ -106,6 +106,6 @@ The end-user can view or edit the standard attributes through the Profile sectio
 
 ## Profiles from Third-party Identity Providers
 
-Authgear supports various [social and enterprise identity providers](../../admin/how-to-setup-sso-integrations/). End-users can sign up and log in to your apps via these connections. Upon signup, these providers will return a set of user attributes about the end-user. Authgear will copy those attributes and populate the profile of the end-user.
+Authgear supports various [social and enterprise identity providers](../how-to-setup-sso-integrations/). End-users can sign up and log in to your apps via these connections. Upon signup, these providers will return a set of user attributes about the end-user. Authgear will copy those attributes and populate the profile of the end-user.
 
 More info about the population logic can be found in [the specification](https://github.com/authgear/authgear-server/blob/master/docs/specs/user-profile/design.md#standard-attributes-population).
