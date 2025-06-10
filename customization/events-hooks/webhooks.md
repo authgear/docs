@@ -241,4 +241,114 @@ server.listen(9999, () => {
 });
 ```
 {% endtab %}
+{% tab title="Java" %}
+```Java
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
+public class TestServer {
+    // Obtain the secret in the portal.
+    private static final String SECRET = "SECRET";
+    
+    /**
+     * Returns the hex-encoded string of HMAC-SHA256 code of body using secret as key.
+     */
+    public static String hmacSHA256String(byte[] data, byte[] secret) throws NoSuchAlgorithmException, InvalidKeyException {
+        Mac hasher = Mac.getInstance("HmacSHA256");
+        SecretKeySpec keySpec = new SecretKeySpec(secret, "HmacSHA256");
+        hasher.init(keySpec);
+        byte[] signature = hasher.doFinal(data);
+        return bytesToHex(signature);
+    }
+    
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder result = new StringBuilder();
+        for (byte b : bytes) {
+            result.append(String.format("%02x", b));
+        }
+        return result.toString();
+    }
+    
+    /**
+     * Constant time comparison to prevent timing attacks
+     */
+    private static boolean constantTimeCompare(String a, String b) {
+        if (a.length() != b.length()) {
+            return false;
+        }
+        
+        byte[] aBytes = a.getBytes();
+        byte[] bBytes = b.getBytes();
+        
+        int result = 0;
+        for (int i = 0; i < aBytes.length; i++) {
+            result |= aBytes[i] ^ bBytes[i];
+        }
+        return result == 0;
+    }
+    
+    static class WebhookHandler implements HttpHandler {
+        @Override
+        public void handle(HttpExchange exchange) throws IOException {
+            if (!"POST".equals(exchange.getRequestMethod())) {
+                exchange.sendResponseHeaders(405, -1);
+                return;
+            }
+            
+            try {
+                // Read request body
+                InputStream requestBody = exchange.getRequestBody();
+                byte[] body = requestBody.readAllBytes();
+                requestBody.close();
+                
+                String sigInHeader = exchange.getRequestHeaders().getFirst("X-Authgear-Body-Signature");
+                if (sigInHeader == null) {
+                    sigInHeader = "";
+                }
+                
+                String sig = hmacSHA256String(body, SECRET.getBytes());
+                
+                // Prefer constant time comparison over == operator.
+                if (!constantTimeCompare(sigInHeader, sig)) {
+                    // The signature does not match
+                    // Do NOT trust the content of this webhook!!!
+                    System.err.println(sigInHeader + " != " + sig);
+                    exchange.sendResponseHeaders(401, -1);
+                    return;
+                }
+                
+                // Continue your logic here.
+                exchange.sendResponseHeaders(200, -1);
+                
+            } catch (Exception e) {
+                // Handle the error properly
+                System.err.println("Error: " + e.getMessage());
+                exchange.sendResponseHeaders(500, -1);
+            }
+        }
+    }
+    
+    public static void main(String[] args) throws IOException {
+        HttpServer server = HttpServer.create(new InetSocketAddress(9999), 0);
+        server.createContext("/", new WebhookHandler());
+        server.setExecutor(null); // Use default executor
+        
+        System.out.println("Server starting on port 9999...");
+        server.start();
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
