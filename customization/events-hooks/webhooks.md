@@ -351,4 +351,71 @@ public class TestServer {
 }
 ```
 {% endtab %}
+{% tab title="PHP" %}
+```php
+<?php
+// Obtain the secret in the portal.
+const SECRET = 'SECRET';
+
+/**
+ * Returns the hex-encoded string of HMAC-SHA256 code of body using secret as key.
+ */
+function hmacSHA256String($data, $secret) {
+    $signature = hash_hmac('sha256', $data, $secret, true);
+    return bin2hex($signature);
+}
+
+/**
+ * Constant time comparison to prevent timing attacks
+ */
+function constantTimeCompare($a, $b) {
+    if (strlen($a) !== strlen($b)) {
+        return false;
+    }
+    
+    $result = 0;
+    for ($i = 0; $i < strlen($a); $i++) {
+        $result |= ord($a[$i]) ^ ord($b[$i]);
+    }
+    return $result === 0;
+}
+
+function main() {
+    // Only handle POST requests
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        exit();
+    }
+    
+    try {
+        // Read request body
+        $body = file_get_contents('php://input');
+        
+        $sigInHeader = $_SERVER['HTTP_X_AUTHGEAR_BODY_SIGNATURE'] ?? '';
+        $sig = hmacSHA256String($body, SECRET);
+        
+        // Prefer constant time comparison over == operator.
+        if (!constantTimeCompare($sigInHeader, $sig)) {
+            // The signature does not match
+            // Do NOT trust the content of this webhook!!!
+            error_log("Signature mismatch: $sigInHeader != $sig");
+            http_response_code(401);
+            exit();
+        }
+        
+        // Continue your logic here.
+        http_response_code(200);
+        
+    } catch (Exception $e) {
+        // Handle the error properly
+        error_log("Error: " . $e->getMessage());
+        http_response_code(500);
+    }
+}
+
+// Run the webhook handler
+main();
+?>
+```
+{% endtab %}
 {% endtabs %}
