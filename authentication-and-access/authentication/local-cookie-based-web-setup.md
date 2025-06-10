@@ -6,7 +6,7 @@ description: >-
 
 # Setup local development environment for Cookie-based authentication
 
-[Running a local Authgear server](../../deployment/local-development/local.md) is not trivial. This guide provides a simple way to bootstrap your local application that communicates with the production Authgear server.
+This guide provides a simple way to bootstrap your local application that communicates with the Authgear SaaS server.
 
 {% hint style="warning" %}
 This guide is only for cookie-based authentication in local development setups. A typical scenario is developing websites. If you are developing mobile applications which use token-based authentication, you can just skip this guide and continue with it as usual.
