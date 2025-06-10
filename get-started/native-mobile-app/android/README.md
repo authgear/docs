@@ -332,7 +332,7 @@ fun startLogin() {
 
 Next, implement the `updateUi()` method that was called in `startLogin()`. This function will update the Views on the screen when the user's logged-in state changes.
 
-The `updateUi()` method also calls the `fetchUserInfo()` method of the Authgear SDK. This will return the [User Info](../../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) of the current user such as their email address, name, etc.
+The `updateUi()` method also calls the `fetchUserInfo()` method of the Authgear SDK. This will return the [User Info](../../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) of the current user such as their email address, name, etc.
 
 ```kotlin
 fun updateUi(authgear: Authgear) {
@@ -482,7 +482,7 @@ The value of `SessionState` can be `UNKNOWN`, `NO_SESSION` or `AUTHENTICATED`. I
 
 #### Fetching User Info
 
-In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI as we did in [step 5](./#step-5-start-the-authentication-flow)). Use the `fetchUserInfo` function to obtain the user info, see [example](../../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
+In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI as we did in [step 5](./#step-5-start-the-authentication-flow)). Use the `fetchUserInfo` function to obtain the user info, see [example](../../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
 
 #### Using the Access Token in HTTP Requests
 

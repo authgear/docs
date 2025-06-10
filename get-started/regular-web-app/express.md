@@ -407,7 +407,7 @@ const accessToken = await refreshAccessTokenIfExpired(req.session.refresh_token,
 
 Now our Express app gets an access token by first calling the new `refreshAccessTokenIfExpired()` method. If the current access token is expired, the method will make a request to Authgear's token endpoint for a new access token. This request needs to have a `grant_type` of `refresh_token`, and the `refresh_token` should be included in the POST request body.
 
-See more about refreshing access tokens [here](../../api-reference/tokens/refresh-token.md).
+See more about refreshing access tokens [here](../../reference/tokens/refresh-token.md).
 
 ## Next steps, Calling an API <a href="#next-steps-calling-an-api" id="next-steps-calling-an-api"></a>
 

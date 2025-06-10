@@ -78,9 +78,9 @@ const authorizationURL = endpoint.toString() + "?" + params.toString();
 
 * “S256” is supported in code\_challenge\_method.
 * The `code_verifier` is a string of length between 43 and 128 generated on the client side. It should be unique for each authorization request. The `code_challenge` is a SHA-256 hash of the verifier.
-* The state parameter is optional. Authgear will include the value of the state parameter when redirecting the user back to the client application. Learn more at [how-to-use-the-oauth-2.0-state-parameter.md](../../authentication-and-access/authentication/how-to-use-the-oauth-2.0-state-parameter.md "mention")
+* The state parameter is optional. Authgear will include the value of the state parameter when redirecting the user back to the client application. Learn more at [how-to-use-the-oauth-2.0-state-parameter.md](../../faq-for-authentication/how-to-use-the-oauth-2.0-state-parameter.md "mention")
 * After login, the user will be redirected to `[redirect_uri]?code=[AUTH_CODE]`, the `AUTH_CODE` is needed in the next step
-* See the supported scopes at [supported-scopes.md](../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/supported-scopes.md "mention")
+* See the supported scopes at [supported-scopes.md](../../reference/apis/oauth-2.0-and-openid-connect-oidc/supported-scopes.md "mention")
 
 ### Handling Callback
 

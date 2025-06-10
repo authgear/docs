@@ -1,5 +1,7 @@
 ---
-description: Learn how to integrate Authgear with mobile apps using SDKs and advanced configurations
+description: >-
+  Learn how to integrate Authgear with mobile apps using SDKs and advanced
+  configurations
 layout:
   title:
     visible: true
@@ -25,6 +27,6 @@ This section covers mobile-specific integration patterns and configurations for 
 [using-webview-to-open-the-authgear-ui.md](using-webview-to-open-the-authgear-ui.md)
 {% endcontent-ref %}
 
-{% content-ref url="../using-sdk-to-call-your-application-server.md" %}
-[using-sdk-to-call-your-application-server.md](../using-sdk-to-call-your-application-server.md)
+{% content-ref url="../../get-started/backend-api/using-sdk-to-call-your-application-server.md" %}
+[using-sdk-to-call-your-application-server.md](../../get-started/backend-api/using-sdk-to-call-your-application-server.md)
 {% endcontent-ref %}

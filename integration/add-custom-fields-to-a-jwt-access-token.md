@@ -8,7 +8,7 @@ JWTs (JSON Web Tokens) are a common method for securely transmitting information
 
 This how-to guide will walk you through the process of **adding custom fields such as** [**User Profiles**](https://docs.authgear.com/integrate/user-profile) **attributes to a JWT access token** payload using Authgear and Javascript [Hooks](https://docs.authgear.com/integrate/events-hooks/denohooks).
 
-Here's an example of the [fields in the JWT Access Tokens by default](../api-reference/tokens/jwt-access-token.md) and an explanation of their values.
+Here's an example of the [fields in the JWT Access Tokens by default](../reference/tokens/jwt-access-token.md) and an explanation of their values.
 
 {% hint style="info" %}
 You can also [add custom attributes](https://docs.authgear.com/integrate/user-profile#add-new-attributes) to [User Profiles](https://docs.authgear.com/integrate/user-profile) on the Authegear Portal.

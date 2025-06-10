@@ -100,7 +100,7 @@ authgear
 
 ### Check the UserInfo object
 
-After "signing up" as an anonymous user, you can [retrieve the "UserInfo" object](../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) and see the `sub` of the end-user.
+After "signing up" as an anonymous user, you can [retrieve the "UserInfo" object](../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) and see the `sub` of the end-user.
 
 **UserInfo**
 

@@ -53,7 +53,7 @@ If your server side rendered Web Application is hosted under`otherapp.com`, but 
 4. As soon as the access token expires, get a new access token with your refresh token.
 5. Clear your cookie session if user requested, or failed to get the new access token with refresh tokens (which meant the session was revoked)
 
-See [Using Authgear as an OIDC Provider](../authentication-and-access/single-sign-on/oidc-provider.md) for how to set this up.
+See [Using Authgear as an OIDC Provider](../get-started/oidc-provider.md) for how to set this up.
 
 {% hint style="success" %}
 TODO: Write an advanced guide for this situation.
