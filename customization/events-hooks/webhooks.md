@@ -160,4 +160,85 @@ if __name__ == "__main__":
     main()
 ```
 {% endtab %}
+{% tab title="NodeJS" %}
+```JavaScript
+const crypto = require('crypto');
+const http = require('http');
+
+// Obtain the secret in the portal.
+const SECRET = 'SECRET';
+
+// HMACSHA256String returns the hex-encoded string of HMAC-SHA256 code of body using secret as key.
+function hmacSHA256String(data, secret) {
+    const hasher = crypto.createHmac('sha256', secret);
+    hasher.update(data);
+    const signature = hasher.digest();
+    return signature.toString('hex');
+}
+
+// Constant time comparison to prevent timing attacks
+function constantTimeCompare(a, b) {
+    if (a.length !== b.length) {
+        return false;
+    }
+    
+    let result = 0;
+    for (let i = 0; i < a.length; i++) {
+        result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+    }
+    return result === 0;
+}
+
+const server = http.createServer((req, res) => {
+    if (req.method !== 'POST') {
+        res.writeHead(405);
+        res.end();
+        return;
+    }
+
+    let body = [];
+    
+    req.on('data', (chunk) => {
+        body.push(chunk);
+    });
+    
+    req.on('end', () => {
+        try {
+            const bodyBuffer = Buffer.concat(body);
+            
+            const sigInHeader = req.headers['x-authgear-body-signature'] || '';
+            const sig = hmacSHA256String(bodyBuffer, SECRET);
+            
+            // Prefer constant time comparison over == operator.
+            if (!constantTimeCompare(sigInHeader, sig)) {
+                // The signature does not match
+                // Do NOT trust the content of this webhook!!!
+                throw new Error(`${sigInHeader} != ${sig}`);
+            }
+            
+            // Continue you r logic here.
+            res.writeHead(200);
+            res.end();
+            
+        } catch (error) {
+            // Handle the error properly
+            console.error('Error:', error.message);
+            res.writeHead(500);
+            res.end();
+        }
+    });
+    
+    req.on('error', (error) => {
+        // Handle the error properly
+        console.error('Request error:', error);
+        res.writeHead(500);
+        res.end();
+    });
+});
+
+server.listen(9999, () => {
+    console.log('Server starting on port 9999...');
+});
+```
+{% endtab %}
 {% endtabs %}
