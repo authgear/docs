@@ -102,4 +102,62 @@ func main() {
 }
 ```
 {% endtab %}
+{% tab title="Python" %}
+```python
+import hmac
+import hashlib
+import secrets
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+# Obtain the secret in the portal.
+SECRET = "SECRET"
+
+def hmac_sha256_string(data: bytes, secret: bytes) -> str:
+    """Returns the hex-encoded string of HMAC-SHA256 code of body using secret as key."""
+    hasher = hmac.new(secret, data, hashlib.sha256)
+    signature = hasher.digest()
+    sig = signature.hex()
+    return sig
+
+class WebhookHandler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        try:
+            content_length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(content_length)
+            
+            sig_in_header = self.headers.get('X-Authgear-Body-Signature', '').encode()
+            sig = hmac_sha256_string(body, SECRET.encode()).encode()
+            
+            # Prefer constant time comparison over == operator.
+            if not secrets.compare_digest(sig_in_header, sig):
+                # The signature does not match
+                # Do NOT trust the content of this webhook!!!
+                print(f"Signature mismatch: {sig_in_header.decode()} != {sig.decode()}")
+                self.send_response(401)
+                self.end_headers()
+                return
+            
+            # Continue your logic here.
+            self.send_response(200)
+            self.end_headers()
+            
+        except Exception as e:
+            # Handle the error properly
+            print(f"Error: {e}")
+            self.send_response(500)
+            self.end_headers()
+
+def main():
+    server = HTTPServer(('', 9999), WebhookHandler)
+    print("Server starting on port 9999...")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("Server stopped")
+        server.shutdown()
+
+if __name__ == "__main__":
+    main()
+```
+{% endtab %}
 {% endtabs %}
