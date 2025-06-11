@@ -82,7 +82,7 @@
   * [Phone Number Validation](authentication-and-access/authentication/phone-number-validation.md)
   * [Skip Login Screen and Direct Users to Enterprise Login](authentication-and-access/authentication/how-to-use-social-enterprise-login-providers-without-authui.md)
   * [Use the OAuth 2.0 State Parameter](authentication-and-access/authentication/how-to-use-the-oauth-2.0-state-parameter.md)
-  * [Setup local development environment for Cookie-based authentication](authentication-and-access/authentication/local-cookie-based-web-setup.md)
+  * [Local Dev Setup for Connecting to Authgear SaaS in Cookie-based Auth](authentication-and-access/authentication/local-cookie-based-web-setup.md)
 
 ## Integration
 
@@ -162,7 +162,7 @@
     * [Authentication and Security](api-reference/apis/admin-api/authentication-and-security.md)
     * [API Schema](api-reference/apis/admin-api/api-schema.md)
     * [API Queries and Mutations](api-reference/apis/admin-api/api-queries-and-mutations.md)
-    * [Using global node IDs](api-reference/apis/admin-api/using-global-node-ids.md)
+    * [Using global node IDs](reference/apis/admin-api/using-global-node-ids.md)
     * [Retrieving users using Admin API](api-reference/apis/admin-api/retrieving-users-using-admin-api.md)
     * [API Examples](api-reference/apis/admin-api/api-examples/README.md)
       * [Generate OTP code](api-reference/apis/admin-api/api-examples/generate-otp-code.md)
