@@ -72,7 +72,7 @@ Authgear has official SDKs for integrating Authgear with React, React Native, io
 Authgear offers multiple options for viewing and managing all users who sign up for your project. These options include:
 
 * Authgear Portal
-* [Admin API](../api-reference/apis/admin-api/)
+* [Admin API](../reference/apis/admin-api/)
 
 The quickest way to manage your users is from the Authgear Portal. To open the user management page in the Authgear Portal, click on the **User Management** link in the navigation bar on the left side.
 

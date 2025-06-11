@@ -6,7 +6,7 @@ description: Define and manage roles and groups that you can apply to your users
 
 ## 1.0 Introduction
 
-Roles and Groups can extend access management on your application that Authgear powers. Authgear includes a user's roles in the response from the [UserInfo endpoint](https://docs.authgear.com/\~/changes/S9PzpQKqtjCE4EDWHGO4/reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo) and in the JWT access token.
+Roles and Groups can extend access management on your application that Authgear powers. Authgear includes a user's roles in the response from the [UserInfo endpoint](https://docs.authgear.com/~/changes/S9PzpQKqtjCE4EDWHGO4/reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo) and in the JWT access token.
 
 The following case is an example of how you can use roles to deliver unique features and interfaces to different categories of users of your application. Let's say you have an application XYZ that powers a transportation business. The app has roles for `admin`, `driver` and `passenger`. You can use the value Authgear returns in UserInfo or JWT access token to enable features for managing drivers to a user with `admin` role only. Similarly, you can allow only users with `driver` role view features to manage their vehicle, passengers, and trip. Finally, you can restrict users with the `passenger` role to only view their ticket and trip details.
 

@@ -13,12 +13,12 @@ To access any of the applications in your Authgear account, each user must have 
 * [Embed User Profiles into JWT](access-user-profiles.md#id-5.-embed-user-profiles-into-jwt)
 
 {% hint style="info" %}
-The standard attributes in UserProfile in OIDC are a standardized schema for representing the end-users identity information and you can not add or delete them. To introduce additional attributes, use custom attributes.&#x20;
+The standard attributes in UserProfile in OIDC are a standardized schema for representing the end-users identity information and you can not add or delete them. To introduce additional attributes, use custom attributes.
 {% endhint %}
 
 ### User Profiles Access Right
 
-Access Right defines what information can be viewed or modified when a user's profile is accessed via the Authgear Portal, User Info endpoint, or User Settings page.&#x20;
+Access Right defines what information can be viewed or modified when a user's profile is accessed via the Authgear Portal, User Info endpoint, or User Settings page.
 
 An Access Right can be set for each profile attribute under a specific medium of accessing user profiles. For example, in the following screenshot, the Primary Email attribute has the Editable Access Right for Portal, `Read-only` for User Info endpoint (also known as access Token Bearer), and `Editable` for User Settings page. In simpler terms, the example means an admin can modify Primary Email in Authgear Portal, while a client application can use a user's access token to view their Primary Email. Finally, users can edit their own Primary Email from the User Settings page.
 
@@ -51,7 +51,7 @@ Each way of accessing user profiles belongs to one of the following Access Right
 
 ### 1. Access user profiles from the Authgear UI portal
 
-It is the fastest and easiest way to view user profiles and manage them.&#x20;
+It is the fastest and easiest way to view user profiles and manage them.
 
 <details>
 
@@ -77,8 +77,6 @@ To manage access and add new custom attributes for all users:
 Go to **Portal** > **User Profile** > **Custom Attributes** and click **Add New Attribute**
 
 <img src="../../.gitbook/assets/image (2) (1) (1).png" alt="" data-size="original">
-
-
 
 </details>
 
@@ -233,11 +231,11 @@ The `userInfo` object is returned from calling **fetch user info** function whic
 
 The following are some attributes that are usually in the userInfo object. Other attributes like email, phoneNumber and custom attributes will be in the userInfo object if those attributes were set for the current user.
 
-| Key         | Type      | Description                                                                                                                                                                                                       |
-| ----------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Key         | Type      | Description                                                                                                                                                                                                                                         |
+| ----------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | isAnonymous | _boolean_ | Indicate if the user is anonymous, i.e. no [identity](../../get-started/core-concepts/user-identity-and-authenticator.md#identity) or [authenticator](../../get-started/core-concepts/user-identity-and-authenticator.md#authenticator) is provided |
-| isVerified  | _boolean_ | Indicate if the user completed the verification requirement                                                                                                                                                       |
-| sub         | _string_  | Unique identifier of the user in your Authgear project                                                                                                                                                            |
+| isVerified  | _boolean_ | Indicate if the user completed the verification requirement                                                                                                                                                                                         |
+| sub         | _string_  | Unique identifier of the user in your Authgear project                                                                                                                                                                                              |
 
 To access a user's profile using the UserInfo endpoint of OpenID Connect, you need to follow these steps:
 
@@ -258,7 +256,7 @@ We are going to use **cURL** commands in our API calls or you can also use [Post
 
 Your client application needs a valid access token for a user in order to make request to the UserInfo endpoint.
 
-To get an access token, you need to make a request to the **OpenID App's Token endpoint** to exchange the **authorization code** that was retrieved after authorization for an access token.&#x20;
+To get an access token, you need to make a request to the **OpenID App's Token endpoint** to exchange the **authorization code** that was retrieved after authorization for an access token.
 
 * The token endpoint URL is usually something like `https://<YOUR_AUTHGEAR_ENDPOINT>/oauth2/token`.
 * Include parameters such as `grant_type=authorization_code`, `code=AUTHORIZATION_CODE`, `client_id=YOUR_CLIENT_ID`, `client_secret=YOUR_CLIENT_SECRET`, and `redirect_uri=YOUR_REDIRECT_URI`.
@@ -302,4 +300,3 @@ See a detailed explanation of the structure and fields included in the response 
 Authgear WebHooks makes it possible to embed the standard attributes and custom attributes for a user's profile into the OIDC JSON Web Token (JWT). Hence, you access both profile attributes in the JWT returned to your OIDC client without making another call to the UserInfo endpoint.
 
 See our post about how to [Add custom fields to a JWT Access Token](../integration/add-custom-fields-to-a-jwt-access-token.md) to learn more.
-

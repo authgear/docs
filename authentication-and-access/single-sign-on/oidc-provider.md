@@ -1,10 +1,10 @@
 ---
 description: >-
   Using Authgear as an OpenID Connect Provider for any OIDC compatible
-  applications.
+  applications for Single Sign-On.
 ---
 
-# Use Authgear as an OpenID Connect Provider
+# Integration by OIDC
 
 If your application supports logging in using an OpenID Connect provider, you can use Authgear as the provider.
 

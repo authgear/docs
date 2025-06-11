@@ -134,7 +134,7 @@ You may send more requests just like this second request depending on the number
 
 To use the Authentication Flow API to build your custom UI, you need to configure a Custom UI URI in the Authgear portal. This URI should point to your custom authentication page.
 
-For more details about the Authentication Flow API endpoints, inputs, response, and more visit the [API reference page](../../../api-reference/apis/authentication-flow-api.md).
+For more details about the Authentication Flow API endpoints, inputs, response, and more visit the [API reference page](../../../reference/apis/authentication-flow-api.md).
 
 ### How the Authentication Flow API Works
 

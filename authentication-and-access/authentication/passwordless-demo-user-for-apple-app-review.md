@@ -4,7 +4,7 @@ description: >-
   login.
 ---
 
-# Passwordless Login for Apple App Store Review
+# Tips for Apple App Store Review with Passwordless Login
 
 When you try to publish a mobile app on the Apple AppStore, there will be an [App Review process](https://developer.apple.com/app-store/review/). You need provide a demo user account for the reviewers to access the features of the app.
 

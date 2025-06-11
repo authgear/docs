@@ -1,8 +1,8 @@
 ---
-description: Guides on how to use Authgear as a SAML Identity Provider
+description: Guides on how to use Authgear as a SAML Identity Provider for Single Sign-On
 ---
 
-# Single Sign-On with SAML
+# Integration by SAML
 
 Security Assertion Markup Language or short [SAML](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0.html) is a standard for exchanging security information between businesses. In SAML, one party acts as the Identity Provider (IdP), and the other party is the Service Provider (SP).
 
@@ -17,7 +17,7 @@ Authgear supports the SAML protocol. Hence, you can set up third-party services 
 
 ## Specific Instructions for Service Providers
 
-See the following guides for some popular service providers:&#x20;
+See the following guides for some popular service providers:
 
 * [use-authgear-as-saml-identity-provider-for-salesforce.md](use-authgear-as-saml-identity-provider-for-salesforce.md "mention")
 * [use-authgear-as-saml-identity-provider-for-dropbox.md](use-authgear-as-saml-identity-provider-for-dropbox.md "mention")
@@ -30,7 +30,7 @@ The following steps show more details on how to set up an OIDC/SAML Client Appli
 
 ### Step 1: Create Authgear Client Application
 
-Log in to Authgear Portal, then click on Applications from the navigation menu.&#x20;
+Log in to Authgear Portal, then click on Applications from the navigation menu.
 
 <figure><img src="../../../.gitbook/assets/authgear-nav-applications.png" alt=""><figcaption></figcaption></figure>
 
@@ -69,11 +69,11 @@ Refer to the following instructions for a generic SP:
 
 **Configuration on Authgear**
 
-* Upload the Metadata XML file provided by your client application into the Authgear Portal&#x20;
+* Upload the Metadata XML file provided by your client application into the Authgear Portal
 * You may also manually enter the parameters into the application settings page in the Portal:
   * NameID Format
     * `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified` , or
-      * When the format is `unspecified`, you can choose to use the User ID, Email, Phone, or Username as the attribute value&#x20;
+      * When the format is `unspecified`, you can choose to use the User ID, Email, Phone, or Username as the attribute value
     * `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`
   * Allowed Assertion Consumer Service URLs (ACS URLs)
   * Response Destination (Optional)

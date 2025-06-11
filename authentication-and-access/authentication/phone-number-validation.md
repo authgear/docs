@@ -1,4 +1,4 @@
-# Phone number validation
+# Phone Number Validation
 
 Use the Phone Number Validation Settings to configure your app to check the phone number your users enter without depending on SMS or WhatsApp for validation and verification.
 

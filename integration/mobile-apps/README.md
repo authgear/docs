@@ -1,5 +1,7 @@
 ---
-description: Learn how to integrate Authgear with mobile apps using SDKs and advanced configurations
+description: >-
+  Learn how to integrate Authgear with mobile apps using SDKs and advanced
+  configurations
 layout:
   title:
     visible: true

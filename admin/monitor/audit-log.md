@@ -4,7 +4,7 @@ Authgear provides the event logs for you to analyze security issues and monitor 
 
 ## View and retrieve logs
 
-You can view the audit log in the Portal, or retrieve logs using the [Admin API](../../api-reference/apis/admin-api/).
+You can view the audit log in the Portal, or retrieve logs using the [Admin API](../../reference/apis/admin-api/).
 
 ### View in Portal
 
@@ -16,7 +16,7 @@ The **Users Activities** tab on the Audit Log page filters the log to only show 
 
 ### Retrieve with Admin API
 
-The API schema can be found in the [Admin API GraphiQL Explorer](../../api-reference/apis/admin-api/#api-explorer). For example:
+The API schema can be found in the [Admin API GraphiQL Explorer](../../reference/apis/admin-api/#api-explorer). For example:
 
 ```graphql
 query {

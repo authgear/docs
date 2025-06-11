@@ -4,7 +4,7 @@ description: >-
   Authgear
 ---
 
-# Use SDK to make authorized API calls to backend
+# Client SDK to make authorized API calls to backend
 
 ## Using Authgear SDK to call your application server
 

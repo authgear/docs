@@ -102,4 +102,320 @@ func main() {
 }
 ```
 {% endtab %}
+{% tab title="Python" %}
+```python
+import hmac
+import hashlib
+import secrets
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+# Obtain the secret in the portal.
+SECRET = "SECRET"
+
+def hmac_sha256_string(data: bytes, secret: bytes) -> str:
+    """Returns the hex-encoded string of HMAC-SHA256 code of body using secret as key."""
+    hasher = hmac.new(secret, data, hashlib.sha256)
+    signature = hasher.digest()
+    sig = signature.hex()
+    return sig
+
+class WebhookHandler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        try:
+            content_length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(content_length)
+            
+            sig_in_header = self.headers.get('X-Authgear-Body-Signature', '').encode()
+            sig = hmac_sha256_string(body, SECRET.encode()).encode()
+            
+            # Prefer constant time comparison over == operator.
+            if not secrets.compare_digest(sig_in_header, sig):
+                # The signature does not match
+                # Do NOT trust the content of this webhook!!!
+                print(f"Signature mismatch: {sig_in_header.decode()} != {sig.decode()}")
+                self.send_response(401)
+                self.end_headers()
+                return
+            
+            # Continue your logic here.
+            self.send_response(200)
+            self.end_headers()
+            
+        except Exception as e:
+            # Handle the error properly
+            print(f"Error: {e}")
+            self.send_response(500)
+            self.end_headers()
+
+def main():
+    server = HTTPServer(('', 9999), WebhookHandler)
+    print("Server starting on port 9999...")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("Server stopped")
+        server.shutdown()
+
+if __name__ == "__main__":
+    main()
+```
+{% endtab %}
+{% tab title="NodeJS" %}
+```JavaScript
+const crypto = require('crypto');
+const http = require('http');
+
+// Obtain the secret in the portal.
+const SECRET = 'SECRET';
+
+// HMACSHA256String returns the hex-encoded string of HMAC-SHA256 code of body using secret as key.
+function hmacSHA256String(data, secret) {
+    const hasher = crypto.createHmac('sha256', secret);
+    hasher.update(data);
+    const signature = hasher.digest();
+    return signature.toString('hex');
+}
+
+// Constant time comparison to prevent timing attacks
+function constantTimeCompare(a, b) {
+    if (a.length !== b.length) {
+        return false;
+    }
+    
+    let result = 0;
+    for (let i = 0; i < a.length; i++) {
+        result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+    }
+    return result === 0;
+}
+
+const server = http.createServer((req, res) => {
+    if (req.method !== 'POST') {
+        res.writeHead(405);
+        res.end();
+        return;
+    }
+
+    let body = [];
+    
+    req.on('data', (chunk) => {
+        body.push(chunk);
+    });
+    
+    req.on('end', () => {
+        try {
+            const bodyBuffer = Buffer.concat(body);
+            
+            const sigInHeader = req.headers['x-authgear-body-signature'] || '';
+            const sig = hmacSHA256String(bodyBuffer, SECRET);
+            
+            // Prefer constant time comparison over == operator.
+            if (!constantTimeCompare(sigInHeader, sig)) {
+                // The signature does not match
+                // Do NOT trust the content of this webhook!!!
+                throw new Error(`${sigInHeader} != ${sig}`);
+            }
+            
+            // Continue your logic here.
+            res.writeHead(200);
+            res.end();
+            
+        } catch (error) {
+            // Handle the error properly
+            console.error('Error:', error.message);
+            res.writeHead(500);
+            res.end();
+        }
+    });
+    
+    req.on('error', (error) => {
+        // Handle the error properly
+        console.error('Request error:', error);
+        res.writeHead(500);
+        res.end();
+    });
+});
+
+server.listen(9999, () => {
+    console.log('Server starting on port 9999...');
+});
+```
+{% endtab %}
+{% tab title="Java" %}
+```Java
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
+public class TestServer {
+    // Obtain the secret in the portal.
+    private static final String SECRET = "SECRET";
+    
+    /**
+     * Returns the hex-encoded string of HMAC-SHA256 code of body using secret as key.
+     */
+    public static String hmacSHA256String(byte[] data, byte[] secret) throws NoSuchAlgorithmException, InvalidKeyException {
+        Mac hasher = Mac.getInstance("HmacSHA256");
+        SecretKeySpec keySpec = new SecretKeySpec(secret, "HmacSHA256");
+        hasher.init(keySpec);
+        byte[] signature = hasher.doFinal(data);
+        return bytesToHex(signature);
+    }
+    
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder result = new StringBuilder();
+        for (byte b : bytes) {
+            result.append(String.format("%02x", b));
+        }
+        return result.toString();
+    }
+    
+    /**
+     * Constant time comparison to prevent timing attacks
+     */
+    private static boolean constantTimeCompare(String a, String b) {
+        if (a.length() != b.length()) {
+            return false;
+        }
+        
+        byte[] aBytes = a.getBytes();
+        byte[] bBytes = b.getBytes();
+        
+        int result = 0;
+        for (int i = 0; i < aBytes.length; i++) {
+            result |= aBytes[i] ^ bBytes[i];
+        }
+        return result == 0;
+    }
+    
+    static class WebhookHandler implements HttpHandler {
+        @Override
+        public void handle(HttpExchange exchange) throws IOException {
+            if (!"POST".equals(exchange.getRequestMethod())) {
+                exchange.sendResponseHeaders(405, -1);
+                return;
+            }
+            
+            try {
+                // Read request body
+                InputStream requestBody = exchange.getRequestBody();
+                byte[] body = requestBody.readAllBytes();
+                requestBody.close();
+                
+                String sigInHeader = exchange.getRequestHeaders().getFirst("X-Authgear-Body-Signature");
+                if (sigInHeader == null) {
+                    sigInHeader = "";
+                }
+                
+                String sig = hmacSHA256String(body, SECRET.getBytes());
+                
+                // Prefer constant time comparison over == operator.
+                if (!constantTimeCompare(sigInHeader, sig)) {
+                    // The signature does not match
+                    // Do NOT trust the content of this webhook!!!
+                    System.err.println(sigInHeader + " != " + sig);
+                    exchange.sendResponseHeaders(401, -1);
+                    return;
+                }
+                
+                // Continue your logic here.
+                exchange.sendResponseHeaders(200, -1);
+                
+            } catch (Exception e) {
+                // Handle the error properly
+                System.err.println("Error: " + e.getMessage());
+                exchange.sendResponseHeaders(500, -1);
+            }
+        }
+    }
+    
+    public static void main(String[] args) throws IOException {
+        HttpServer server = HttpServer.create(new InetSocketAddress(9999), 0);
+        server.createContext("/", new WebhookHandler());
+        server.setExecutor(null); // Use default executor
+        
+        System.out.println("Server starting on port 9999...");
+        server.start();
+    }
+}
+```
+{% endtab %}
+{% tab title="PHP" %}
+```php
+<?php
+// Obtain the secret in the portal.
+const SECRET = 'SECRET';
+
+/**
+ * Returns the hex-encoded string of HMAC-SHA256 code of body using secret as key.
+ */
+function hmacSHA256String($data, $secret) {
+    $signature = hash_hmac('sha256', $data, $secret, true);
+    return bin2hex($signature);
+}
+
+/**
+ * Constant time comparison to prevent timing attacks
+ */
+function constantTimeCompare($a, $b) {
+    if (strlen($a) !== strlen($b)) {
+        return false;
+    }
+    
+    $result = 0;
+    for ($i = 0; $i < strlen($a); $i++) {
+        $result |= ord($a[$i]) ^ ord($b[$i]);
+    }
+    return $result === 0;
+}
+
+function main() {
+    // Only handle POST requests
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        exit();
+    }
+    
+    try {
+        // Read request body
+        $body = file_get_contents('php://input');
+        
+        $sigInHeader = $_SERVER['HTTP_X_AUTHGEAR_BODY_SIGNATURE'] ?? '';
+        $sig = hmacSHA256String($body, SECRET);
+        
+        // Prefer constant time comparison over == operator.
+        if (!constantTimeCompare($sigInHeader, $sig)) {
+            // The signature does not match
+            // Do NOT trust the content of this webhook!!!
+            error_log("Signature mismatch: $sigInHeader != $sig");
+            http_response_code(401);
+            exit();
+        }
+        
+        // Continue your logic here.
+        http_response_code(200);
+        
+    } catch (Exception $e) {
+        // Handle the error properly
+        error_log("Error: " . $e->getMessage());
+        http_response_code(500);
+    }
+}
+
+// Run the webhook handler
+main();
+?>
+```
+{% endtab %}
 {% endtabs %}

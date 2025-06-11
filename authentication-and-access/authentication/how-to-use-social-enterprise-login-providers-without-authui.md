@@ -4,7 +4,7 @@ description: >-
   page without opening AuthUI login page.
 ---
 
-# Use Social/Enterprise Login Providers Without AuthUI
+# Skip Login Screen and Direct Users to Enterprise Login
 
 You can use Authgear's `x_oauth_provider_alias` parameter to add social/enterprise login to your application without showing any AuthUI pages. To do this, you must enable the **Social/Enterprise only** login method for your project in Authgear Portal.
 

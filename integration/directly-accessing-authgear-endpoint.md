@@ -4,7 +4,7 @@ description: >-
   access your Authgear project endpoint without using OIDC/SDK/SAML.
 ---
 
-# Directly accessing Authgear Endpoint
+# What happens with user directly access the Authgear Endpoint?
 
 Normally, the user should access the signup/login page through an OIDC flow, via the SDK or SAML. In such cases, the user will be redirected to the application specified by the flow.
 

@@ -315,7 +315,7 @@ The value of `SessionState` can be `Unknown`, `NoSession` or `Authenticated`. In
 
 ## Fetching User Info
 
-In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI). Use the `FetchUserInfoAsync` function to obtain the user info, see [example](../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
+In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI). Use the `FetchUserInfoAsync` function to obtain the user info, see [example](../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
 
 ## Logout
 

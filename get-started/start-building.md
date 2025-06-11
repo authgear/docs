@@ -62,7 +62,7 @@ You can [customize the look and feel of Authgear prebuilt UI](../customization/u
 
 The Authgear Admin API enables comprehensive user management via a GraphQL endpoint for your backend server. The server can perform operations including searching for users, updating user details, deleting user accounts, and disabling user access.
 
-For detailed implementation instructions and API capabilities, refer to the [Admin API ](../api-reference/apis/admin-api/)guide.
+For detailed implementation instructions and API capabilities, refer to the [Admin API ](../reference/apis/admin-api/)guide.
 
 ### Custom UI
 
@@ -91,7 +91,7 @@ You can [customize the look and feel of Authgear prebuilt UI](../customization/u
 
 The Authgear Admin API enables comprehensive user management via a GraphQL endpoint for your server. The server can perform operations including searching for users, updating user details, deleting user accounts, and disabling user access.
 
-For detailed implementation instructions and API capabilities, refer to the [Admin API ](../api-reference/apis/admin-api/)guide.
+For detailed implementation instructions and API capabilities, refer to the [Admin API ](../reference/apis/admin-api/)guide.
 
 ### Custom UI
 

@@ -75,4 +75,4 @@ In Zero-Downtime migration, Authgear seamlessly creates new sessions from extern
 
 The following flow diagram explains a typical authentication flow using the zero-downtime migration approach:
 
-<figure><img src="../../.gitbook/assets/authgear-zero-dt-migration.png" alt=""><figcaption><p>Zero-downtime migration flow diagram</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/authgear-zero-dt-migration.png" alt=""><figcaption><p>Zero-downtime migration flow diagram</p></figcaption></figure>
