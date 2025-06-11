@@ -160,31 +160,31 @@
 
 ## Reference
 
-* [APIs](reference/apis/README.md)
-  * [Admin API](reference/apis/admin-api/README.md)
-    * [Authentication and Security](reference/apis/admin-api/authentication-and-security.md)
-    * [API Schema](reference/apis/admin-api/api-schema.md)
-    * [API Queries and Mutations](reference/apis/admin-api/api-queries-and-mutations.md)
-    * [Using global node IDs](reference/apis/admin-api/using-global-node-ids.md)
-    * [Retrieving users using Admin API](reference/apis/admin-api/retrieving-users-using-admin-api.md)
-    * [API Examples](reference/apis/admin-api/api-examples/README.md)
-      * [Generate OTP code](reference/apis/admin-api/api-examples/generate-otp-code.md)
-      * [Search for users](reference/apis/admin-api/api-examples/search-for-users.md)
-      * [Update user's picture](reference/apis/admin-api/api-examples/update-users-picture.md)
-      * [Update user's standard attributes](reference/apis/admin-api/api-examples/update-users-standard-attributes.md)
-  * [Authentication Flow API](reference/apis/authentication-flow-api.md)
-  * [OAuth 2.0 and OpenID Connect (OIDC)](reference/apis/oauth-2.0-and-openid-connect-oidc/README.md)
-    * [Supported Scopes](reference/apis/oauth-2.0-and-openid-connect-oidc/supported-scopes.md)
-    * [UserInfo](reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md)
-  * [User Import API](reference/apis/user-import-api.md)
-  * [User Export API](reference/apis/user-export-api.md)
-* [Tokens](reference/tokens/README.md)
-  * [JWT Access Token](reference/tokens/jwt-access-token.md)
-  * [Refresh Token](reference/tokens/refresh-token.md)
-* [Rate Limits](reference/rate-limits/README.md)
-  * [Account Lockout](reference/rate-limits/account-lockout.md)
-* [Glossary](reference/glossary.md)
-* [Billing FAQ](reference/billing-faq.md)
+* [APIs](api-reference/apis/README.md)
+  * [Admin API](api-reference/apis/admin-api/README.md)
+    * [Authentication and Security](api-reference/apis/admin-api/authentication-and-security.md)
+    * [API Schema](api-reference/apis/admin-api/api-schema.md)
+    * [API Queries and Mutations](api-reference/apis/admin-api/api-queries-and-mutations.md)
+    * [Using global node IDs](api-reference/apis/admin-api/using-global-node-ids.md)
+    * [Retrieving users using Admin API](api-reference/apis/admin-api/retrieving-users-using-admin-api.md)
+    * [API Examples](api-reference/apis/admin-api/api-examples/README.md)
+      * [Generate OTP code](api-reference/apis/admin-api/api-examples/generate-otp-code.md)
+      * [Search for users](api-reference/apis/admin-api/api-examples/search-for-users.md)
+      * [Update user's picture](api-reference/apis/admin-api/api-examples/update-users-picture.md)
+      * [Update user's standard attributes](api-reference/apis/admin-api/api-examples/update-users-standard-attributes.md)
+  * [Authentication Flow API](api-reference/apis/authentication-flow-api.md)
+  * [OAuth 2.0 and OpenID Connect (OIDC)](api-reference/apis/oauth-2.0-and-openid-connect-oidc/README.md)
+    * [Supported Scopes](api-reference/apis/oauth-2.0-and-openid-connect-oidc/supported-scopes.md)
+    * [UserInfo](api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md)
+  * [User Import API](api-reference/apis/user-import-api.md)
+  * [User Export API](api-reference/apis/user-export-api.md)
+* [Tokens](api-reference/tokens/README.md)
+  * [JWT Access Token](api-reference/tokens/jwt-access-token.md)
+  * [Refresh Token](api-reference/tokens/refresh-token.md)
+* [Rate Limits](api-reference/rate-limits/README.md)
+  * [Account Lockout](api-reference/rate-limits/account-lockout.md)
+* [Glossary](api-reference/glossary.md)
+* [Billing FAQ](api-reference/billing-faq.md)
 
 ## Authgear ONCE
 
@@ -202,11 +202,11 @@
 
 ## Client App SDKs
 
-* [Javascript SDK Reference](https://authgear.github.io/authgear-sdk-js/docs/)
-* [iOS SDK Reference](https://authgear.github.io/authgear-sdk-ios/)
-* [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
-* [Flutter SDK Reference](https://authgear.github.io/authgear-sdk-flutter/)
-* [Xamarin SDK Reference](https://authgear.github.io/authgear-sdk-xamarin/)
+* [Javascript SDK api-reference](https://authgear.github.io/authgear-sdk-js/docs/)
+* [iOS SDK api-reference](https://authgear.github.io/authgear-sdk-ios/)
+* [Android SDK api-reference](https://authgear.github.io/authgear-sdk-android/)
+* [Flutter SDK api-reference](https://authgear.github.io/authgear-sdk-flutter/)
+* [Xamarin SDK api-reference](https://authgear.github.io/authgear-sdk-xamarin/)
 
 ## Deployment
 
@@ -218,10 +218,10 @@
   * [authgear.yaml](deployment/configuration/authgear.yaml.md)
   * [authgear.secrets.yaml](deployment/configuration/authgear.secrets.yaml.md)
 * [Architecture Guides](deployment/architecture-guides/README.md)
-  * [AWS Reference Architecture](deployment/architecture-guides/aws-reference-architecture.md)
-  * [Azure Reference Architecture](deployment/architecture-guides/azure-reference-architecture.md)
-  * [Google Cloud Reference Architecture](deployment/architecture-guides/google-cloud-reference-architecture.md)
-  * [Throughput Scaling Reference](deployment/architecture-guides/throughput-scaling-reference.md)
+  * [AWS api-reference Architecture](deployment/architecture-guides/aws-api-reference-architecture.md)
+  * [Azure api-reference Architecture](deployment/architecture-guides/azure-api-reference-architecture.md)
+  * [Google Cloud api-reference Architecture](deployment/architecture-guides/google-cloud-api-reference-architecture.md)
+  * [Throughput Scaling api-reference](deployment/architecture-guides/throughput-scaling-api-reference.md)
 
 ## Troubleshooting
 
