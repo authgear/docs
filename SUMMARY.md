@@ -6,9 +6,6 @@
 
 * [5-Minute Guide](get-started/5-minute-guide.md)
 * [Start Building](get-started/start-building.md)
-* [Choose Authentication Approach](get-started/authentication-approach/README.md)
-  * [Token-based (Native mobile or Single-page app)](get-started/authentication-approach/token-based.md)
-  * [Cookie-based (Website or Single-page app)](get-started/authentication-approach/cookie-based.md)
 * [Single-Page App](get-started/single-page-app/README.md)
   * [JavaScript (Web)](get-started/single-page-app/website.md)
   * [React](get-started/single-page-app/react.md)
@@ -202,11 +199,11 @@
 
 ## Client App SDKs
 
-* [Javascript SDK api-reference](https://authgear.github.io/authgear-sdk-js/docs/)
-* [iOS SDK api-reference](https://authgear.github.io/authgear-sdk-ios/)
-* [Android SDK api-reference](https://authgear.github.io/authgear-sdk-android/)
-* [Flutter SDK api-reference](https://authgear.github.io/authgear-sdk-flutter/)
-* [Xamarin SDK api-reference](https://authgear.github.io/authgear-sdk-xamarin/)
+* [Javascript SDK Reference](https://authgear.github.io/authgear-sdk-js/docs/)
+* [iOS SDK Reference](https://authgear.github.io/authgear-sdk-ios/)
+* [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
+* [Flutter SDK Reference](https://authgear.github.io/authgear-sdk-flutter/)
+* [Xamarin SDK Reference](https://authgear.github.io/authgear-sdk-xamarin/)
 
 ## Deployment
 
@@ -218,10 +215,10 @@
   * [authgear.yaml](deployment/configuration/authgear.yaml.md)
   * [authgear.secrets.yaml](deployment/configuration/authgear.secrets.yaml.md)
 * [Architecture Guides](deployment/architecture-guides/README.md)
-  * [AWS api-reference Architecture](deployment/architecture-guides/aws-api-reference-architecture.md)
-  * [Azure api-reference Architecture](deployment/architecture-guides/azure-api-reference-architecture.md)
-  * [Google Cloud api-reference Architecture](deployment/architecture-guides/google-cloud-api-reference-architecture.md)
-  * [Throughput Scaling api-reference](deployment/architecture-guides/throughput-scaling-api-reference.md)
+  * [AWS Reference Architecture](deployment/architecture-guides/aws-reference-architecture.md)
+  * [Azure Reference Architecture](deployment/architecture-guides/azure-reference-architecture.md)
+  * [Google Cloud Reference Architecture](deployment/architecture-guides/google-cloud-reference-architecture.md)
+  * [Throughput Scaling Reference](deployment/architecture-guides/throughput-scaling-reference.md)
 
 ## Troubleshooting
 
