@@ -106,7 +106,7 @@
   * [Example: Only Allow Signups from Inside the Corporate Network using Hooks](customization/events-hooks/only-allow-signups-from-inside-the-corporate-network-using-hooks.md)
 * [Built-in UI](customization/ui-customization/built-in-ui/README.md)
   * [Branding in Auth UI](customization/ui-customization/built-in-ui/branding.md)
-  * [User Settings](customization/ui-customization/built-in-ui/auth-ui.md)
+  * [User Settings](customization/ui-customization/built-in-ui/user-settings.md)
   * [Privacy Policy & Terms of Service Links](customization/ui-customization/built-in-ui/privacy-policy-terms-of-service.md)
   * [Customer Support Link](customization/ui-customization/built-in-ui/customer-support-link.md)
   * [Custom Text](customization/ui-customization/built-in-ui/localization.md)
