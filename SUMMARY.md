@@ -6,6 +6,9 @@
 
 * [5-Minute Guide](get-started/5-minute-guide.md)
 * [Start Building](get-started/start-building.md)
+* [Choose Authentication Approach](get-started/authentication-approach/README.md)
+  * [Token-based (Native mobile or Single-page app)](get-started/authentication-approach/token-based.md)
+  * [Cookie-based (Website or Single-page app)](get-started/authentication-approach/cookie-based.md)
 * [Single-Page App](get-started/single-page-app/README.md)
   * [JavaScript (Web)](get-started/single-page-app/website.md)
   * [React](get-started/single-page-app/react.md)
