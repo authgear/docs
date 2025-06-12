@@ -6,7 +6,7 @@ description: >-
 
 # Authgear Overview
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue?logo=markdown)](https://r.jina.ai/https://docs.authgear.com/)
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue?logo=https://raw.githubusercontent.com/authgear/docs/main/markdown.svg)](https://r.jina.ai/https://docs.authgear.com/)
 
 **Authgear** is an authentication & user management solution which makes it very easy for developers to integrate and customize their consumer applications, it includes these features out of the box:
 
