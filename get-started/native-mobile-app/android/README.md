@@ -4,6 +4,8 @@ description: How to use authgear android SDK
 
 # Android SDK
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/native-mobile-app/android)
+
 This guide provides instructions on integrating Authgear with an Android app. Supported platforms include:
 
 * Android 5.0 (API 21) or higher

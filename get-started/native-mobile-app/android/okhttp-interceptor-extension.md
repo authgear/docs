@@ -1,5 +1,7 @@
 # Android OKHttp Interceptor Extension (Optional)
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/native-mobile-app/android/okhttp-interceptor-extension)
+
 The Authgear Android SDK provides an optional `Okhttp` interceptor which handles everything from refreshing the access token to putting the access token in the header.
 
 ## Get the Extension

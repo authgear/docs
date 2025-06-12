@@ -4,6 +4,8 @@ description: Authentication for Spring Boot App with Authgear and OAuth2
 
 # Java Spring Boot
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/regular-web-app/java-spring-boot)
+
 In this guide, you will learn how to add authentication to your Java Spring Boot application using [OAuth2](https://tools.ietf.org/html/rfc6749) with Authgear as the **Identity Provider (IdP)**.
 
 ### Learning objectives

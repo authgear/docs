@@ -4,6 +4,8 @@ description: Authentication for a Python web application
 
 # Python Flask App
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/regular-web-app/python-flask-app)
+
 This guide demonstrates how to add authentication with Authgear to a Python web application built with the [Flask](https://palletsprojects.com/p/flask/) framework using the [Authlib](https://authlib.org/) OAuth library. The full source code for this sample project can be found on the [GitHub repo](https://github.com/authgear/authgear-example-python-flask).
 
 ### Learning objectives

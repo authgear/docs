@@ -17,6 +17,8 @@ layout:
 
 # Native/Mobile App
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/native-mobile-app)
+
 
 
 {% content-ref url="android/" %}

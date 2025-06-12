@@ -15,6 +15,8 @@ layout:
 
 # Start Building
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/start-building)
+
 ## Integration Approaches
 
 There are 3 different high-level approaches to integrating Authgear with your applications:

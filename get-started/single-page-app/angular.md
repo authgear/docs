@@ -6,6 +6,8 @@ description: >-
 
 # Angular
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/single-page-app/angular)
+
 Authgear helps you add user logins to your Angular apps. It provides prebuilt login page and user settings page that accelerate the development.
 
 Follow this :clock1: **15 minutes** tutorial to create a simple app using Angular with Authgear SDK.

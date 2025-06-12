@@ -4,6 +4,8 @@ description: Authentication for PHP websites with Authgear and OAuth2
 
 # PHP
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/regular-web-app/php)
+
 Using OAuth, you can use Authgear to add user authentication in a vanilla PHP application.
 
 In this guide, we'll cover how to implement OAuth 2.0 login in a regular PHP web application with Authgear as the Identity Provider.

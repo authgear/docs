@@ -17,6 +17,8 @@ layout:
 
 # Single-Page App
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/single-page-app)
+
 {% content-ref url="angular.md" %}
 [angular.md](angular.md)
 {% endcontent-ref %}

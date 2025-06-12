@@ -4,6 +4,8 @@ description: Add authentication for ASP.NET app with Authgear
 
 # ASP.NET Core MVC
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/regular-web-app/asp.net-core-mvc)
+
 In this guide, you will learn how to add authentication features with [Authgear](https://www.authgear.com/) by implementing an [OpenID Connect](https://docs.authgear.com/concepts/identity-fundamentals#open-id-connect) flow, then retrieving OAuth tokens, to call APIs. View [implementation](https://github.com/authgear/authgear-example-dotnet) on GitHub.
 
 ### Learning objectives

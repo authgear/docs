@@ -4,6 +4,8 @@ description: A quick guide on getting started with Authgear
 
 # 5-Minute Guide
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/5-minute-guide)
+
 Authgear makes it easy to add user authentication and authorization to any application. In this guide, we'll show you how to get started with Authgear in 5 minutes.
 
 ### Video Guide

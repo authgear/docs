@@ -4,6 +4,8 @@ description: Authentication for Laravel websites with Authgear and OAuth2
 
 # Laravel
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/regular-web-app/laravel)
+
 In this guide, you'll learn how to add user authentication to a Laravel app using Authgear as an OIDC provider.
 
 Authgear supports multiple ways to allow users to log in to apps such as passwordless sign-in, phone OTP, and 2FA. In this post, we'll show you how to enable all these options in your Laravel app without worrying about the underlying logic.

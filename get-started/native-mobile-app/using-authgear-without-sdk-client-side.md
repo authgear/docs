@@ -4,6 +4,8 @@ description: Integrate Authgear on the client side in mobile apps without SDK
 
 # Using Authgear without SDK (Client side)
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/native-mobile-app/using-authgear-without-sdk-client-side)
+
 Authgear is built based on OIDC 2.0 standard, you can integrate it into any application framework without SDK.
 
 ### Supported grant types

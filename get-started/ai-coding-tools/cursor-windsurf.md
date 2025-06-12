@@ -1,5 +1,7 @@
 # Cursor/Windsurf
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/ai-coding-tools/cursor-windsurf)
+
 AI-assisted IDEs like Cursor and Windsurf are increasingly popular among developers for enhancing productivity. These tools offer LLM-based agents for code suggestions, debugging, and understanding codebases.
 
 Now, you’ve created an innovative software project consisting of a frontend application and a backend server. By leveraging generative AI with the right prompts, you can integrate robust security features into your project within seconds.
