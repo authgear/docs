@@ -6,6 +6,8 @@ description: >-
 
 # Validate JWT in your application server
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/backend-api/jwt.md)
+
 In this section, we will go through how to decode the JWT token to obtain the currently logged-in user.
 
 Before we start, make sure the option **Issue JWT as access token** is enabled in your Application settings in the Portal.

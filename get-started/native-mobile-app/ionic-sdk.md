@@ -4,6 +4,8 @@ description: Guide on how to use Authgear in an Ionic project
 
 # Ionic SDK
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/native-mobile-app/ionic-sdk.md)
+
 In this post, you'll learn how to use Authgear with your Ionic project using the Authgear Ionic SDK.
 
 {% hint style="info" %}

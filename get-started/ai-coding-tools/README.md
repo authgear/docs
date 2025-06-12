@@ -1,5 +1,7 @@
 # AI Coding tools
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/ai-coding-tools/README.md)
+
 Generative AI powered by large language models (LLMs) has revolutionized software development, giving rise to a new paradigm called “Vibe Coding.” This approach empowers individuals with ideas—regardless of their coding expertise—to create software quickly and intuitively. For developers, generative AI automates repetitive tasks, boosts productivity, and even enhances code quality in some cases.
 
 <figure><img src="../../.gitbook/assets/image (51).png" alt="" width="250"><figcaption><p>Vibe coding is cool. But you probably don’t want to trust AI for security. (image: <a href="https://www.reddit.com/r/ProgrammerHumor/comments/1jdrrcb/iamdebuggingmyseniorsaigeneratedcoderightnow/">r/ProgrammerHumor</a>)</p></figcaption></figure>

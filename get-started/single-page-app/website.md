@@ -4,6 +4,8 @@ description: Integrate Authgear to your website with the Web SDK
 
 # JavaScript (Web)
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/single-page-app/website.md)
+
 In this guide, you'll learn how to integrate Authgear into your website using the [Token Approach](https://docs.authgear.com/get-started/authentication-approach/token-based). In the token approach, the Authgear server returns an access token and a refresh token to your SPA application after successful user authentication.
 
 Your application can send the access token in subsequent HTTP requests to access protected resources.

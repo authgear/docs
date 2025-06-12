@@ -4,6 +4,8 @@ description: Authentication for Express.JS apps with Authgear and OAuth2
 
 # Express
 
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/regular-web-app/express.md)
+
 Authgear makes it easy to add user authentication to a regular web app that is not powered by any framework. You can do this by integrating Authgear into your application as an OIDC identity provider.
 
 In this post, you'll learn how to add user authentication to an Express.js application using Authgear.
