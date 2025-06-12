@@ -15,7 +15,7 @@ layout:
 
 # Backend/API Integration
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/backend-api)
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/backend-api/README.md)
 
 If your API or backend service needs authentication, you can validate the session in your application server code. Each request from the client to your application server should contain an access token or a cookie. Your backend server should validate them for each HTTP request.
 

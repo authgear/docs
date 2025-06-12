@@ -4,7 +4,7 @@ description: Integrate your iOS application with Authgear iOS SDK
 
 # iOS SDK
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/native-mobile-app/ios)
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/native-mobile-app/ios.md)
 
 This guide provides instructions on integrating Authgear with an iOS app. Supported platforms include:
 

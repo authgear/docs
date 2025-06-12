@@ -1,6 +1,6 @@
 # Cursor/Windsurf
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/ai-coding-tools/cursor-windsurf)
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/ai-coding-tools/cursor-windsurf.md)
 
 AI-assisted IDEs like Cursor and Windsurf are increasingly popular among developers for enhancing productivity. These tools offer LLM-based agents for code suggestions, debugging, and understanding codebases.
 

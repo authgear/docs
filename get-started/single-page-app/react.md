@@ -6,7 +6,7 @@ description: >-
 
 # React
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/single-page-app/react)
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/single-page-app/react.md)
 
 Authgear helps you add user logins to your React apps. It provides a pre-built login page and user settings page that can accelerate your development process.
 

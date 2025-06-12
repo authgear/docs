@@ -4,7 +4,7 @@ description: Authentication for Next.js app with Authgear
 
 # Next.js
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/regular-web-app/next.js)
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/regular-web-app/next.js.md)
 
 In this guide, you'll learn how to implement authentication for the [Next.js](https://nextjs.org/) application, a popular React-based framework for JavaScript, and [Authgear](https://www.authgear.com/) as the OIDC provider. The source code can be found on [GitHub](https://github.com/authgear/authgear-example-nextjs).
 

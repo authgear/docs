@@ -4,7 +4,7 @@ description: Follow this quickstart tutorial to add authentication to your Vue a
 
 # Vue
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/single-page-app/vue)
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/single-page-app/vue.md)
 
 Authgear helps you add user logins to your Vue apps. It provides a prebuilt login page and user settings page that accelerate the development.
 

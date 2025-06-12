@@ -6,7 +6,7 @@ description: >-
 
 # Forward Authentication to Authgear Resolver Endpoint
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/backend-api/nginx)
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/backend-api/nginx.md)
 
 In this section, we will explain how to set up a reverse proxy in NGINX to protect your app server from unauthorized access with the Authgear resolver. You can forward the requests without the request body to the resolver endpoint. Authgear will look at the `Authorization` and `Cookie` in the HTTP header, verify the token, and respond to HTTP 200 with `X-Authgear-` headers for session validity, the user id...etc.
 

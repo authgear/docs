@@ -1,6 +1,6 @@
 # Android Kotlin coroutine support
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://r.jina.ai/https://docs.authgear.com/get-started/native-mobile-app/android/coroutine-support)
+[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/native-mobile-app/android/coroutine-support.md)
 
 The Authgear Android SDK comes with kotlin support out of the box. In fact, the SDK is written in kotlin!
 
