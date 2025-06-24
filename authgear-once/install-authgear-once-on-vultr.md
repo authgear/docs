@@ -6,7 +6,7 @@ description: Step-by-step guide for installing Authgear ONCE on Vultr VM
 
 In this guide, you'll learn how to install Authgear ONCE on [Vultr](https://www.vultr.com). Before you continue, make sure you have your Authgear ONCE license ready. You can purchase one from [authgear.com](https://www.authgear.com/).
 
-{% embed url="https://youtu.be/fHfwJKv8KGo" %}
+{% embed url="https://youtu.be/VpSZYHJu7DM" %}
 
 ### Step 1: Create a Server (Virtual Machine)
 

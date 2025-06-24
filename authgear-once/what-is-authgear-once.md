@@ -31,7 +31,7 @@ Authgear ONCE is a version of Authgear that you can install on any Virtual Machi
 
 ### Install Authgear ONCE in 7 minutes
 
-{% embed url="https://youtu.be/fHfwJKv8KGo" %}
+{% embed url="https://youtu.be/VpSZYHJu7DM" %}
 
 ### Frequently Asked Questions (FAQ)
 
