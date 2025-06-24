@@ -2,9 +2,11 @@
 description: Step-by-step guide for installing Authgear ONCE on Vultr VM
 ---
 
-# Authgear ONCE installation guide for Vultr
+# Install Authgear ONCE on Vultr
 
 In this guide, you'll learn how to install Authgear ONCE on [Vultr](https://www.vultr.com). Before you continue, make sure you have your Authgear ONCE license ready. You can purchase one from [authgear.com](https://www.authgear.com/).
+
+{% embed url="https://www.youtube.com/watch?v=pGfu0oWf7HY" %}
 
 ### Step 1: Create a Server (Virtual Machine)
 
@@ -13,12 +15,12 @@ In this guide, you'll learn how to install Authgear ONCE on [Vultr](https://www.
 3. While creating your new server, select a machine that has Docker pre-installed, or manually install Docker after your server is created.
    1.  &#x20;**(Recommended)** To create a machine with Docker pre-installed, switch to the **Marketplace Apps** tab in the **Configure Software & Deploy Instance** page, then search for "**Docker**" and click on "Docker on Ubuntu" from the results.
 
-       <figure><img src="../../.gitbook/assets/image (52).png" alt=""><figcaption><p>Deploy a server with Docker pre-installed</p></figcaption></figure>
+       <figure><img src="../.gitbook/assets/image (52).png" alt=""><figcaption><p>Deploy a server with Docker pre-installed</p></figcaption></figure>
    2. To manually install Docker, visit [https://docs.docker.com/get-started/get-docker/](https://docs.docker.com/get-started/get-docker/) for a detailed guide on how to manually install Docker on different machines.
 4. Note the **IPv4 address** for your server as you'll use it later to set up **A** record on your domain name DNS.
 5. SSH into your machine or use the **View Console** feature in Vultr portal to access your server via a terminal. The username and password can be found in the Server Information page.
 
-<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption><p>Vultr's Server Information page show the public IP and View Console button</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (53).png" alt=""><figcaption><p>Vultr's Server Information page show the public IP and View Console button</p></figcaption></figure>
 
 ### Step 2: Set up DNS A Records for Domain Name
 
@@ -30,7 +32,7 @@ To use the default domain setup, add new DNS records using the IPv4 address for 
 
 <table><thead><tr><th width="66.83203125">Type</th><th width="275">Name</th><th>Usage</th></tr></thead><tbody><tr><td>A</td><td><code>auth</code></td><td>The authentication endpoint</td></tr><tr><td>A</td><td><code>authgear-portal</code></td><td>The admin portal for CIAM functions</td></tr><tr><td>A</td><td><code>authgear-portal-accounts</code></td><td>A domain for logging into the Authgear portal. You don't need to access it directly.</td></tr></tbody></table>
 
-<figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption><p>Example: Add the A records in DNS management in Namecheap</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (55).png" alt=""><figcaption><p>Example: Add the A records in DNS management in Namecheap</p></figcaption></figure>
 
 ### Step 3: Prepare External Email Provider
 
@@ -107,4 +109,4 @@ Once installation is successful, visit `authgear-portal.domain-name.com` (Replac
 
 Log in to the Portal using the email address and password you created in step 4 of the installation prompt.
 
-<figure><img src="../../.gitbook/assets/once-onboard.png" alt=""><figcaption><p>Onboarding screen in Portal for new Authgear ONCE instance.</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/once-onboard.png" alt=""><figcaption><p>Onboarding screen in Portal for new Authgear ONCE instance.</p></figcaption></figure>

@@ -29,6 +29,10 @@ Authgear ONCE is a version of Authgear that you can install on any Virtual Machi
 | Availablity depends on third-party VM and cloud provider | Same level of availability for all SaaS users    | High Availability Support   |
 | Scalabilty depend on setup on third-party cloud provider | Plans can be upgraded according to your need     | Scalable for high traffic   |
 
+### Install Authgear ONCE in 7 minutes
+
+{% embed url="https://www.youtube.com/watch?v=pGfu0oWf7HY" %}
+
 ### Frequently Asked Questions (FAQ)
 
 #### Can I try Authgear for free?
