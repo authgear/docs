@@ -10,7 +10,7 @@ ONCE is easier to set up than deploying the open-source version of Authgear. Com
 
 Anyone can purchase a one-time license for Authgear ONCE and install it on any popular cloud provider or VPS and have their own instance of Authgear running in less than 10 Minutes. The steps are easy, and you don't need to be a cloud or DevOps expert to use ONCE.
 
-{% embed url="https://www.youtube.com/watch?v=pGfu0oWf7HY" %}
+{% embed url="https://youtu.be/fHfwJKv8KGo" %}
 
 ## Getting Started with Authgear ONCE
 
