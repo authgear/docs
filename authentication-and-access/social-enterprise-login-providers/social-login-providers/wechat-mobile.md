@@ -15,7 +15,7 @@ See [Appendix: Create mobile app on WeChat Open Platform](wechat-mobile.md#appen
 
 ## Get the information from WeChat Open Platform
 
-Once your mobile app is approved on the platform, you will see the world ":white\_check\_mark:<mark style="color:green;">已通过</mark>" in the app details page.
+Once your mobile app is approved on the platform, you will see the word ":white\_check\_mark:<mark style="color:green;">已通过</mark>" in the app details page.
 
 * Get the `appid` (**Client ID**).
 
