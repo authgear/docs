@@ -36,7 +36,7 @@ Authgear contains the following high-level components:
 #### Backend Authentication and Integrations
 
 * [**Backend/API Integration**](get-started/backend-api/) - explain the common approach of using Access Token or Cookies (JWT or random string) to authenticate an API or HTTP Requests.
-* [**Admin API**](reference/apis/admin-api/) - allow your backend to interact directly with Authgear for user management purpose.
+* [**Admin API**](api-reference/apis/admin-api/) - allow your backend to interact directly with Authgear for user management purpose.
 * [**Events and Hooks**](customization/events-hooks/) - call external web endpoint or use the hosted type-script to customize the behaviour of Authgear. E.g. blocking certain type of sign up, or call external endpoint for each login.
 * [**User Import API**](admin/user-management/import-users-using-user-import-api.md) - Import multiple users from another service to your project.
 * [**Export User API**](admin/user-management/export-users-using-the-user-export-api.md) - Export user data from Authgear into a CSV or [ndjosn](https://github.com/ndjson/ndjson-spec) file.

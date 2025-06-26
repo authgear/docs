@@ -58,7 +58,7 @@ Authorization: Bearer <Admin API JWT Token>
 ```
 
 {% hint style="info" %}
-To learn more detailed information about the User Import API (such as endpoints, inputs, and responses), see the [User Import API Reference](../../reference/apis/user-import-api.md).
+To learn more detailed information about the User Import API (such as endpoints, inputs, and responses), see the [User Import API Reference](../../api-reference/apis/user-import-api.md).
 {% endhint %}
 
 ## Usage Example
@@ -111,7 +111,7 @@ See our post on [Admin API Authentication](https://docs.authgear.com/reference/a
 
 To import users to your Authgear project using the User Import API, make a POST HTTP(S) request to the Initiate Import endpoint (`/_api/admin/users/import`).&#x20;
 
-The user data you wish to import must be provided as a JSON input in the HTTP(S) request body as specified in the [API input format](../../reference/apis/user-import-api.md#input-format).
+The user data you wish to import must be provided as a JSON input in the HTTP(S) request body as specified in the [API input format](../../api-reference/apis/user-import-api.md#input-format).
 
 In the following steps, we'll use the node-fetch package to make HTTP requests to the User Import API. Hence, install node-fetch by running the following command:
 

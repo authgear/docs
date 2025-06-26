@@ -19,7 +19,7 @@ To improve security, enable the "Ask user to change password on login" feature s
 
 ## How to Create Accounts for Users and Send them their Password
 
-You can create accounts for users using Authgear Portal or [Admin API](../../reference/apis/admin-api/) and the password you set or a random auto-generated password will be sent to the user's email address. In addition, you can also configure the new accounts such that users are required to set a new password on login.
+You can create accounts for users using Authgear Portal or [Admin API](../../api-reference/apis/admin-api/) and the password you set or a random auto-generated password will be sent to the user's email address. In addition, you can also configure the new accounts such that users are required to set a new password on login.
 
 ### Step 1: Open the Create User Page
 

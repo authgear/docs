@@ -6,24 +6,28 @@
 
 ## Prerequisite
 
-- Register a WeChat Open Platform account (微信开放平台账号).
-- Register a Mobile Application (移动应用).
-  - For **iOS**, WeChat Open Platform requires your app to support Associated Domains and Universal Links. See [the official documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content/) from Apple for details.
-  - For **Android**, WeChat Open Platform requires you to tell them the MD5 fingerprint of the signing keystore.
+* Register a [WeChat Open Platform account (微信开放平台账号)](https://open.weixin.qq.com/).
+* Register a Mobile Application (移动应用).
+  * For **iOS**, the **Associated Domains and Universal Links** supports are required in your app. See [the official documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content/) from Apple for details.
+  * For **Android**, the **MD5 fingerprint of the signing keystore** is required
+
+See [Appendix: Create mobile app on WeChat Open Platform](wechat-mobile.md#appendix-create-mobile-app-on-wechat-open-platform) for more details.
 
 ## Get the information from WeChat Open Platform
 
-- Get the `appid` (**Client ID**).
+Once your mobile app is approved on the platform, you will see the world ":white\_check\_mark:<mark style="color:green;">已通过</mark>" in the app details page.
 
-<figure><img src="../../../.gitbook/assets/wechat-mobile-appid.png" alt="where to find appid"><figcaption>where to find appid</figcaption></figure>
+* Get the `appid` (**Client ID**).
 
-- Get the `appsecret` (**Client Secret**). It will only be shown once. You need to re-generate if you lose it.
+<figure><img src="../../../.gitbook/assets/wechat-mobile-appid.png" alt="where to find appid"><figcaption><p>where to find appid</p></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/wechat-mobile-appsecret.png" alt="where to find appsecret"><figcaption>where to find appsecret</figcaption></figure>
+* Get the `appsecret` (**Client Secret**). It will only be shown once. You need to re-generate if you lose it.
 
-- Get the `原始ID` (**Account ID**) of your WeChat Open Platform account.
+<figure><img src="../../../.gitbook/assets/wechat-mobile-appsecret.png" alt="where to find appsecret"><figcaption><p>where to find appsecret</p></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/wechat-open-platform-account-id.png" alt="where to find account ID"><figcaption>where to find account ID</figcaption></figure>
+* Get the `原始ID` (**Account ID**) of your WeChat Open Platform account.
+
+<figure><img src="../../../.gitbook/assets/wechat-open-platform-account-id.png" alt="where to find account ID"><figcaption><p>where to find account ID</p></figcaption></figure>
 
 ## Configure Sign in with WeChat in the Authgear portal
 
@@ -58,8 +62,7 @@ This section reminds you some of the important points that you may miss in the o
 pod "WechatOpenSDK-XCFramework", "~> 2.0.4"
 ```
 
-The latest version can be found at [this URL](https://cocoapods.org/pods/WechatOpenSDK)
-As of the time of writing, the latest version is `2.0.4`.
+The latest version can be found at [this URL](https://cocoapods.org/pods/WechatOpenSDK) As of the time of writing, the latest version is `2.0.4`.
 
 ### Specify your WeChat `appid` in Info.plist
 
@@ -100,7 +103,7 @@ If you fail to do so, you will encounter [this error](https://developers.weixin.
 
 The WeChat SDK for iOS depends on the Objective-C runtime. Therefore, your app has to link to the Objective-C runtime. To do so, you need to make sure `OTHER_LDFLAGS` contains `-ObjC`.
 
-The `-ObjC` flag is so special in CocoaPods that you **CANNOT** add it with CocoaPods [post_install](https://guides.cocoapods.org/syntax/podfile.html#post_install) hook.
+The `-ObjC` flag is so special in CocoaPods that you **CANNOT** add it with CocoaPods [post\_install](https://guides.cocoapods.org/syntax/podfile.html#post_install) hook.
 
 If your iOS app is written in [React Native](https://reactnative.dev/), the app is likely to have `OTHER_LDFLAGS` including `-ObjC` already, as React Native depend on the Objective-C runtime.
 
@@ -110,7 +113,6 @@ In other case, you need to manually edit your Build Settings to include the `-Ob
 
 {% tabs %}
 {% tab title="Swift WeChat SDK" %}
-
 In your `AppDelegate.swift`
 
 ```swift
@@ -182,10 +184,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
 }
 ```
-
 {% endtab %}
-{% tab title="Objective-C WeChat SDK" %}
 
+{% tab title="Objective-C WeChat SDK" %}
 In your `AppDelegate.h`
 
 ```objc
@@ -272,7 +273,6 @@ In your `SceneDelegate.m` (if you have one)
 
 @end
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -292,8 +292,7 @@ This section reminds you some of the important points that you may miss in the o
 implementation "com.tencent.mm.opensdk:wechat-sdk-android:6.8.34"
 ```
 
-The latest version can be found at [this URL](https://central.sonatype.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android)
-As of the time of writing, the latest version is `6.8.34`.
+The latest version can be found at [this URL](https://central.sonatype.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android) As of the time of writing, the latest version is `6.8.34`.
 
 ### Declare `<queries>` in your `AndroidManifest.xml`
 
@@ -419,7 +418,7 @@ If you use Google Play Console to distribute your Android app, it is likely that
 
 To get the MD5 fingerprint of the managed keystore, refer to the following screenshot:
 
-<figure><img src="../../../.gitbook/assets/wechat-mobile-play-store-keystore-md5.png" alt="where to find the MD5 fingerprint of the managed keystore"><figcaption>where to find the MD5 fingerprint of the managed keystore</figcaption></figure>
+<figure><img src="../../../.gitbook/assets/wechat-mobile-play-store-keystore-md5.png" alt="where to find the MD5 fingerprint of the managed keystore"><figcaption><p>where to find the MD5 fingerprint of the managed keystore</p></figcaption></figure>
 
 Note that the MD5 fingerprint you see on Google Play Console is a **colon-delimited uppercase hex string**, while WeChat Open Platform expects you to provide a **plain lowercase hex string**.
 
@@ -439,9 +438,10 @@ keytool -exportcert -keystore "$STORE_FILE" -storepass "$STORE_PASSWORD" -alias 
 ```
 
 Where
-- `STORE_FILE` is an environment variable pointing to the keystore file on your machine, for example, `./mykeystore.jks`.
-- `STORE_PASSWORD` is an environment variable containing the password of the keystore.
-- `KEY_ALIAS` is an environment variable indicating which key in the keystore to use.
+
+* `STORE_FILE` is an environment variable pointing to the keystore file on your machine, for example, `./mykeystore.jks`.
+* `STORE_PASSWORD` is an environment variable containing the password of the keystore.
+* `KEY_ALIAS` is an environment variable indicating which key in the keystore to use.
 
 ## Configure Authgear SDK for WeChat
 
@@ -454,7 +454,6 @@ You have 2 actions to take:
 
 {% tabs %}
 {% tab title="iOS WebKitWebViewUIImplementation" %}
-
 ```swift
 import Authgear
 
@@ -470,10 +469,9 @@ self.authgear = Authgear(
   uiImplementation: uiImplementation
 )
 ```
-
 {% endtab %}
-{% tab title="Android WebKitWebViewUIImplementation" %}
 
+{% tab title="Android WebKitWebViewUIImplementation" %}
 ```java
 WebKitWebViewUIImplementation impl = new WebKitWebViewUIImplementation();
 impl.setWechatRedirectURI(Uri.parse("com.myapp://authgear/open_wechat_app"));
@@ -493,10 +491,9 @@ this.mAuthgear = new Authgear(
   null
 );
 ```
-
 {% endtab %}
-{% tab title="React Native WebKitWebViewUIImplementation" %}
 
+{% tab title="React Native WebKitWebViewUIImplementation" %}
 ```typescript
 import authgear, {
   WebKitWebViewUIImplementation,
@@ -517,10 +514,9 @@ authgear.configure({
   }),
 })
 ```
-
 {% endtab %}
-{% tab title="Flutter WebKitWebViewUIImplementation" %}
 
+{% tab title="Flutter WebKitWebViewUIImplementation" %}
 ```dart
 import 'package:flutter_authgear/flutter_authgear.dart';
 
@@ -541,7 +537,6 @@ var authgear = Authgear(
   ),
 )
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -550,18 +545,17 @@ var authgear = Authgear(
 {% hint style="info" %}
 This section assume you have integrated the WeChat SDK according to
 
-- [Add the integration code for the WeChat SDK for iOS](#add-the-integration-code-for-the-wechat-sdk-for-ios)
-- [Implement the callback Activity](#implement-the-callback-activity)
+* [Add the integration code for the WeChat SDK for iOS](wechat-mobile.md#add-the-integration-code-for-the-wechat-sdk-for-ios)
+* [Implement the callback Activity](wechat-mobile.md#implement-the-callback-activity)
 
 In particular,
 
-- On iOS, you implement `WXApiDelegate` on your `AppDelegate`.
-- On Android, your `WXEntryActivity` sends a broadcast with `state` being the Intent action.
+* On iOS, you implement `WXApiDelegate` on your `AppDelegate`.
+* On Android, your `WXEntryActivity` sends a broadcast with `state` being the Intent action.
 {% endhint %}
 
 {% tabs %}
 {% tab title="iOS Authgear WeChat" %}
-
 In your `AppDelegate.swift`
 
 ```swift
@@ -610,9 +604,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate, AuthgearDe
 }
 ```
 
-{% endtab %}
-{% tab title="Android Authgear WeChat" %}
 
+{% endtab %}
+
+{% tab title="Android Authgear WeChat" %}
 In your `MainActivity.java`
 
 ```java
@@ -668,10 +663,9 @@ public class MainActivity extends AppCompatActivity implements AuthgearDelegate 
   }
 }
 ```
-
 {% endtab %}
-{% tab title="React Native Authgear WeChat" %}
 
+{% tab title="React Native Authgear WeChat" %}
 In your React Native TypeScript code
 
 ```typescript
@@ -870,10 +864,9 @@ public class MyWeChatModule extends ReactContextBaseJavaModule {
     }
 }
 ```
-
 {% endtab %}
-{% tab title="Flutter Authgear WeChat" %}
 
+{% tab title="Flutter Authgear WeChat" %}
 In your Flutter code
 
 ```dart
@@ -1035,6 +1028,42 @@ class MainActivity: FlutterFragmentActivity() {
   }
 }
 ```
-
 {% endtab %}
 {% endtabs %}
+
+## Appendix: Create mobile app on WeChat Open Platform
+
+**Prerequisite**: A WeChat account is required for registering the app.
+
+These information are required for creating the application on the platform, prepare them before creating the application:
+
+### Basic Information
+
+| Field     | Meaning in English                                       | Usage                                                                                                                                                                                                         |
+| --------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 移动应用名称    | Mobile app name                                          | The app name shown to the end-user when they login                                                                                                                                                            |
+| 英文名称      | Mobile app name in English                               | The app name shown to an English end-user when they login                                                                                                                                                     |
+| 移动应用简介    | Mobile app description                                   | A description for the approver to understand the app                                                                                                                                                          |
+| 英文简介      | Mobile app description in English                        | Optional field                                                                                                                                                                                                |
+| 应用官网      | Official website of the mobile app                       | The webpage should show the description of the app and offer links to download it on app stores                                                                                                               |
+| 移动应用图片    | App Icon                                                 | A 28x28 and a 108x108 icon                                                                                                                                                                                    |
+| 应用市场      | Is the app released on any app stores for Chinese users? | <p>Choose between:<br>- <strong>Unreleased</strong>: the login is rate limited to 100 per day<br>- <strong>Released:</strong> A Chinese ICP license is required (App备案号), for example: 粤B2-00000000-0000A</p> |
+| 应用类目      | App category                                             | Choose from the list of categories defined by the platform that best describe your app                                                                                                                        |
+| 应用运行流程图   | Images of app flow                                       | Any flowchart or screenshots showing how the app works                                                                                                                                                        |
+| 申请/修改应用说明 | Application details                                      | Reasons for application, any testing account and testing instruction.                                                                                                                                         |
+| 管理员身份设置   | Set Admin                                                | Scan the QR code from the WeChat mobile app to prove the admin identity of the app.                                                                                                                           |
+
+### App configuration
+
+#### iOS
+
+* Bundle ID
+* 测试 Bundle (Testing Bundle ID)
+* Universal Links
+* 备用 Universal Links (Backup Universal Links)
+
+#### Android
+
+* 应用包名 (Package name)
+* 应用签名 (App Signature)
+

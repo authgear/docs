@@ -10,8 +10,8 @@ Brand and customize login experience for your users where you can customize doma
 [branding.md](branding.md)
 {% endcontent-ref %}
 
-{% content-ref url="auth-ui.md" %}
-[auth-ui.md](auth-ui.md)
+{% content-ref url="user-settings.md" %}
+[user-settings.md](user-settings.md)
 {% endcontent-ref %}
 
 {% content-ref url="privacy-policy-terms-of-service.md" %}
