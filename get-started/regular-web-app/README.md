@@ -1,16 +1,5 @@
 ---
 description: Traditional web app that runs on the server
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: false
-  pagination:
-    visible: false
 ---
 
 # Regular Web App

@@ -1,12 +1,10 @@
 ---
-description: The app configuration authgear.yaml
+description: This is the main configuration file affecting every aspect of Authgear.
 ---
 
 # authgear.yaml
 
-This is the main configuration file affecting every aspect of Authgear.
-
-## JSON Schema
+### JSON Schema
 
 The configuration file is validated against the following JSON Schema:
 
@@ -1609,7 +1607,7 @@ The configuration file is validated against the following JSON Schema:
 }
 ```
 
-## Annotated example
+### Annotated example
 
 ```yaml
 # The ID of this instance of Authgear.

@@ -394,7 +394,7 @@ Add the following activity entry to the `AndroidManifest.xml` of your app. The i
             &#x3C;category android:name="android.intent.category.DEFAULT" />
             &#x3C;category android:name="android.intent.category.BROWSABLE" />
             &#x3C;!-- Configure data to be the exact redirect URI your app uses. -->
-            &#x3C;!-- Here, we are using com.myapp://host/path as configured in authgear.yaml. -->
+            &#x3C;!-- Here, we are using com.authgear.example://host/path as configured in the portal -->
             &#x3C;!-- NOTE: The redirectURI supplied in AuthenticateOptions *has* to match as well -->
             &#x3C;data android:scheme="com.example.authgeardemo"
                 android:host="host"

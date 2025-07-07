@@ -97,8 +97,6 @@ import authgear, { Page, ReactNativeContainer, SessionState, SessionStateChangeR
 
 Add the following code at the top inside the `App()` function in `App.tsx` to configure a new Authgear instance and set up a `delegate` that will help our app to know the current state of a user's session (whether they're logged in or not):
 
-
-
 ```typescript
 const [sessionState, setSessionState] = useState<SessionState | null>(() => {
   return authgear.sessionState;
@@ -355,7 +353,7 @@ Add the following `activity` entry to the `android/app/src/main/AndroidManifest.
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Configure data to be the exact redirect URI your app uses. -->
-                <!-- Here, we are using com.authgear.example://host/path as configured in authgear.yaml. -->
+                <!-- Here, we are using com.authgear.example://host/path as configured in the portal -->
                 <!-- NOTE: The redirectURI supplied in AuthenticateOptions *has* to match as well -->
                 <data android:scheme="com.authgear.example.rn"
                     android:host="host"
@@ -410,9 +408,9 @@ In `ios/<your_project>/Info.plist`, add the matching redirect URI.
 
 <summary>Optional: Handle deep links for WeChat Login</summary>
 
-Skip this part if you don't need support for "Login with WeChat".&#x20;
+Skip this part if you don't need support for "Login with WeChat".
 
-Alternatively, use any popular deep-linking library then implement code to forward the deep link to our SDK in the JavaScript side for your React Native app.&#x20;
+Alternatively, use any popular deep-linking library then implement code to forward the deep link to our SDK in the JavaScript side for your React Native app.
 
 To handle WeChat deep links, in `AppDelegate.m`, add the following code snippet:
 
@@ -458,7 +456,7 @@ To handle WeChat deep links, in `AppDelegate.m`, add the following code snippet:
 
 ### Step 7: Logout
 
-Now let's add a Logout feature to our example app so users can logout and end their session.&#x20;
+Now let's add a Logout feature to our example app so users can logout and end their session.
 
 We'll add a Logout button and implement a `logout()` method that calls the corresponding `logout()` method of the Authgear SDK:
 
@@ -487,7 +485,7 @@ Save your code and run the app. Click the Logout button and the user should be l
 
 The Authgear SDK includes a `fetchUserInfo()` method that returns details such as user ID, email, phone number, etc about the current user.
 
-In this step, we'll add a **Show User Info** button to our app. This button will call the fetchUserInfo() to demonstrate how the method works.&#x20;
+In this step, we'll add a **Show User Info** button to our app. This button will call the fetchUserInfo() to demonstrate how the method works.
 
 Add a `showUserInfo()` method to your `App()` function just below the `logout()` method:
 
@@ -542,7 +540,7 @@ Now run your app and you should be able to access the User Settings page when yo
 
 #### Get the Logged-In State
 
-When you start launching the application. You may want to know if the user has logged in. (e.g. Show users the login page if they haven't logged in).&#x20;
+When you start launching the application. You may want to know if the user has logged in. (e.g. Show users the login page if they haven't logged in).
 
 The `sessionState` reflects the user logged-in state in the SDK local state. That means even if the `sessionState` is `AUTHENTICATED`, the session may be invalid if it is revoked remotely. Hence, after initializing the Authgear SDK, call `fetchUserInfo` to update the `sessionState` as soon as it is proper to do so. We demonstrated this in our example app using the `postConfigure()` method.
 
@@ -583,7 +581,7 @@ authgear
 
 #### Option 2: Add the access token to your HTTP
 
-You can access the access token through `authgear.accessToken`. Call `refreshAccessTokenIfNeeded()` every time before using the access token. The `refreshAccessTokenIfNeeded()` function will check and make the network call to refresh the access token only if it has expired.&#x20;
+You can access the access token through `authgear.accessToken`. Call `refreshAccessTokenIfNeeded()` every time before using the access token. The `refreshAccessTokenIfNeeded()` function will check and make the network call to refresh the access token only if it has expired.
 
 Include the access token in the Authorization header of your application request.
 
@@ -614,4 +612,3 @@ To protect your application server from unauthorized access. You will need to [i
 ## JavaScript SDK Reference
 
 For detailed documentation on the JavaScript React Native SDK, visit [@authgear/react-native Reference](https://authgear.github.io/authgear-sdk-js/docs/react-native/)
-

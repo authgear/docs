@@ -2,24 +2,11 @@
 description: >-
   If you are developing mobile or desktop applications, choose from one of these
   SDKs for your platform to get started.
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: false
-  pagination:
-    visible: false
 ---
 
 # Native/Mobile App
 
 [![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/native-mobile-app/README.md)
-
-
 
 {% content-ref url="android/" %}
 [android](android/)

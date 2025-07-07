@@ -2,7 +2,7 @@
 description: How to run locally with Docker.
 ---
 
-# Running locally with Docker
+# Run with Docker
 
 Authgear is available as a Docker image. It depends on PostgreSQL (with pg\_partman enabled) and Redis. To run it locally, the simplest way is to use docker-compose.
 
@@ -70,7 +70,7 @@ touch postgres/Dockerfile
 
 Copy the following contents to `postgres/Dockerfile`
 
-```Dockerfile
+```dockerfile
 FROM postgres:16.8
 
 ENV PARTMAN_VERSION 5.2.4
@@ -88,7 +88,7 @@ RUN wget https://github.com/pgpartman/pg_partman/archive/v${PARTMAN_VERSION}.zip
     && make NO_BGW=1 install
 ```
 
-## Create authgear.yaml and authgear.secrets.yaml
+### Create authgear.yaml and authgear.secrets.yaml
 
 First, we need to create `authgear.yaml` and `authgear.secrets.yaml`. Authgear itself is a CLI program capable of generating a minimal configuration file.
 

@@ -17,8 +17,6 @@ Signup for an Authgear Portal account in [https://portal.authgear.com/](https://
 
 From the Project listing, create a new Project or select an existing Project. After that, we will need to create an application in the project.
 
-{% tabs %}
-{% tab title="Portal" %}
 **Step 1: Create an application in the Portal**
 
 1. Go to **Applications** on the left menu bar.
@@ -26,7 +24,7 @@ From the Project listing, create a new Project or select an existing Project. Af
 3. Input the name of your application and select **Native App** as the application type. Click "Save".
 4. You will see a list of guides that can help you for setting up, then click "Next".
 
-![Create an application](../../.gitbook/assets/create-application-app-1.png)
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 **Step 2: Configure the application**
 
@@ -34,26 +32,7 @@ From the Project listing, create a new Project or select an existing Project. Af
 2. Head back to Authgear Portal, fill in the Redirect URI that you have defined in the previous steps.
 3. Click "Save" in the top tool bar and keep the **Client ID**. You can also obtain it again from the Applications list later.
 
-![Edit an application](../../.gitbook/assets/edit-application-app.png)
-{% endtab %}
-
-{% tab title="authgear.yaml (self-deployed)" %}
-```yaml
-oauth:
-  clients:
-    - name: your_app_name
-      client_id: a_random_generated_string
-      redirect_uris:
-        - "com.myapp.example://host/path"
-      grant_types:
-        - authorization_code
-        - refresh_token
-      response_types:
-        - code
-        - none
-```
-{% endtab %}
-{% endtabs %}
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Create a Xamarin app
 

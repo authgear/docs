@@ -11,28 +11,9 @@ To use webhooks you need to:
 
 ## Configure Authgear to deliver events to your webhook
 
-{% tabs %}
-{% tab title="Portal" %}
 1. In the portal, go to **Advanced** > **Hooks**.
 2. Add your webhooks in **Blocking Events** and **Non-Blocking Events**, depending on which event you want to listen to.
 3. Click **Save**.
-{% endtab %}
-
-{% tab title="authgear.yaml" %}
-```yaml
-hook:
-  blocking_handlers:
-    - event: "user.pre_create"
-      url: 'https://myapp.com/check_user_create'
-  non_blocking_handlers:
-    # listen to all events and filter events by type in request
-    - events: ["*"]
-      url: 'https://myapp.com/all_events'
-    - events: ["user.created"]
-      url: 'https://myapp.com/sync_user_creation'
-```
-{% endtab %}
-{% endtabs %}
 
 ## Protocol
 
@@ -102,6 +83,7 @@ func main() {
 }
 ```
 {% endtab %}
+
 {% tab title="Python" %}
 ```python
 import hmac
@@ -160,8 +142,9 @@ if __name__ == "__main__":
     main()
 ```
 {% endtab %}
+
 {% tab title="NodeJS" %}
-```JavaScript
+```javascript
 const crypto = require('crypto');
 const http = require('http');
 
@@ -241,8 +224,9 @@ server.listen(9999, () => {
 });
 ```
 {% endtab %}
+
 {% tab title="Java" %}
-```Java
+```java
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -351,6 +335,7 @@ public class TestServer {
 }
 ```
 {% endtab %}
+
 {% tab title="PHP" %}
 ```php
 <?php

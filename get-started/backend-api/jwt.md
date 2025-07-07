@@ -4,7 +4,7 @@ description: >-
   server
 ---
 
-# Validate JWT in your application server
+# Validate JWT in your backend
 
 [![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/backend-api/jwt.md)
 
@@ -12,7 +12,7 @@ In this section, we will go through how to decode the JWT token to obtain the cu
 
 Before we start, make sure the option **Issue JWT as access token** is enabled in your Application settings in the Portal.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt="" width="375"><figcaption><p>Enable this option in application settings in the portal</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt="" width="375"><figcaption><p>Enable this option in application settings in the portal</p></figcaption></figure>
 
 With the **Issue JWT as access token** option turned on in your application, Authgear will issue JWT as access tokens. The incoming HTTP requests should include the access token in their `Authorization` headers. Without setting the reverse proxy, your backend server can use your Authgear **JWKS** to verify the request and decode user information from the JWT access token.
 
@@ -43,14 +43,14 @@ Follow this step-by-step example to verify and decode the JWT token.
 
 {% tabs %}
 {% tab title="Python" %}
-#### Step 1: Install packages
+**Step 1: Install packages**
 
 ```bash
 pip install cryptography
 pip install PyJWT
 ```
 
-#### Step 2: Find the JSON Web Key Sets (JWKS) endpoint
+**Step 2: Find the JSON Web Key Sets (JWKS) endpoint**
 
 Define a function to find the JWKS endpoint from the OpenID Connect configuration. Use your Authgear endpoint as the `base_address`
 
@@ -71,7 +71,7 @@ def fetch_jwks_uri(base_address):
     return jwks_uri
 ```
 
-#### Step 3: Get the JWT token from the Authorization header
+**Step 3: Get the JWT token from the Authorization header**
 
 Define a function to extract the access token from the Authorization header in the incoming request. It should look like `Authorization: Bearer <access_token>`.
 
@@ -88,7 +88,7 @@ def parse_header(authz_header):
     return parts[1]
 ```
 
-#### Step 4: Verify and decode the JWT token
+**Step 4: Verify and decode the JWT token**
 
 Here we show an example of using the Flask web framework to guard a path. You may need to adjust some of the codes to suit your technologies.
 
@@ -137,13 +137,13 @@ def hello():
 {% endtab %}
 
 {% tab title="Node.js" %}
-#### Step 1: Install dependencies
+**Step 1: Install dependencies**
 
 ```bash
 npm install --save axios jwks-rsa jsonwebtoken
 ```
 
-#### Step 2: Find the JWKS Endpoint
+**Step 2: Find the JWKS Endpoint**
 
 Use the following method to get the JWKS URI (you'll need to URI to extract the public signing key from a JWT).
 
@@ -156,7 +156,7 @@ const getJwksUri = async (appUrl) => {
 }
 ```
 
-#### Step 3: Extract JWT from Request Header
+**Step 3: Extract JWT from Request Header**
 
 Use the following code to extract only the token part from a `Bearer [token]` authorization header in your Express app:
 
@@ -181,7 +181,7 @@ app.get('/', async (req, res) => {
 }
 ```
 
-#### Step 4: Decode Access Token
+**Step 4: Decode Access Token**
 
 Next, decode the access token so that you can extract the JWT `kid` from the result. You'll need this \`kid to get the public signing key. Use the following code to decode the JWT:
 
@@ -189,7 +189,7 @@ Next, decode the access token so that you can extract the JWT `kid` from the res
 const decoded_access_token = node_jwt.decode(access_token, {complete: true});
 ```
 
-#### Step 5: Get JWT Signing Keys and Verify the JWT
+**Step 5: Get JWT Signing Keys and Verify the JWT**
 
 Use the following code to extract the JWT public keys then verify the JWT using the keys:
 
@@ -373,7 +373,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {% tab title="Java" %}
 The following example uses Spring Boot.
 
-#### Step 1: Install dependencies
+**Step 1: Install dependencies**
 
 Add the following dependencies to your build.gradle file:
 
@@ -399,7 +399,7 @@ import java.net.URL;
 import java.util.List;
 ```
 
-#### Step 2: Get JWKS Endpoint
+**Step 2: Get JWKS Endpoint**
 
 Implement the following method to fetch the JWKS URI:
 
@@ -426,7 +426,7 @@ private static String fetchJwksUri(String baseAddress) throws Exception {
 }
 ```
 
-#### Step 3: Get Signing Key
+**Step 3: Get Signing Key**
 
 Get the signing key from the JWK using the following method:
 
@@ -446,7 +446,7 @@ private static RSAKey getSigningKeyFromJwks(String jwksUri, String token) throws
 }
 ```
 
-#### Step 4: Validate JWT
+**Step 4: Validate JWT**
 
 To demonstrate how to validate a JWT, we'll implement a `validateJWT` endpoint in a Spring Boot application. The endpoint will read access tokens from the bearer authorization header.
 
@@ -562,7 +562,7 @@ public class DemoApplication {
 {% endtab %}
 
 {% tab title="PHP" %}
-#### Step 1: Install Packages
+**Step 1: Install Packages**
 
 First, install the dependencies required by running these com
 
@@ -574,7 +574,7 @@ composer require firebase/php-jwt
 composer require guzzlehttp/guzzle
 ```
 
-#### Step 2: Find the JWKS Endpoint
+**Step 2: Find the JWKS Endpoint**
 
 Create a function that finds the JWKS endpoint from your Authgear application endpoint using the following code:
 
@@ -598,7 +598,7 @@ function getJwksUri($appUrl) {
 }
 ```
 
-#### Step 3: Get Signing Key
+**Step 3: Get Signing Key**
 
 Add the following code to your application to get the JWT signing key:
 
@@ -614,7 +614,7 @@ $parsedKey = JWK::parseKey($jwks, "RS256");
 $signingKey = $parsedKey->getKeyMaterial();
 ```
 
-#### Step 4: Extract the JWT From the Request Header
+**Step 4: Extract the JWT From the Request Header**
 
 To extract the access token from the HTTP request use the following code:
 
@@ -625,7 +625,7 @@ $authorizationHeader = $_SERVER['HTTP_AUTHORIZATION'];
 $jwt = (explode(" ", $authorizationHeader))[1];
 ```
 
-#### Step 5: Validate and Decode JWT
+**Step 5: Validate and Decode JWT**
 
 Finally, decode the JWT signing key.
 

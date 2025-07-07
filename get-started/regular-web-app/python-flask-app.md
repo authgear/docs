@@ -32,11 +32,11 @@ To use Authgear services, you’ll need to have an application set up in the Aut
 
 To set up the application, navigate to the [Authgear Portal UI](https://portal.authgear.com/) and select **Applications** on the left-hand navigation bar. Use the interactive selector to create a new **Authgear OIDC Client application** or select an existing application that represents the project you want to integrate with.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Every application in Authgear is assigned an alphanumeric, unique client ID that your application code will use to call Authgear APIs through the Authlib client library in the Flask app. Record the generated Authgear Issuer `Domain` (for example, `example-auth.authgear-apps.com`), `CLIENT ID`, `CLIENT SECRET` from the output. You will use these values in Part 2 for the Flask app config.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Step 2: Configure **Redirect URI**
 
@@ -52,7 +52,7 @@ After you create the **Authgear app**, you choose how users need to **authentica
 
 ### Part 2: **Create a Flask application**
 
-Next, create a Flask application with a single page and routes for home, callback, login, and logout flows.&#x20;
+Next, create a Flask application with a single page and routes for home, callback, login, and logout flows.
 
 #### Step 1: Configure an .env file <a href="#configure-your-env-file" id="configure-your-env-file"></a>
 
@@ -123,7 +123,7 @@ def callback():
 
 **Refresh Token**
 
-Calling the  `authorize_access_token()` method of the Flask Authlib package will include a refresh token in the token response, provided your Flask application has `offline_access` as one of the OAuth 2.0 scopes.
+Calling the `authorize_access_token()` method of the Flask Authlib package will include a refresh token in the token response, provided your Flask application has `offline_access` as one of the OAuth 2.0 scopes.
 
 Authlib will also use the refresh token to obtain a new access token automatically when the current access token has expired.
 
@@ -154,7 +154,7 @@ def home():
     )
 ```
 
-#### Step 4:  Add UI page <a href="#setup-your-routes" id="setup-your-routes"></a>
+#### Step 4: Add UI page <a href="#setup-your-routes" id="setup-your-routes"></a>
 
 Create a new sub-directory in the project folder named `templates`, and create a file `home.html`.
 

@@ -2,17 +2,6 @@
 description: >-
   You need to protect a JavaScript SPA application that runs entirely in a
   browser
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: false
-  pagination:
-    visible: false
 ---
 
 # Single-Page App

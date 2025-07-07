@@ -34,27 +34,9 @@ Sounds overwhelming? Authgear's magic handles all these for you. Follow this gui
 
 ## Enable biometric authentication for your project
 
-{% tabs %}
-{% tab title="Portal" %}
 1. In the portal, go to **Authentication > Biometric**.
 2. Turn on **Enable biometric authentication**.
 3. **Save** the settings.
-{% endtab %}
-
-{% tab title="authgear.yaml" %}
-```yaml
-authentication:
-  identities:
-    ...
-    # Add biometric along with the other enabled identities
-    - biometric
-identity:
-  biometric:
-    # Enable listing biometric login in user setting page, default false
-    list_enabled: true
-```
-{% endtab %}
-{% endtabs %}
 
 ## Set reasonably short token lifetimes for client applications
 

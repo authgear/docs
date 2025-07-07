@@ -2,17 +2,6 @@
 description: >-
   In this section of the Authgear documentation, you'll learn about all the
   GraphQL queries and mutations the Admin API supports.
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # API Queries and Mutations
@@ -411,7 +400,7 @@ query {
 
 ### 1.7 getUser and getUsers Queries
 
-The `getUser` and `getUsers` queries are a collection of Admin API queries for getting details about a single user or multiple users using specific attributes as the search key and in real-time. Unlike the `users()` query, the result from the getUser and getUsers queries is immediately consistent.&#x20;
+The `getUser` and `getUsers` queries are a collection of Admin API queries for getting details about a single user or multiple users using specific attributes as the search key and in real-time. Unlike the `users()` query, the result from the getUser and getUsers queries is immediately consistent.
 
 Learn more about all the queries in this collection [here](retrieving-users-using-admin-api.md).
 
@@ -832,7 +821,7 @@ mutation {
 
 **Example 2 (send new password to user):**
 
-You can include `sendPassword: true` and `setPasswordExpired: true` in the input for the  `resetPassword` mutation to send the new password to a user and set it as expired so they can set a new one the next time they log in. Here is an example of the mutation:
+You can include `sendPassword: true` and `setPasswordExpired: true` in the input for the `resetPassword` mutation to send the new password to a user and set it as expired so they can set a new one the next time they log in. Here is an example of the mutation:
 
 ```graphql
 mutation {
@@ -1288,9 +1277,9 @@ updateUser(input: UpdateUserInput!): UpdateUserPayload!
 
 **Example 1 (Standard Attributes):**
 
-For this `updateUser` example, we will be updating the standard attributes for a user. The first thing to do is to extract all the current values of the user's standard attributes into a variable. Then, add new fields or modify existing fields in the variable with new values.&#x20;
+For this `updateUser` example, we will be updating the standard attributes for a user. The first thing to do is to extract all the current values of the user's standard attributes into a variable. Then, add new fields or modify existing fields in the variable with new values.
 
-**Note:** It is important to include the current values of the fields that you don't wish to update but still want to keep.  The Admin API will delete any existing fields you omit in the variable.&#x20;
+**Note:** It is important to include the current values of the fields that you don't wish to update but still want to keep. The Admin API will delete any existing fields you omit in the variable.
 
 The following block of code shows an example variable. If you're using GraphiQL, simply create the variable in the variable tab of GraphiQL like this:
 
@@ -1343,17 +1332,15 @@ mutation ($standardAttributes: UserStandardAttributes) {
 
 **Example 2 (Custom Attributes)**
 
-The following example shows how to update custom attributes.&#x20;
+The following example shows how to update custom attributes.
 
 **Note:** You must have created the custom attributes you wish to update in **Authgear Portal** > **User Profile** > **Custom Attributes**.
 
 <figure><img src="../../../.gitbook/assets/authgear-custom-attr.png" alt=""><figcaption></figcaption></figure>
 
-
-
 Create a variable and extract the current custom attributes into it. Modify the values of the attributes you wish to update or add new attributes.
 
-**Note:** Again, it is important to include the current values of the fields that you don't wish to update but still want to keep.  The Admin API will delete any existing fields you omit in the variable.
+**Note:** Again, it is important to include the current values of the fields that you don't wish to update but still want to keep. The Admin API will delete any existing fields you omit in the variable.
 
 The following block of code shows an example of the variable. You can set the variable in the variable tab of GraphiQL.
 
@@ -1873,8 +1860,6 @@ mutation {
 {% endtab %}
 {% endtabs %}
 
-
-
 ### 2.32 removeRoleFromGroups
 
 Removes a role from one or more groups.
@@ -2155,4 +2140,3 @@ mutation {
 ```
 {% endtab %}
 {% endtabs %}
-

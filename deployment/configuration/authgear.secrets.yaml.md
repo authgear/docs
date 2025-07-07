@@ -1,12 +1,10 @@
 ---
-description: The secret configuration authgear.secrets.yaml
+description: This is the configuration file containing various secrets used in Authgear.
 ---
 
 # authgear.secrets.yaml
 
-This is the configuration file containing various secrets used in Authgear.
-
-## JSON Schema
+### JSON Schema
 
 The configuration file is validated against the following JSON Schema:
 
@@ -500,7 +498,7 @@ The configuration file is validated against the following JSON Schema:
 }
 ```
 
-## Structure
+### Structure
 
 Secrets are placed under the key `secrets`. Each item has `key` and `data`. The valid values for `key` are listed below, where `data` is key-specific.
 
@@ -512,7 +510,7 @@ secrets:
 
 Note that **ALL** secrets are required.
 
-### admin-api.auth
+#### admin-api.auth
 
 `admin-api.auth` defines the JWK to verify Admin API token. It must be an RSA key.
 
@@ -526,7 +524,7 @@ secrets:
       # Other fields specific to RSA.
 ```
 
-### db
+#### db
 
 `db` defines the database credentials. Only PostgreSQL database is supported.
 
@@ -538,7 +536,7 @@ secrets:
     database_scheme: public
 ```
 
-### audit.db
+#### audit.db
 
 `audit.db` defines the database credentials of the instance for storing audit data. Only PostgreSQL database is supported.
 
@@ -550,7 +548,7 @@ secrets:
     database_scheme: public
 ```
 
-### redis
+#### redis
 
 `redis` defines the Redis credentials.
 
@@ -561,7 +559,7 @@ secrets:
     redis_url: redis://username:password@localhost:6379/0
 ```
 
-### analytic.redis
+#### analytic.redis
 
 `analytic.redis` defines the Redis credentials of the Redis instance for storing analytics data.
 
@@ -572,7 +570,7 @@ secrets:
     redis_url: redis://username:password@localhost:6379/0
 ```
 
-### elasticsearch
+#### elasticsearch
 
 `elasticsearch` defines the connection information of the Elasticsearch instance.
 
@@ -583,7 +581,7 @@ secrets:
     elasticsearch_url: http://localhost:9200
 ```
 
-### sso.oauth.client
+#### sso.oauth.client
 
 `sso.oauth.client` defines the client secrets.
 
@@ -600,7 +598,7 @@ secrets:
       client_secret: private_key_in_pem_format
 ```
 
-### mail.smtp
+#### mail.smtp
 
 `mail.smtp` defines the SMTP credentials.
 
@@ -617,7 +615,7 @@ secrets:
     password: password
 ```
 
-### sms.twilio
+#### sms.twilio
 
 `sms.twilio` defines the Twilio credentials.
 
@@ -629,7 +627,7 @@ secrets:
     auth_token: auth_token
 ```
 
-### sms.nexmo
+#### sms.nexmo
 
 `sms.nexmo` defines the Nexmo credentials.
 
@@ -641,7 +639,7 @@ secrets:
     api_secret: api_secret
 ```
 
-### jwt
+#### jwt
 
 `jwt` defines the JSON web key (JWK) to sign internal use, ephemeral JWT token. It must be an octet key.
 
@@ -655,7 +653,7 @@ secrets:
       k: key
 ```
 
-### oidc
+#### oidc
 
 `oidc` defines the JWK to sign ID tokens. It must be an RSA key.
 
@@ -669,14 +667,14 @@ secrets:
       # Other fields specific to RSA.
 ```
 
-### csrf
+#### csrf
 
 `csrf` defines the symmetric key to generate a CSRF token. It must be an octet key.
 
-The format shares with [jwt](authgear.secrets.yaml.md#jwt)
+The format shares with jwt
 
-### webhook
+#### webhook
 
 `webhook` defines the symmetric key to sign webhook request body. It must be an octet key.
 
-The format is shared with [jwt](authgear.secrets.yaml.md#jwt).
+The format is shared with jwt.

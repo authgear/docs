@@ -2,17 +2,6 @@
 description: >-
   Authgear exposes APIs for developers to manage their applications
   programmatically
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # APIs
@@ -25,7 +14,7 @@ Unless otherwise specified, all paths mentioned here are relative to the endpoin
 
 Authgear provides the following groups of APIs:
 
-* [**OAuth 2.0 and OpenID Connect**](oauth-2.0-and-openid-connect-oidc/): for connecting with OIDC Clients
+* [**OAuth 2.0 and OpenID Connect**](oauth-2.0-and-openid-connect-oidc): for connecting with OIDC Clients
 * [**Admin API**](admin-api/): for your servers to manage users via a GraphQL endpoint.
 * [**User Import API**](user-import-api.md)**:** this is an API that supports the bulk import of users from another system to an Authgear project.
 * [**User Export API**](user-export-api.md): an API that allows you to export user data from an Authgear project into a file in CSV or ndjson format.
@@ -38,8 +27,8 @@ Here are all of the special paths with each group of the API above.
 
 For more information about the OIDC API endpoint, please refer to the following sections or any of the Regular Web App Getting Started guides.
 
-{% content-ref url="oauth-2.0-and-openid-connect-oidc/" %}
-[oauth-2.0-and-openid-connect-oidc](oauth-2.0-and-openid-connect-oidc/)
+{% content-ref url="oauth-2.0-and-openid-connect-oidc" %}
+[oauth-2.0-and-openid-connect-oidc](oauth-2.0-and-openid-connect-oidc)
 {% endcontent-ref %}
 
 {% content-ref url="../../authentication-and-access/single-sign-on/oidc-provider.md" %}

@@ -72,7 +72,7 @@ Run the following command from the root directory of your Flutter project to ins
 flutter pub add flutter_authgear
 ```
 
-### Step 3:  Initialize Authgear
+### Step 3: Initialize Authgear
 
 First, import Authgear at the top of `lib/main.dart`:
 
@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 Replace "\<AUTHGEAR\_ENDPOINT>" and "\<ClIENT\_ID>" with the client ID and endpoint for the client application you created earlier.
 
-Finally, override the `initState()` method for your State class to call your new `_init()` method. This will initiate a new instance of the Authgear SDK that you'll use to perform operations like starting an authentication flow.&#x20;
+Finally, override the `initState()` method for your State class to call your new `_init()` method. This will initiate a new instance of the Authgear SDK that you'll use to perform operations like starting an authentication flow.
 
 ```dart
 @override
@@ -128,7 +128,7 @@ void initState() {
 
 In this step, we'll add a login button and other UI widgets to our demo application.
 
-To do that, first, add a `_userInfo` field variable to the State class:&#x20;
+To do that, first, add a `_userInfo` field variable to the State class:
 
 ```dart
 UserInfo? _userInfo;
@@ -321,7 +321,7 @@ When your app runs, you should see the Login button, clicking on it should start
 
 <figure><img src="../../.gitbook/assets/image (48).png" alt="" width="188"><figcaption><p>demo app preview</p></figcaption></figure>
 
-## Step 6: Setup redirect URI for your app&#x20;
+## Step 6: Setup redirect URI for your app
 
 To finish the integration, setup the app to handle the redirectURI specified in the application. This part requires platform specific integration.
 
@@ -347,7 +347,7 @@ Add the following `<activity>` entry to the `/android/app/src/main/AndroidManife
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Configure data to be the exact redirect URI your app uses. -->
-                <!-- Here, we are using com.authgear.example://host/path as configured in authgear.yaml. -->
+                <!-- Here, we are using com.authgear.example://host/path as configured in the portal -->
                 <!-- NOTE: The redirectURI supplied in AuthenticateOptions *has* to match as well -->
                 <data android:scheme="com.example.authgeardemo.flutter"
                     android:host="host"
@@ -377,7 +377,7 @@ Remove the following line from `AndroidManifest.xml` because this setting confli
 android:taskAffinity=""
 ```
 
-Next, open `/android/app/build.gradle` and set `minSdk` to `30`:&#x20;
+Next, open `/android/app/build.gradle` and set `minSdk` to `30`:
 
 ```gradle
 android {
@@ -502,8 +502,6 @@ state = _authgear.sessionState;
 
 The value of `sessionState` can be `SessionState.unknown`, `SessionState.noSession` or `SessionState.authenticated`. Initially, the `sessionState` is `SessionState.unknown`. After a call to `authgear.configure`, the session state would become `SessionState.authenticated` if a previous session was found, or `SessionState.noSession` if such session was not found.
 
-
-
 #### Using the Access Token in HTTP Requests
 
 To include the access token to the HTTP requests to your application server, use `wrapHttpClient`.
@@ -525,4 +523,4 @@ To protect your application server from unauthorized access. You will need to **
 
 ## Flutter SDK Reference
 
-For detailed documentation on the Flutter SDK, visit [Flutter SDK Reference](https://authgear.github.io/authgear-sdk-flutter/)&#x20;
+For detailed documentation on the Flutter SDK, visit [Flutter SDK Reference](https://authgear.github.io/authgear-sdk-flutter/)
