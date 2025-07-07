@@ -9,17 +9,15 @@ description: >-
 
 This glossary provides definitions for technical terms and abbreviations to make it easier to understand concepts and work with Authgear.
 
-We've arranged the glossary terms and abbreviations in alphabetical order on the left side. Select any term to see the full definition and explanation.&#x20;
+We've arranged the glossary terms and abbreviations in alphabetical order on the left side. Select any term to see the full definition and explanation.
 
 ### Access token
 
-An access token is a credential that a client application can use to access a user's account and resources on Authgear. The user needs to first grant a client authorization to their account before the client can request an access token.
-
-Authgear also uses access token to protect resources on the backend server. As a result, HTTP requests to the backend server must contain a valid access token.
+An access token is a credential that a client application used to authenticate on behalf of the users for accessing resources on a backend server. In a logged in session, the requests from the client application to the backend servers should contain an access token. An access token can be in different formats, but JWT is a common choice.
 
 ### Admin API
 
-The Admin API provides a GraphQL interface for developers to interact with services and data on Authgear from their own code or custom application.&#x20;
+The Admin API provides a GraphQL interface for developers to interact with services and data on Authgear from their own code or custom application.
 
 You can also access Inspect the GraphQL schema and build queries and mutations with GraphiQL in the Authgear portal.
 
@@ -65,7 +63,7 @@ Examples of blocking events Authgear supports include: `user.pre_create`, `user.
 
 Claims contain details that can be used to identify a user or application. They are typically included in the authentication tokens such as JWT and can contain details like username, scope, and role.
 
-See [this post](https://docs.authgear.com/how-to-guide/integration/add-custom-fields-to-a-jwt-access-token) for instructions on how to add custom fields (details) to Authgear's JWT access token to meet your specific needs.&#x20;
+See [this post](https://docs.authgear.com/how-to-guide/integration/add-custom-fields-to-a-jwt-access-token) for instructions on how to add custom fields (details) to Authgear's JWT access token to meet your specific needs.
 
 ### Client ID
 
@@ -113,9 +111,9 @@ Authgear supports the OAuth 2.0 standard and you can use it to access your user'
 
 ### OpenID Connect (OIDC)
 
-OpenID Connect (OIDC) is an authentication protocol based on the OAuth 2.0 standard. It makes it possible for applications to verify the identity of a user using data from an authorization provider.&#x20;
+OpenID Connect (OIDC) is an authentication protocol based on the OAuth 2.0 standard. It makes it possible for applications to verify the identity of a user using data from an authorization provider.
 
-You can use Authgear as an OpenID Connect provider to enable user authentication on your application without having to store or manage user passwords on your application.&#x20;
+You can use Authgear as an OpenID Connect provider to enable user authentication on your application without having to store or manage user passwords on your application.
 
 ### Passkey
 
@@ -139,7 +137,7 @@ A refresh token is a special token that can be used to obtain a new access token
 
 ### Roles
 
-Roles can be used to control access to certain parts of an application or API that's powered by Authgear.  Roles are returned using the `https://authgear.com/claims/user/roles` attribute in Authgear's JWT access token and [UserInfo](apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) as an array.&#x20;
+Roles can be used to control access to certain parts of an application or API that's powered by Authgear. Roles are returned using the `https://authgear.com/claims/user/roles` attribute in Authgear's JWT access token and [UserInfo](apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) as an array.
 
 The following is an example of how you can use roles. In a blog application with two roles (`admin` and `reader`), you can restrict access for editing and adding new posts to only users with the `admin` role. Check out our documentation on [roles and groups](../admin/user-management/manage-users-roles-and-groups.md) to learn more about managing roles in Authgear.
 
@@ -200,4 +198,3 @@ Your Authgear endpoint or project endpoint is the active domain name that points
 The easiest way to find out what your Authgear endpoint is is to navigate to **Custom Domains** in the Authgear Portal. Your endpoint is the domain in the row with a green **Active** status.
 
 <figure><img src="../.gitbook/assets/authgear-active-domain.png" alt=""><figcaption></figcaption></figure>
-
