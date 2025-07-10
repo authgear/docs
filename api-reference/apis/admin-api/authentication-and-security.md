@@ -33,10 +33,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/lestrrat-go/jwx/v2/jwa"
-	"github.com/lestrrat-go/jwx/v2/jwk"
-	"github.com/lestrrat-go/jwx/v2/jws"
-	"github.com/lestrrat-go/jwx/v2/jwt"
+	"github.com/lestrrat-go/jwx/v3/jwa"
+	"github.com/lestrrat-go/jwx/v3/jwk"
+	"github.com/lestrrat-go/jwx/v3/jws"
+	"github.com/lestrrat-go/jwx/v3/jwt"
 )
 
 // Replace "myapp" with your project ID here.
@@ -68,7 +68,7 @@ func main() {
 	_ = payload.Set(jwt.ExpirationKey, now.Add(5*time.Minute).Unix())
 
 	// The alg MUST be RS256.
-	alg := jwa.RS256
+	alg := jwa.RS256()
 	hdr := jws.NewHeaders()
 	hdr.Set("typ", "JWT")
 
