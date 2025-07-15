@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 # Example: Only Allow Signups from Inside the Corporate Network using Hooks
 
 Authgear Webhook is a feature that sends notifications in the form of HTTP requests to an external URL that you specify when certain events occur. For example, Webhook can send the user.pre\_create event just before a new user is created.

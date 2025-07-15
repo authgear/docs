@@ -129,10 +129,11 @@
 * [Events and Hooks](customization/events-hooks/README.md)
   * [Blocking Events](customization/events-hooks/blocking-events.md)
   * [Non-blocking Events](customization/events-hooks/non-blocking-events.md)
-  * [Webhooks](customization/events-hooks/webhooks.md)
   * [JavaScript / TypeScript Hooks](customization/events-hooks/denohooks.md)
+  * [Webhooks](customization/events-hooks/webhooks.md)
   * [AMR (Authentication Method Reference)](customization/events-hooks/amr.md)
   * [Example: Only Allow Signups from Inside the Corporate Network using Hooks](customization/events-hooks/only-allow-signups-from-inside-the-corporate-network-using-hooks.md)
+  * [Examples: Common Use Cases](customization/events-hooks/examples-common-use-cases.md)
 
 ## Admin & Operations
 
