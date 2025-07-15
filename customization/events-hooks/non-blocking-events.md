@@ -1,188 +1,45 @@
 ---
-description: The full list of events
+description: >-
+  Non-blocking events are delivered asynchronously after the operation is
+  performed.
 ---
 
-# Event List
+# Non-blocking Events
 
-## Blocking Events
+Non-blocking events are triggered after the operation is performed. They are delivered to your hooks asynchronously after the operation is performed.
 
-* [user.pre\_create](event-list.md#user.pre\_create)
-* [user.profile.pre\_update](event-list.md#user.profile.pre\_update)
-* [user.pre\_schedule\_deletion](event-list.md#user.pre\_schedule\_deletion)
-* [oidc.jwt.pre\_create](event-list.md#oidc.jwt.pre\_create)
+The hooks must finish within 60 seconds. Otherwise, the delivery will fail due to timeout. In Webhooks, your server must return a HTTP status code within **2xx** range. Other status codes are considered as a failed delivery.&#x20;
 
-## Non-blocking Events
+The response of the hooks is ignored.
 
-* [user.created](event-list.md#user.created)
-* [user.profile.updated](event-list.md#user.profile.updated)
-* [user.authenticated](event-list.md#user.authenticated)
-* [user.disabled](event-list.md#user.disabled)
-* [user.reenabled](event-list.md#user.reenabled)
-* [user.anonymous.promoted](event-list.md#user.anonymous.promoted)
-* [user.deletion\_scheduled](event-list.md#user.deletion\_scheduled)
-* [user.deletion\_unscheduled](event-list.md#user.deletion\_unscheduled)
-* [user.deleted](event-list.md#user.deleted)
-* [identity.email.added](event-list.md#identity.email.added)
-* [identity.email.removed](event-list.md#identity.email.removed)
-* [identity.email.updated](event-list.md#identity.email.updated)
-* [identity.email.verified](event-list.md#identity.email.verified)
-* [identity.email.unverified](event-list.md#identity.email.unverified)
-* [identity.phone.added](event-list.md#identity.phone.added)
-* [identity.phone.removed](event-list.md#identity.phone.removed)
-* [identity.phone.updated](event-list.md#identity.phone.updated)
-* [identity.phone.verified](event-list.md#identity.phone.verified)
-* [identity.phone.unverified](event-list.md#identity.phone.unverified)
-* [identity.username.added](event-list.md#identity.username.added)
-* [identity.username.removed](event-list.md#identity.username.removed)
-* [identity.username.updated](event-list.md#identity.username.updated)
-* [identity.oauth.connected](event-list.md#identity.oauth.connected)
-* [identity.oauth.disconnected](event-list.md#identity.oauth.disconnected)
-* [identity.biometric.enabled](event-list.md#identity.biometric.enabled)
-* [identity.biometric.disabled](event-list.md#identity.biometric.disabled)
+## Non-blocking Event List
 
-### user.pre\_create
-
-Occurs right before the user creation. User can be created by user signup, user signup as an anonymous user, or created by the admin via the Portal or Admin API.
-
-This event supports [Mutations on the user object](./#mutations-on-the-user-object)
-
-```json
-{
-  "type": "user.pre_create",
-  "payload": {
-    "user": {
-      "id": "338deafa-400b-4589-a922-2c92d670b757",
-      "created_at": "2006-01-02T03:04:05.123456Z",
-      "updated_at": "2006-01-02T03:04:05.123456Z",
-      "is_anonymous": false,
-      "is_verified": true,
-      "is_disabled": false,
-      "is_deactivated": false,
-      "can_reauthenticate": true,
-      "standard_attributes": {
-        "email": "user@example.com",
-        "email_verified": true,
-        "updated_at": 1136171045
-      }
-    },
-    "identities": [
-      {
-        "id": "239d585d-9b90-4148-9aa2-2e3131b5847a",
-        "created_at": "2006-01-02T03:04:05.123456Z",
-        "updated_at": "2006-01-02T03:04:05.123456Z",
-        "type": "login_id",
-        "claims": {
-          "email": "user@example.com",
-          "https://authgear.com/claims/login_id/key": "email",
-          "https://authgear.com/claims/login_id/original_value": "user@example.com",
-          "https://authgear.com/claims/login_id/type": "email",
-          "https://authgear.com/claims/login_id/value": "user@example.com"
-        }
-      }
-    ]
-  }
-}
-```
-
-### user.profile.pre\_update
-
-Occurs right before the update of the user profile.
-
-This event supports [Mutations on the user object](./#mutations-on-the-user-object)
-
-```json
-{
-  "type": "user.profile.pre_update",
-  "payload": {
-    "user": {
-      "id": "338deafa-400b-4589-a922-2c92d670b757",
-      "created_at": "2006-01-02T03:04:05.123456Z",
-      "updated_at": "2006-01-02T03:04:05.123456Z",
-      "last_login_at": "2006-01-02T03:04:05.123456Z",
-      "is_anonymous": false,
-      "is_verified": true,
-      "is_disabled": false,
-      "is_deactivated": false,
-      "can_reauthenticate": true,
-      "standard_attributes": {
-        "email": "user@example.com",
-        "email_verified": true,
-        "name": "Chris",
-        "updated_at": 1136171045
-      }
-    }
-  }
-}
-```
-
-### user.pre\_schedule\_deletion
-
-Occurs right before account deletion is scheduled.
-
-This event does not support mutations.
-
-```json
-{
-  "type": "user.pre_schedule_deletion",
-  "payload": {
-    "user": {
-      "id": "338deafa-400b-4589-a922-2c92d670b757",
-      "created_at": "2006-01-02T03:04:05.123456Z",
-      "updated_at": "2006-01-02T03:04:05.123456Z",
-      "last_login_at": "2006-01-02T03:04:05.123456Z",
-      "is_anonymous": false,
-      "is_verified": true,
-      "is_disabled": true,
-      "is_deactivated": true,
-      "delete_at": "2022-09-30T15:18:19.040081Z",
-      "can_reauthenticate": true,
-      "standard_attributes": {
-        "email": "user@example.com",
-        "email_verified": true,
-        "updated_at": 1136171045
-      }
-    }
-  }
-}
-```
-
-### oidc.jwt.pre\_create
-
-Occurs right before the access token is issued. Use this event to add custom fields to the JWT access token.
-
-This event supports [Mutations on the JWT payload](./#mutations-on-the-jwt-payload)
-
-```json
-{
-  "type": "oidc.jwt.pre_create",
-  "payload": {
-    "user": {
-      "id": "338deafa-400b-4589-a922-2c92d670b757",
-      "created_at": "2006-01-02T03:04:05.123456Z",
-      "updated_at": "2006-01-02T03:04:05.123456Z",
-      "last_login_at": "2006-01-02T03:04:05.123456Z",
-      "is_anonymous": false,
-      "is_verified": true,
-      "is_disabled": true,
-      "is_deactivated": true,
-      "delete_at": "2022-09-30T15:18:19.040081Z",
-      "can_reauthenticate": true,
-      "standard_attributes": {
-        "email": "user@example.com",
-        "email_verified": true,
-        "updated_at": 1136171045
-      }
-    },
-    "jwt": {
-      "payload": {
-        "iss": "https://myapp.authgear.cloud",
-        "aud": ["YOUR_CLIENT_ID"],
-        "sub": "338deafa-400b-4589-a922-2c92d670b757"
-      }
-    }
-  }
-}
-```
+* [user.created](non-blocking-events.md#user.created)
+* [user.profile.updated](non-blocking-events.md#user.profile.updated)
+* [user.authenticated](non-blocking-events.md#user.authenticated)
+* [user.disabled](non-blocking-events.md#user.disabled)
+* [user.reenabled](non-blocking-events.md#user.reenabled)
+* [user.anonymous.promoted](non-blocking-events.md#user.anonymous.promoted)
+* [user.deletion\_scheduled](non-blocking-events.md#user.deletion_scheduled)
+* [user.deletion\_unscheduled](non-blocking-events.md#user.deletion_unscheduled)
+* [user.deleted](non-blocking-events.md#user.deleted)
+* [identity.email.added](non-blocking-events.md#identity.email.added)
+* [identity.email.removed](non-blocking-events.md#identity.email.removed)
+* [identity.email.updated](non-blocking-events.md#identity.email.updated)
+* [identity.email.verified](non-blocking-events.md#identity.email.verified)
+* [identity.email.unverified](non-blocking-events.md#identity.email.unverified)
+* [identity.phone.added](non-blocking-events.md#identity.phone.added)
+* [identity.phone.removed](non-blocking-events.md#identity.phone.removed)
+* [identity.phone.updated](non-blocking-events.md#identity.phone.updated)
+* [identity.phone.verified](non-blocking-events.md#identity.phone.verified)
+* [identity.phone.unverified](non-blocking-events.md#identity.phone.unverified)
+* [identity.username.added](non-blocking-events.md#identity.username.added)
+* [identity.username.removed](non-blocking-events.md#identity.username.removed)
+* [identity.username.updated](non-blocking-events.md#identity.username.updated)
+* [identity.oauth.connected](non-blocking-events.md#identity.oauth.connected)
+* [identity.oauth.disconnected](non-blocking-events.md#identity.oauth.disconnected)
+* [identity.biometric.enabled](non-blocking-events.md#identity.biometric.enabled)
+* [identity.biometric.disabled](non-blocking-events.md#identity.biometric.disabled)
 
 ### user.created
 

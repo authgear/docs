@@ -16,13 +16,9 @@ The stdout and the stderr of the Hooks are both ignored. Your hooks **MUST NOT**
 
 ## Configure Authgear to deliver events to your Hooks
 
-{% tabs %}
-{% tab title="Portal" %}
-1. In the portal, go to **Advanced** > **Hooks**.
-2. Add your Hooks in **Blocking Events** and **Non-Blocking Events**, depending on which event you want to listen to.
-3. Click **Save**.
-{% endtab %}
-{% endtabs %}
+* In the portal, go to **Advanced** > **Hooks**.
+* Add your Hooks in **Blocking Events** and **Non-Blocking Events**, depending on which event you want to listen to.
+* Click **Save**.
 
 ## Examples
 
@@ -69,9 +65,9 @@ export default async function(e: HookEvent): Promise<void> {
 
 ## TypeScript Definition
 
-[https://deno.land/x/authgear\_deno\_hook](https://deno.land/x/authgear\_deno\_hook) is a TypeScript definition that aids you in writing a Hook. You can see the full definition at [https://deno.land/x/authgear\_deno\_hook/mod.ts](https://deno.land/x/authgear\_deno\_hook/mod.ts)
+[https://deno.land/x/authgear\_deno\_hook](https://deno.land/x/authgear_deno_hook) is a TypeScript definition that aids you in writing a Hook. You can see the full definition at [https://deno.land/x/authgear\_deno\_hook/mod.ts](https://deno.land/x/authgear_deno_hook/mod.ts)
 
-If you are a Visual Studio Code user, you can [set up your editor](https://deno.land/manual@v1.27.2/references/vscode\_deno) to take full advantage of the definition.
+If you are a Visual Studio Code user, you can [set up your editor](https://deno.land/manual@v1.27.2/references/vscode_deno) to take full advantage of the definition.
 
 Alternatively, you can edit your hook and use the Deno CLI to typecheck.
 
