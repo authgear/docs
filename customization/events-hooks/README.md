@@ -14,7 +14,7 @@ Each event can have multiple hooks. The delivery order of non-blocking events is
 
 Events have the following shape as the body:
 
-```json5
+```json
 {
   "id": "0E1E9537-DF4F-4AF6-8B48-3DB4574D4F24",
   "seq": 435,

@@ -37,7 +37,7 @@ Supported fields in the JSON response:
 
 To let the operation proceed, return a JSON document with `is_allowed` set to `true`.
 
-```json
+```json5
 {
   "is_allowed": true
 }
@@ -45,7 +45,7 @@ To let the operation proceed, return a JSON document with `is_allowed` set to `t
 
 To abort the operation, return a JSON document with `is_allowed` set to `false`, and a non-empty `reason` and `title`.
 
-```json
+```json5
 {
   "is_allowed": false,
   "reason": "some reason",
@@ -70,7 +70,7 @@ Mutations by a hook are applied only when the operation is allowed to proceed. M
 
 When a blocking event supports mutations on the user object, your hooks can respond a JSON document to allow the operation, and specify the mutations you want to apply on the user object.
 
-```json
+```json5
 {
   "is_allowed": true,
   "mutations": {
@@ -96,7 +96,7 @@ You must include the **WHOLE** `standard_attributes` , `custom_attributes` , `ro
 
 When a blocking event supports mutations on the JWT payload, your hooks can respond a JSON document to allow the operation, and specify additional fields that you want to include in the JWT payload. However, you **MUST NOT** change or remove any existing fields in the JWT payload, as they are essential to the validity of the JWT.
 
-```json5
+```json
 {
   "is_allowed": true,
   "mutations": {
@@ -141,7 +141,7 @@ When multiple values are returned in `amr`, they are in AND relationship. For ex
 
 Example response for requiring MFA in authentication:
 
-```json5
+```json
 {
   "is_allowed": true,
   "constraints": {
@@ -162,7 +162,7 @@ Use the `rate_limits` property in a blocking event response to dynamically overr
 
 For example, this hook response means in the next operation, the "account enumeration" rate limit is double counted. i.e. The user shall hit the rate limit with half the numbers of attempts.
 
-```json5
+```json
 {
   "is_allowed": true,
   "rate_limits": {
@@ -184,7 +184,7 @@ Use `bot_protection` property to enable or disable for this request. This overri
 
 Example response with bot protection override:
 
-```json5
+```json
 {
   "is_allowed": true,
   "bot_protection": {
@@ -312,7 +312,7 @@ Occurs right before the account anonymization is scheduled.
 
 This event supports [#mutations-on-the-user-object](blocking-events.md#mutations-on-the-user-object "mention")
 
-```json5
+```json
 {
   "type": "user.pre_schedule_anonymization",
   "payload": {
@@ -343,7 +343,7 @@ Occurs right before any authentication flow started.
 
 This event supports [#apply-authentication-constraints](blocking-events.md#apply-authentication-constraints "mention"), [#bot-protection](blocking-events.md#bot-protection "mention"), [#override-rate-limits](blocking-events.md#override-rate-limits "mention")
 
-```json5
+```json
 {
   "type": "authentication.pre_initialize",
   "payload": {
@@ -369,7 +369,7 @@ Occurs right after an identity is identified during authentication, for example 
 
 This event supports [#apply-authentication-constraints](blocking-events.md#apply-authentication-constraints "mention"), [#bot-protection](blocking-events.md#bot-protection "mention"), [#override-rate-limits](blocking-events.md#override-rate-limits "mention")
 
-```json5
+```json
 {
   "type": "authentication.post_identified",
   "payload": {
@@ -452,7 +452,7 @@ Occurs right before any authentication flows completed. It is triggered when the
 
 This event supports [#apply-authentication-constraints](blocking-events.md#apply-authentication-constraints "mention"), [#override-rate-limits](blocking-events.md#override-rate-limits "mention")
 
-```json5
+```json
 {
   "payload": {
     "authentication_context": {
