@@ -25,7 +25,7 @@ The stdout and the stderr of the Hooks are both ignored. Your hooks **MUST NOT**
 Here is an example of a Hook for a blocking event.
 
 ```typescript
-import { HookEvent, HookResponse } from "https://deno.land/x/authgear_deno_hook@v1.0.0/mod.ts";
+import { HookEvent, HookResponse } from "https://deno.land/x/authgear_deno_hook@v1.6.1/mod.ts";
 export default async function(e: HookEvent): Promise<HookResponse> {
   // This hook simply allows the operation, which is identical to no-op.
   return { is_allowed: true };

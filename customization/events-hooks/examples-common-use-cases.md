@@ -1,4 +1,16 @@
+---
+description: >-
+  Common usage of events and hooks to modify the behavior of an authentication
+  on Authgear
+---
+
 # Examples: Common Use Cases
+
+Here are some example of using Hook to add actions to Authgear during the authentication flow. This allows extension of security features such as more granular access control, adaptive MFA and variable rate limit.
+
+Navigate to **Advanced** > **Hooks** in the Authgear portal. Next, click on **Add** under the **Blocking Events** section. Select "TypeScript" and then "Edit Script" to write code that will be executed on your desired events.&#x20;
+
+Webhook can also be used if you want to run the code in your server. See [webhooks.md](webhooks.md "mention") for more details.
 
 ## Allow signups only from inside the corporate network
 
@@ -7,9 +19,10 @@ You can use the **user.pre\_create** event to allow signups only from a certain 
 For example, only allow signup when user is in the network `123.45.67.89` :
 
 ```typescript
-export default async function (e: EventUserPreCreate): Promise<HookResponse> {
-  // Write your hook with the help of the type definition.
-  const allowedIp = "123.45.67.89";
+export default async function (
+  e: EventUserPreCreate
+): Promise<HookResponse> {
+  const allowedIp = "123.45.67.89"; // The IP address of the corporate network
   if (e.context.ip_address == allowedIp) {
     return {
       is_allowed: true,
@@ -184,3 +197,112 @@ export default async function (
 ```
 
 This overrides the original `mode` of bot\_protection in your config. Therefore, bot\_protection will be turned on if the user is trying to signup or login outside Hong Kong.
+
+## Adaptive MFA: Require MFA only for users with high risk
+
+You can use **authentication.pre\_authenticated** to implement Adaptive MFA.
+
+For example, you consider logins from outside `HK` is at a higher risk, therefore MFA should be required:
+
+```typescript
+export default async function (
+  e: EventAuthenticationPreAuthenticated
+): Promise<EventAuthenticationPreAuthenticatedHookResponse> {
+  if (e.context.geo_location_code !== "HK") {
+    return {
+      // Allow the login with a mfa contraint
+      is_allowed: true,
+      constraints: {
+        amr: ["mfa"],
+      },
+    };
+  }
+  // Else, simply allow the login
+  return {
+    is_allowed: true,
+  };
+}
+```
+
+If `constraints.amr` with value `["mfa"]` is returned in the response, depending on the authentication flow type:
+
+* Signup / Promote: If the user does not have any secondary authenticator setup during the flow, a step will be added at the end of the flow to force user to setup a secondary authenticator.&#x20;
+* Login / Re-authentication: If the user does not use any secondary authenticator during the flow, a step will be added at the end of the flow for 2FA. If the user never setup 2FA before, the flow fail.
+* Account Recovery: No effect, because account recovery does not support 2FA.
+
+Learn more about AMR in [amr.md](amr.md "mention").
+
+## Advanced: Applying stricter rate limits for authentications for a certain IP range
+
+You can apply a stricter rate limit in an authentication for a certain IP range flow using hooks.
+
+For example, you want to limit account enumeration to **5 per minute if the request origins from a data center IP address**, and **10 attempts per minute in any other requests**.
+
+### Adjust base rate limit
+
+Firstly, add this rate limit configuration in the project config. (Portal > Advanced > Edit Config)
+
+```yaml
+authentication:
+  rate_limits:
+    account_enumeration:
+      per_ip:
+        enabled: true
+        period: 1m
+        burst: 10
+```
+
+This sets the base rate limit of account enumeration to 10/minute.
+
+### Override rate limit in the hook by a weight
+
+Then, create the following hook in the **authentication.pre\_initialize** event:
+
+```typescript
+function ipToBinary(ip: string): string {
+  return ip
+    .split(".")
+    .map((octet) => parseInt(octet, 10).toString(2).padStart(8, "0"))
+    .join("");
+}
+
+function cidrToPrefix(cidr: string): string {
+  const [ip, lengthStr] = cidr.split("/");
+  const prefixLength = parseInt(lengthStr, 10);
+  const ipBinary = ipToBinary(ip);
+  return ipBinary.substring(0, prefixLength);
+}
+
+export default async function (
+  e: EventAuthenticationPreInitialize
+): Promise<EventAuthenticationPreInitializeHookResponse> {
+  if (e.context.ip_address == null) {
+    // ip unknown, block it.
+    return {
+      is_allowed: false,
+    };
+  }
+
+  const ipBinary = ipToBinary(e.context.ip_address);
+
+  // ip ranges from https://www.gstatic.com/ipranges/cloud.json
+  const dataCenterIPRanges = ["34.125.0.0/16", "34.124.24.0/21"];
+  // 34.125.0.0/16
+  if (dataCenterIPRanges.some((cidr) => ipBinary.startsWith(cidrToPrefix(cidr)))) {
+    return {
+      is_allowed: true,
+      rate_limits: {
+        "authentication.account_enumeration": {
+          weight: 2,
+        },
+      },
+    };
+  } else {
+    return {
+      is_allowed: true,
+    };
+  }
+}
+```
+
+By setting `"rate_limits.authentication.account_enumeration.weight"` to 2, any attempt of account enumeration will contribute `2` attempts to the rate limit. Therefore, only 5 attempts are  allowed in 1 minute. (10 / 2 = 5). Learn more in [#override-rate-limits](blocking-events.md#override-rate-limits "mention")
