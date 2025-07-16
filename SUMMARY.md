@@ -54,6 +54,7 @@
   * [Set Password Expiry](authentication-and-access/authentication/set-password-expiry.md)
   * [Change Forgot/Reset Password settings](authentication-and-access/authentication/forgot-reset-password-settings.md)
   * [Add authentication to any web page](authentication-and-access/authentication/add-authentication-to-any-web-page.md)
+  * [Disable Public Signup](authentication-and-access/authentication/disable-public-signup.md)
 * [Single Sign-on Overview](authentication-and-access/single-sign-on/README.md)
   * [App2App Login](authentication-and-access/single-sign-on/app2app-authorization.md)
   * [App2Web (Pre-authenticated URLs)](authentication-and-access/single-sign-on/pre-authenticated-urls.md)
