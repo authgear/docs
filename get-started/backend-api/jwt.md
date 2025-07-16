@@ -634,6 +634,82 @@ $decoded = JWT::decode($jwt, new Key($signingKey, 'RS256'));
 echo json_encode($decoded);
 ```
 {% endtab %}
+
+{% tab title="ASP.NET" %}
+**Step 1: Install NuGet packages**
+
+```bash
+dotnet add package NSwag.AspNetCore
+```
+then add these imports to the top of your program.cs file:
+```c#
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+```
+
+**Step 2: Configure JWT Authentication**
+
+This tells ASP.NET Core to use JWT Bearer tokens for authentication
+
+```c#
+var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
+
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
+}).AddJwtBearer(x => // here we configure what to validate in JWT tokens  
+{
+    // .NET will automatically fetch JWKS keys from {authority}/.well-known/openid-configuration
+    x.Authority = ""; // place your authgear app endpoint here,
+    x.RequireHttpsMetadata = false; // Allow HTTP for development
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = x.Authority,
+        ValidateAudience = false, // set to true if you validate audience
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+    };
+});
+```
+
+**Step 3: Add authorization**
+```c#
+builder.Services.AddAuthorization();
+```
+
+**Step 4: Configure middleware pipeline**
+
+Order is important! Authentication must come before Authorization
+
+```c#
+app.UseAuthentication();
+app.UseAuthorization();
+```
+
+**Step 5: Create a protected endpoint**
+
+The following example uses the Minimal API model
+```c#
+app.MapGet("/", (HttpContext context) => 
+{
+    var user = context.User;
+    Console.WriteLine($"Authorization header: {context.Request.Headers.Authorization}");
+    Console.WriteLine($"User authenticated: {user.Identity?.IsAuthenticated}");
+    if (user.Identity?.IsAuthenticated == true)
+    {
+        var claims = user.Claims.ToDictionary(c => c.Type, c => c.Value);
+        return Results.Ok(claims);
+    }
+    return Results.Json(new { error = "Unauthorized" }, statusCode: 401);
+}).RequireAuthorization(); // require auth from this endpoint
+```
+For Controller-based APIs, simply add [Authorize] to your controller class or individual action methods to protect them
+
+{% endtab %}
 {% endtabs %}
 
 ### Check the validity of JWT
