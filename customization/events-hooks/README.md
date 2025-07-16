@@ -86,3 +86,99 @@ Learn more in:
 {% content-ref url="non-blocking-events.md" %}
 [non-blocking-events.md](non-blocking-events.md)
 {% endcontent-ref %}
+
+## **Event Trigger Points in Signup/Login Flows**
+
+This section outlines when each event is triggered within the _**default**_ signup and login flows, helping you understand where your hooks can interact with Authgear.
+
+Note that the event timing may be changed in a customized authentication flow.
+
+Legends:
+
+* <mark style="background-color:blue;">**Blue**</mark>: Blocking events
+* <mark style="background-color:green;">**Green**</mark>: Non-blocking events
+
+### Default Signup flow
+
+```mermaid
+flowchart TD
+    subgraph "Signup Flow"
+        Start([Start])
+        Start --> AuthenticationPreInitialize[authentication.pre_initialize]
+        AuthenticationPreInitialize --> BotProtection[Bot Protection]
+        BotProtection -- "Failed" --> BotProtectionVerificationFailed[bot_protection.verification.failed]
+        BotProtection -- "Success" --> Identify[Identify]
+        Identify --> AuthenticationPostIdentified[authentication.post_identified]
+        AuthenticationPostIdentified --> Verify[Verify]
+        Verify --> CreateAuthenticator[Create Authenticator]
+        CreateAuthenticator --> AuthenticationPreAuthenticated[authentication.pre_authenticated]
+        AuthenticationPreAuthenticated --> CreateAuthenticatorAdaptive["Create Authenticator<br>(Enforce AMR Constraints)"]
+        CreateAuthenticatorAdaptive --> ViewRecoveryCode[View Recovery Code]
+        ViewRecoveryCode --> PromptCreatePasskey[Prompt Create Passkey]
+        PromptCreatePasskey --> UserPreCreate[user.pre_create]
+        UserPreCreate --> CreateUser[Create User]
+        CreateUser --> UserCreated[user.created]
+        UserCreated --> FinishSignup([Finish])
+    end
+
+    subgraph "Authorization Code Exchange"
+        ExchangeCode[Exchange Code for Tokens]
+        ExchangeCode --> OIDCJWTPreCreate[oidc.jwt.pre_create]
+        OIDCJWTPreCreate --> IssueTokens[Issue Tokens]
+    end
+
+    FinishSignup --> ExchangeCode
+
+    classDef event fill:#98FB98,color:#000000
+    classDef blockingEvent fill:#ADD8E6,color:#000000
+    classDef processNode fill:#dddddd,color:#000000
+    class BotProtectionVerificationFailed,UserCreated event
+    class AuthenticationPreInitialize,AuthenticationPostIdentified,AuthenticationPreAuthenticated,UserPreCreate,OIDCJWTPreCreate blockingEvent
+    class Start,BotProtection,Identify,Verify,CreateAuthenticator,ViewRecoveryCode,PromptCreatePasskey,CreateAuthenticatorAdaptive,CreateUser,FinishSignup,ExchangeCode,IssueTokens processNode
+```
+
+### Default Login Flow
+
+```mermaid
+flowchart TD
+    subgraph "Login Flow"
+        Start([Start])
+        Start --> AuthenticationPreInitialize[authentication.pre_initialize]
+        AuthenticationPreInitialize --> BotProtection[Bot Protection]
+        BotProtection -- "Failed" --> BotProtectionVerificationFailed[bot_protection.verification.failed]
+        BotProtection -- "Success" --> Identify[Identify]
+        Identify -- "Success" --> AuthenticationPostIdentified[authentication.post_identified]
+        Identify -- "Failed" --> AuthenticationIdentityLoginIDFailed[authentication.identity.login_id.failed]
+
+        AuthenticationPostIdentified --> AuthenticatePrimary["Authenticate<br>(Primary Authenticator)"]
+
+        AuthenticatePrimary -- "Success" --> AuthenticateSecondary["Authenticate<br>(Secondary Authenticator)"]
+        AuthenticatePrimary -- "Failed" --> PrimaryAuthFailed["authentication.primary.password.failed<br>authentication.primary.oob_otp_email.failed<br>authentication.primary.oob_otp_sms.failed"]:::event
+
+        AuthenticateSecondary -- "Success" --> AuthenticationPreAuthenticated[authentication.pre_authenticated]
+        AuthenticateSecondary -- "Failed" --> SecondaryAuthFailed["authentication.secondary.password.failed<br>authentication.secondary.totp.failed<br>authentication.secondary.oob_otp_email.failed<br>authentication.secondary.oob_otp_sms.failed<br>authentication.secondary.recovery_code.failed"]:::event
+
+        AuthenticationPreAuthenticated --> AuthenticateAdaptive["Authenticate<br>(Enforce AMR Constraints)"]
+        AuthenticateAdaptive --> ChangePassword[Change Password]
+        ChangePassword --> CheckAccountStatus[Check Account Status]
+        CheckAccountStatus --> TerminateOtherSessions[Terminate Other Sessions]
+        TerminateOtherSessions --> PromptCreatePasskey[Prompt Create Passkey]
+        PromptCreatePasskey --> UserAuthenticated[user.authenticated]
+        UserAuthenticated --> FinishLogin([Finish])
+    end
+
+    subgraph "Authorization Code Exchange"
+        ExchangeCode[Exchange Code for Tokens]
+        ExchangeCode --> OIDCJWTPreCreate[oidc.jwt.pre_create]
+        OIDCJWTPreCreate --> IssueTokens[Issue Tokens]
+    end
+
+    FinishLogin --> ExchangeCode
+
+    classDef event fill:#98FB98,color:#000000
+    classDef blockingEvent fill:#ADD8E6,color:#000000
+    classDef processNode fill:#dddddd,color:#000000
+    class BotProtectionVerificationFailed,AuthenticationIdentityLoginIDFailed,PrimaryAuthFailed,SecondaryAuthFailed,UserAuthenticated event
+    class AuthenticationPreInitialize,AuthenticationPostIdentified,AuthenticationPreAuthenticated,OIDCJWTPreCreate blockingEvent
+    class Start,BotProtection,Identify,AuthenticatePrimary,AuthenticateSecondary,ChangePassword,CheckAccountStatus,TerminateOtherSessions,PromptCreatePasskey,AuthenticateAdaptive,ExchangeCode,IssueTokens,FinishLogin processNode
+```
