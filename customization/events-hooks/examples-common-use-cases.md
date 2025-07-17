@@ -238,7 +238,7 @@ You can apply a stricter rate limit in an authentication for a certain IP range 
 
 For example, you want to limit account enumeration to **5 per minute if the request origins from a data center IP address**, and **10 attempts per minute in any other requests**.
 
-### Adjust base rate limit
+**Step 1: Adjust base rate limit**
 
 Firstly, add this rate limit configuration in the project config. (Portal > Advanced > Edit Config)
 
@@ -254,7 +254,7 @@ authentication:
 
 This sets the base rate limit of account enumeration to 10/minute.
 
-### Override rate limit in the hook by a weight
+**Step 2: Override rate limit in the hook by a weight**
 
 Then, create the following hook in the **authentication.pre\_initialize** event:
 
