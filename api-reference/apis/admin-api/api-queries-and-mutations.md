@@ -520,6 +520,11 @@ mutation {
   }
 }
 ```
+
+Note on `password` field: 
+* If `password` is an empty string (""), the server will generate a password only if the project has `password` enabled. However, the generated password will not be sent to the user.
+* If `password` is null, no password will be created regardless of the project's configuration.
+
 {% endtab %}
 
 {% tab title="Response" %}
@@ -775,7 +780,7 @@ mutation {
 
 ### 2.9. resetPassword
 
-The resetPassword mutation lets you rest a user's password from the Admin API.
+The resetPassword mutation lets you rest a user's password from the Admin API. This is only available if the user has an existing password - it cannot be used for users who registered using third-party providers.
 
 **Schema:**
 
@@ -797,6 +802,7 @@ mutation {
   }
 }
 ```
+If `password` is an empty string ("") or null, a password will be generated.
 {% endtab %}
 
 {% tab title="Response" %}
