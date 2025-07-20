@@ -99,6 +99,7 @@ Now create a `server.js` file in the root folder of your project. Add the follow
 ```javascript
 const express = require("express");
 const { join } = require("path");
+const path = require("path");
 const app = express();
 
 // Serve static assets from the /public folder
