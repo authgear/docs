@@ -512,7 +512,7 @@ createUser(input: CreateUserInput!): CreateUserPayload!
 {% tab title="Query" %}
 ```graphql
 mutation {
-  createUser(input: {definition: {loginID: {key: "email", value: "user@gmail.com"}}, password:"my$ecurepa55"}) {
+  createUser(input: {definition: {loginID: {key: "email", value: "user@gmail.com"}}, password:"my$ecurepa55", sendPassword: true, setPasswordExpired: true}) {
     user{
       id
       standardAttributes
@@ -521,8 +521,9 @@ mutation {
 }
 ```
 
-Note on `password` field: 
-* If `password` is an empty string (""), the server will generate a password only if the project has `password` enabled. However, the generated password will not be sent to the user.
+Note on `password`: 
+* If `password` is an empty string (""), the server will generate a password only if the project has `password` enabled. 
+  * You can include `sendPassword: true` and `setPasswordExpired: true` in the input for the `resetPassword` mutation to send the new password to a user and set it as expired so they can set a new one the next time they log in.
 * If `password` is null, no password will be created regardless of the project's configuration.
 
 {% endtab %}
@@ -780,7 +781,7 @@ mutation {
 
 ### 2.9. resetPassword
 
-The resetPassword mutation lets you rest a user's password from the Admin API. This is only available if the user has an existing password - it cannot be used for users who registered using third-party providers.
+The resetPassword mutation lets you reset a user's password from the Admin API. This is only available if the user already has an existing password - it cannot be used for users who registered using third-party services (like Google).
 
 **Schema:**
 
@@ -802,7 +803,8 @@ mutation {
   }
 }
 ```
-If `password` is an empty string ("") or null, a password will be generated.
+If `password` is an empty string ("") or null, a random password will be generated.
+
 {% endtab %}
 
 {% tab title="Response" %}
