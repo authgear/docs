@@ -1,3 +1,18 @@
+---
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # Disable Public Signup
 
 For many business applications, it's important to restrict who can register for your platform. By disabling public signups in Authgear, you can ensure that new users are only added through your internal processes, such as the Admin API or the Authgear Portal.
