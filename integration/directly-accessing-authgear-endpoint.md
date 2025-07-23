@@ -18,7 +18,7 @@ By default, when users access the endpoint of a project directly, they'll see an
 
 Instead of the default error message, you can show a link to redirect the user away under your logo and project name. Go to **Advanced** > **Endpoint Direct Access,** select "**Show a simple brand page with a back to home link**" and provide the link.
 
-<figure><img src="../.gitbook/assets/image (1) (1).png" alt="" width="375"><figcaption><p>Show a link under your logo and project name</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt="" width="375"><figcaption><p>Show a link under your logo and project name</p></figcaption></figure>
 
 ## Cookie-based Authentication
 
