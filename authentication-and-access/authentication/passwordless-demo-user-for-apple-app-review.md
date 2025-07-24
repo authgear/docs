@@ -21,7 +21,7 @@ To work around this, you can enable "test mode" for a specific phone number or e
       enabled: true
       rules:
       - fixed_code: "000000"
-        regex: \+85291231234$
+        regex: \+85291231234$ | ^me@example\.com$
     sms:
       enabled: true
       rules:
@@ -36,7 +36,7 @@ To work around this, you can enable "test mode" for a specific phone number or e
       enabled: true
       rules:
       - suppressed: true
-      regex: ^(?!me@example\.com$)
+        regex: ^me@example\.com$
   ```
   In this example,
   - `+85291231234` and `me@example.com` will not recieve any messages.
