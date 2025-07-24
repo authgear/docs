@@ -36,7 +36,7 @@ To work around this, you can enable "test mode" for a specific phone number or e
       enabled: true
       rules:
       - suppressed: true
-      regex: \me@example.com
+      regex: ^(?!me@example\.com$)
   ```
   In this example,
   - `+85291231234` and `me@example.com` will not recieve any messages.
