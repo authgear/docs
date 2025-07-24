@@ -21,7 +21,7 @@ To work around this, you can enable "test mode" for a specific phone number or e
       enabled: true
       rules:
       - fixed_code: "000000"
-        regex: \+85291231234$ | ^me@example\.com$
+        regex: (\+85291231234$|^me@example\.com$)
     sms:
       enabled: true
       rules:
