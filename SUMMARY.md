@@ -80,6 +80,7 @@
 ***
 
 * [FAQ for Authentication](faq-for-authentication/README.md)
+  * [OTP Test Mode](faq-for-authentication/otp-test-mode.md)
   * [Tips for Apple App Store Review with Passwordless Login](authentication-and-access/authentication/passwordless-demo-user-for-apple-app-review.md)
   * [Phone Number Validation](authentication-and-access/authentication/phone-number-validation.md)
   * [Skip Login Screen and Direct Users to Enterprise Login](authentication-and-access/authentication/how-to-use-social-enterprise-login-providers-without-authui.md)
