@@ -49,20 +49,19 @@ How this works
 
 ### Case 1: Development
 
-In development and testing, you may only want certain accounts (e.g. QA team) to receive real OTPs, and have others use fixed codes.
+In development, you may want to use a fixed code for testing.
 
 ```yaml
 test_mode:
   oob_otp:
     enabled: true
     rules:
-    - regex: ^\+85291231234$ # no fixed code defined for +85291231234
     - regex: .*
       fixed_code: "000000"
   sms:
     enabled: true
     rules:
-    - regex: ^\+85291231234$
+    - regex: ^\+85291231234$ # SMS not suppressed for +85291231234
     - regex: .*
       suppressed: true
   whatsapp:
@@ -79,63 +78,40 @@ test_mode:
 
 In this case,
 
-* The first rule in `oob_otp` matches `+85291231234` and has no `fixed_code` defined, so a real OTP must be used.&#x20;
-* Similarly, SMS is not suppressed for `+85291231234` only, so they will receive a real OTP via SMS.
+* The rule in `oob_otp` matches all target so a fixed OTP `000000` will be used.&#x20;
+* SMS is not suppressed for `+85291231234` only. They will receive `000000` via SMS so the SMS sending capability can be tested.
 * No messages will be sent to WhatsApp or email channels
 
 {% hint style="info" %}
 Since `rules` are evaluated top to bottom, always order them from most to least specific. &#x20;
 {% endhint %}
 
-If the rules were reversed in the example above, the `.*` regex would match all accounts first, making more specific rules unreachable.\
+If the rules in `sms` were reversed in the example above, the `.*` regex would match all accounts first, making more specific rules unreachable.
 
+### Case 2: App review
 
-### Case 2: Testing delivery only
-
-Allow SMS, WhatsApp, and email messages, but always accept a specific fixed code. This is useful when you want to test message delivery, but don't want to rely on the actual code.
-
-```yaml
-test_mode:
-  oob_otp:         
-    enabled: true
-    rules:
-    - regex: .*
-      fixed_code: "000000" 
-```
-
-In this example,&#x20;
-
-* The end-to-end passwordless login flow will work as usual for all channels
-* The fixed code `000000` can still be used for authentication
-
-
-
-### Case 3: Testing specific channels
-
-During internal testing, you may want to test only the OTP login flow for emails. To keep messaging costs low, you can suppress all SMS and WhatsApp message delivery while allowing authentication using a fixed code.&#x20;
+During app review, you can enable "test mode" for a specific phone number or email address that allows the account to authenticate with a fixed OTP. So this account can be shared with the app reviewer to complete the passwordless login flow
 
 ```yaml
 test_mode:
-  oob_otp:         
+  oob_otp:
     enabled: true
     rules:
-    - regex: @   # all emails will not have fixed code
-    - regex: .*
+    - regex: ^\+85291231234$
       fixed_code: "000000"
   sms:
     enabled: true
     rules:
-    - regex: .*
+    - regex: ^\+85291231234$
       suppressed: true
   whatsapp:
     enabled: true
     rules:
-    - regex: .*
+    - regex: ^\+85291231234$
       suppressed: true
 ```
 
 In this example,
 
-* All email accounts will receive real OTPs
-* SMS and WhatsApp channels are suppressed
-* The fixed code will be accepted for all non-email channels (SMS and WhatsApp)
+* Only `+85291231234` can be passed with the fixed code `000000` and other accounts should use real OTP.
+* SMS and WhatsApp are suppressed for `+85291231234`
