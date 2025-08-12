@@ -12,9 +12,10 @@ Authgear uses industry-standard tokens to manage user authentication and authori
 
 Authgear provides several types of tokens for different purposes:
 
-- **JWT Access Tokens**: Used for authorizing API calls and accessing protected resources
-- **Refresh Tokens**: Used to obtain new access tokens when they expire
-- **ID Tokens**: Contain user identity information for OpenID Connect flows
+* **JWT Access Tokens**: Used for authorizing API calls and accessing protected resources
+* **M2M Tokens**: They are JWT access token issued to M2M applications for authorizing API calls and accessing protected resources.
+* **Refresh Tokens**: Used to obtain new access tokens when they expire
+* **ID Tokens**: Contain user identity information for OpenID Connect flows
 
 ## Token Contents
 
@@ -22,6 +23,10 @@ Get details about what claims are returned in the JWT access token and response 
 
 {% content-ref url="jwt-access-token.md" %}
 [jwt-access-token.md](jwt-access-token.md)
+{% endcontent-ref %}
+
+{% content-ref url="../../reference/tokens/m2m-tokens.md" %}
+[m2m-tokens.md](../../reference/tokens/m2m-tokens.md)
 {% endcontent-ref %}
 
 {% content-ref url="refresh-token.md" %}

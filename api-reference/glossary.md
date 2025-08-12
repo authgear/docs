@@ -27,6 +27,10 @@ Anonymous users are users who do not have any identity (e.g. email or phone numb
 
 This concept makes it possible to create a temporary account for guests on your website or application so that they can access features before they sign up using their email or phone number. When you promote an anonymous user, the value of their `sub` (User ID) remains the same, and as a result, you can easily link their previous activities after they sign up.
 
+### API Resources
+
+API resources are first registered in the Authgear Portal and M2M applications are authorized to access these API resources with scopes (permissions). Each API resource is identified by its unique "identifier", which consist of a logical URL. The access token issued in the OAuth Client Credential flows contain the identifier of the API resource as the `aud` (audience), and the related `scopes`, which the API server can use to authenticate the incoming requests from an M2M application client.
+
 ### Auth UI
 
 By default, Authgear provides a customizable User Interface (UI) for login, user registration, and profile settings pages for your project. These pages make up what is referred to as Auth UI.
@@ -115,7 +119,11 @@ JavaScript / TypeScript hooks is a feature on the Authgear portal that allows yo
 
 Magic link, also known as Email Login Link is a type of user authentication method that uses a unique login link that's sent to a user's email instead of a traditional password.
 
-### Multi-factor authentication (MFA)
+### Machine-to-Machine (M2M) Applications
+
+M2M applications are services or machines that need to communicate securely with API resources that do not involve human interaction. M2M applications are linked to an API resource and its scopes (permissions). These applications use the OAuth 2.0 client credentials flow to request short-lived access tokens from Authgear and then use them for authenticating with the API resources.
+
+### Multi-factor Authentication (MFA)
 
 Multi-factor authentication, or MFA, is an application security measure that requires users to provide two or more factors to verify that it's them actually trying to access their account. For example, when an application requires a user to enter their password (something they know) and an OTP sent to their phone (something they have).
 

@@ -185,6 +185,7 @@
 * [Tokens](api-reference/tokens/README.md)
   * [JWT Access Token](api-reference/tokens/jwt-access-token.md)
   * [Refresh Token](api-reference/tokens/refresh-token.md)
+  * [M2M Tokens](reference/tokens/m2m-tokens.md)
 * [Rate Limits](api-reference/rate-limits/README.md)
   * [Account Lockout](api-reference/rate-limits/account-lockout.md)
 * [Glossary](api-reference/glossary.md)
