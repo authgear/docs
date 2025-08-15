@@ -404,3 +404,5 @@ main();
 ```
 {% endtab %}
 {% endtabs %}
+
+:bulb: You can use this [HMAC Signature Generator/Verifier](https://www.authgear.com/tools/hmac-signature-generator-verifier) tool to debug the webhook signature code.
