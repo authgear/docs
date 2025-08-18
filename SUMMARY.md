@@ -45,6 +45,12 @@
 ## Authentication and Access
 
 * [Authentication](authentication-and-access/authentication/README.md)
+  * [Passwords](authentication-and-access/authentication/passwords/README.md)
+    * [Change Forgot/Reset Password settings](authentication-and-access/authentication/passwords/forgot-reset-password-settings.md)
+    * [Password Policy](authentication-and-access/authentication/passwords/password-policy.md)
+    * [Password Expiry](authentication-and-access/authentication/passwords/password-expiry.md)
+    * [How to Handle Password While Creating Accounts for Users](authentication-and-access/authentication/passwords/how-to-handle-password-while-creating-accounts-for-users.md)
+    * [Reset Password for Users](authentication-and-access/authentication/passwords/reset-password-for-users.md)
   * [Add Passkeys Login](authentication-and-access/authentication/passkeys.md)
   * [Add WhatsApp OTP Login](authentication-and-access/authentication/whatsapp-otp-login.md)
   * [Add Email Magic Link Login](authentication-and-access/authentication/add-email-magic-link-login.md)
@@ -52,8 +58,6 @@
   * [Add Anonymous Users](authentication-and-access/authentication/anonymous-users.md)
   * [Enable Two-Factor Authentication (2FA)](authentication-and-access/authentication/enable-two-factor-authentication-2fa.md)
   * [Re-authentication](authentication-and-access/authentication/reauthentication.md)
-  * [Set Password Expiry](authentication-and-access/authentication/set-password-expiry.md)
-  * [Change Forgot/Reset Password settings](authentication-and-access/authentication/forgot-reset-password-settings.md)
   * [Add authentication to any web page](authentication-and-access/authentication/add-authentication-to-any-web-page.md)
   * [Disable Public Signup](authentication-and-access/authentication/disable-public-signup.md)
 * [Single Sign-on Overview](authentication-and-access/single-sign-on/README.md)
@@ -149,7 +153,6 @@
   * [Import Users using User Import API](admin/user-management/import-users-using-user-import-api.md)
   * [Export Users using the User Export API](admin/user-management/export-users-using-the-user-export-api.md)
   * [Manage Users Roles and Groups](admin/user-management/manage-users-roles-and-groups.md)
-  * [How to Handle Password While Creating Accounts for Users](admin/user-management/how-to-handle-password-while-creating-accounts-for-users.md)
 * [Migration](migration/README.md)
   * [Bulk migration](migration/bulk-migration.md)
   * [Rolling migration](migration/rolling-migration.md)
@@ -160,7 +163,6 @@
 * [Brute-force Protection](security/brute-force-protection.md)
 * [Bot Protection](security/bot-protection.md)
 * [Non-HTTP scheme redirect URI](security/redirect-uri.md)
-* [Password Strength](security/password-strength.md)
 
 ## Reference
 

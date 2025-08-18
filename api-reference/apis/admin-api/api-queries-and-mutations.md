@@ -521,11 +521,11 @@ mutation {
 }
 ```
 
-Note on `password`: 
-* If `password` is an empty string (""), the server will generate a password only if the project has `password` enabled. 
+Note on `password`:
+
+* If `password` is an empty string (""), the server will generate a password only if the project has `password` enabled.
   * You can include `sendPassword: true` and `setPasswordExpired: true` in the input for the `resetPassword` mutation to send the new password to a user and set it as expired so they can set a new one the next time they log in.
 * If `password` is null, no password will be created regardless of the project's configuration.
-
 {% endtab %}
 
 {% tab title="Response" %}
@@ -803,8 +803,8 @@ mutation {
   }
 }
 ```
-If `password` is an empty string ("") or null, a random password will be generated.
 
+If `password` is an empty string ("") or null, a random password will be generated.
 {% endtab %}
 
 {% tab title="Response" %}
@@ -829,7 +829,10 @@ If `password` is an empty string ("") or null, a random password will be generat
 
 **Example 2 (send new password to user):**
 
-You can include `sendPassword: true` and `setPasswordExpired: true` in the input for the `resetPassword` mutation to send the new password to a user and set it as expired so they can set a new one the next time they log in. Here is an example of the mutation:
+You can include the following in the `resetPassword` mutation:
+
+* `sendPassword: true` sends the new password to a user
+* `setPasswordExpired: true`  forces the user to change their password on next login.
 
 ```graphql
 mutation {

@@ -51,7 +51,7 @@ Authgear contains the following high-level components:
 
 * [**Brute-force Protection**](security/brute-force-protection.md) - Set account Lockout Policy to safeguard a user account from brute-force login attempts.
 * [**Bot Protection**](security/bot-protection.md) - Bot protection tools to block automated attackers.
-* [**Password Strength**](security/password-strength.md) - Learn how to set password strength and how the password strength is calculated.
+* [**Password Strength**](authentication-and-access/authentication/passwords/password-policy.md) - Learn how to set password strength and how the password strength is calculated.
 
 #### Login Methods
 
@@ -70,7 +70,7 @@ Authgear contains the following high-level components:
 
 Features for managing your users via Authgear Portal
 
-* [**Create a new account on behalf of a user**](admin/user-management/how-to-handle-password-while-creating-accounts-for-users.md) - Create a new account for a user from Authgear Portal.
+* [**Create a new account on behalf of a user**](authentication-and-access/authentication/passwords/how-to-handle-password-while-creating-accounts-for-users.md) - Create a new account for a user from Authgear Portal.
 * [**Account Deletion**](admin/user-management/account-deletion.md) - Delete a user account from your project.
 * [**User Roles and Groups**](admin/user-management/manage-users-roles-and-groups.md) - Detailed guide on how to use Roles and Groups.
 * [**User Profiles**](admin/user-profiles/) - Guides on how to view and manage user profile information.

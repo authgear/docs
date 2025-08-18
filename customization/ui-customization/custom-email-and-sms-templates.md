@@ -16,31 +16,17 @@ You can edit the Email/SMS Templates for each language you have enabled for your
 
 ### Important notice for sending SMS to Chinese phone numbers (+86):
 
-The template for SMS to Chinese numbers can not be modified. As a result, even when you have set a custom template, Authgear will use the default template for Chinese numbers.&#x20;
+The template for SMS to Chinese numbers cannot be modified. As a result, Authgear will always use the default template for Chinese numbers even when you have set a custom template. All SMS other than OTPs (e.g. password reset links) will not be delivered.
 
 Authgear will use your custom SMS template for other users with non-Chinese phone numbers.
 
-The following is the content of the default SMS template:
-
-For `locale = en` or other languages
+The following is the content of the SMS template **regardless of locale** when sending to a Chinese phone number:&#x20;
 
 ```
-【Authgear】{code} is your {app-name} one-time password.
+【简信】你的 {app-name} 登錄驗證碼是 {code}
 ```
 
-For `locale = zh-Hant` (Traditional Chinese)
-
-```
-【Authgear】你的{app-name}一次性密碼為 {code}，請勿分享給任何人
-```
-
-For `locale = zh-Hans` (Simplified Chinese)
-
-```
-【Authgear】你的{app-name}一次性密码为 {code}，请勿分享给任何人
-```
-
-The reason for falling back to the above default SMS template is that services are required to register their SMS templates before they can deliver to Chinese numbers. Authgear has registered the default SMS template so that one will deliver without any further action on your side.
+The reason for this fallback is that services are required to register their SMS templates in advance with the officials before they can deliver to Chinese numbers. Authgear has registered the default SMS template such that it will deliver without any further action on your side.
 
 Enterprise users who still wish to customize their SMS template for Chinese numbers can [contact us](https://www.authgear.com/schedule-demo) for more details.
 
