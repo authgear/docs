@@ -6,9 +6,7 @@ description: >-
 
 # Non-blocking Events
 
-Non-blocking events are triggered after the operation is performed. They are delivered to your hooks asynchronously after the operation is performed.
-
-The hooks must finish within 60 seconds. Otherwise, the delivery will fail due to timeout. In Webhooks, your server must return a HTTP status code within **2xx** range. Other status codes are considered as a failed delivery.&#x20;
+The hooks must finish within 60 seconds. Otherwise, the delivery will fail due to timeout. For Webhooks, your server must return a HTTP status code within **2xx** range. Other status codes are considered a failed delivery.&#x20;
 
 The response of the hooks is ignored.
 
@@ -43,7 +41,7 @@ The response of the hooks is ignored.
 
 ### user.created
 
-Occurs after a new user is created. User can be created by user signup, user signup as an anonymous user, or created by the admin via the Portal or Admin API.
+Occurs after a new user is created. A user can be created by user signup, user signup as an anonymous user, or created by the admin via the Portal or Admin API.
 
 ```json
 {

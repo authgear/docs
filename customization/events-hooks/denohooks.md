@@ -10,14 +10,14 @@ The module **MUST** have a [default export](https://developer.mozilla.org/en-US/
 
 If the Hook is registered for a blocking event, the function **MUST** return a value according to the [specification](./#blocking-events).
 
-The Hooks **DO NOT** have access to file, or environment. They only have access to external network.
+The Hooks **DO NOT** have access to files or the environment. They only have access to the external network.
 
-The stdout and the stderr of the Hooks are both ignored. Your hooks **MUST NOT** assume anything on the arguments and the stdin of the module.
+The stdout and the stderr of the Hooks are both ignored. Your hooks **MUST NOT** assume anything about the arguments and the stdin of the module.
 
-## Configure Authgear to deliver events to your Hooks
+## Configure JavaScript / TypeScript Hooks in your Authgear project
 
 * In the portal, go to **Advanced** > **Hooks**.
-* Add your Hooks in **Blocking Events** and **Non-Blocking Events**, depending on which event you want to listen to.
+* Add your JavaScript / TypeScript Hooks handler in **Blocking Events** and **Non-Blocking Events**, depending on which event you want to listen to.
 * Click **Save**.
 
 ## Examples

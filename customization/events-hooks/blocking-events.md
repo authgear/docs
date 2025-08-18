@@ -4,7 +4,7 @@ description: Blocking events are triggered before the operation is performed.
 
 # Blocking Events
 
-Blocking events are triggered before the operation is performed, such as before user creation. This allow you to abort or alter the operations programmatically.
+Blocking events are triggered before the operation is performed, such as before user creation. This allows you to abort or alter the operations programmatically.
 
 They are delivered to your hooks synchronously, right before changes are persisted to the database.
 
@@ -27,7 +27,7 @@ Your hooks must return a JSON document to indicate whether the operation should 
 }
 ```
 
-Each of your hooks must respond within 5 seconds. All of your hooks must complete within 10 seconds. Otherwise, the delivery will fail to due timeout.
+Each of your hooks must respond within 5 seconds. All of your hooks must complete within 10 seconds. Otherwise, the delivery will fail due to timeout.
 
 Supported fields in the JSON response:
 
@@ -57,9 +57,9 @@ If any of your hooks abort the operation, the operation is aborted. The `reason`
 
 ## Mutations
 
-Your hooks can optionally apply mutation for certain blocking events. The supported mutation is specific for each type of blocking event. Refer to the [Event List](non-blocking-events.md) to see what mutation is supported.
+Your hooks can optionally apply a mutation for certain blocking events. The supported mutation is specific to each type of blocking event. Refer to the [Event List](non-blocking-events.md) to see what mutations are supported.
 
-Mutations by a hook are applied only when the operation is allowed to proceed. Mutations take effect only when all hooks allow the operation to proceed.
+Mutations by a hook are applied only when the operation is allowed to proceed, and take effect only when all hooks allow the operation to proceed.
 
 * Objects not appearing in `mutations` are left intact.&#x20;
 * The mutated objects are **NOT** merged with the original ones.
@@ -68,7 +68,7 @@ Mutations by a hook are applied only when the operation is allowed to proceed. M
 
 ### Mutations on the user object
 
-When a blocking event supports mutations on the user object, your hooks can respond a JSON document to allow the operation, and specify the mutations you want to apply on the user object.
+When a blocking event supports mutations on the user object, your hooks can respond with a JSON document to allow the operation, and specify the mutations you want to apply on the user object.
 
 ```json5
 {
@@ -94,7 +94,7 @@ You must include the **WHOLE** `standard_attributes` , `custom_attributes` , `ro
 
 ### Mutations on the JWT payload
 
-When a blocking event supports mutations on the JWT payload, your hooks can respond a JSON document to allow the operation, and specify additional fields that you want to include in the JWT payload. However, you **MUST NOT** change or remove any existing fields in the JWT payload, as they are essential to the validity of the JWT.
+If a blocking event supports mutations on the JWT payload, your hooks can respond with a JSON document that allows the operation, and specify additional fields that you want to include in the JWT payload. However, you **MUST NOT** change or remove any existing fields in the JWT payload, as they are essential to the validity of the JWT.
 
 ```json
 {
@@ -118,7 +118,7 @@ When a blocking event supports mutations on the JWT payload, your hooks can resp
 }
 ```
 
-To add additional fields to the JWT payload, include the **WHOLE** `jwt.payload` inside `mutations`. You **MUST** add your own fields only.
+To add additional fields to the JWT payload, include the **WHOLE** `jwt.payload` inside `mutations`. You must only add your own custom fields.&#x20;
 
 ## Apply Authentication Constraints
 
@@ -137,7 +137,7 @@ Use the `constraints` property to conditionally require additional authenticatio
   * `x_secondary_oob_otp_sms`
   * `x_secondary_totp`
 
-When multiple values are returned in `amr`, they are in AND relationship. For example, for `"amr": ["mfa", "otp"]`, the user must fulfil `mfa` AND `otp` in the authentication flow.
+When multiple values are returned in `amr`, they represent a combined requirement where user must satisfy all listed methods. For example, for `"amr": ["mfa", "otp"]`, the user must fulfil `mfa` AND `otp` in the authentication flow.
 
 Example response for requiring MFA in authentication:
 
@@ -152,15 +152,15 @@ Example response for requiring MFA in authentication:
 
 The constraints are enforced based on the authentication flow type:
 
-* Signup / Promote: Enforces thesetup of corresponding authenticator according to value of `amr`.
-* Login / Re-authentication: Enforces the use of corresponding authenticator according to value of `amr`.
+* Signup / Promote: Enforces the setup of corresponding authenticator according to the value of `amr`.
+* Login / Re-authentication: Enforces the use of corresponding authenticator according to the value of `amr`.
 * Account Recovery: No effect (does not support 2FA)
 
 ## Override Rate Limits
 
-Use the `rate_limits` property in a blocking event response to dynamically override rate limit weights. The `weight` parameter define the amount of value contribute to the specified rate limit in subsequent operations. The default value is 1. A value of 0 means that subsequent operations will not be counted towards the rate limit.
+Use the `rate_limits` property in a blocking event response to dynamically override rate limit weights. The `weight` parameter defines the amount of value contributed to the specified rate limit in subsequent operations. The default value is 1. A value of 0 means that subsequent operations will not be counted towards the rate limit.
 
-For example, this hook response means in the next operation, the "account enumeration" rate limit is double counted. i.e. The user shall hit the rate limit with half the numbers of attempts.
+For example, this hook response is saying that, in the next operation, the "account enumeration" rate limit will be double counted. i.e. The user shall hit the rate limit with half the number of attempts.
 
 ```json
 {
@@ -202,7 +202,7 @@ This overrides the original `mode` of bot\_protection in your config. Supported 
 
 ### user.pre\_create
 
-Occurs right before the user creation. User can be created by user signup, user signup as an anonymous user, or created by the admin via the Portal or Admin API.
+Occurs right before the user creation. A user can be created by user signup, user signup as an anonymous user, or created by the admin via the Portal or Admin API.
 
 This event supports [#mutations-on-the-user-object](blocking-events.md#mutations-on-the-user-object "mention")
 

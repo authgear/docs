@@ -1,10 +1,10 @@
 ---
-description: Webhooks is one of the supported hooks to receive events.
+description: Use Webhooks for your Authgear project
 ---
 
 # Webhooks
 
-To use webhooks you need to:
+To use webhooks, you'll need to:
 
 1. Deploy a webhook on your server.
 2. Configure Authgear to deliver events to your webhook.
@@ -19,11 +19,11 @@ To use webhooks you need to:
 
 Events are delivered to your webhooks via **HTTPS**, so your server must support HTTPS.
 
-Events are delivered to your webhooks with **POST** requests. You webhooks must return a HTTP status code within **2xx** range. Other status codes are considered as a failed delivery.
+Events are delivered to your webhooks with **POST** requests. Your webhooks must return an HTTP status code within **2xx** range. Other status codes will be considered considered a failed delivery.
 
 ## Verifying signature
 
-The request to your webhooks is signed with a secret key shared between Authgear and your hooks. You are **RECOMMENDED** to verify the signature and reject any requests with invalid signatures. This ensures the request originates from Authgear.
+The request to your webhooks is signed with a secret key shared between Authgear and your hooks. You are strongly recommended to verify the signature and reject any requests with invalid signatures. This ensures the request originates from Authgear.
 
 The signature is calculated as the hex encoded value of HMAC-SHA256 of the request body and included in the HTTP header `x-authgear-body-signature`.
 
