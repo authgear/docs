@@ -331,11 +331,11 @@ There are 6 options on Android:
 
 In summary, based on the desired behavior and business requirements, set the policy and constraint options as below.
 
-| Requirement                                                                             | Constraint                                                   |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Any strong biometric exceed the requirements for Class 3 as defined by the Android CDD. | `[BIOMETRIC_STRONG]`                                         |
-| Any biometric exceed the requirements for Class 2 as defined by the Android CDD.        | `[BIOMETRIC_WEAK, DEVICE_CREDENTIAL]`                        |
-| Any biometric or non-biometric credentials (i.e., PIN, pattern, or password)            | `[BIOMETRIC_STRONG``, BIOMETRIC_WEA``K, DEVICE_CREDENTIAL]`  |
+| Requirement                                                                             | Constraint                                              |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| Any strong biometric exceed the requirements for Class 3 as defined by the Android CDD. | `[BIOMETRIC_STRONG]`                                    |
+| Any biometric exceed the requirements for Class 2 as defined by the Android CDD.        | `[BIOMETRIC_WEAK, DEVICE_CREDENTIAL]`                   |
+| Any biometric or non-biometric credentials (i.e., PIN, pattern, or password)            | `[BIOMETRIC_STRONG, BIOMETRIC_WEAK, DEVICE_CREDENTIAL]` |
 
 ### Code examples
 
