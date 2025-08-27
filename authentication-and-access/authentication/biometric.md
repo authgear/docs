@@ -297,22 +297,20 @@ In the following section, we will show you how to use biometric login in the SDK
 
 ### Biometric options
 
-In the SDKs, a set of biometric options is required to check the support or enable biometric on the device.
+Customize the biometric options to achieve the expected user experience.
 
 #### iOS
 
-There are two options on iOS:
+There are 3 options on iOS:
 
-* `localizedReason` is the message string the user will see when FaceID or TouchID is presented
+* `localizedReason` is the message to the user explaining why FaceID, TouchID, or device passcode is required.
 * `constraint` is an enum that constraint the access of key stored under different conditions:
-  * `biometryAny`: The key is still accessible by Touch ID if fingers are added or removed, or by Face ID if the user is re-enrolled
-  * `BiometricCurrentSet`: The key is invalidated if fingers are added or removed for Touch ID, or if the user re-enrolls for Face ID
-
-See reference in Apple Developers Doc on [biometryAny](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/2937191-biometryany) and [biometryCurrentSet](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/2937192-biometrycurrentset).
-
-* `policy` can be used to allow users to log in with only biometrics, or using biometrics and the device PIN/password as fallback when biometric verification fails.  The following are the available options:
-  * `BiometricLAPolicy.deviceOwnerAuthenticationWithBiometrics`: When this policy is set, users can **ONLY** use a biometric method to complete the login. Users **cannot** log in with their device PIN/password after a failed biometric login attempt. &#x20;
-  * `BiometricLAPolicy.deviceOwnerAuthentication`: enable this policy to allow users to log in with non-biometric local authentication methods like device PIN/password when biometric verification fails or is not enrolled on their device.
+  * [`userPresence`](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/userpresence): The key is accessible as long as the user is authenticated by FaceID, TouchID, or device passcode.
+  * [`biometryAny`](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/biometryany): The key is still accessible by Touch ID if fingers are added or removed, or by Face ID if the user is re-enrolled.
+  * [`biometryCurrentSet`](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/biometrycurrentset): The key is invalidated if fingers are added or removed for Touch ID, or if the user re-enrolls for Face ID
+* `policy` can be used to allow users to log in with only biometrics, or using biometrics and device passcode as fallback when biometric verification fails, or device passcode when the device has no FaceID or TouchID. The following are the available options:
+  * [`deviceOwnerAuthenticationWithBiometrics`](https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthenticationwithbiometrics): The user **MUST** log in FaceID or TouchID. Users **CANNOT** log in with device passcode as fallback.
+  * [`deviceOwnerAuthentication`](https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthentication): If TouchID or FaceID is available, it is used first. Otherwise, device passcode is used.
 
 #### Android
 
@@ -322,8 +320,18 @@ There are 6 options on Android:
 * `subtitle` is the subtitle of the biometric dialog presented to the users
 * `description` is the description of the biometric dialog presented to the users
 * `negativeButtonText` is what the dismiss button says in the biometric dialog
-* `constraint` is an array that defines the requirement of security level, which can be `BIOMETRIC_STRONG`, `BIOMETRIC_WEAK`, `DEVICE_CREDENTIAL`. See reference in Android developers documentation on [`BiometricManager.Authenticators`](https://developer.android.com/reference/android/hardware/biometrics/BiometricManager.Authenticators)
-* `invalidatedByBiometricEnrollment` is a boolean that controls if the key pair will be invalidated if a new biometric is enrolled, or when all existing biometrics are deleted. See reference in Android developers documentation on [`KeyGenParameterSpec.Builder`](https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder#setInvalidatedByBiometricEnrollment\(boolean\)).
+* `constraint` is an array that defines the requirement of security level, which can be [`BIOMETRIC_STRONG`](https://developer.android.com/reference/android/hardware/biometrics/BiometricManager.Authenticators#BIOMETRIC_STRONG), [`BIOMETRIC_WEAK`](https://developer.android.com/reference/android/hardware/biometrics/BiometricManager.Authenticators#BIOMETRIC_WEAK), [`DEVICE_CREDENTIAL`](https://developer.android.com/reference/android/hardware/biometrics/BiometricManager.Authenticators#DEVICE_CREDENTIAL).
+* [`invalidatedByBiometricEnrollment`](https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder#setInvalidatedByBiometricEnrollment\(boolean\)) is a boolean that controls if the key pair will be invalidated if a new biometric is enrolled, or when all existing biometrics are deleted.
+
+### Example of biometric options
+
+This table summarizes a few scenarios that can be implemented on both iOS and Android.
+
+| Scenario                                                                                              | iOS biometric options                                                             | Android biometric options                                                                                    |
+|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| Users can log in with either TouchID, FaceID, or device passcode                                         | `policy=deviceOwnerAuthentication` <br> `constraint=userPresence`                     | `constraint=[BIOMETRIC_STRONG, BIOMETRIC_WEAK, DEVICE_CREDENTIAL]` <br> `invalidatedByBiometricEnrollment=false` |
+| Users can log in with TouchID or FaceID only. <br> Changes to TouchID or FaceID requires setup again.         | `policy=deviceOwnerAuthenticationWithBiometrics` <br> `constraint=biometryCurrentSet` | `constraint=[BIOMETRIC_STRONG, BIOMETRIC_WEAK]` <br> `invalidatedByBiometricEnrollment=true`                     |
+| Users can log in with TouchID or FaceID only. <br> Changes to TouchID or FaceID does not require setup again. | `policy=deviceOwnerAuthenticationWithBiometrics` <br> `constraint=biometryAny`        | `constraint=[BIOMETRIC_STRONG, BIOMETRIC_WEAK]` <br> `invalidatedByBiometricEnrollment=false`                    |
 
 ### Code examples
 
@@ -337,7 +345,7 @@ Always check if the current device supports biometric login before calling any b
 // check if current device supports biometric login
 var supported = false
 do {
-    try authgear.checkBiometricSupported()
+    try authgear.checkBiometricSupported(policy: .deviceOwnerAuthenticationWithBiometrics)
     supported = true
 } catch {}
 
@@ -373,14 +381,15 @@ if (supported) {
 const biometricOptions = {
   ios: {
     localizedReason: 'Use biometric to authenticate',
-    constraint: 'biometryCurrentSet' as const,
+    constraint: BiometricAccessConstraintIOS.BiometryCurrentSet,
+    policy: BiometricLAPolicy.deviceOwnerAuthenticationWithBiometrics,
   },
   android: {
     title: 'Biometric Authentication',
     subtitle: 'Biometric authentication',
     description: 'Use biometric to authenticate',
     negativeButtonText: 'Cancel',
-    constraint: ['BIOMETRIC_STRONG' as const],
+    constraint: [BiometricAccessConstraintAndroid.BiometricStrong],
     invalidatedByBiometricEnrollment: true,
   },
 };
@@ -402,6 +411,7 @@ authgear
 final ios = BiometricOptionsIOS(
     localizedReason: "Use biometric to authenticate",
     constraint: BiometricAccessConstraintIOS.biometryAny,
+    policy: BiometricLAPolicy.deviceOwnerAuthenticationWithBiometrics,
 );
 final android = BiometricOptionsAndroid(
     title: "Biometric Authentication",
@@ -409,7 +419,7 @@ final android = BiometricOptionsAndroid(
     description: "Use biometric to authenticate",
     negativeButtonText: "Cancel",
     constraint: [BiometricAccessConstraintAndroid.biometricStrong],
-    invalidatedByBiometricEnrollment: false,
+    invalidatedByBiometricEnrollment: true,
 );
 
 try {
@@ -504,7 +514,8 @@ Enable biometric login for logged in user
 // which displays in the authentication dialog presented to the user
 authgear.enableBiometric(
     localizedReason: "REPLACE_WITH_LOCALIZED_REASON",
-    constraint: .biometryCurrentSet
+    constraint: .biometryCurrentSet,
+    policy: .deviceOwnerAuthenticationWithBiometrics
 ) { result in
     if case let .failure(error) = result {
         // failed to enable biometric with error
@@ -1058,33 +1069,7 @@ catch
 {% endtab %}
 {% endtabs %}
 
-## Biometric Verification Fallback Support
-
-In some use cases, you may want to provide an alternative means for users to log in when biometric verification fails on their devices. For example, in a case where a user's finger is dirty (touch-based) or when the user's face is covered (Face ID).
-
-### Use of Device PIN/Password
-
-In the biometric options, the parameters **policy**: `BiometricLAPolicy.deviceOwnerAuthentication` (iOS) and **constraint** `BiometricAccessConstraintAndroid.DeviceCredential` (Android) can be used to allow users to enter their device PIN/Password when biometric verification fails.
-
-You can set the policy for iOS and constraint for Android in the [Biometric options](biometric.md#biometric-options) of the Authgear SDK. The following is an example of a biometric options that allows users to use device's PIN/Password in iOS and Android:
-
-```javascript
-const biometricOptions: BiometricOptions = {
-  ios: {
-    localizedReason: "Use biometric to authenticate",
-    constraint: BiometricAccessConstraintIOS.BiometryCurrentSet,
-    policy: BiometricLAPolicy.deviceOwnerAuthentication,
-  },
-  android: {
-    title: "Biometric Authentication",
-    subtitle: "Biometric authentication",
-    description: "Use biometric to authenticate",
-    negativeButtonText: "Cancel",
-    constraint: [BiometricAccessConstraintAndroid.BiometricStrong, BiometricAccessConstraintAndroid.DeviceCredential],
-    invalidatedByBiometricEnrollment: true,
-  },
-};
-```
+## Appendix: screenshots showing the difference between `deviceOwnerAuthentication` and `deviceOwnerAuthenticationWithBiometrics`
 
 The biometric pop-up will look like this after a failed biometric log-in attempt with `BiometricLAPolicy.deviceOwnerAuthentication` policy on iOS:
 
