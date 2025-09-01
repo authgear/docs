@@ -13,6 +13,12 @@
 
 See [Appendix: Create mobile app on WeChat Open Platform](wechat-mobile.md#appendix-create-mobile-app-on-wechat-open-platform) for more details.
 
+{% hint style="warning" %}
+### WeChat login is incompatible with Passkey
+
+Login with WeChat requires the use of `WebKitWebViewUIImplementation`  which does not support the use of Passkey APIs. At the moment, either passkey or WeChat login can be enabled in your mobile applications.&#x20;
+{% endhint %}
+
 ## Get the information from WeChat Open Platform
 
 Once your mobile app is approved on the platform, you will see the word ":white\_check\_mark:<mark style="color:green;">已通过</mark>" in the app details page.
