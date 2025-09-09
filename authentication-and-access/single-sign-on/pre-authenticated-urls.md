@@ -4,7 +4,7 @@ description: >-
   an authenticated state.
 ---
 
-# Pre-authenticated URLs
+# App2Web (Pre-authenticated URLs)
 
 Pre-authenticated URLs is a feature that enables single sign-on (SSO)  from a mobile application to a website. It allows users who are authenticated on a mobile application to open a website in an authenticated state.
 
@@ -37,7 +37,23 @@ authgear
 
 ### Step 2: Add Allowed Origin to Web App Client
 
-Next, add an allowed origin to the web application client in Authgear. Navigate to **Applications** in the Authgear Portal, select the web application client, and scroll to the Allowed Origins section. Then, add the origin you wish to use for Pre-authentication URLs. Note that the origin should be of the format "protocol (scheme) + domain + port". For example, if the mobile application wants to open `https://www.mywebapp.com/home?key=value`, the origin must be `https://www.mywebapp.com`.
+Next, add an allowed origin to the web application client in Authgear.&#x20;
+
+Navigate to **Advanced > Edit Config** in the Authgear Portal, find the **web application client** and add the origins you wish to use for Pre-authentication URLs in the `x_pre_authenticated_url_allowed_origins` key. Also set `x_pre_authenticated_url_enabled` to true.
+
+```yaml
+oauth:
+  clients:
+  - client_id: <Client ID of the web app>
+    x_pre_authenticated_url_enabled: true
+    x_pre_authenticated_url_allowed_origins:
+    - <origin 1>
+    - <origin 2>
+    - ...
+    ...
+```
+
+Note that the origin should be of the format "protocol (scheme) + domain + port". For example, if the mobile application wants to open `https://www.mywebapp.com/home?key=value`, the origin must be `https://www.mywebapp.com`.
 
 ### Step 3: Generate Pre-Authenticated URL
 
