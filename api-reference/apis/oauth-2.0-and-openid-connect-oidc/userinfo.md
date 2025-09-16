@@ -62,8 +62,8 @@ The following section explains each standard attribute and examples of some cust
 * `phone_number_verified`: returns `true` if the associated phone number is verified and `false` if it's not.
 * `picture`: contains the URL to the user's profile photo.
 * `updated_at`: returns the date and time for the last time the user's profile was updated.
-* `x_web3`: this field contains an object that has details related to [Authgear's web3](https://docs.authgear.com/how-to-guide/authenticate/web3) support.
 * `custom_attributes`: this field contains an object that has all the custom attributes you defined.
+* `x_web3`: **Deprecated** - this field contains an object that has details related to deprecated web3 support.
 
 **Note**: The above list is not an exhaustive list of all the fields that the UserInfo endpoint can return. Also, fields that are not defined for the current user will be excluded from the response. For example, if a user does not have any phone number associated with their account, the `phone_number` field will not be included in the JSON response.
 
@@ -87,4 +87,3 @@ If we add a new customer attribute for `passport_number`, the response from the 
     "given_name": "Doe"
 }
 ```
-
