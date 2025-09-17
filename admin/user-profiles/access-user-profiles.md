@@ -250,7 +250,7 @@ We are going to use **cURL** commands in our API calls or you can also use [Post
 **Prerequisites**
 
 * Make sure that you have a registered app type of **OIDC Client Application** in Authgear Portal.
-* You have successfully configured your application to use Authgear as an OIDC provider. See your [getting started guide](https://docs.authgear.com/get-started/start-building) for detailed steps.
+* You have successfully configured your application to use Authgear as an OIDC provider. See your [getting started guide](../../get-started/start-building.md) for detailed steps.
 
 **Step 1: Obtain an access token**
 
@@ -293,10 +293,10 @@ If you are using Postman, you can enable the Authorization type of OAuth2.0, pro
 
 </details>
 
-See a detailed explanation of the structure and fields included in the response of the UserInfo endpoint [here](../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
+See a detailed explanation of the structure and fields included in the response of the UserInfo endpoint [here](../../api-reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
 
 ### 5. Embed User Profiles into the JWT Access Token
 
 Authgear WebHooks makes it possible to embed the standard attributes and custom attributes for a user's profile into the OIDC JSON Web Token (JWT). Hence, you access both profile attributes in the JWT returned to your OIDC client without making another call to the UserInfo endpoint.
 
-See our post about how to [Add custom fields to a JWT Access Token](../integration/add-custom-fields-to-a-jwt-access-token.md) to learn more.
+See our post about how to [Add custom fields to a JWT Access Token](../../integration/add-custom-fields-to-a-jwt-access-token.md) to learn more.

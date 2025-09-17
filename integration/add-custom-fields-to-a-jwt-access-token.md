@@ -6,12 +6,12 @@ description: Learn how to add custom attributes to a JWT Access Token using Auth
 
 JWTs (JSON Web Tokens) are a common method for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. With Authgear, it is straightforward to add custom fields to your JWT access tokens.
 
-This how-to guide will walk you through the process of **adding custom fields such as** [**User Profiles**](https://docs.authgear.com/integrate/user-profile) **attributes to a JWT access token** payload using Authgear and Javascript [Hooks](https://docs.authgear.com/integrate/events-hooks/denohooks).
+This how-to guide will walk you through the process of **adding custom fields such as** [**User Profiles**](../admin/user-profiles/) **attributes to a JWT access token** payload using Authgear and Javascript [Hooks](../customization/events-hooks/).
 
 Here's an example of the [fields in the JWT Access Tokens by default](../api-reference/tokens/jwt-access-token.md) and an explanation of their values.
 
 {% hint style="info" %}
-You can also [add custom attributes](https://docs.authgear.com/integrate/user-profile#add-new-attributes) to [User Profiles](https://docs.authgear.com/integrate/user-profile) on the Authegear Portal.
+You can also [add custom attributes](../admin/user-profiles/) to [User Profiles](../admin/user-profiles/) on the Authegear Portal.
 {% endhint %}
 
 ### Prerequisites
@@ -65,13 +65,13 @@ export default async function(e: EventOIDCJWTPreCreate): Promise<HookResponse> {
 6. Click on **Finish Editing**.
 7. Back to the **Hooks** page from the navigation bar and click on the **Save** button at the top of the page.
 
-In the above code, we are importing the necessary modules such as `HookResponse` and `EventOIDCJWTPreCreate` which are types from the Authgear [Deno](https://deno.land/) hook [Typescript library](https://deno.land/x/authgear_deno_hook). We modify the JWT payload by adding [Standard Attributes](https://docs.authgear.com/integrate/user-profile#standard-attributes)(`e.payload.user.standard_attributes`) and [Custom Attributes](https://docs.authgear.com/integrate/user-profile#custom-attributes)(`e.payload.user.custom_attributes`) of the user.
+In the above code, we are importing the necessary modules such as `HookResponse` and `EventOIDCJWTPreCreate` which are types from the Authgear [Deno](https://deno.land/) hook [Typescript library](https://deno.land/x/authgear_deno_hook). We modify the JWT payload by adding [Standard Attributes](../admin/user-profiles/)(`e.payload.user.standard_attributes`) and [Custom Attributes](../admin/user-profiles/)(`e.payload.user.custom_attributes`) of the user.
 
 ### Verify the Custom Field in a JWT token
 
 There are two ways to test it:
 
-* You can do this by [decoding the JWT token](https://docs.authgear.com/get-started/backend-integration/jwt) on your application server side using a JWT decoder and inspecting the payload.
+* You can do this by [decoding the JWT token](../get-started/backend-api/jwt.md) on your application server side using a JWT decoder and inspecting the payload.
 * If you created the application type **OIDC Client Application,** you need to follow the steps below. Expand it to see instructions.
 
 <details>
@@ -128,7 +128,7 @@ curl --request POST \
 
 **Step 5: Verify custom attributes in the access token**
 
-Finally, we can debug the access token using the [JWT Debugger tool](https://jwt.io/) to see if the custom field and value we added previously are there inside the JWT payload.
+Finally, we can debug the access token using the [JWT Debugger tool](https://www.authgear.com/tools/jwt-jwe-debugger) to see if the custom field and value we added previously are there inside the JWT payload.
 
 <img src="../.gitbook/assets/image (17).png" alt="" data-size="original">
 

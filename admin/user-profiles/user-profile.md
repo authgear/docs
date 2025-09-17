@@ -1,6 +1,6 @@
 # What is User Profile
 
-The user profiles contain information about your end-users such as name, email, addresses, and their unique identifier. You can manage the profiles via the Portal & Admin API. The end-users can also manage their own profile through the Profile section in the [User Setting page](../../design/built-in-ui/auth-ui.md) provided by the AuthUI.
+The user profiles contain information about your end-users such as name, email, addresses, and their unique identifier. You can manage the profiles via the Portal & Admin API. The end-users can also manage their own profile through the Profile section in the [User Setting page](../../customization/ui-customization/built-in-ui/user-settings.md) provided by the AuthUI.
 
 The complete information in the user profiles is a combination of standard attributes and custom attributes. Attributes are a way of grouping the fields of the user profile information. With standard attributes containing common fields, you'll find in a user profile, hence the names of these fields are set by Authgear. You set custom fields on the other hand based on the unique needs of your project.
 
@@ -26,7 +26,7 @@ The following attributes are built-in supported by Authgear. They are the set of
 
 ### Standard Attributes that are coupled with Identities
 
-The following attributes are coupled with the [identities](../../get-started/core-concepts/user-identity-and-authenticator.md#identity) owned by the end-user. They represent the email addresses, phone numbers, or usernames the end-users are using to authenticate themselves on Authgear. If the end-user uses a third-party identity provider for authentication, these attributes will be coupled with the corresponding attributes returned by the provider.
+The following attributes are coupled with the [identities](../../concepts/identity-fundamentals.md) owned by the end-user. They represent the email addresses, phone numbers, or usernames the end-users are using to authenticate themselves on Authgear. If the end-user uses a third-party identity provider for authentication, these attributes will be coupled with the corresponding attributes returned by the provider.
 
 The standard attributes coupled with identities are listed below:
 
@@ -57,7 +57,7 @@ You can define a set of custom attributes in the user profile. They are returned
 
 Go to **Portal** > **User Profile** > **Custom Attributes** and click **Add New Attribute**
 
-The custom attribute name should consist of lowercase letters (a-z), digits (0-9) and underscore (\_) only. It must start with lowercase letters (a-z), and NOT end with an underscore (_\__). The default display name will be the attribute name split with underscore and in title case. e.g. `my_string` will render as `My String` in the [AuthUI Settings page](../../design/built-in-ui/auth-ui.md).
+The custom attribute name should consist of lowercase letters (a-z), digits (0-9) and underscore (\_) only. It must start with lowercase letters (a-z), and NOT end with an underscore (_\__). The default display name will be the attribute name split with underscore and in title case. e.g. `my_string` will render as `My String` in the [AuthUI Settings page](../../customization/ui-customization/built-in-ui/user-settings.md).
 
 Authgear supports the following attribute types:
 
@@ -80,7 +80,7 @@ Deleting custom attributes is not supported. You can change the name and access 
 
 ### Custom attribute order
 
-You can arrange the attribute order by drag-and-drop the handle in the custom attribute configuration in the Portal. This will control the order of how the attributes are shown to the end-users in the [AuthUI User Settings page](../../design/built-in-ui/auth-ui.md).
+You can arrange the attribute order by drag-and-drop the handle in the custom attribute configuration in the Portal. This will control the order of how the attributes are shown to the end-users in the [AuthUI User Settings page](../../customization/ui-customization/built-in-ui/user-settings.md).
 
 ## User Profile Configuration
 
@@ -90,7 +90,7 @@ These are the parties that have access to the user profile:
 
 ### The Admin API
 
-Through [the Admin API](../../reference/apis/admin-api/), developers **ALWAYS** have **full access** to **ALL** the standard attributes and custom attributes. The Admin API allows the developer to view or edit the standard attributes and the custom attributes.
+Through [the Admin API](../../api-reference/apis/admin-api/), developers **ALWAYS** have **full access** to **ALL** the standard attributes and custom attributes. The Admin API allows the developer to view or edit the standard attributes and the custom attributes.
 
 ### The Portal
 
@@ -98,14 +98,14 @@ The admin user can view or edit the standard attributes via the Authgear Portal.
 
 ### The Session Bearer
 
-The session bearer is someone who has a valid session cookie or a valid access token. The standard attributes of the end-user whom the session represents can be viewed by accessing [the UserInfo endpoint](user-profile.md#userinfo-endpoint) and [the resolver endpoint](https://docs.authgear.com/get-started/backend-integration/nginx). The session bearer can be the end-user, the client mobile app, or the client website.
+The session bearer is someone who has a valid session cookie or a valid access token. The standard attributes of the end-user whom the session represents can be viewed by accessing [the UserInfo endpoint](user-profile.md#userinfo-endpoint) and [the resolver endpoint](../../get-started/backend-api/nginx.md). The session bearer can be the end-user, the client mobile app, or the client website.
 
 ### The End-user
 
-The end-user can view or edit the standard attributes through the Profile section in the [User Setting page](../../design/built-in-ui/auth-ui.md) provided by the AuthUI.
+The end-user can view or edit the standard attributes through the Profile section in the [User Setting page](../../customization/ui-customization/built-in-ui/user-settings.md) provided by the AuthUI.
 
 ## Profiles from Third-party Identity Providers
 
-Authgear supports various [social and enterprise identity providers](../how-to-setup-sso-integrations/). End-users can sign up and log in to your apps via these connections. Upon signup, these providers will return a set of user attributes about the end-user. Authgear will copy those attributes and populate the profile of the end-user.
+Authgear supports various [social and enterprise identity providers](../../authentication-and-access/social-enterprise-login-providers/). End-users can sign up and log in to your apps via these connections. Upon signup, these providers will return a set of user attributes about the end-user. Authgear will copy those attributes and populate the profile of the end-user.
 
 More info about the population logic can be found in [the specification](https://github.com/authgear/authgear-server/blob/master/docs/specs/user-profile/design.md#standard-attributes-population).

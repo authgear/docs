@@ -150,7 +150,7 @@ query {
 
 ### 1.3. node
 
-A node represents a single object of different Types. The node query allows you to query a single object using the node ID. You learn more about node ID here: [https://docs.authgear.com/reference/apis/admin-api/node-id](https://docs.authgear.com/reference/apis/admin-api/node-id).
+A node represents a single object of different Types. The node query allows you to query a single object using the node ID. You can [learn more about node ID here](../../../reference/apis/admin-api/using-global-node-ids.md).
 
 **Schema:**
 

@@ -20,7 +20,7 @@ Here's an example to illustrate the concept:
 
 ### OAuth 2.0
 
-The [OAuth 2.0](https://tools.ietf.org/html/rfc6749) authorization framework is a protocol that allows a user to grant a third-party website or application access to the user's protected resources, without necessarily revealing their long-term credentials or even their identity. It’s the standard that allows third-party developers to rely on large social platforms like Facebook, Google, and Twitter for login.  Authgear generates access tokens for API authorization scenarios, in [JSON web token](identity-fundamentals.md#json-web-tokens) (JWT) format. The permissions are represented by [the access token](https://docs.authgear.com/get-started/authentication-approach/token-based).
+The [OAuth 2.0](https://tools.ietf.org/html/rfc6749) authorization framework is a protocol that allows a user to grant a third-party website or application access to the user's protected resources, without necessarily revealing their long-term credentials or even their identity. It’s the standard that allows third-party developers to rely on large social platforms like Facebook, Google, and Twitter for login.  Authgear generates access tokens for API authorization scenarios, in [JSON web token](identity-fundamentals.md#json-web-tokens) (JWT) format. The permissions are represented by [the access token](../api-reference/tokens/jwt-access-token.md).
 
 ### Open ID Connect
 
