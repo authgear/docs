@@ -30,13 +30,23 @@ The reason for this fallback is that services are required to register their SMS
 
 Enterprise users who still wish to customize their SMS template for Chinese numbers can [contact us](https://www.authgear.com/schedule-demo) for more details.
 
-### Important notice for sending SMS to Vietnamese phone numbers (+84)
+### Important notice for sending SMS to Vietnamese (+84) and Taiwanese (+886) phone numbers&#x20;
 
-Due to the regulatory requirements from the local government, all SMS messages to Vietnam must include the application name in the message body. If your users in Vietnam experience difficulties receiving SMS, try adding `[Authgear]` at the begining of the SMS template. SMS without `[Authgear]` may be blocked by the mobile operators.  For example, your OTP message could appears like:
+Due to the regulatory requirements from the local governments, all SMS messages to Vietnam & Taiwan must include the application name in the message body. If your users in Vietnam & Taiwan experience difficulties receiving SMS, try adding `[Authgear]` at the begining of the SMS template. SMS without `[Authgear]` may be blocked by the mobile operators.  For example, your OTP message could appears like:
 
 ```
 [Authgear] {code} is your {app-name} one-time password.
 Don't share it with anyone.
 ```
 
-Enterprise users who still wish to customize the beginning part of the message for Vietnamese numbers can [contact us](https://www.authgear.com/schedule-demo) for more details.
+```
+[Authgear] {code} là mã xác minh {app-name} của bạn.
+Vui lòng không chia sẻ mã này với bất kỳ ai.
+```
+
+```
+[Authgear] {code} 是你的 {app-name} 驗證碼。
+切勿分享給任何人。
+```
+
+Enterprise users who still wish to customize the beginning part of the message for Vietnamese & Taiwanese numbers can [contact us](https://www.authgear.com/schedule-demo) for more details.
