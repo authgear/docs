@@ -16,6 +16,10 @@ Before we start, make sure the option **Issue JWT as access token** is enabled i
 
 With the **Issue JWT as access token** option turned on in your application, Authgear will issue JWT as access tokens. The incoming HTTP requests should include the access token in their `Authorization` headers. Without setting the reverse proxy, your backend server can use your Authgear **JWKS** to verify the request and decode user information from the JWT access token.
 
+## Payload of the JWT access token
+
+See the claims in the access token in this reference: [jwt-access-token.md](../../api-reference/tokens/jwt-access-token.md "mention"). Learn more about [add-custom-fields-to-a-jwt-access-token.md](../../integration/add-custom-fields-to-a-jwt-access-token.md "mention") for adding claims into the JWT.
+
 ## Find the JSON Web Key Sets (JWKS) endpoint
 
 This Discovery endpoint serves as a JSON document containing the OpenID Connect configuration of your app. It includes the authorization endpoint, the token endpoint, and the JWKS endpoint.
