@@ -60,6 +60,7 @@
   * [Re-authentication](authentication-and-access/authentication/reauthentication.md)
   * [Add authentication to any web page](authentication-and-access/authentication/add-authentication-to-any-web-page.md)
   * [Disable Public Signup](authentication-and-access/authentication/disable-public-signup.md)
+  * [Custom Authentication Flow](authentication-and-access/authentication/custom-authentication-flow.md)
 * [Single Sign-on Overview](authentication-and-access/single-sign-on/README.md)
   * [App2App Login](authentication-and-access/single-sign-on/app2app-authorization.md)
   * [App2Web (Pre-authenticated URLs)](authentication-and-access/single-sign-on/pre-authenticated-urls.md)
