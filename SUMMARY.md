@@ -95,7 +95,7 @@
 
 ## Integration
 
-* [Add custom fields to a JWT Access Token](integration/add-custom-fields-to-a-jwt-access-token.md)
+* [Add custom fields to a JWT Access Token or ID Token](integration/add-custom-fields-to-a-jwt-access-token.md)
 * [User Profiles](admin/user-profiles/README.md)
   * [What is User Profile](admin/user-profiles/user-profile.md)
   * [Access User Profiles](admin/user-profiles/access-user-profiles.md)

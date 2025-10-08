@@ -18,6 +18,7 @@ The list of events:
 * [authentication.post\_identified](blocking-events.md#authentication.post_identified)
 * [authentication.pre\_authenticated](blocking-events.md#authentication.pre_authenticated)
 * [oidc.jwt.pre\_create](blocking-events.md#oidc.jwt.pre_create)
+* [oidc.id\_token.pre\_create](blocking-events.md#oidc.id_token.pre_create)
 
 Your hooks must return a JSON document to indicate whether the operation should continue. For example, to let the operation proceed, return the following JSON:
 
@@ -92,15 +93,15 @@ To mutate the user object, include `user` inside `mutations`. Only `standard_att
 You must include the **WHOLE** `standard_attributes` , `custom_attributes` , `roles` or `groups` when you specify the mutations. Otherwise, missing attributes **WILL BE** deleted.
 {% endhint %}
 
-### Mutations on the JWT payload
+### Mutations on the JWT/ID Token payload
 
-If a blocking event supports mutations on the JWT payload, your hooks can respond with a JSON document that allows the operation, and specify additional fields that you want to include in the JWT payload. However, you **MUST NOT** change or remove any existing fields in the JWT payload, as they are essential to the validity of the JWT.
+If a blocking event supports mutations on the access token or ID token (JWT) payload, your hooks can respond with a JSON document that allows the operation, and specify additional fields that you want to include in the JWT payload. However, you **MUST NOT** change or remove any existing fields in the JWT payload, as they are essential to the validity of the JWT.
 
 ```json
 {
   "is_allowed": true,
   "mutations": {
-    "jwt": {
+    "jwt": { // "jwt" for access token or "id_token" for ID Token
       "payload": {
         // The original payload you get from the event object.
         "iss": "https://myapp.authgear.cloud",
@@ -521,7 +522,7 @@ This event supports [#apply-authentication-constraints](blocking-events.md#apply
 
 Occurs right before the access token is issued. Use this event to add custom fields to the JWT access token.
 
-This event supports [#mutations-on-the-jwt-payload](blocking-events.md#mutations-on-the-jwt-payload "mention")
+This event supports [#mutations-on-the-jwt-id-token-payload](blocking-events.md#mutations-on-the-jwt-id-token-payload "mention")
 
 ```json
 {
@@ -551,6 +552,64 @@ This event supports [#mutations-on-the-jwt-payload](blocking-events.md#mutations
         "sub": "338deafa-400b-4589-a922-2c92d670b757"
       }
     }
+  }
+}
+```
+
+### oidc.id\_token.pre\_create
+
+Occurs right before the access token is issued. Use this event to add custom fields to the JWT access token.
+
+This event supports [#mutations-on-the-jwt-id-token-payload](blocking-events.md#mutations-on-the-jwt-id-token-payload "mention")
+
+```json
+{
+  "type": "oidc.id_token.pre_create",
+  "payload": {
+    "user": {
+      "id": "338deafa-400b-4589-a922-2c92d670b757",
+      "created_at": "2006-01-02T03:04:05.123456Z",
+      "updated_at": "2006-01-02T03:04:05.123456Z",
+      "last_login_at": "2006-01-02T03:04:05.123456Z",
+      "is_anonymous": false,
+      "is_verified": true,
+      "is_disabled": true,
+      "is_deactivated": true,
+      "delete_at": "2022-09-30T15:18:19.040081Z",
+      "can_reauthenticate": true,
+      "standard_attributes": {
+        "email": "user@example.com",
+        "email_verified": true,
+        "updated_at": 1136171045
+      }
+    },
+    "identities": [ 
+      // Identities of the user...
+    ],
+    "id_token": {
+      "payload": {
+        "amr": [
+          "pwd",
+          "x_primary_password"
+        ],
+        "aud": [
+          "CLIENT_ID"
+        ],
+        "auth_time": 1136171045,
+        "exp": 1136171045,
+        "https://authgear.com/claims/user/can_reauthenticate": true,
+        "https://authgear.com/claims/user/is_anonymous": false,
+        "https://authgear.com/claims/user/is_verified": true,
+        "https://authgear.com/claims/user/roles": [],
+        "iat": 1759930051,
+        "iss": "AUTHGEAR_ENDPOINT",
+        "sid": "...",
+        "sub": "...",
+      }
+    }
+  },
+  "context": {
+    // Authentication context
   }
 }
 ```
