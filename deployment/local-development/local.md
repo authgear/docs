@@ -43,7 +43,6 @@ services:
       - "6379:6379"
 
   authgear:
-    # Remember to replace the latest tag with the exact version you would like to use!
     image: quay.io/theauthgear/authgear-server:latest
     volumes:
       - ./authgear.yaml:/app/authgear.yaml
@@ -51,6 +50,16 @@ services:
     environment:
       DEV_MODE: "true"
       LOG_LEVEL: "debug"
+      # Set TRUST_PROXY to true if you will run it behind a reverse proxy
+      # TRUST_PROXY: "true"
+      DATABASE_SCHEMA: public
+      DATABASE_URL: "postgres://postgres:postgres@db:5432/app?sslmode=disable"
+      AUDIT_DATABASE_SCHEMA: public
+      AUDIT_DATABASE_URL: "postgres://postgres:postgres@db:5432/audit?sslmode=disable"
+      SEARCH_DATABASE_SCHEMA: "public"
+      SEARCH_DATABASE_URL: "postgres://postgres:postgres@localhost:5432/search?sslmode=disable"
+      REDIS_URL: "redis://redis:6379"
+      ANALYTIC_REDIS_URL: "redis://redis:6379"
     ports:
       - "3000:3000"
 
