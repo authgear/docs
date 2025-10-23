@@ -2,7 +2,7 @@
 description: Guide on how to use Authgear to secure Firebase services
 ---
 
-# Integrate Authgear with Firebase
+# Authgear and Firebase
 
 ## How to use a third-party authentication system to secure Firestore and other Firebase services.
 
@@ -26,7 +26,7 @@ The client application will pass the JWT to Firebase to create a Firebase user i
 
 The following flow diagram shows the complete sequence of using Firebase Custom Tokens and Authgear.
 
-<figure><img src="../.gitbook/assets/Authgear Firestore-2024-12-13-183623.png" alt=""><figcaption><p>flow diagran for authgear-firebase integration</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Authgear Firestore-2024-12-13-183623.png" alt=""><figcaption><p>flow diagran for authgear-firebase integration</p></figcaption></figure>
 
 ## How to integrate Authgear with Firebase using Custom Tokens
 
@@ -193,7 +193,7 @@ Finally, run `firebase deploy` to deploy your new function.
 
 On successful deploy, Firebase CLI will output the public endpoint for your function in the terminal. Copy the endpoint as you will use it later in your React app.
 
-<figure><img src="../.gitbook/assets/firebase-function-url.png" alt=""><figcaption><p>firebase function URL</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/firebase-function-url.png" alt=""><figcaption><p>firebase function URL</p></figcaption></figure>
 
 ### Part 2: Implement React App
 
@@ -210,7 +210,7 @@ As mentioned in the prerequisites for this post, you can get the starter code fo
 5. Copy the code that includes your Firebase config, and paste it in the `firebase.js` file.\
 
 
-<figure><img src="../.gitbook/assets/firebase-config.png" alt=""><figcaption><p>Firebase app config</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/firebase-config.png" alt=""><figcaption><p>Firebase app config</p></figcaption></figure>
 
 
 
@@ -414,7 +414,7 @@ You can click on the **My Todos** link to open the Todo page.
 
 Return to your project in Firebase console, then navigate to **Build** > **Firestore Database**. Enable Firestore if it's not active for your project.
 
-<figure><img src="../.gitbook/assets/firestore-rule.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/firestore-rule.png" alt=""><figcaption></figcaption></figure>
 
 Go to the Rules tab, then change the security rule to the following:
 
@@ -440,4 +440,4 @@ Follow the instructions in the `README.md` file for the Authgear React example a
 
 You should be able to authenticate with Authgear and add items to the to-do.
 
-<figure><img src="../.gitbook/assets/react-demo-todo.png" alt=""><figcaption><p>UI of demo app</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/react-demo-todo.png" alt=""><figcaption><p>UI of demo app</p></figcaption></figure>
