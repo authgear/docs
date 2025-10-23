@@ -10,11 +10,11 @@ User authentication is a foundational part of any modern web application but get
 
 Pairing Authgear with Supabase's Postgres database and powerful Row-Level Security (RLS) gives you a secure, scalable foundation for building user-specific applications.
 
-In this guide, we will walkthrough the process of integrating Authgear and Supabase using React JS to build a basic CRUD application.
+In this guide, you’ll learn how to integrate Authgear and Supabase using React.js to build a basic CRUD application.
 
 <figure><img src="../../.gitbook/assets/image (58).png" alt="Simple instrument tracking app where users can manage their personal collection after logging in with Authgear"><figcaption><p>Simple instrument tracking app where users can manage their personal collection after logging in with Authgear</p></figcaption></figure>
 
-You’ll learn how to **authenticate users with Authgear**, exchange tokens via a **Supabase Edge Function**, apply **RLS policies** based on Authgear-issued JWTs, and connect it all in a modern React frontend using Vite.
+We will walkthrough how to **authenticate users with Authgear**, exchange tokens via a **Supabase Edge Function**, apply **RLS policies** based on Authgear-issued JWTs, and connect it all in a modern React frontend using Vite.
 
 ```
 ┌─────────────┐          ┌──────────────┐          ┌──────────────┐
@@ -36,16 +36,16 @@ You’ll learn how to **authenticate users with Authgear**, exchange tokens via 
 
 ```
 
-## Full example code
+## **Full example code**
 
-The full example app is available on GitHub and can be used as a starting point for your own project: [https://github.com/authgear/authgear-example-supabase](https://github.com/authgear/authgear-example-supabase)
+The full example app source code is available on GitHub and can be used as a starting point for your own project: [https://github.com/authgear/authgear-example-supabase](https://github.com/authgear/authgear-example-supabase)
 
 ## What you need
 
 * **Authgear account & project** – [Sign up for Authgear](https://portal.authgear.com/).
 * **Supabase account & project** – [Sign up on supabase.com](https://supabase.com/)
 
-## Step 1: Set Up Your Authgear Project and Application
+## Step 1: Set up an Authgear project
 
 First, configure Authgear to handle authentication for your app.
 
@@ -59,11 +59,11 @@ First, configure Authgear to handle authentication for your app.
 
 We will need these values when initializing Authgear in our React app and in the Supabase function.
 
-## Step 2: Set Up a Supabase Project
+## Step 2: Set up a Supabase project
 
 Next, prepare your Supabase backend.
 
-1. **Create a Supabase Project:** Log in to Supabase Dashboard, create a new project (choose an organization, project name, database password, and region). Wait for your database to initialize.
+1. **Create a Supabase Project:** Log in to Supabase Dashboard, create a new project (choose an organization, project name, database password, and region).&#x20;
 2. **Retrieve Project Keys:** In your Supabase project, go to **Project Settings → API → API keys**. Copy the **Publishable Key** and the **URL** of your project (e.g., `https://xyzcompany.supabase.co`).
 3.  **Get the JWT Secret:** Still in **Project settings**, navigate to **JWT Keys** and find the **Legacy JWT Secret** for your project. This is a secret key that Supabase uses to sign and verify JWTs for RLS. Copy the JWT secret value – we will use it in our Edge Function config.\
 
@@ -73,7 +73,7 @@ Next, prepare your Supabase backend.
 
 4. _(Optional)_ **Install Supabase CLI:** If you plan to use the CLI to deploy the Edge Function, install it by following [Supabase’s instructions](https://supabase.com/docs/guides/local-development/cli/getting-started). Alternatively, you can deploy the function via the Dashboard UI.
 
-## Step 3: Create an Edge Function to Exchange JWTs
+## Step 3: Create an Edge Function to exchange JWTs
 
 Now we set up the critical piece: a Supabase Edge Function that will accept Authgear’s JWT and return a new JWT signed with Supabase’s secret.&#x20;
 
@@ -219,7 +219,7 @@ Once deployed, your function is accessible at:&#x20;
 ${SUPABASE_URL}/functions/v1/exchange-jwt
 ```
 
-## Step 4: Create the Database Table and RLS Policies
+## Step 4: Create the database table and RLS policies
 
 Now let’s set up the database table and RLS rules in Supabase. We’ll create a table (`instruments`) to store items owned by users, and use RLS to ensure each user can only manipulate their own rows.
 
@@ -286,7 +286,7 @@ USING (user_id = current_user_id());
 
 We then defined four policies, one for each CRUD operation (SELECT, INSERT, UPDATE, DELETE). Each policy is limited to the `authenticated` role and uses a condition requiring that the row’s `user_id` matches the user’s id from the JWT.
 
-## Step 5. Build the React App with Supabase Client
+## Step 5. Build the React app with Supabase Client
 
 Now for the frontend. We will create a React app using Vite, integrate Authgear’s SDK for authentication, and configure the Supabase client to use our token exchange flow automatically.
 
@@ -394,7 +394,7 @@ supabase.from('instruments').insert({
 
 Similarly, to update or delete, similarly call `.update(...)` or `.delete(...)` in the Supabase Client with appropriate filters
 
-## 6. Run and Test the App
+## 6. Run and test the app
 
 We’re ready to test the whole system. Start the development server:
 
