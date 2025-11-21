@@ -252,43 +252,6 @@ function AuthenticationScreen() {
 ```
 {% endtab %}
 
-{% tab title="Xamarin" %}
-```csharp
-using System;
-
-using Android.App;
-using Android.Content.PM;
-using Android.Runtime;
-using Android.OS;
-
-using Xamarin.Forms;
-using Authgear.Xamarin;
-
-namespace MyApp.Droid
-{
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
-    {
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            // ...
-
-            var authgear = new AuthgearSdk(this, new AuthgearOptions
-            {
-                ClientId = CLIENT_ID,
-                AuthgearEndpoint = ENDPOINT,
-                TokenStorage = new TransientTokenStorage()
-            });
-            DependencyService.RegisterSingleton<AuthgearSdk>(authgear);
-            LoadApplication(new App());
-
-            // ...
-        }
-
-        // other methods are omitted for brevity.
-    }
-}
-```
-{% endtab %}
 {% endtabs %}
 
 ## Enable biometric login in mobile SDK
@@ -301,15 +264,16 @@ Customize the biometric options to achieve the expected user experience.
 
 #### iOS
 
-There are 3 options on iOS:
+There are 4 options on iOS:
 
 * `localizedReason` is the custom message to explain to the user why TouchID or FaceID is required.
-* `policy` constrainst how the user is authenticated locally.
+* `localizedCancelTitle` (optional) customizes the cancel button label.
+* `policy` constraints how the user is authenticated locally.
   * [`deviceOwnerAuthenticationWithBiometrics`](https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthenticationwithbiometrics): The user MUST use TouchID or FaceID. This also implies the device must have TouchID or FaceID already set up. See also [#error-handling](biometric.md#error-handling "mention")
   * [`deviceOwnerAuthentication`](https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthentication): If the device has TouchID or FaceID set up, it is used first. Otherwise, the device passcode is used. This also implies the device must have a passcode. See also [#error-handling](biometric.md#error-handling "mention")
   * It refers to the `LAPolicy` enum on iOS, see [reference in Apple Developers Doc on these options](https://developer.apple.com/documentation/localauthentication/lapolicy).
 * `constraint` is an enum that constraint the access of key stored under different conditions:
-  * [`BiometryCurrentSet`](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/biometrycurrentset): The biometric login will be invalidated if the device has any changes to TouchID or FaceID. Changes include adding, or removing, re-enrolling any fingerprints or faces.
+  * [`biometryCurrentSet`](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/biometrycurrentset): The biometric login will be invalidated if the device has any changes to TouchID or FaceID. Changes include adding, or removing, re-enrolling any fingerprints or faces.
   * [`biometryAny`](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/biometryany): The biometric login stays valid even if the device has any changes to TouchID or FaceID.
   * [`userPresence`](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/userpresence): Either biometry or device passcode/PIN can be used to access the private key.
   * See [reference in Apple Developers Doc on these options](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags).
@@ -326,16 +290,17 @@ There are 6 options on Android:
 * `subtitle` is the subtitle of the biometric dialog presented to the users
 * `description` is the description of the biometric dialog presented to the users
 * `negativeButtonText` is what the dismiss button says in the biometric dialog
-* `constraint` is an array that defines the requirement of security level, which can be [`BIOMETRIC_STRONG`](https://developer.android.com/reference/android/hardware/biometrics/BiometricManager.Authenticators#BIOMETRIC_STRONG), [`BIOMETRIC_WEAK`](https://developer.android.com/reference/android/hardware/biometrics/BiometricManager.Authenticators#BIOMETRIC_WEAK), [`DEVICE_CREDENTIAL`](https://developer.android.com/reference/android/hardware/biometrics/BiometricManager.Authenticators#DEVICE_CREDENTIAL).
-* ​[`invalidatedByBiometricEnrollment`](https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder#setInvalidatedByBiometricEnrollment\(boolean\)) is a boolean that controls if the key pair will be invalidated if a new biometric is enrolled, or when all existing biometrics are deleted.
+* `allowedAuthenticatorsOnEnable` is an array that defines the requirement of security level when the user enable biometric, which can be [`BIOMETRIC_STRONG`](https://developer.android.com/reference/android/hardware/biometrics/BiometricManager.Authenticators#BIOMETRIC_STRONG) or [`DEVICE_CREDENTIAL`](https://developer.android.com/reference/android/hardware/biometrics/BiometricManager.Authenticators#DEVICE_CREDENTIAL).
+* `allowedAuthenticatosOnAuthenticate` is an array that defines the requirement of security level when the user authenticates with biometric.
+* [`invalidatedByBiometricEnrollment`](https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder#setInvalidatedByBiometricEnrollment\(boolean\)) is a boolean that controls if the key pair will be invalidated if a new biometric is enrolled, or when all existing biometrics are deleted.
 
-In summary, based on the desired behavior and business requirements, set the policy and constraint options as below.
+In summary, based on the desired behavior and business requirements, set `allowedAuthenticatorsOnEnable` and `allowedAuthenticatosOnAuthenticate` as below.
 
-| Requirement                                                                             | Constraint                                              |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| Any strong biometric exceed the requirements for Class 3 as defined by the Android CDD. | `[BIOMETRIC_STRONG]`                                    |
-| Any biometric exceed the requirements for Class 2 as defined by the Android CDD.        | `[BIOMETRIC_WEAK, DEVICE_CREDENTIAL]`                   |
-| Any biometric or non-biometric credentials (i.e., PIN, pattern, or password)            | `[BIOMETRIC_STRONG, BIOMETRIC_WEAK, DEVICE_CREDENTIAL]` |
+| Requirement                                                                                           | `allowedAuthenticatorsOnEnable`         | `allowedAuthenticatosOnAuthenticate`    |
+| ---                                                                                                   | ---                                     | ---                                     |
+| Biometric is required during enable and subsequent biometric authentication.                          | `[BIOMETRIC_STRONG]`                    | `[BIOMETRIC_STRONG]`                    |
+| Biometric is required during enable. Passcode is also allowed in subsequent biometric authentication. | `[BIOMETRIC_STRONG]`                    | `[BIOMETRIC_STRONG, DEVICE_CREDENTIAL]` |
+| Passcode is allowed during enable and subsequent biometric authentication.                            | `[BIOMETRIC_STRONG, DEVICE_CREDENTIAL]` | `[BIOMETRIC_STRONG, DEVICE_CREDENTIAL]` |
 
 ### Code examples
 
@@ -368,7 +333,7 @@ try {
         // check if current device supports biometric login
         authgear.checkBiometricSupported(
                 this.getApplication(),
-                ALLOWED
+                List.of(BiometricAuthenticator.BIOMETRIC_STRONG)
         );
         supported = true;
     }
@@ -384,6 +349,7 @@ if (supported) {
 const biometricOptions = {
   ios: {
     localizedReason: 'Use biometric to authenticate',
+    localizedCancelTitle: 'Cancel',
     constraint: BiometricAccessConstraintIOS.BiometryCurrentSet,
     policy: BiometricLAPolicy.deviceOwnerAuthenticationWithBiometrics,
   },
@@ -392,7 +358,8 @@ const biometricOptions = {
     subtitle: 'Biometric authentication',
     description: 'Use biometric to authenticate',
     negativeButtonText: 'Cancel',
-    constraint: [BiometricAccessConstraintAndroid.BiometricStrong],
+    allowedAuthenticatorsOnEnable: [BiometricAuthenticatorAndroid.BiometricStrong],
+    allowedAuthenticatosOnAuthenticate: [BiometricAuthenticatorAndroid.BiometricStrong],
     invalidatedByBiometricEnrollment: true,
   },
 };
@@ -413,6 +380,7 @@ authgear
 // We will need the options for the other biometric api
 final ios = BiometricOptionsIOS(
     localizedReason: "Use biometric to authenticate",
+    localizedCancelTitle: "Cancel",
     constraint: BiometricAccessConstraintIOS.biometryAny,
     policy: BiometricLAPolicy.deviceOwnerAuthenticationWithBiometrics,
 );
@@ -421,7 +389,8 @@ final android = BiometricOptionsAndroid(
     subtitle: "Biometric authentication",
     description: "Use biometric to authenticate",
     negativeButtonText: "Cancel",
-    constraint: [BiometricAccessConstraintAndroid.biometricStrong],
+    allowedAuthenticatorsOnEnable: [BiometricAuthenticatorAndroid.biometricStrong],
+    allowedAuthenticatorsOnAuthenticate: [BiometricAuthenticatorAndroid.biometricStrong],
     invalidatedByBiometricEnrollment: true,
 );
 
@@ -440,6 +409,7 @@ try {
 const biometricOptions: BiometricOptions = {
   ios: {
     localizedReason: "Use biometric to authenticate",
+    localizedCancelTitle: "Cancel",
     constraint: BiometricAccessConstraintIOS.BiometryCurrentSet,
     policy: BiometricLAPolicy.deviceOwnerAuthenticationWithBiometrics,
   },
@@ -448,7 +418,8 @@ const biometricOptions: BiometricOptions = {
     subtitle: "Biometric authentication",
     description: "Use biometric to authenticate",
     negativeButtonText: "Cancel",
-    constraint: [BiometricAccessConstraintAndroid.BiometricStrong],
+    allowedAuthenticatorsOnEnable: [BiometricAuthenticatorAndroid.BiometricStrong],
+    allowedAuthenticatosOnAuthenticate: [BiometricAuthenticatorAndroid.BiometricStrong],
     invalidatedByBiometricEnrollment: true,
   },
 };
@@ -470,40 +441,6 @@ const updateBiometricState = useCallback(async () => {
 ```
 {% endtab %}
 
-{% tab title="Xamarin" %}
-```csharp
-// We will need the options for the other biometric api
-var ios = new BiometricOptionsIos
-{
-    LocalizedReason = "Use biometric to authenticate",
-    AccessConstraint = BiometricAccessConstraintIos.BiometricAny,
-};
-var android = new BiometricOptionsAndroid
-{
-    Title = "Biometric Authentication",
-    Subtitle = "Biometric authentication",
-    Description = "Use biometric to authenticate",
-    NegativeButtonText = "Cancel",
-    AccessConstraint = BiometricAccessConstraintAndroid.BiometricOnly,
-    InvalidatedByBiometricEnrollment = false,
-};
-var biometricOptions = new BiometricOptions
-{
-    Ios = ios, 
-    Android = android
-};
-try
-{
-    // check if current device supports biometric login
-    authgear.EnsureBiometricIsSupported(biometricOptions);
-    // biometric login is supported
-}
-catch
-{
-    // biometric login is not supported
-}
-```
-{% endtab %}
 {% endtabs %}
 
 #### Enable biometric login
@@ -518,7 +455,8 @@ Enable biometric login for logged in user
 authgear.enableBiometric(
     localizedReason: "REPLACE_WITH_LOCALIZED_REASON",
     constraint: .biometryCurrentSet,
-    policy: .deviceOwnerAuthenticationWithBiometrics
+    policy: .deviceOwnerAuthenticationWithBiometrics,
+    localizedCancelTitle: "Cancel",
 ) { result in
     if case let .failure(error) = result {
         // failed to enable biometric with error
@@ -538,7 +476,8 @@ BiometricOptions biometricOptions = new BiometricOptions(
     "Biometric authentication", // subtitle
     "Use biometric to authenticate", // description
     "Cancel", // negativeButtonText
-    ALLOWED, // allowedAuthenticators
+    List.of(BiometricAuthenticator.BIOMETRIC_STRONG), // allowedAuthenticatorsOnEnable
+    List.of(BiometricAuthenticator.BIOMETRIC_STRONG), // allowedAuthenticatorsOnAuthenticate
     true // invalidatedByBiometricEnrollment
 );
 authgear.enableBiometric(
@@ -608,19 +547,6 @@ const onClickEnableBiometric = useCallback(
 ```
 {% endtab %}
 
-{% tab title="Xamarin" %}
-```csharp
-try
-{
-    await authgear.EnableBiometricAsync(biometricOptions);
-    // enabled biometric login successfully
-}
-catch
-{
-    // failed to enable biometric with error
-}
-```
-{% endtab %}
 {% endtabs %}
 
 #### Check if biometric has been enabled before
@@ -679,19 +605,6 @@ try {
 ```
 {% endtab %}
 
-{% tab title="Xamarin" %}
-```csharp
-try
-{
-    var enabled = await authgear.GetIsBiometricEnabledAsync();
-    // show if biometric login is enabled
-}
-catch
-{
-    // failed to check the enabled status
-}
-```
-{% endtab %}
 {% endtabs %}
 
 #### Login with biometric credentials
@@ -701,7 +614,10 @@ If biometric is supported and enabled, you can use the Authenticate Biometric me
 {% tabs %}
 {% tab title="iOS" %}
 ```swift
-authgear.authenticateBiometric { result in
+authgear.authenticateBiometric(
+    localizedReason: "The reason",
+    policy: .deviceOwnerAuthenticationWithBiometrics
+) { result in
     switch result {
         case let .success(userInfo):
             let userInfo = userInfo
@@ -862,19 +778,6 @@ try {
 ```
 {% endtab %}
 
-{% tab title="Xamarin" %}
-```csharp
-try
-{
-    await authgear.DisableBiometricAsync();
-    // disabled biometric login successfully
-}
-catch
-{
-    // failed to disable biometric login
-}
-```
-{% endtab %}
 {% endtabs %}
 
 #### Error handling
@@ -1030,76 +933,226 @@ if (e instanceof CancelError) {
 ```
 {% endtab %}
 
-{% tab title="Xamarin" %}
-```csharp
-try 
-{
-    // ...
-}
-catch (OperationCanceledException ex)
-{
-    // user cancel
-}
-catch (BiometricPrivateKeyNotFoundException ex)
-{
-    // biometric info has changed. e.g. Touch ID or Face ID has changed.
-    // user have to set up biometric authentication again
-}
-catch (BiometricNoEnrollmentException ex)
-{
-    // device does not have biometric set up
-    // e.g. have not set up Face ID or Touch ID in the device
-}
-catch (BiometricNotSupportedOrPermissionDeniedException ex)
-{
-    // biometric is not supported in the current device
-    // or user has denied the permission of using Face ID
-}
-catch (BiometricNoPasscodeException ex)
-{
-    // device does not have unlock credential or passcode set up
-}
-catch (BiometricLockoutException ex)
-{
-    // the biometric is locked out due to too many failed attempts
-}
-catch
-{
-    // other error
-    // you may consider showing a generic error message to the user
-}
-```
-{% endtab %}
 {% endtabs %}
 
 ## Fall back to Device PIN/Password when Biometric Verification fails
 
 You may want to provide an alternative means for users to log in when biometric verification fails on their devices. For example, in a case where a user's finger is dirty (touch-based) or when the user's face is covered (Face ID).
 
-In the biometric options, the parameters **policy**: `BiometricLAPolicy.deviceOwnerAuthentication` (iOS) and **constraint** `BiometricAccessConstraintAndroid.DeviceCredential` (Android) can be used to allow users to enter their device PIN/Password when biometric verification fails.
+On iOS, you use `deviceOwnerAuthenticationWithBiometrics` during enable, and use `deviceOwnerAuthentication` during subsequent authentication.
 
-You can set the policy for iOS and constraint for Android in the [Biometric options](biometric.md#biometric-options) of the Authgear SDK. The following is an example of a biometric options that allows users to use device's PIN/Password in iOS and Android:
+On Android, you set `allowedAuthenticatorsOnEnable` and `allowedAuthenticatosOnAuthenticate` according to the example below.
 
-```javascript
-const biometricOptions: BiometricOptions = {
-  ios: {
-    localizedReason: "Use biometric to authenticate",
-    constraint: BiometricAccessConstraintIOS.userPresence,
-    policy: BiometricLAPolicy.deviceOwnerAuthentication,
-  },
-  android: {
+{% tabs %}
+{% tab title="iOS" %}
+```swift
+// Enable biometric for the user.
+authgear.enableBiometric(
+    localizedReason: "The reason",
+    constraint: .biometryCurrentSet,
+    // The user must authenticate with biometric during enable.
+    policy: .deviceOwnerAuthenticationWithBiometrics,
+) { result in
+    if case let .failure(error) = result {
+        // Handle error
+    } else {
+        // Enabled successfully
+    }
+}
+
+// Authenticate the user
+authgear.authenticateBiometric(
+    localizedReason: "The reason",
+    // Allow passcode by using deviceOwnerAuthentication instead of deviceOwnerAuthenticationWithBiometrics
+    policy: .deviceOwnerAuthentication
+) { result in
+    if case let .failure(error) = result {
+        // Handle error
+    } else {
+        // Authenticated successfully, either with biometric or passcode.
+    }
+}
+```
+{% endtab %}
+{% tab title="Android" %}
+```java
+BiometricOptions biometricOptions = new BiometricOptions(
+    activity, // FragmentActivity
+    "Biometric authentication", // title
+    "Biometric authentication", // subtitle
+    "Use biometric to authenticate", // description
+    "Cancel", // negativeButtonText
+    // Require biometric during enable
+    List.of(BiometricAuthenticator.BIOMETRIC_STRONG), // allowedAuthenticatorsOnEnable
+    // Allow passcode during authentication
+    List.of(BiometricAuthenticator.BIOMETRIC_STRONG, BiometricAuthenticator.DEVICE_CREDENTIAL), // allowedAuthenticatorsOnAuthenticate
+    true // invalidatedByBiometricEnrollment
+);
+
+authgear.enableBiometric(
+    biometricOptions,
+    new OnEnableBiometricListener() {
+        @Override
+        public void onEnabled() {
+            // enabled biometric login successfully
+        }
+
+        @Override
+        public void onFailed(Throwable throwable) {
+            // failed to enable biometric with error
+        }
+    }
+);
+
+authgear.authenticateBiometric(
+    biometricOptions,
+    new OnAuthenticateBiometricListener() {
+        @Override
+        public void onAuthenticated(UserInfo userInfo) {
+            // logged in successfully
+        }
+
+        @Override
+        public void onAuthenticationFailed(Throwable throwable) {
+            // failed to login
+        }
+    }
+);
+```
+{% endtab %}
+{% tab title="React Native" %}
+```typescript
+const androidOptions = {
+  title: "Biometric Authentication",
+  subtitle: "Biometric authentication",
+  description: "Use biometric to authenticate",
+  negativeButtonText: "Cancel",
+  allowedAuthenticatorsOnEnable: [BiometricAuthenticatorAndroid.BiometricStrong],
+  allowedAuthenticatosOnAuthenticate: [BiometricAuthenticatorAndroid.BiometricStrong, BiometricAuthenticatorAndroid.DeviceCredential],
+  invalidatedByBiometricEnrollment: true,
+};
+
+const iosOptionsForEnable = {
+  localizedReason: "Use biometric to authenticate",
+  localizedCancelTitle: "Cancel",
+  constraint: BiometricAccessConstraintIOS.BiometryCurrentSet,
+  policy: BiometricLAPolicy.deviceOwnerAuthenticationWithBiometrics,
+};
+
+const iosOptionsForAuthenticate = {
+  localizedReason: "Use biometric to authenticate",
+  localizedCancelTitle: "Cancel",
+  constraint: BiometricAccessConstraintIOS.BiometryCurrentSet,
+  policy: BiometricLAPolicy.deviceOwnerAuthentication,
+};
+
+authgear
+    .enableBiometric({ ios: iosOptionsForEnable, android: androidOptions })
+    .then(() => {
+        // enabled biometric login successfully
+    })
+    .catch((err) => {
+        // failed to enable biometric with error
+    });
+
+authgear
+    .authenticateBiometric({ ios: iosOptionsForAuthenticate, android: androidOptions})
+    .then(({userInfo}) => {
+        // logged in successfully
+    })
+    .catch((e) => {
+        // failed to login
+    });
+```
+
+{% endtab %}
+{% tab title="Flutter" %}
+```dart
+final androidOptions = BiometricOptionsAndroid(
     title: "Biometric Authentication",
     subtitle: "Biometric authentication",
     description: "Use biometric to authenticate",
     negativeButtonText: "Cancel",
-    constraint: [
-      BiometricAccessConstraintAndroid.BiometricStrong, 
-      BiometricAccessConstraintAndroid.BiometricWeak,
-      BiometricAccessConstraintAndroid.DeviceCredential],
+    allowedAuthenticatorsOnEnable: [BiometricAuthenticatorAndroid.biometricStrong],
+    allowedAuthenticatorsOnAuthenticate: [BiometricAuthenticatorAndroid.biometricStrong, BiometricAuthenticatorAndroid.deviceCredential],
     invalidatedByBiometricEnrollment: true,
-  },
-};
+);
+
+final iosOptionsForEnable = BiometricOptionsIOS(
+    localizedReason: "Use biometric to authenticate",
+    localizedCancelTitle: "Cancel",
+    constraint: BiometricAccessConstraintIOS.biometryCurrentSet,
+    policy: BiometricLAPolicy.deviceOwnerAuthenticationWithBiometrics,
+);
+
+final iosOptionsForAuthenticate = BiometricOptionsIOS(
+    localizedReason: "Use biometric to authenticate",
+    localizedCancelTitle: "Cancel",
+    constraint: BiometricAccessConstraintIOS.biometryCurrentSet,
+    policy: BiometricLAPolicy.deviceOwnerAuthentication,
+);
+
+try {
+    await authgear.enableBiometric(ios: iosOptionsForEnable, android: androidOptions);
+    // enabled biometric login successfully
+} catch (e) {
+    // failed to enable biometric with error
+}
+
+try {
+    final userInfo = await authgear.authenticateBiometric(ios: iosOptionsForAuthenticate, android: androidOptions);
+    // logged in successfully
+} catch (e) {
+    // failed to login
+}
 ```
+{% endtab %}
+{% tab title="Ionic" %}
+```typescript
+const androidOptions = {
+  title: "Biometric Authentication",
+  subtitle: "Biometric authentication",
+  description: "Use biometric to authenticate",
+  negativeButtonText: "Cancel",
+  allowedAuthenticatorsOnEnable: [BiometricAuthenticatorAndroid.BiometricStrong],
+  allowedAuthenticatosOnAuthenticate: [BiometricAuthenticatorAndroid.BiometricStrong, BiometricAuthenticatorAndroid.DeviceCredential],
+  invalidatedByBiometricEnrollment: true,
+};
+
+const iosOptionsForEnable = {
+  localizedReason: "Use biometric to authenticate",
+  localizedCancelTitle: "Cancel",
+  constraint: BiometricAccessConstraintIOS.BiometryCurrentSet,
+  policy: BiometricLAPolicy.deviceOwnerAuthenticationWithBiometrics,
+};
+
+const iosOptionsForAuthenticate = {
+  localizedReason: "Use biometric to authenticate",
+  localizedCancelTitle: "Cancel",
+  constraint: BiometricAccessConstraintIOS.BiometryCurrentSet,
+  policy: BiometricLAPolicy.deviceOwnerAuthentication,
+};
+
+authgear
+    .enableBiometric({ ios: iosOptionsForEnable, android: androidOptions })
+    .then(() => {
+        // enabled biometric login successfully
+    })
+    .catch((err) => {
+        // failed to enable biometric with error
+    });
+
+authgear
+    .authenticateBiometric({ ios: iosOptionsForAuthenticate, android: androidOptions})
+    .then(({userInfo}) => {
+        // logged in successfully
+    })
+    .catch((e) => {
+        // failed to login
+    });
+```
+{% endtab %}
+{% endtabs %}
 
 The biometric pop-up will look like this after a failed biometric log-in attempt with `BiometricLAPolicy.deviceOwnerAuthentication` policy on iOS:
 
