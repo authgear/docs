@@ -6,7 +6,7 @@ description: >-
 
 # Use the OAuth 2.0 State Parameter
 
-The [OAuth 2.0 framework](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.1) includes an optional `state` parameter. The value of the `state` parameter can be any random string or number defined by a client application (e.g. a web or mobile that uses Authgear for user authentication) before making an authorization request. In fact, the `state` parameter is added to the authorization URL as a URL query.&#x20;
+The [OAuth 2.0 framework](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.1) includes an optional `state` parameter. The value of the `state` parameter can be any random string or number defined by a client application (e.g. a web or mobile that uses Authgear for user authentication) before making an authorization request. In fact, the `state` parameter is added to the authorization URL as a URL query.
 
 The authorization server (Authgear) will include the value of the state parameter when redirecting the user-agent back to the client application. As a result, the client application can retrieve the value of `state` returned to verify that it is the origin of the authorization request.
 
@@ -18,7 +18,7 @@ The following are some use cases of the OAuth 2.0 state parameter.
 
 ### 1. Customize Post Login/Sign up User Experience
 
-Because the value for the state parameter passed at the beginning of an authorization request is returned unchanged after authorization, you can use this behavior to customize the post-login or sign-up user experience.&#x20;
+Because the value for the state parameter passed at the beginning of an authorization request is returned unchanged after authorization, you can use this behavior to customize the post-login or sign-up user experience.
 
 For example, you can show users some custom messages after they sign up or log in, using a special link that was sent to them via email or SMS. The "special" thing in the link would be the value of a query parameter that can be passed in the `state` parameter.
 
@@ -40,7 +40,7 @@ In OAuth, an attacker can perform a Cross-site Request Forgery using the client 
 
 The official Authgear SDKs have mechanisms for protecting your applications from CSRF built into them.
 
-However, if you are not using the official SDK, you can secure your application by generating a random hard-to-guess value on the client application and passing it in the `state` parameter. Your application should store this value securely on the user's client-side using session cookies or some other form of local storage. Then,  verify the `state` parameter in the redirect URI against the value stored locally to confirm that a user-agent is the origin of an authorization request before exchanging the authorization code for an access token.&#x20;
+However, if you are not using the official SDK, you can secure your application by generating a random hard-to-guess value on the client application and passing it in the `state` parameter. Your application should store this value securely on the user's client-side using session cookies or some other form of local storage. Then, verify the `state` parameter in the redirect URI against the value stored locally to confirm that a user-agent is the origin of an authorization request before exchanging the authorization code for an access token.
 
 ## Examples: Including the State Parameter in Authorization Request
 
@@ -54,13 +54,13 @@ As you can see from the above URL, `state` is a query parameter in addition to o
 
 If you're constructing the authorization URL manually, you can include the state parameter by simply appending "`&state=random_state_value`" to the authorization URL.
 
-Alternatively, if you're using any of the Authgear SDKs, you can use the built-in `state` field to set a value.&#x20;
+Alternatively, if you're using any of the Authgear SDKs, you can use the built-in `state` field to set a value.
 
 The following code samples show the use of the state parameter with Authgear.
 
 {% tabs %}
 {% tab title="JavaScript (React)" %}
-### Step 1: Set up a React Project to use Authgear
+#### Step 1: Set up a React Project to use Authgear
 
 Create a new React project or use an existing project and configure the project to use Authgear. The following example is based on our [React example Git repository](https://github.com/authgear/authgear-example-react).
 
@@ -94,7 +94,7 @@ async function init() {
 init().catch((e) => console.log(e));
 ```
 
-### Step 2: Include State Parameter in Authorization Request
+#### Step 2: Include State Parameter in Authorization Request
 
 Set the `state` field in your call to the `startAuthentication()` method of the Authgear SDK to a random hard-to-guess value based on your use case.
 
@@ -118,7 +118,7 @@ Set the `state` field in your call to the `startAuthentication()` method of the 
   }, []);
 ```
 
-### Step 3: Read and Use the Value of State Returned After the Authorization
+#### Step 3: Read and Use the Value of State Returned After the Authorization
 
 Implement the component that handles your OAuth 2.0 redirect like this:
 
@@ -166,11 +166,11 @@ const AuthRedirect: React.FC = () => {
 
 The above code will read the value of the state parameter returned in the redirect and compare it to the initial value.
 
-For this example, when the initial value of the `state` parameter before authorization is not the same as the value returned in the redirectURL, we halt the authentication process.&#x20;
+For this example, when the initial value of the `state` parameter before authorization is not the same as the value returned in the redirectURL, we halt the authentication process.
 {% endtab %}
 
 {% tab title="PHP" %}
-### Step 1: Set up PHP Project
+#### Step 1: Set up PHP Project
 
 This example uses the [League OAuth 2.0 client](https://oauth2-client.thephpleague.com/) PHP package. Install the package using the following command:
 
@@ -217,7 +217,7 @@ if (!isset($_GET['code'])) {
 
 The League OAuth 2.0 client we are using in this example helps us generate random strings for the `state` parameter. In the above code, we store the value for the state generated in session on the line with `$_SESSION['oauth2state'] = $provider->getState()`;.
 
-### Step 2: Read and Use the Value of State
+#### Step 2: Read and Use the Value of State
 
 Add an else block for the `if (!isset($_GET['code']))` condition with the following code:
 

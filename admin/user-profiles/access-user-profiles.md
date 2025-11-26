@@ -70,13 +70,13 @@ To manage access for standard attributes for all users:
 
 Go to **Portal** > **User Profile** > **Standard Attributes**
 
-<img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (14) (1).png" alt="" data-size="original">
 
 To manage access and add new custom attributes for all users:
 
 Go to **Portal** > **User Profile** > **Custom Attributes** and click **Add New Attribute**
 
-<img src="../../.gitbook/assets/image (2) (1) (1).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (22) (1).png" alt="" data-size="original">
 
 </details>
 

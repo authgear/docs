@@ -22,7 +22,7 @@ In this step, we'll create a webhook for the **User pre-create** event in the Au
 
 Enter the full URL that points to the page that will be receiving and processing the webhook requests in the Endpoint text field.
 
-<figure><img src="../../.gitbook/assets/authgear-webhooks (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-webhooks (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Once you're done, click on the Save button at the top.
 
@@ -161,7 +161,7 @@ Navigate to **Advance** > **Hooks** in the Authgear portal. Next, click on **Add
 
 Select **TypeScript** as the type and **User pre-create** as the Event.
 
-The third field in a TypeScript hook is different from a regular webhook. The field allows you to enter JavaScript code that the hook can execute when an event is triggered.&#x20;
+The third field in a TypeScript hook is different from a regular webhook. The field allows you to enter JavaScript code that the hook can execute when an event is triggered.
 
 <figure><img src="../../.gitbook/assets/authgear-typescript-hook (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -189,7 +189,7 @@ export default async function (e: EventUserPreCreate): Promise<HookResponse> {
 }
 ```
 
-Make sure to update the value for `allowedIp` to the IP address you wish to allow.&#x20;
+Make sure to update the value for `allowedIp` to the IP address you wish to allow.
 
 Once you're done, click on **Finish Editing** to return to the Hooks configuration page. Save your new hook by clicking on the **Save** button at the top of the configuration page.
 

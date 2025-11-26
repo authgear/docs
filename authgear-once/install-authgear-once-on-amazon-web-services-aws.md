@@ -29,7 +29,7 @@ Enter a name for your instance in the **Name and tag** field. Then, click on the
 
 On the **Choose an Amazon Machine Image (AMI)** page, click on **AWS Marketplace AMIs**.
 
-Then, enter "docker" in the search box and hit the Enter/Return key.&#x20;
+Then, enter "docker" in the search box and hit the Enter/Return key.
 
 Select your preferred Linux distro from the search results to continue. For example, Docker on Debian 11. Click on **Subscribe on instance launch** on the next screen.
 
@@ -59,7 +59,7 @@ Configure your domain name with the following A records and the public IP addres
 | A    | authgear-portal          | IP of your VM | The admin portal for CIAM functions                                                  |
 | A    | authgear-portal-accounts | IP of your VM | A domain for logging into the Authgear portal. You don't need to access it directly. |
 
-<figure><img src="../.gitbook/assets/image (55).png" alt=""><figcaption><p>Example of A records on Namecheap</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (54) (1).png" alt=""><figcaption><p>Example of A records on Namecheap</p></figcaption></figure>
 
 ### Step 4: Prepare External Email Provider
 
@@ -82,7 +82,7 @@ Log in to your VM via SSH and run the installation script. You can find the comm
 
 The installation script is interactive and will walk you through all the steps for configuring your domain, email provider, and Portal admin account.
 
-### Step 6. Log in to Your Authgear Portal&#x20;
+### Step 6. Log in to Your Authgear Portal
 
 After a successful installation, visit `authgear-portal.your-domain.com` (change `your-domain.com` to your actual domain name) to view the admin Portal for your new Authgear instance.
 

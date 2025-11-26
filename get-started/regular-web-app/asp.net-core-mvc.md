@@ -32,11 +32,11 @@ To use Authgear services, you’ll need to have an application set up in the Aut
 
 Use the interactive selector to create a new **Authgear OIDC Client application** or select an existing application that represents the project you want to integrate with.
 
-<figure><img src="../../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (34) (1).png" alt=""><figcaption></figcaption></figure>
 
 Every application in Authgear is assigned an alphanumeric, unique client ID that your application code will use to call Authgear APIs through the OpenID Connect Client in the .NET app. Note down the Authgear `ISSUER` (for example, [https://example-auth.authgear.cloud](https://example-auth.authgear.cloud)), `CLIENT ID`, `CLIENT SECRET`, and `OpenID Token Endpoint` ([https://example-auth.authgear.cloud/oauth2/token](https://example-auth.authgear.cloud/oauth2/token)) from the output. You will use these values in the next step for the client app config.
 
-<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Step 2: Configure **Redirect URI**
 
@@ -54,7 +54,7 @@ Also, enable **Issue JWT as an access token** option under the **Access Token** 
 
 After you create the **Authgear app**, you choose how users need to **authenticate on the login page**. From the **Authentication** tab, navigate to **Login Methods**, you can choose a **login method** from various options including, by email, mobile, or social, just using a username or the custom method you specify. For this demo, we choose the **Email+Passwordless** approach where our users are asked to register an account and log in by using their emails. They will receive a One-time password (OTP) to their emails and verify the code to use the app.
 
-<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Part 2: Configure [ASP.NET](http://asp.net) Core application to use Authgear
 
@@ -328,11 +328,11 @@ dotnet run
 
 You can now visit [http://localhost:5002](http://localhost:5002) to access the application. When you click on the **"View Protected Data"** button, [ASP.NET](http://asp.net) Core takes you to the **Authgear’s Login page**.
 
-<figure><img src="../../.gitbook/assets/image (37).png" alt="" width="464"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt="" width="464"><figcaption></figcaption></figure>
 
 Your users can log in to your application through a page hosted by Authgear, which provides them with a secure, standards-based login experience that you can customize with your own branding and various authentication methods, such as [social logins](https://www.authgear.com/features/social-login), [passwordless](https://www.authgear.com/features/passwordless-authentication), [biometrics logins](https://www.authgear.com/features/biometric-authentication), [one-time-password (OTP)](https://www.authgear.com/features/whatsapp-otp) with SMS/WhatsApp, and multi-factor authentication (MFA).
 
-<figure><img src="../../.gitbook/assets/image (38).png" alt="" width="464"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt="" width="464"><figcaption></figcaption></figure>
 
 After you have authenticated, a protected view is rendered. The application receives an Access token that it uses to present user data on the screen, and tokens that could be used in upstream requests to some backend API, to access data on behalf of the user.
 

@@ -13,7 +13,7 @@ In this guide, you'll learn how to install Authgear ONCE on [Vultr](https://www.
 1. Log in to Vultr and then click on **Deploy +** to create a new server.
 2. Select the specification based on your need. For low volume usage, choose virtual machines of "Shared CPU" type.
 3. While creating your new server, select a machine that has Docker pre-installed, or manually install Docker after your server is created.
-   1.  &#x20;**(Recommended)** To create a machine with Docker pre-installed, switch to the **Marketplace Apps** tab in the **Configure Software & Deploy Instance** page, then search for "**Docker**" and click on "Docker on Ubuntu" from the results.
+   1.  **(Recommended)** To create a machine with Docker pre-installed, switch to the **Marketplace Apps** tab in the **Configure Software & Deploy Instance** page, then search for "**Docker**" and click on "Docker on Ubuntu" from the results.
 
        <figure><img src="../.gitbook/assets/image (52).png" alt=""><figcaption><p>Deploy a server with Docker pre-installed</p></figcaption></figure>
    2. To manually install Docker, visit [https://docs.docker.com/get-started/get-docker/](https://docs.docker.com/get-started/get-docker/) for a detailed guide on how to manually install Docker on different machines.
@@ -32,7 +32,7 @@ To use the default domain setup, add new DNS records using the IPv4 address for 
 
 <table><thead><tr><th width="66.83203125">Type</th><th width="275">Name</th><th>Usage</th></tr></thead><tbody><tr><td>A</td><td><code>auth</code></td><td>The authentication endpoint</td></tr><tr><td>A</td><td><code>authgear-portal</code></td><td>The admin portal for CIAM functions</td></tr><tr><td>A</td><td><code>authgear-portal-accounts</code></td><td>A domain for logging into the Authgear portal. You don't need to access it directly.</td></tr></tbody></table>
 
-<figure><img src="../.gitbook/assets/image (55).png" alt=""><figcaption><p>Example: Add the A records in DNS management in Namecheap</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (54) (1).png" alt=""><figcaption><p>Example: Add the A records in DNS management in Namecheap</p></figcaption></figure>
 
 ### Step 3: Prepare External Email Provider
 

@@ -28,7 +28,7 @@ In this section, you can control after how many failed attempts the lockout will
 
 #### Lockout Duration
 
-<figure><img src="../.gitbook/assets/image (23).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (20) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 This section determined the amount of time an account will remain locked when it has exceeded the lockout threshold.
 

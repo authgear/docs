@@ -42,7 +42,7 @@ Input the name of your application and select **Native App** as the application 
 
 On the next screen, you will see a list of guides that can help you with setting up, click "**Next**" to continue.
 
-![Create an application](../../.gitbook/assets/authgear-new-app-native-2.png)
+![Create an application](<../../.gitbook/assets/authgear-new-app-native-2 (1).png>)
 
 ### **Step 2: Configure the application**
 

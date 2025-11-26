@@ -14,9 +14,9 @@
 See [Appendix: Create mobile app on WeChat Open Platform](wechat-mobile.md#appendix-create-mobile-app-on-wechat-open-platform) for more details.
 
 {% hint style="warning" %}
-### WeChat login is incompatible with Passkey
+#### WeChat login is incompatible with Passkey
 
-Login with WeChat requires the use of `WebKitWebViewUIImplementation`  which does not support the use of Passkey APIs. At the moment, either passkey or WeChat login can be enabled in your mobile applications.&#x20;
+Login with WeChat requires the use of `WebKitWebViewUIImplementation` which does not support the use of Passkey APIs. At the moment, either passkey or WeChat login can be enabled in your mobile applications.
 {% endhint %}
 
 ## Get the information from WeChat Open Platform
@@ -609,8 +609,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate, AuthgearDe
   }
 }
 ```
-
-
 {% endtab %}
 
 {% tab title="Android Authgear WeChat" %}
@@ -1072,4 +1070,3 @@ These information are required for creating the application on the platform, pre
 
 * 应用包名 (Package name)
 * 应用签名 (App Signature)
-

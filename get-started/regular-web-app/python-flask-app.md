@@ -32,11 +32,11 @@ To use Authgear services, you’ll need to have an application set up in the Aut
 
 To set up the application, navigate to the [Authgear Portal UI](https://portal.authgear.com/) and select **Applications** on the left-hand navigation bar. Use the interactive selector to create a new **Authgear OIDC Client application** or select an existing application that represents the project you want to integrate with.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (34) (1).png" alt=""><figcaption></figcaption></figure>
 
 Every application in Authgear is assigned an alphanumeric, unique client ID that your application code will use to call Authgear APIs through the Authlib client library in the Flask app. Record the generated Authgear Issuer `Domain` (for example, `example-auth.authgear-apps.com`), `CLIENT ID`, `CLIENT SECRET` from the output. You will use these values in Part 2 for the Flask app config.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Step 2: Configure **Redirect URI**
 
@@ -48,7 +48,7 @@ Set the following [http://localhost:3000/callback](python-flask-app.md#learning-
 
 After you create the **Authgear app**, you choose how users need to **authenticate on the login page**. From the **Authentication** tab, navigate to **Login Methods**, you can choose a **login method** from various options including, by email, mobile, or social, just using a username or the custom method you specify. For this demo, we choose the **Email+Passwordless** approach where our users are asked to register an account and log in by using their emails. They will receive a One-time password (OTP) to their emails and verify the code to use the app.
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Part 2: **Create a Flask application**
 

@@ -32,7 +32,7 @@ Click **⊕Add Application** in the top toolbar.
 
 Input the name of your application and select **Native App** as the application type. Click "Save".
 
-![Create an application](../../.gitbook/assets/authgear-new-app-native-2.png)
+![Create an application](<../../.gitbook/assets/authgear-new-app-native-2 (1).png>)
 
 You will see a list of guides that can help you for setting up, then click "Next".
 
@@ -44,7 +44,7 @@ Head back to Authgear Portal, and add `com.example.authgeardemo://host/path` as 
 
 Click "Save" button and note the **Client ID**. and **Endpoint** for your new client application as you'll use them later in your iOS application. You can also obtain the Client ID again from the Applications list later.
 
-![Fill in the Authorized Redirect URI](../../.gitbook/assets/authgear-app-config-android.png)
+![Fill in the Authorized Redirect URI](<../../.gitbook/assets/authgear-app-config-android (1).png>)
 
 ## Add Authgear to your iOS Application
 

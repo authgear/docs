@@ -13,7 +13,7 @@ To configure "Sign in with Apple" for Authgear, you will need to fulfil the foll
 7. Create a "Services ID" by adding a new "Identifier" [here](https://developer.apple.com/account/resources/identifiers/list), choose service IDs, enable "Sign in with Apple".
 8.  Click "Configure" the Next to "Sign in with Apple". In "Primary App ID" field, select app ID created above.
 
-    <figure><img src="../../../.gitbook/assets/image (46).png" alt=""><figcaption><p>Select here to see Services IDs</p></figcaption></figure>
+    <figure><img src="../../../.gitbook/assets/image (44) (1).png" alt=""><figcaption><p>Select here to see Services IDs</p></figcaption></figure>
 9. Fill in and verify the domain created above, add `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/apple` to **Return URLs**
 10. Create a "Key" following [this guide](https://developer.apple.com/help/account/manage-keys/create-a-private-key) with "Sign in with Apple" enabled. Click "Configure" next to "Sign in with Apple" and select "Primary App ID" with app ID created above. Keep the private key safe, you need to provide this later.
 

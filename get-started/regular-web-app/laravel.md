@@ -28,7 +28,7 @@ To follow along with the example, you should have the following in place:
 
 The example app we'll build in this post uses the default Laravel Breeze authentication kit. This kit provides the starter code for email and password user authentication systems.
 
-We will be using Authgear to handle and process authentication data instead of the default Breeze database. By doing so, we get all the benefits of Authgear including more security and flexibility.&#x20;
+We will be using Authgear to handle and process authentication data instead of the default Breeze database. By doing so, we get all the benefits of Authgear including more security and flexibility.
 
 <figure><img src="../../.gitbook/assets/laravel-example-new-landing.png" alt=""><figcaption></figcaption></figure>
 
@@ -42,11 +42,11 @@ Before we can use Authgear as an OAuth identity provider, we need to set up an a
 
 To do that, log in to Authgear then select a project. Next, navigate to the Applications section for your project. Create a new application or configure an existing one with **OIDC Client Application** as Application Type as shown below:
 
-<figure><img src="../../.gitbook/assets/authgear-configure-project (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-configure-project (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Once you're done, click on **Save** to go to the application configuration page. This page reveals the application credentials and OAuth 2.0 endpoints.
 
-<figure><img src="../../.gitbook/assets/authgear-app-config-page (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-app-config-page (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Note down details like the Client ID, Client Secret, and the endpoints as you'll use them later in your Laravel project.
 
@@ -190,7 +190,7 @@ AUTHGEAR_APP_CLIENT_SECRET=""
 AUTHGEAR_APP_REDIRECT_URI="http://localhost:8000/oauth/callback"
 ```
 
-**Note:** Your Authgear project URL is the hostname of any of your endpoint URLs. For example, the project URL for a project with an authorization endpoint: `https://laravel-app.authgear.cloud/oauth2/authorize`  will be `https://laravel-app.authgear.cloud`.
+**Note:** Your Authgear project URL is the hostname of any of your endpoint URLs. For example, the project URL for a project with an authorization endpoint: `https://laravel-app.authgear.cloud/oauth2/authorize` will be `https://laravel-app.authgear.cloud`.
 
 Now let's create a route in our Laravel project that will call the `startAuthorization()` method.
 
@@ -215,7 +215,7 @@ Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
 At this point accessing the `/login` route should redirect to the Authgear authorization page.
 
-<figure><img src="../../.gitbook/assets/authgear-authorization-page (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-authorization-page (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Step 6: Implement Redirect URI Page
 

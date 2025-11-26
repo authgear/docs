@@ -89,3 +89,7 @@ Refer to the following instructions for a generic SP:
     * Upload the SP's certificate in PEM format
 
 You may find more detailed guides for adding IdP on the Service Provider's documentation.
+
+## Tools for troubleshooting
+
+* Online Base64 decode/encode: [https://www.authgear.com/tools/base64-decode-encode](https://www.authgear.com/tools/base64-decode-encode)
