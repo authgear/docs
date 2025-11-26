@@ -277,8 +277,8 @@ import (
     "regexp"
     "time"
 
-    "github.com/lestrrat-go/jwx/jwk"
-    "github.com/lestrrat-go/jwx/jwt"
+    "github.com/lestrrat-go/jwx/v3/jwk"
+    "github.com/lestrrat-go/jwx/v3/jwt"
 )
 
 
@@ -326,25 +326,24 @@ func FetchJWK(baseAddress string) (jwk.Set, error) {
 }
 
 // DecodeUser parse request Authorization header and obtain user id and claims
-func DecodeUser(r *http.Request) (string, map[string]interface{}, error) {
+func DecodeUser(r *http.Request) (string, bool, bool, error)
     // fetch jwks_uri from Authgear
-    // you can cache the value of jwks to have better performance
+    // you can cache the value of jwks using jwk.Cache to have better performance
     set, err := FetchJWK(baseAddress)
     if err != nil {
-        return "", nil, fmt.Errorf("failed to fetch JWK: %s", err)
-    }
-
-    // get jwt token from Authorization header
-    authzHeader := r.Header.Get("Authorization")
-    match := authzHeaderRegexp.FindStringSubmatch(authzHeader)
-    if len(match) != 2 {
-        return "", nil, fmt.Errorf("no token")
+        return "", false, false, fmt.Errorf("failed to fetch JWK: %s", err)
     }
 
     // parse jwt token
-    token, err := jwt.ParseString(match[1], jwt.WithKeySet(set))
+    token, err := jwt.ParseRequest(
+        r, 
+        // This may not work out of the box depending on the jwk.Set.
+        // Please read about requirements for "kid" and "alg" (and possibly
+        // "WithDefaultKey") when using jwk.Set in the jwt.WithKeySet documentation.
+        jwt.WithKeySet(set),
+    )
     if err != nil {
-        return "", nil, fmt.Errorf("invalid token: %s", err)
+        return "", false, false, fmt.Errorf("invalid token: %s", err)
     }
 
     // validate jwt token
@@ -355,19 +354,21 @@ func DecodeUser(r *http.Request) (string, map[string]interface{}, error) {
         jwt.WithAudience(baseAddress),
     )
     if err != nil {
-        return "", nil, fmt.Errorf("invalid token: %s", err)
+        return "", false, false, fmt.Errorf("invalid token: %s", err)
     }
 
-    return token.Subject(), token.PrivateClaims(), nil
+    var verified bool
+    var anonymous bool
+    // ignore errors -- if the the claim does not exist, it doesn't matter
+    _ = token.Get("https://authgear.com/claims/user/is_verified", &verified)
+    _ = token.Get("https://authgear.com/claims/user/is_anonymous", &anonymous)
+
+    return token.Subject(), verified, anonymous, nil
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
     // decode user example
-    userid, claims, err := DecodeUser(r)
-    isUserVerified, _ :=
-        claims["https://authgear.com/claims/user/is_verified"].(bool)
-    isAnonymousUser, _ :=
-        claims["https://authgear.com/claims/user/is_anonymous"].(bool)
+    userid, isUserVerified, isAnonymousUser, err := DecodeUser(r)
 
     // ... your handler logic
 }
