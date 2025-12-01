@@ -8,31 +8,41 @@ This section includes information about the software and the hardware requiremen
 
 #### Kubernetes requirements
 
-The minimum supported version of Kubernetes is 1.19.
+The minimum supported version of Kubernetes is 1.23.
+
+Here is a list of used Kubernetes features and their earliest available version.
+- [CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) is available since v1.21
+- [Pod Disruption Budget](https://kubernetes.io/docs/tasks/run-application/configure-pdb/) is available since v1.21
+- [autoscaling/v2](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#horizontalpodautoscaler-v126) is available since v1.23
 
 #### Storage requirements
 
-Authgear does not store persist data on disk. It stores data in a PostgreSQL database and a Redis.
+Authgear does not store persist data on disk. It stores data in a PostgreSQL instance and a Redis instance.
 
-Authgear allows the end-user to upload their profile image. This feature is disabled by default. If you enable it, then Authgear requires a cloud object store. The supported cloud object store are AWS S3, GCP GCS, and Azure Blob Storage.
+Authgear allows the end-user to upload their profile image. This feature is disabled by default. If you enable it, then Authgear requires an object store. The supported object store are AWS S3, GCP GCS, and Azure Blob Storage.
 
 #### CPU requirements
 
-The CPU requirements depend on the number of users, workload and how active the users are. There are 4 scalable pods, 1 non-scalable pod and 1 images server in the basic setup. The scalable pods have a limit of `500m` CPU, the non-scalable one has `300m`, the images server has `1000m`. 2 Cores is recommended for the basic setup.
+2CPUs is recommended for the basic setup.
 
 #### Memory requirements
 
-The scalable pods have a limit of `256MiB` of memory, the non-scalable one has `64MiB`, the images server have a limit of `1GiB` of memory. 1 GB of memory is recommended for the basic setup.
+4GB memory is recommended for the basic setup.
 
 #### Database requirements
 
-PostgreSQL is the only supported database. PostgreSQL 12 is recommended. The PostgreSQL database must have the extension `pg_partman` installed, the version must be >= 4.0.
+PostgreSQL is the only supported database. PostgreSQL greater than or equal to 16 is recommended.
+
+The extension `pg_partman` must be installed. The version of `pg_partman` depends on your PostgreSQL version.
 
 The database must have at least 5GB storage. The exact amount of storage depend on the number of users. About 100MB of storage is required to store 10,000 users.
 
-Authgear stores its main data in a PostgreSQL database, and log data in another PostgreSQL database. 2 separate PostgreSQL databases are required. It is strongly recommended that the PostgreSQL databases are not shared with other software. The database account must have full access to the PostgreSQL database it connects to. Authgear uses the `public` schema.
+By default, Authgear uses the `public` schema.
 
-If you decided to use PostgreSQL as the search service, an additional database is required.
+Authgear has 3 separate connection URLs to PostgreSQL
+- Database URL to the database that stores main data.
+- Audit database URL to the database that stores audit logs.
+- Search database URL to the database that stores search data. (Only if you do not use ElasticSearch)
 
 Do not make changes to the PostgreSQL databases, the schemas, the tables, the columns, or the rows.
 
@@ -50,20 +60,17 @@ For projects expecting more than 10,000 users, ElasticSearch is recommended for 
 
 #### Web browser requirements
 
-Authgear supports the following web browsers:
+Authgear specifies the supported web browsers with browserslist.
 
-* Apple Safari
-* Google Chrome
-* Microsoft Edge
-* Mozilla Firefox
+[Here](https://github.com/authgear/authgear-server/blob/main/authui/.browserslistrc) is the link to the browserslist.
 
-The latest two major versions of the supported browsers are supported.
+To visualize the browserslist, please visit [https://browsersl.ist/](https://browsersl.ist/) and paste the browserslist into it.
 
 #### Hardware requirements summary
 
 * CPU: 2 Cores CPU for the k8s nodes; 3 Cores for Elasticsearch
-* Memory: 1GB memory for the k8s nodes; 6GB memory for Elasticsearch
-* PostgreSQL 12 with `pg_partman>=4.0`, at least 5GB storage
+* Memory: 4GB memory for the k8s nodes; 6GB memory for Elasticsearch
+* PostgreSQL 16 with compatible version of `pg_partman`, at least 5GB storage.
 * Redis >= 6.2, with 30kB per user. 10000 users require 300MB.
 
 ### How to install this Helm chart
@@ -74,9 +81,17 @@ This section provides detailed steps on how to install this Helm chart.
 
 You need to install the following tools on your local machine.
 
-* `kubectl` with a version matching the Kubernetes server version. For example, if the server is 1.21, then you should be using the latest version of `kubectl` 1.21.x.
+* `kubectl` with a version matching the Kubernetes server version. For example, if the server is 1.23, then you should be using the latest version of `kubectl` 1.23.x.
 * Helm v3. You should use the latest version.
 * Docker daemon. You need to be able to run Docker container on your local machine. If Docker daemon is unavailable, you need to download the binary release of Authgear to proceed. See Download binary release for details.
+
+#### Pick an image tag
+
+You need to pick an image tag that is suitable for deployment.
+
+You should pick an image tag which is in form of `YYYY-MM-dd.digit`, for example, `2025-11-26.0`.
+
+For the rest of the guide, `TAG` refers to the tag you have picked.
 
 #### Download binary release
 
@@ -87,18 +102,18 @@ If for some reason your local machine cannot have Docker daemon running, you can
 * Visit [https://github.com/authgear/authgear-server/releases](https://github.com/authgear/authgear-server/releases) to download the binary.
 * You should choose a release closest to your intended version of Authgear.
 * Currently, the binary is built for linux amd64 only.
-* The name of the binary is in the format `authgear-lite-<platform>-<arch>-<tag>` and `authgear-portal-lite-<platform>-<arch>-<tag>`.
+* The name of the binary is in the format `authgear-lite-<platform>-<arch>-TAG` and `authgear-portal-lite-<platform>-<arch>-TAG`.
 * You need to download both.
 
 The following guide assumes you have downloaded the binary to your working directory and renamed them to `./authgear` and `./authgear-portal` respectively.
 
 #### Obtain a domain name
 
-You need to obtain a domain name from a Internet domain registrar. If you already have a domain name, you can skip this step.
+You need to obtain a domain name from an Internet domain registrar. If you already have a domain name, you can skip this step.
 
 #### Overview of the subdomains
 
-This Helm chart assumes you have a apex domain dedicated to Authgear. Assume your apex domain is `myapp.com`.
+This Helm chart assumes you have an apex domain dedicated to Authgear. Assume your apex domain is `myapp.com`.
 
 Here is the list of subdomain assignments.
 
@@ -118,15 +133,15 @@ If you have a Kubernetes cluster already, you can skip creating a new one. Other
 
 #### Provision the PostgreSQL database instance
 
-> It is strongly recommended that you set up an external production-ready PostgreSQL instance, instead of relying on a in-cluster PostgreSQL deployment like [bitnami/postgresql](https://hub.docker.com/r/bitnami/postgresql).
+> It is strongly recommended that you set up an external production-ready PostgreSQL instance.
 
 If you have a PostgreSQL database instance already, you can skip creating a new one. Otherwise, follow the instructions from your cloud provider to create a new one. Refer to the Database requirements to configure the instance.
 
-Create 2 PostgreSQL databases within the instance. Create 1 PostgreSQL user for each PostgreSQL database. Make sure the PostgreSQL user has full access to the PostgreSQL database. See Database requirements for details.
+Create 2 or 3 PostgreSQL databases within the instance. Create 1 PostgreSQL user for each PostgreSQL database. Make sure the PostgreSQL user has full access to the PostgreSQL database. See Database requirements for details.
 
 #### Provision the Redis instance
 
-> It is strongly recommended that you set up an external production-ready Redis instance, instead of relying on a in-cluster Redis deployment like [bitnami/redis](https://hub.docker.com/r/bitnami/redis).
+> It is strongly recommended that you set up an external production-ready Redis instance.
 
 If you have a Redis instance already, you can skip creating a new one. Otherwise, follow the instructions from your cloud provider to create a new one. Refer to the Redis requirements to configure the instance.
 
@@ -227,21 +242,21 @@ You need to create a [HTTP01 issuer](https://cert-manager.io/docs/configuration/
 {% tabs %}
 {% tab title="Docker" %}
 ```
-$ docker run --rm -it quay.io/theauthgear/authgear-server authgear database migrate up \
+$ docker run --rm -it quay.io/theauthgear/authgear-server:TAG authgear database migrate up \
   --database-url DATABASE_URL \
   --database-schema public
-$ docker run --rm -it quay.io/theauthgear/authgear-server authgear images database migrate up \
+$ docker run --rm -it quay.io/theauthgear/authgear-server:TAG authgear images database migrate up \
   --database-url DATABASE_URL \
   --database-schema public
-$ docker run --rm -it quay.io/theauthgear/authgear-server authgear audit database migrate up \
+$ docker run --rm -it quay.io/theauthgear/authgear-server:TAG authgear audit database migrate up \
+  --database-url AUDIT_DATABASE_URL \
+  --database-schema public
+$ docker run --rm -it quay.io/theauthgear/authgear-portal:TAG authgear-portal database migrate up \
   --database-url DATABASE_URL \
   --database-schema public
-$ docker run --rm -it quay.io/theauthgear/authgear-portal authgear-portal database migrate up \
-  --database-url DATABASE_URL \
-  --database-schema public
-  
+
 # Run this if you are using postgresql as search service
-$ docker run --rm -it quay.io/theauthgear/authgear-portal authgear search migrate up \
+$ docker run --rm -it quay.io/theauthgear/authgear-portal:TAG authgear search migrate up \
   --search-database-url SEARCH_DATABASE_URL \
   --search-database-schema public
 ```
@@ -256,7 +271,7 @@ $ ./authgear images database migrate up \
   --database-url DATABASE_URL \
   --database-schema public
 $ ./authgear audit database migrate up \
-  --database-url DATABASE_URL \
+  --database-url AUDIT_DATABASE_URL \
   --database-schema public
 $ ./authgear-portal database migrate up \
   --database-url DATABASE_URL \
@@ -277,7 +292,7 @@ $ ./authgear search database migrate up \
 {% tabs %}
 {% tab title="Docker" %}
 ```
-$ docker run --rm -it quay.io/theauthgear/authgear-server authgear internal elasticsearch create-index \
+$ docker run --rm -it quay.io/theauthgear/authgear-server:TAG authgear internal elasticsearch create-index \
   --elasticsearch-url ELASTICSEARCH_URL
 ```
 {% endtab %}
@@ -289,23 +304,6 @@ $ ./authgear internal elasticsearch create-index \
 ```
 {% endtab %}
 {% endtabs %}
-
-**Create deployment-specific authgear.secrets.yaml**
-
-Create a Secret that contains a `authgear.secrets.yaml` shared by all apps.
-
-For example,
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: authgear-vendor-resources
-type: Opaque
-data:
-  authgear.secrets.yaml: |-
-    {{ include "authgear.authgearSecretsYAML" .Values.authgear | b64enc }}
-```
 
 **Create the "accounts" app**
 
@@ -320,7 +318,7 @@ Generate the `authgear.yaml` and `authgear.secrets.yaml`. Save the files to `res
 {% tabs %}
 {% tab title="Docker" %}
 ```
-$ docker run -v "$PWD"/resources:/app/resources --rm -it authgear-server authgear init \
+$ docker run -v "$PWD"/resources:/app/resources --rm -it quay.io/theauthgear/authgear-server:TAG authgear init \
   --output-folder=resources/authgear \
   --for-helm-chart
 App ID (default 'my-app'): accounts
@@ -350,7 +348,7 @@ Create the "accounts" app
 {% tabs %}
 {% tab title="Docker" %}
 ```
-$ docker run -v "$PWD"/resources:/app/resources quay.io/theauthgear/authgear-portal authgear-portal internal configsource create ./resources/authgear \
+$ docker run -v "$PWD"/resources:/app/resources quay.io/theauthgear/authgear-portal:TAG authgear-portal internal configsource create ./resources/authgear \
   --database-url DATABASE_URL \
   --database-schema public
 
@@ -374,6 +372,42 @@ $ ./authgear-portal internal setup-portal ./resources/authgear \
 Refer to Helm chart values reference and prepare the `./authgear-deploy/values.yaml`.
 
 Remember to provide the correct client ID. The client ID can be found in the generated `authgear.yaml`.
+
+**Create deployment-specific authgear.secrets.yaml**
+
+Create a Secret that contains a `authgear.secrets.yaml` shared by all apps.
+
+For example,
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: authgear-vendor-resources
+type: Opaque
+data:
+  authgear.secrets.yaml: |-
+    {{ include "authgear.authgearSecretsYAML" .Values.authgear | b64enc }}
+```
+
+In your `./authgear-deploy/values.yaml`, use this Secret.
+
+```yaml
+# This `authgear` field means override the values of the subchart `authegar`.
+authgear:
+  # This `authgear` field is part of the structure of the values of Authgear helm chart.
+  # As you can see at https://github.com/authgear/helm-charts/blob/authgear-10.26.1/authgear/values.yaml#L1
+  # the values are all rooted at `authgear`.
+  authgear:
+    appCustomResources:
+      path: "/var/resources/authgear"
+      volume:
+        secret:
+          secretName: authgear-vendor-resources
+          items:
+          - key: authgear.secrets.yaml
+            path: authgear.secrets.yaml
+```
 
 **Install your Helm chart**
 
