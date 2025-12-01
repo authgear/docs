@@ -6,13 +6,13 @@ description: This guide shows how to use Custom Login/Signup pages UI in Native 
 
 Implementing custom login and signup screens in any native application (Flutter, React Native, Kotlin, or iOS) doesn't require much change to the code for your existing native apps that use Authgear.
 
-At the moment, we don't support direct interaction between your native code and the Authentication Flow API that powers custom UIs. That means you'll need to use the platform-specific [SDKs](broken-reference) we already provide and call the authenticate method to start the authentication flow.
+At the moment, we don't support direct interaction between your native code and the Authentication Flow API that powers custom UIs. That means you'll need to use the platform-specific [SDKs](broken-reference/) we already provide and call the authenticate method to start the authentication flow.
 
 In this guide, we'll teach you how to implement custom authentication UIs in a Flutter app using the Flutter SDK and Authentication Flow API.
 
 ### Part 1: Configure Authgear Project in Portal
 
-The main factor that enables custom UI in your Authgear application is specifying a custom UI URL in Authgear. Once this value is set, calling the authenticate method in any of the native SDKs will open the custom login/signup UI in a Web View instead of the default Auth UI.&#x20;
+The main factor that enables custom UI in your Authgear application is specifying a custom UI URL in Authgear. Once this value is set, calling the authenticate method in any of the native SDKs will open the custom login/signup UI in a Web View instead of the default Auth UI.
 
 #### Step 1: Set up an Authgear Application
 
@@ -40,7 +40,7 @@ Setting a value for Custom UI URI in Authgear Portal will redirect users of your
 
 To set the Custom UI URI, scroll down to the **Custom UI** section on your application configuration page in the Authgear Portal. Then, add the URL to your custom login/signup page in the **Custom UI URI** text field.
 
-<figure><img src="../../../.gitbook/assets/authgear-config-app-custom-ui-url-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-config-app-custom-ui-url-2 (1).png" alt=""><figcaption></figcaption></figure>
 
 This URL is a publicly accessible link on the web that hosts the code that implements your custom UI and does the actual interaction with the Authentication Flow API. Check out our examples for implementing custom login and signup UI pages using [PHP](implement-authentication-flow-api-using-php.md) and [JavaScript(Express)](implement-authentication-flow-api-using-express.md) to learn more.
 
@@ -87,7 +87,7 @@ To test your application, run the following command:
 flutter run
 ```
 
-Tap on the **Authenticate** button when your app runs on a physical device or emulator.  You should see the custom UI instead of the default Auth UI.
+Tap on the **Authenticate** button when your app runs on a physical device or emulator. You should see the custom UI instead of the default Auth UI.
 
 ### Conclusion
 

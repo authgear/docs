@@ -85,7 +85,7 @@ To set the custom UI URI, scroll to the **Custom UI** section on your applicatio
 
 **Note**: For our example app, you must include the `/login` path in the URL so that the user is redirected straight to our login route.
 
-<figure><img src="../../../.gitbook/assets/authgear-config-app-custom-ui-url-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-config-app-custom-ui-url-2 (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Step 4: Enable Email + Password Login Option and Disable 2FA
 
@@ -93,11 +93,11 @@ For our example app in this tutorial, users will be using their email and passwo
 
 To do that, enable the "Email + Password" option under **Authentication** > **Login Methods**.
 
-<figure><img src="../../../.gitbook/assets/authgear-login-methods.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-login-methods (1).png" alt=""><figcaption></figcaption></figure>
 
 Also, disable 2FA (if enabled) so that the authentication flow does not include an extra step which our demo app will not cover. You can disable 2FA Requirements in **Authentication** > **2FA** in the Authgear Portal.
 
-<figure><img src="../../../.gitbook/assets/authgear-config-2fa.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-config-2fa (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Part 2: Implementing Authentication Flow API
 
