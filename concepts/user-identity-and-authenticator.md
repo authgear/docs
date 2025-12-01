@@ -1,56 +1,88 @@
 # User, Identity and Authenticator
 
-To fully configure and use Authgear, you need to understand 3 important concepts in Authgear's flexible yet powerful authentication system:
+Authgear’s authentication system is flexible and powerful. To configure it effectively, it helps to understand three core concepts:
 
 * User
 * Identity
 * Authenticator
 
-Combining identity and authenticators, Authgear can support a lot of different authentication needs such as, but not included to:
+By combining identities and authenticators, Authgear enables a wide range of authentication scenarios, such as:
 
-* Simple email / username / phone sign in, with or without 2FA
-* Email or SMS Passwordless login
-* SSO login such as Google / Facebook etc
-* Phone sign in with Password as the 2nd factor like telegram or whatsapp
-* A lot more.
+* Simple email / username / phone sign-in, with or without 2FA
+* Email or SMS passwordless login
+* Social logins (Google, Facebook, etc.)
+* Phone sign-in with password as a second factor (similar to Telegram or WhatsApp)
+* And much more
 
 ## User
 
-A user represents an entity who use your app, usually a person. Each user can have multiple identities.
+A **User** represents an entity that interacts with your application — typically a person.
+
+Each user can have **multiple identities** that represent different ways of identifying themselves.
 
 ## Identity
 
-Identities are the way users can identify themselves, such as username, email and phone. Identities could also came from an OAuth Provider such as Google/Facebook SSO, or Sign in with Apple.
+An **Identity** is a piece of information that uniquely identifies a user.\
+Examples include username, email, phone number, or identities issued by OAuth providers.
 
-Currently, Authgear support the following identity:
+Authgear currently supports the following identity types:
 
 * Email
 * Phone
 * Username
-* OAuth Provider:
-  * Google
-  * Facebook
-  * Azure Active Directory
-  * Linkedin
-  * Sign in with Apple
 * Anonymous
+* [Social/Enterprise Login](../authentication-and-access/social-enterprise-login-providers/)
 
-Each identities have its configuration. For example email could be configured to block "+" or not, or if a username is case sensitive or not.
+Each identity type has its own configuration options. For example:
 
-Email, Phone and Username identities automatically create the `email`, `phone_number` and `preferred_username` claims. OAuth Provider might create a `email` claim depends on if the user's email is provided.
+* Email identities can be configured to allow or block “+” tags.
+* Username identities can be case-sensitive or case-insensitive.
+
+When a user registers with an Email, Phone, or Username identity, Authgear automatically creates the corresponding OIDC standard claims:
+
+* `email`
+* `phone_number`
+* `preferred_username`
+
+OAuth provider identities may also provide claims such as `email`, depending on the provider and the user’s consent.
+
+#### Identity Uniqueness
+
+Each identity is **uniquely linked to a single user**.\
+This means two users cannot share the same:
+
+* Email address
+* Phone number
+* Username
 
 ## Authenticator
 
-Authenticators are the way a user with an identity can authenticate themselves, each user can multiple primary and secondary authenticators. If secondary are configured or required, a user need to authenticate itself against both to be signed in.
+An **Authenticator** is a method a user uses to prove their identity. Each user may have multiple **primary** and **secondary** authenticators. If [secondary authentication](../authentication-and-access/authentication/enable-two-factor-authentication-2fa.md) is required, users must pass both primary and secondary authentication to sign in.
 
-Currently Authgear support the following authenticators:
+Authgear supports two categories of authenticators:
 
-* Primary Authenticators:
-  * Password
-  * One Time Passcode via Email or SMS (oob\_otp)
-* Secondary Authenticators:
-  * Password
-  * TOTP (2FA token)
-  * One Time Passcode via Email or SMS (oob\_otp)
+#### 1. Primary Authenticators
 
-Secondary authentication could be optional (only if the user configured it) or required for all users.
+* Password
+* One-Time Passcode (Email) — `oob_otp_email`
+* One-Time Passcode (SMS/WhatsApp) — `oob_otp_sms`
+
+Primary OTP authenticators are automatically created based on the user’s identities. For example:
+
+* If the user has an email identity and OTP-via-email login is enabled, Authgear automatically creates an `oob_otp_email` authenticator.
+* If the user has a phone identity and OTP-via-SMS/WhatsApp login is enabled, Authgear automatically creates an `oob_otp_sms` authenticator.
+
+#### 2. Secondary Authenticators
+
+Secondary authenticators are used for multi-factor authentication (MFA/2FA).
+
+Supported secondary authenticators include:
+
+* Password
+* Time-based One-Time Password (TOTP)
+* One-Time Passcode (Email) — `oob_otp_email`
+* One-Time Passcode (SMS/WhatsApp) — `oob_otp_sms`
+
+Unlike identities, **secondary authenticators do not require uniqueness**.
+
+This allows multiple users to register the same email or phone number as their second-factor method, useful for shared devices or corporate environments.
