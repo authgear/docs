@@ -16,6 +16,8 @@ Once you obtain a valid Admin API JWT, you can set it as a Bearer Authorization 
 
 ## Endpoints
 
+[![Run In Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/25586250-e38e5bf3-3b2e-4a6e-87d6-c5939e9dadd1?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D25586250-e38e5bf3-3b2e-4a6e-87d6-c5939e9dadd1%26entityType%3Dcollection%26workspaceId%3D0e6e6700-48e7-498b-a5ed-c9fd5cdd1cf2)
+
 The following are the two endpoints for the User Export API:
 
 ### Initiate Export Task <a href="#initiate-export-task" id="initiate-export-task"></a>

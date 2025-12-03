@@ -27,13 +27,15 @@ The following are other **important things to note about the User Import API**:
 
 The Import User API has two endpoints, one for initiating a user import task and the other for checking the status of the task. The endpoints only support secure HTTPS request and require a valid Admin API JWT token using `Bearer` authorization header (`Authorization: Bearer <Admin API JWT Token>`).
 
+[![Run In Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/25586250-e38e5bf3-3b2e-4a6e-87d6-c5939e9dadd1?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D25586250-e38e5bf3-3b2e-4a6e-87d6-c5939e9dadd1%26entityType%3Dcollection%26workspaceId%3D0e6e6700-48e7-498b-a5ed-c9fd5cdd1cf2)
+
 Here are more details about the endpoints and their expected inputs.
 
 ### **Initiate Import**
 
 <mark style="color:green;">`POST`</mark> `/_api/admin/users/import`
 
-Use this endpoint to create a new user import task.&#x20;
+Use this endpoint to create a new user import task.
 
 **Headers**
 
@@ -167,7 +169,7 @@ To understand the input better, let's take a close look at the three fields (`up
 
 <mark style="color:green;">`GET`</mark> `/_api/admin/users/import/{ID}`
 
-Use this endpoint to query the status of an existing user import task. Replace `{ID}` with a valid ID for a user import task.&#x20;
+Use this endpoint to query the status of an existing user import task. Replace `{ID}` with a valid ID for a user import task.
 
 **Headers**
 
