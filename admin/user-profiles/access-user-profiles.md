@@ -64,7 +64,7 @@ To view see user profile of a specific user:
 3. Choose a user you would like to view a profile.
 4. On the **User Details** page, you will see the **Profile** tab.
 
-<img src="../../.gitbook/assets/image (13).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (13) (1).png" alt="" data-size="original">
 
 To manage access for standard attributes for all users:
 
@@ -194,7 +194,7 @@ Authgear provides an [Admin API](../../reference/apis/admin-api/) GraphQL endpoi
 3. Find a section called **GraphiQL Explorer.**
 4. Click on the **GraphiQL tool** link.
 
-<img src="../../.gitbook/assets/image (8).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (8) (1).png" alt="" data-size="original">
 
 The explorer will be opened in a separate browser tab.
 

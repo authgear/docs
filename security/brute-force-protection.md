@@ -22,7 +22,7 @@ To setup the account lockout policy:
 
 #### Lockout Threshold
 
-<figure><img src="../.gitbook/assets/image (7).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (7) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 In this section, you can control after how many failed attempts the lockout will take effects, and the reset duration of the attempts. By default, the lock will be reset after 24 hours has passed from the last failed login attempt.
 
@@ -42,6 +42,6 @@ You can choose to protect against only the attempts from a single IP address or 
 
 #### Apply only to selected authenticators
 
-<figure><img src="../.gitbook/assets/image (11).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (11) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 The brute-force protection do not only applies to password, it can also protect against other authenticator attempts.

@@ -328,11 +328,11 @@ dotnet run
 
 You can now visit [http://localhost:5002](http://localhost:5002) to access the application. When you click on the **"View Protected Data"** button, [ASP.NET](http://asp.net) Core takes you to the **Authgear’s Login page**.
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt="" width="464"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt="" width="464"><figcaption></figcaption></figure>
 
 Your users can log in to your application through a page hosted by Authgear, which provides them with a secure, standards-based login experience that you can customize with your own branding and various authentication methods, such as [social logins](https://www.authgear.com/features/social-login), [passwordless](https://www.authgear.com/features/passwordless-authentication), [biometrics logins](https://www.authgear.com/features/biometric-authentication), [one-time-password (OTP)](https://www.authgear.com/features/whatsapp-otp) with SMS/WhatsApp, and multi-factor authentication (MFA).
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt="" width="464"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt="" width="464"><figcaption></figcaption></figure>
 
 After you have authenticated, a protected view is rendered. The application receives an Access token that it uses to present user data on the screen, and tokens that could be used in upstream requests to some backend API, to access data on behalf of the user.
 

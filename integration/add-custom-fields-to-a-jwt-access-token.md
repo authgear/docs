@@ -92,7 +92,7 @@ This part explains how to retrieve an access token using **OpenID App** Endpoint
 
 Open your **OpenID Auth App** configuration, and find **Client ID**, **Client Secret**, and check **Authorization**, and **Token** endpoints. You will use them in the next steps.
 
-<img src="../.gitbook/assets/image (10).png" alt="" data-size="original"> <img src="../.gitbook/assets/image (6).png" alt="" data-size="original">
+![](<../.gitbook/assets/image (10) (1).png>) ![](<../.gitbook/assets/image (6) (1).png>)
 
 **Step 2: Construct the authorization endpoint URL**
 
@@ -108,7 +108,7 @@ Replace `<YOUR_AUTHGEAR_ENDPOINT>` with your Authgear server's domain, `YOUR_CLI
 
 Next, you need to redirect the user to the authorization endpoint. You can just put the URL in your browser and log in with a user credential you are interested to retrieve an access token for. After successful authentication and consent, the Authgear will redirect the user back to your specified redirect URI, including an **authorization code** as a query parameter. You will need the code in the next step
 
-<img src="../.gitbook/assets/image (12).png" alt="" data-size="original">
+<img src="../.gitbook/assets/image (12) (1).png" alt="" data-size="original">
 
 **Step 4: Obtain an access token**
 
