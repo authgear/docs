@@ -503,8 +503,8 @@ import (
     "net/http"
     "time"
 
-    "github.com/lestrrat-go/jwx/jwk"
-    "github.com/lestrrat-go/jwx/jwt"
+    "github.com/lestrrat-go/jwx/v3/jwk"
+    "github.com/lestrrat-go/jwx/v3/jwt"
 )
 
 var (
@@ -558,7 +558,13 @@ func CheckIDToken(idToken string) error {
     }
 
     // parse jwt token
-    token, err := jwt.ParseString(idToken, jwt.WithKeySet(set))
+    token, err := jwt.ParseString(
+        idToken, 
+        // This may not work out of the box depending on the jwk.Set.
+        // Please read about requirements for "kid" and "alg" (and possibly
+        // "WithDefaultKey") when using jwk.Set in the jwt.WithKeySet documentation.
+        jwt.WithKeySet(set),
+    )
     if err != nil {
         return fmt.Errorf("invalid token: %s", err)
     }
@@ -574,14 +580,9 @@ func CheckIDToken(idToken string) error {
         return fmt.Errorf("invalid token: %s", err)
     }
 
-    authTimeAny, ok := token.Get("auth_time")
-    if !ok {
-        return fmt.Errorf("no auth_time")
-    }
-
-    authTimeUnix, ok := authTimeAny.(float64)
-    if !ok {
-        return fmt.Errorf("auth_time is not number")
+    var authTimeUnix float64
+    if err := token.Get("auth_time", &authTimeUnix); err != nil {
+        return fmt.Errorf("no auth_time: %w", err)
     }
 
     authTime := time.Unix(int64(authTimeUnix), 0)
