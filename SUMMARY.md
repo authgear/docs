@@ -155,6 +155,8 @@
   * [Import Users using User Import API](admin/user-management/import-users-using-user-import-api.md)
   * [Export Users using the User Export API](admin/user-management/export-users-using-the-user-export-api.md)
   * [Manage Users Roles and Groups](admin/user-management/manage-users-roles-and-groups.md)
+  * [Disable User](admin-and-operations/user-management/disable-user.md)
+  * [Account Valid Period](admin-and-operations/user-management/account-valid-period.md)
 * [Migration](migration/README.md)
   * [Bulk migration](migration/bulk-migration.md)
   * [Rolling migration](migration/rolling-migration.md)
