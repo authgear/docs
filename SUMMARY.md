@@ -166,6 +166,7 @@
 
 * [Brute-force Protection](security/brute-force-protection.md)
 * [Bot Protection](security/bot-protection.md)
+* [IP Blocklist](security/ip-blocklist.md)
 * [Non-HTTP scheme redirect URI](security/redirect-uri.md)
 * [Sender Constraining](security/sender-constraining.md)
 
