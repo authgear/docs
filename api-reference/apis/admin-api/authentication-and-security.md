@@ -10,6 +10,10 @@ description: >-
 
 Accessing the Admin API GraphQL endpoint requires your server to generate a valid JWT and include it as `Authorization` HTTP header.
 
+## Temporary Access Token
+
+A temporary access token can be obtained from the **Advanced** -> **Admin API** page for quick testing. The access token is valid for 5 minutes.
+
 ## Obtaining the private key for signing JWT
 
 * Go to **Advanced** -> **Admin API**
@@ -399,10 +403,6 @@ echo $jwt;
 ```
 {% endtab %}
 {% endtabs %}
-
-
-
-
 
 #### Example of the JWT header
 
