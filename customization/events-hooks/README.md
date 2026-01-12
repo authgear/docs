@@ -23,13 +23,13 @@ Events have the following structure:
   "type": "user.pre_create",
   "payload": { /* ... */ },
   "context": {
-    "app_id": "project-1"
-    "client_id": "bfb2e0e0e7f3cfa2"
+    "app_id": "project-1",
+    "client_id": "bfb2e0e0e7f3cfa2",
     "timestamp": 1670570552,
     "user_id": "f333b70b-4436-4efb-a40b-d9ed7a74d319",
     "preferred_languages": ["en-US", "zh-HK"],
     "language": "en-US",
-    "triggered_by": "user"
+    "triggered_by": "user",
     "oauth": {
       "state": "eyJ0b2tlbiI6IlgxS1RRTUM1TkRRUzQzOFAifQ"
     },
