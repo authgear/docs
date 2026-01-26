@@ -22,23 +22,26 @@ To create a new app, go to the Facebook Developers [Apps](https://developers.fac
 
 <figure><img src="../../../.gitbook/assets/facebook-devs-app-landing.png" alt=""><figcaption></figcaption></figure>
 
-On the next screen, select **Other** as your app **use case** then, click **Next**.
+On the "**Use cases**" screen, select **Others** and "**Authenticate and request data from users with Facebook Login**" as your app **use case** then, click **Next**.
 
-In the **app type** selection screen, pick the option that best meets your requirements. For our example, we'll select the **Consumer** app type.
+<figure><img src="../../../.gitbook/assets/SCR-20260126-nstn.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/facebook-devs-select-app-type.png" alt=""><figcaption></figcaption></figure>
+Follow the on-screen instructions to finish the app creation process.
 
-Enter your app name on the next screen and finish the app creation process.
+## Step 2: Add "email" permission
 
-## Step 2: Set up the OAuth Client
+1. Go to "Use Cases" configuration in your application just created.
+2. Customize the "Authenticate and request data from users with Facebook Login" use case.
+3. Enable "email" permission, make sure both "public\_profile" and "email" are enabled.
 
-1. In the app panel, click **Add Product** next to **Products** in the sidebar.
-2. Click the **Set Up** button in **Facebook Login**.
-3. Go to **Settings** of **Facebook Login**.
-4. Make sure **Client OAuth Login** and **Web OAuth Login** are enabled.
-5. Add `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/facebook` to **Valid OAuth Redirect URIs** and save the changes.&#x20;
+<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-![](../../../.gitbook/assets/facebook_setup_ouath_client.png)
+## Step 3: Set up the OAuth Client
+
+1. In the use case settings, make sure **Client OAuth Login** and **Web OAuth Login** are enabled.
+2. Add `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/facebook` to **Valid OAuth Redirect URIs** and save the changes.
+
+<figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 Redirect URI has the form of `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/:alias`. The `alias` is used as the identifier of OAuth provider. You can configure the `alias` in Authgear Portal.
@@ -46,24 +49,26 @@ Redirect URI has the form of `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callba
 See [Your Authgear Endpoint](../../../api-reference/glossary.md#your-authgear-endpoint) for instructions on how to get the value for `YOUR_AUTHGEAR_ENDPOINT`.
 {% endhint %}
 
-## Step 3: Configure Login with Facebook in Authgear Portal
+## Step 4: Configure Login with Facebook in Authgear Portal
 
 ### Get your OAuth Client details
 
-After setting up the Facebook Login product, go to **App settings** > **Basic** in the sidebar.
+After setting up the OAuth Client, go to **App settings** > **Basic** in the sidebar.
 
-![](../../../.gitbook/assets/facebook-devs-oauth-details.png)
+<figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 You will need the **App ID** and **App Secret** to configure Facebook Login so, note them down.
+
+App review submission maybe needed to complete this step. Please follow the on-screen instructions.
 
 ### Configure in Authgear Portal
 
 1. In the portal, go to **Authentication > Social / Enterprise Login**.
 2. Enable **Login with Facebook**.
-3. Fill in the **Client ID** with the **App ID** obtained from the Facebook Developers portal in the previous step.
+3. Fill in the **Client ID** with the **App ID** obtained from the Facebook Developers portal, and **Client Secret** with the **App Secret** in the previous step.
 4. **Save** the settings.
 
-<figure><img src="../../../.gitbook/assets/authgear-social-fb.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 🎉 Done! You have just added Facebook Login to your apps!
 

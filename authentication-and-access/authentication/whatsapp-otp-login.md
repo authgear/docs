@@ -50,7 +50,7 @@ Skip this if you already have an existing business portfolio
 1. Go to “Settings” in Meta Businss Suite
 2.  Under “Accounts”, go to “WhatsApp accounts” and then “Create a new WhatsApp Business account”<br>
 
-    <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 3. Enter the display name and set up the profile image, which will be shown to your users
 4. Use a unregistered phone number for the account, Follow the on-screen instructions to verify the phone number
 5. Set up payment method in this business portfolio and link the WhatsApp account with the payment method.
@@ -60,19 +60,19 @@ Skip this if you already have an existing business portfolio
 1. Go to “WhatsApp Manager” in Meta Business Suite, if the item is not available in the nav bar, search WhatsApp in “All tools”
 2.  Go to “Manage templates” and “Create Template”, make sure the correct WhatsApp business account is selected on the top right dropdown.<br>
 
-    <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 3.  Select “Authentication” type<br>
 
-    <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 4. For each language you wish to support, create a template named `one_time_password`
    1. Select “Copy Code” under **Code delivery setup**
    2. Select “Add security recommendation” under **Content**
    3.  Set Validity period to 10 minutes<br>
 
-       <figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+       <figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 5.  The template page should look like this after adding the required languages<br>
 
-    <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
