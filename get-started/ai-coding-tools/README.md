@@ -8,7 +8,7 @@ To install all Authgear Skills, in your project use:
 npx skills add authgear/skills
 ```
 
-Or clone the repo and point the skills path of your coding agent to the `skills` folder.
+Or clone [the repo](https://github.com/authgear/authgear-skills) and point the skills path of your coding agent to the `skills` folder.
 
 ### Available skills
 
