@@ -5,6 +5,7 @@
 ## Get Started
 
 * [5-Minute Guide](get-started/5-minute-guide.md)
+* [Skills for AI Agent](get-started/ai-skills.md)
 * [Start Building](get-started/start-building.md)
 * [Single-Page App](get-started/single-page-app/README.md)
   * [JavaScript (Web)](get-started/single-page-app/website.md)
@@ -34,8 +35,6 @@
   * [Validate JWT in your backend](get-started/backend-api/jwt.md)
   * [Forward Authentication to Authgear Resolver Endpoint](get-started/backend-api/nginx.md)
 * [Machine-to-Machine (M2M) Applications](get-started/m2m-applications.md)
-* [AI Coding tools](get-started/ai-coding-tools/README.md)
-  * [Cursor/Windsurf](get-started/ai-coding-tools/cursor-windsurf.md)
 * [Integration by OIDC](authentication-and-access/single-sign-on/oidc-provider.md)
 * [Integration by SAML](authentication-and-access/single-sign-on/single-sign-on-with-saml/README.md)
   * [Use Authgear as SAML Identity Provider for Salesforce](authentication-and-access/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-salesforce.md)
