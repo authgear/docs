@@ -6,8 +6,6 @@ description: >-
 
 # Single-Page App
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/single-page-app/README.md)
-
 {% content-ref url="angular.md" %}
 [angular.md](angular.md)
 {% endcontent-ref %}

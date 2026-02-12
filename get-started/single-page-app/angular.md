@@ -6,8 +6,6 @@ description: >-
 
 # Angular
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/single-page-app/angular.md)
-
 Authgear helps you add user logins to your Angular apps. It provides prebuilt login page and user settings page that accelerate the development.
 
 Follow this :clock1: **15 minutes** tutorial to create a simple app using Angular with Authgear SDK.
@@ -40,12 +38,12 @@ After that, we will need to create an Application in the Project Portal.
 1. Go to **Applications** on the left menu bar.
 2. Click **⊕Add Application** in the top tool bar.
 3. Input the name of your application, e.g. "MyAwesomeApp".
-4. Select **Single Page Application** as the application type&#x20;
+4. Select **Single Page Application** as the application type
 5. Click "Save" to create the application
 
 ### Configure Authorize Redirect URI
 
-The Redirect URI is a URL in you application where the user will be redirected to after login with Authgear. In this path, make a **finish authentication** call to complete the login process.&#x20;
+The Redirect URI is a URL in you application where the user will be redirected to after login with Authgear. In this path, make a **finish authentication** call to complete the login process.
 
 For this tutorial, add `http://localhost:4000/auth-redirect` to Authorize Redirect URIs.
 
@@ -77,7 +75,7 @@ For Windows clients, please find your reference in [https://angular.io/guide/set
 
 #### Create initial workspace
 
-Run the following cli command to create a new workspace and initial app called `my-app` with a routing module generated.&#x20;
+Run the following cli command to create a new workspace and initial app called `my-app` with a routing module generated.
 
 ```bash
 # Create a workspace called my-app
@@ -98,11 +96,11 @@ In the `package.json` file, edit the `start` script in the `script` section
 "start": "ng serve --port 4000"
 ```
 
-The `start` script run the app in development mode on port 4000 instead of the default one.&#x20;
+The `start` script run the app in development mode on port 4000 instead of the default one.
 
 #### Edit the `app.component.html` file
 
-By default, the Angular CLI generated an initial application for us, but for simplicity, we recommend to modify some of these files to scratch.&#x20;
+By default, the Angular CLI generated an initial application for us, but for simplicity, we recommend to modify some of these files to scratch.
 
 In the `src/app/app.component.html` file, remove all the lines and add the following line:
 
@@ -155,7 +153,7 @@ export class AppComponent implements OnInit {
 
 The Authgear container instance takes `endpoint` and `clientID` as parameters. They can be obtained from the application page created in [#setup-application-in-authgear](angular.md#setup-application-in-authgear "mention").
 
-It is recommend to render the app after `configure()` resolves. So by the time the app is rendered, Authgear is ready to use.&#x20;
+It is recommend to render the app after `configure()` resolves. So by the time the app is rendered, Authgear is ready to use.
 
 {% hint style="info" %}
 Run **`npm start`** now and you should see a page with "Hello World" and no error message in the console if Authgear SDK is configured successfully
@@ -163,9 +161,9 @@ Run **`npm start`** now and you should see a page with "Hello World" and no erro
 
 ## Step 3: Implement the User Service
 
-Since we want to reference the logged in state in anywhere of the app, let's put the state in a **service** with `user.service.ts` in the `/src/app/services/` folder.&#x20;
+Since we want to reference the logged in state in anywhere of the app, let's put the state in a **service** with `user.service.ts` in the `/src/app/services/` folder.
 
-In `user.service.ts`, it will have a `isLoggedIn` boolean variable. The `isLoggedIn` boolean variable can be auto updated using the `onSessionStateChange` callback. This callback can be stored in `delegate` which is in the local SDK container.&#x20;
+In `user.service.ts`, it will have a `isLoggedIn` boolean variable. The `isLoggedIn` boolean variable can be auto updated using the `onSessionStateChange` callback. This callback can be stored in `delegate` which is in the local SDK container.
 
 ```typescript
 // src/app/services/user.service.ts
@@ -211,7 +209,7 @@ We will inject the router and the UserService to get the use of navigation and t
 
 Call the Authgear `finishAuthentication()` function in the Auth Redirect component to send a token back to Authgear server in exchange for access token and refresh token. Don't worry about the technical jargons, `finishAuthentication()` will do all the hard work for you and and save the authentication data.
 
-When the authentication is finished, the `isLoggedIn` state from the UserService will automatic set to `true`.  Finally, navigate back to root (`/`) which is our Home page.
+When the authentication is finished, the `isLoggedIn` state from the UserService will automatic set to `true`. Finally, navigate back to root (`/`) which is our Home page.
 
 The final `auth-redirect.component.ts` will look like this
 
@@ -249,7 +247,7 @@ Next, we will add a "Home" page . Create a `home` component using the following 
 ng generate component home
 ```
 
-Then import **HomeComponent** and **AuthRedirectComponent** as routes. We can add those routes in the `app-routing.module.ts` file:&#x20;
+Then import **HomeComponent** and **AuthRedirectComponent** as routes. We can add those routes in the `app-routing.module.ts` file:
 
 ```tsx
 // src/app/app-routing.module.ts
@@ -270,7 +268,7 @@ const routes: Routes = [
 export class AppRoutingModule {}
 ```
 
-You can apply those routes in `src/app/app.component.html` by replace the lines with the following:&#x20;
+You can apply those routes in `src/app/app.component.html` by replace the lines with the following:
 
 ```html
 <router-outlet></router-outlet>
@@ -355,7 +353,7 @@ The Authgear SDK helps you get the information of the logged in users easily.
 
 In the last step, the user is successfully logged in so let's try to print the user ID (sub) of the user in the Home page.
 
-In `home` component, we will add a simple Loading splash and a greeting message printing the Sub ID. We will add two conditional elements such that they are only shown when user is logged in. We can also change the login button to show only if the user is not logged in.&#x20;
+In `home` component, we will add a simple Loading splash and a greeting message printing the Sub ID. We will add two conditional elements such that they are only shown when user is logged in. We can also change the login button to show only if the user is not logged in.
 
 Make use of `isLoggedIn` from the `UserService` to control the components on the page. Fetch the user info by `fetchInfo()` and access its `sub` property.
 
@@ -414,7 +412,7 @@ export class HomeComponent implements OnInit {
 
 ```
 
-In the `home.component.html`:&#x20;
+In the `home.component.html`:
 
 ```html
 <h1>Home Page</h1>
@@ -429,7 +427,7 @@ Run the app again, the User ID (sub) of the user should be printed on the Home p
 
 ## Step 8: Add a Logout button
 
-Finally, let's add an Logout button when user is logged in.&#x20;
+Finally, let's add an Logout button when user is logged in.
 
 In `home.component.html`, we will add a conditional element in the markup:
 
@@ -462,7 +460,7 @@ Run the app again, we can now logout by clicking the logout button.
 
 ## Step 9: Open User Settings
 
-Authgear provide a built-in UI for the users to set their attributes and change security settings.&#x20;
+Authgear provide a built-in UI for the users to set their attributes and change security settings.
 
 Use the `open` function to open the setting page at `<your_app_endpoint>/settings`
 

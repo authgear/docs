@@ -4,8 +4,6 @@ description: How to integrate with a Xamarin app
 
 # Xamarin SDK
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/native-mobile-app/xamarin.md)
-
 This guide provides instructions on integrating Authgear with a Xamarin app. Supported packages include:
 
 * Xamarin.Essentials 1.7.2 or higher

@@ -4,8 +4,6 @@ description: Guide on how to use Authgear in an Ionic project
 
 # Ionic SDK
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/native-mobile-app/ionic-sdk.md)
-
 In this post, you'll learn how to use Authgear with your Ionic project using the Authgear Ionic SDK.
 
 {% hint style="info" %}
@@ -41,7 +39,7 @@ To follow this guide seamlessly, make sure to have the following:
 
 Follow this guide to add Authgear to your Ionic app in 🕐 10 minutes.
 
-## Setup Application in  Authgear Portal
+## Setup Application in Authgear Portal
 
 In this part, you'll learn how to configure an Authgear client application that you will use in your Ionic project. You'll do this by performing the following steps in the Authgear Portal.
 
@@ -175,7 +173,7 @@ const REDIRECT_URI_CAPACITOR = "com.authgear.example.capacitor://host/path";
 const REDIRECT_URI_WEB_REAUTH = "http://localhost:8100/reauth-redirect";
 ```
 
-Update the values for the constants (`CLIENT_ID`, `ENDPOINT`)  to the correct values from your client application's configuration page in the Authgear Portal.
+Update the values for the constants (`CLIENT_ID`, `ENDPOINT`) to the correct values from your client application's configuration page in the Authgear Portal.
 
 Now, just below the constants, add this small utility function that will help to check whether your Ionic app is running natively or on a web browser:
 
@@ -301,7 +299,7 @@ const postConfigure = useCallback(async () => {
 
 The `postConfigure()` method checks if the user is already authenticated and calls the fetchUserInfo() method of the Authgear SDK. Calling the fetchUserInfo() method will refresh the user's access token if it is expired.
 
-Now, call the **configure()** method in `useEffect` by adding the following code after the  `postConfigure()` method:&#x20;
+Now, call the **configure()** method in `useEffect` by adding the following code after the `postConfigure()` method:
 
 ```typescript
 useEffect(() => {
@@ -399,7 +397,7 @@ const authenticate = useCallback(async (page: string) => {
 
 Calling this `authenticate()` method will initialize an authentication flow. The `page` parameter can be used to specify whether to start the authentication flow on the `login` page or `signup` page.
 
-Finally, implement a  `onClickAuthenticate()` method that will call `authenticate` when the Login button is pressed:
+Finally, implement a `onClickAuthenticate()` method that will call `authenticate` when the Login button is pressed:
 
 ```typescript
 const onClickAuthenticate = useCallback(
@@ -744,7 +742,7 @@ const onClickLogout = useCallback(
 
 The Authgear SDK offers a `fetchUserInfo()` method that can return details such as User ID, email, phone number, and so on about the current user. In this step, we'll demonstrate how to call `fetchUserInfo` in our app.
 
-First, add a  **Fetch User Info** button to your `AuthenticationScreen` component just below the Logout button:
+First, add a **Fetch User Info** button to your `AuthenticationScreen` component just below the Logout button:
 
 ```tsx
 <IonButton className="button" onClick={onClickFetchUserInfo}>
@@ -795,7 +793,7 @@ To allow users to open the settings page from your app, first add a **User Setti
 </IonButton>
 ```
 
-Now add an  `openUserSettings()` method in `AuthenticationScreen` component:
+Now add an `openUserSettings()` method in `AuthenticationScreen` component:
 
 ```typescript
 const openUserSettings = useCallback(async () => {

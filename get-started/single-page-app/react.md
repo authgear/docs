@@ -6,8 +6,6 @@ description: >-
 
 # React
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/single-page-app/react.md)
-
 Authgear helps you add user logins to your React apps. It provides a pre-built login page and user settings page that can accelerate your development process.
 
 Follow this :clock1: **15-minute** tutorial to create a simple app using React with the Authgear SDK.
@@ -34,7 +32,7 @@ Enter the name of your application, e.g. "MyAwesomeApp", then select **Single Pa
 
 ### Configure Authorize Redirect URI
 
-The **Authorized Redirect URI** is a URL in you application where the user will be redirected to after login with Authgear. In this path, make a **finish authentication** call to complete the login process.&#x20;
+The **Authorized Redirect URI** is a URL in you application where the user will be redirected to after login with Authgear. In this path, make a **finish authentication** call to complete the login process.
 
 Go to the URI section of the Authgear client application you just created and add a new **Authorized Redirect URI**. For this tutorial, add `http://localhost:4000/auth-redirect` to Authorize Redirect URIs.
 
@@ -73,7 +71,7 @@ In the `package.json` file, update the value of `dev` field in the `script.dev` 
 "dev": "vite --port 4000",
 ```
 
-This will enable the `npm run dev` command run the app in development mode on port 4000.&#x20;
+This will enable the `npm run dev` command run the app in development mode on port 4000.
 
 The file structure in your project should look like this now:
 
@@ -133,7 +131,7 @@ VITE_AUTHGEAR_ENDPOINT=<AUTHGEAR_ENDPOINT>
 VITE_AUTHGEAR_REDIRECT_URL=http://localhost:4000/auth-redirect
 ```
 
-It is recommended to render the app after `configure()` resolves. So by the time the app is rendered, Authgear is ready to use.&#x20;
+It is recommended to render the app after `configure()` resolves. So by the time the app is rendered, Authgear is ready to use.
 
 {% hint style="info" %}
 Run **`npm run dev`** now and you should see the default page again and no error message in the console if Authgear SDK is configured successfully
@@ -141,9 +139,9 @@ Run **`npm run dev`** now and you should see the default page again and no error
 
 ### Step 3: Implement the Context Provider
 
-Since we want to reference the logged-in state everywhere in the app, let's put the state in a **context provider** with `UserProvider.tsx` in the `/src/context` folder.&#x20;
+Since we want to reference the logged-in state everywhere in the app, let's put the state in a **context provider** with `UserProvider.tsx` in the `/src/context` folder.
 
-The `UserProvider.tsx` file will have an `isLoggedIn` boolean and a `setIsLoggedIn` function. The  `isLoggedIn` boolean state can be auto-updated using the `onSessionStateChange` callback. This callback can be stored in `delegate` which is in the local SDK container.&#x20;
+The `UserProvider.tsx` file will have an `isLoggedIn` boolean and a `setIsLoggedIn` function. The `isLoggedIn` boolean state can be auto-updated using the `onSessionStateChange` callback. This callback can be stored in `delegate` which is in the local SDK container.
 
 ```tsx
 // src/context/UserProvider.tsx
@@ -208,11 +206,11 @@ First, install `react-router-dom` using the following command:
 npm install --save-exact react-router-dom
 ```
 
-Create the `AuthRedirect.tsx` component file in the `src/` folder.&#x20;
+Create the `AuthRedirect.tsx` component file in the `src/` folder.
 
 Call the Authgear `finishAuthentication()` function in the Auth Redirect component to send a token back to Authgear server in exchange for an access token and a refresh token. Don't worry about the technical jargons, `finishAuthentication()` will do all the hard work for you and save the authentication data.
 
-When the authentication is finished, the `isLoggedIn` state from the UserContextProvider will be automatically set to `true`.  Finally, navigate back to root (`/`) which is our Home page.
+When the authentication is finished, the `isLoggedIn` state from the UserContextProvider will be automatically set to `true`. Finally, navigate back to root (`/`) which is our Home page.
 
 The final `AuthRedirect.tsx` will look like this
 
@@ -257,7 +255,7 @@ Without a cleanup function, an`useEffect`Hook will be fired twice and hence `fin
 
 ### Step 5: Add Routes and Context Provider to the App
 
-Now, we will add a "Home" page. Create a `Home.tsx` component file the `src/` folder.&#x20;
+Now, we will add a "Home" page. Create a `Home.tsx` component file the `src/` folder.
 
 Then import **Home** and **AuthRedirect** as routes. And Import **UserContextProvider** and wrap the routes with it.
 
@@ -347,7 +345,7 @@ The Authgear SDK helps you get the information of the logged-in users easily.
 
 In the last step, the user is successfully logged in, so let's try to print the user ID (sub) of the user on the Home page.
 
-In `Home.tsx`, we will add a simple loading splash and a greeting message printing the Sub ID. We will add two conditional elements such that they are only shown when user is logged in. We can also change the login button to show only if the user is not logged in.&#x20;
+In `Home.tsx`, we will add a simple loading splash and a greeting message printing the Sub ID. We will add two conditional elements such that they are only shown when user is logged in. We can also change the login button to show only if the user is not logged in.
 
 Make use of `isLoggedIn` from the `UserContext` to control the components on the page. Fetch the user info by `fetchInfo()` and access its `sub` property.
 
@@ -419,7 +417,7 @@ Run the app again, the User ID (sub) of the user should be printed on the Home p
 
 ### Step 8: Add a Logout button
 
-Now, let's add a Logout button that is displayed when the user is logged in.&#x20;
+Now, let's add a Logout button that is displayed when the user is logged in.
 
 In `Home.tsx`, we will use conditional elements to show a Logout button only for a user that is currently logged in.
 
@@ -435,7 +433,7 @@ Find the following line in Home.tsx:
 )}
 ```
 
-&#x20;Add the following code on a new line just after the above line:
+Add the following code on a new line just after the above line:
 
 ```tsx
 {isLoggedIn && (
@@ -468,7 +466,7 @@ Run the app again, we can now log out by clicking the Logout button.
 
 ### Step 9: Open User Settings
 
-Authgear provides a built-in UI for the users to set their attributes and change security settings.&#x20;
+Authgear provides a built-in UI for the users to set their attributes and change security settings.
 
 Use the `openURL` function to open the settings page at `<your_app_endpoint>/settings`
 

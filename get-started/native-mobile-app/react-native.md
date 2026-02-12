@@ -4,8 +4,6 @@ description: How to integrate with a React Native app
 
 # React Native SDK
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/native-mobile-app/react-native.md)
-
 This guide provides instructions on integrating Authgear with a React Native app. Supported platforms include:
 
 * React Native 0.60.0 or higher

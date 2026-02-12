@@ -5,7 +5,7 @@
 ## Get Started
 
 * [5-Minute Guide](get-started/5-minute-guide.md)
-* [Skills for AI Agent](get-started/ai-skills.md)
+* [Skills for AI Agent](get-started/ai-coding-tools/README.md)
 * [Start Building](get-started/start-building.md)
 * [Single-Page App](get-started/single-page-app/README.md)
   * [JavaScript (Web)](get-started/single-page-app/website.md)

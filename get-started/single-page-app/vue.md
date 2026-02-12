@@ -4,8 +4,6 @@ description: Follow this quickstart tutorial to add authentication to your Vue a
 
 # Vue
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/single-page-app/vue.md)
-
 Authgear helps you add user logins to your Vue apps. It provides a prebuilt login page and user settings page that accelerate the development.
 
 Follow this :clock1: **15-minute** tutorial to create a simple app using Vue with Authgear SDK.
@@ -22,7 +20,7 @@ After that, we will need to create an Application in the Project Portal.
 
 ### Create an application in the Portal
 
-In this step, we'll create an Authgear client application in the Authgear Portal. We'll use the configuration for this application in later steps to connect our Vue application to Authgear.&#x20;
+In this step, we'll create an Authgear client application in the Authgear Portal. We'll use the configuration for this application in later steps to connect our Vue application to Authgear.
 
 To create a client application navigate to **Applications** on the left menu bar in Authgear Portal.
 
@@ -230,7 +228,7 @@ init().catch((e) => {
 });
 ```
 
-The Authgear container instance takes `endpoint` and `clientID` as parameters. They can be obtained from the application page created in [#setup-application-in-authgear](vue.md#setup-application-in-authgear "mention").&#x20;
+The Authgear container instance takes `endpoint` and `clientID` as parameters. They can be obtained from the application page created in [#setup-application-in-authgear](vue.md#setup-application-in-authgear "mention").
 
 Create a `.env` file in the root directory of your project and add your Authgear client application configuration using the following fields:
 

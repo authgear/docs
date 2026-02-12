@@ -4,8 +4,6 @@ description: Choose the integration approach based on application type
 
 # Start Building
 
-[![LLM | View as markdown](https://img.shields.io/badge/LLM-View%20as%20markdown-blue)](https://raw.githubusercontent.com/authgear/docs/refs/heads/main/get-started/start-building.md)
-
 ## Integration Approaches
 
 There are 3 different high-level approaches to integrating Authgear with your applications:
