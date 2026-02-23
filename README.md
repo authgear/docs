@@ -16,13 +16,13 @@ description: >-
 * Single Sign-On (SSO) provides a single unified experience for your customers to log into multiple web/mobile apps, including Web2Web, Web2App, and App2App SSO.
 * Enable [SSO with SAML](authentication-and-access/single-sign-on/single-sign-on-with-saml/) for your users to log into multiple web applications easily.
 * Session management with Authgear Portals, and a pre-built setting page for users to control concurrent sessions.
-* Customizable UI with a **user-friendly low-code** dashboard.&#x20;
+* Customizable UI with a **user-friendly low-code** dashboard.
 * Various security features such as audit logs, brute force protection, smart account lockout, password policy, etc.
 * APIs for further integration and customizations. For example, build your own custom login and sign-up pages from the ground up powered by [Authentication Flow API](https://docs.authgear.com/~/changes/anTCj6yoZ06s3pLJk5v8/reference/apis/authentication-flow-api).
 
 Most importantly, you can [get started](https://accounts.portal.authgear.com/signup) **with Authgear for free**.
 
-### Learn about Authgear&#x20;
+### Learn about Authgear
 
 Authgear contains the following high-level components:
 
@@ -39,7 +39,7 @@ Authgear contains the following high-level components:
 * [**Admin API**](api-reference/apis/admin-api/) - allow your backend to interact directly with Authgear for user management purpose.
 * [**Events and Hooks**](customization/events-hooks/) - call external web endpoint or use the hosted type-script to customize the behaviour of Authgear. E.g. blocking certain type of sign up, or call external endpoint for each login.
 * [**User Import API**](admin/user-management/import-users-using-user-import-api.md) - Import multiple users from another service to your project.
-* [**Export User API**](admin/user-management/export-users-using-the-user-export-api.md) - Export user data from Authgear into a CSV or [ndjosn](https://github.com/ndjson/ndjson-spec) file.
+* [**Export User API**](admin/user-management/export-users-using-the-user-export-api.md) - Export user data from Authgear into a CSV or [ndjson](https://github.com/ndjson/ndjson-spec) file.
 * [**Link OAuth Provider using Account Management API**](customization/ui-customization/custom-ui/manually-link-oauth-provider-using-account-management-api.md) - Link an OAuth provider to a user's account without AuthUI.
 
 #### Management Portal
