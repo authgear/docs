@@ -34,7 +34,7 @@ Follow the on-screen instructions to finish the app creation process.
 2. Customize the "Authenticate and request data from users with Facebook Login" use case.
 3. Enable "email" permission, make sure both "public\_profile" and "email" are enabled.
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Step 3: Set up the OAuth Client
 

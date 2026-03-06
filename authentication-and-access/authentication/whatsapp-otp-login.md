@@ -63,7 +63,7 @@ Skip this if you already have an existing business portfolio
     <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 3.  Select “Authentication” type<br>
 
-    <figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 4. For each language you wish to support, create a template named `one_time_password`
    1. Select “Copy Code” under **Code delivery setup**
    2. Select “Add security recommendation” under **Content**
