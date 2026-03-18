@@ -10,8 +10,8 @@ If your application is a traditional web app running on a server, for example, *
 [express.md](express.md)
 {% endcontent-ref %}
 
-{% content-ref url="next.js.md" %}
-[next.js.md](next.js.md)
+{% content-ref url="nextjs.md" %}
+[nextjs.md](nextjs.md)
 {% endcontent-ref %}
 
 {% content-ref url="python-flask-app.md" %}

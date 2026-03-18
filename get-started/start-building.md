@@ -65,7 +65,7 @@ If your application is a traditional web app running on a server, you can levera
 
 **See the following tutorials for your specific application framework:**
 
-* [Next JS](regular-web-app/next.js.md)
+* [Next JS](regular-web-app/nextjs.md)
 * [Express JS](regular-web-app/express.md)
 * [PHP (Laravel)](regular-web-app/laravel.md)
 * [Python (Flask)](regular-web-app/python-flask-app.md)
