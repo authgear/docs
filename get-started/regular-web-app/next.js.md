@@ -4,251 +4,384 @@ description: Authentication for Next.js app with Authgear
 
 # Next.js
 
-In this guide, you'll learn how to implement authentication for the [Next.js](https://nextjs.org/) application, a popular React-based framework for JavaScript, and [Authgear](https://www.authgear.com/) as the OIDC provider. The source code can be found on [GitHub](https://github.com/authgear/authgear-example-nextjs).
+Integrate Authgear authentication into a Next.js App Router application using the `@authgear/nextjs` SDK. You will set up login, logout, display user info, and protect a server-side API route.
 
-### Learning objectives
+A complete example application is available at [authgear/authgear-example-nextjs](https://github.com/authgear/authgear-example-nextjs).
 
-You will learn the following throughout the article:
+**What you will build:**
 
-* How to add user login, sign-up, and logout to Next.js Applications.
-* How to create a middleware to protect Next.js application pages.
+* A home page that shows a Login button when unauthenticated, and the user's identity + Logout button when authenticated
+* A protected API route (`/api/me`) that returns the current user's info
 
-### Implementing authentication in a Next.js web app
+***
 
-In the [demo application](https://github.com/authgear/authgear-example-nextjs), the Next.js app is integrated with Authgear, and the [NextAuth.js](https://next-auth.js.org/) client library is used for sending authentication requests as an **OpenID Connect middleware** from the app to Authgear.
+### Setting Up Your Application in Authgear
 
-### **Prerequisites**
+#### Step 1: Create an Application in the Portal
 
-Before you begin, you'll need the following:
+1. Sign in to the [Authgear Portal](https://portal.authgear.com/)
+2. Select or create a Project
+3. Navigate to **Applications** in the left menu
+4. Click **⊕ Add Application**
+5. Enter an application name and select **OIDC/SAML Client Application** as the application type
+6. Click **Save**
 
-* A **free Authgear account**. [Sign up](https://accounts.portal.authgear.com/signup) if you don't have one already.
-* [Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
-* Experience with [Next.js](https://nextjs.org/) framework and application development.
+#### Step 2: Configure the Application
 
-### Part 1: Configure Authgear
+1. Under **OAuth 2.0**, find the **Authorized Redirect URIs** field
+2. Add `http://localhost:3000/api/auth/callback`
+3. Note down your **Client ID**, **Client Secret**, and **Endpoint** (e.g. `https://your-project.authgear.cloud`) — you will need these shortly
+4. Click **Save**
 
-To use Authgear services, you’ll need to have an application set up in the Authgear [Dashboard](https://portal.authgear.com/). This setup allows users in Authgear to sign in to the Next.js application automatically once they are authenticated by Authgear.
+***
 
-#### Step 1: Configure an application
+### Building Your Next.js Application
 
-To set up the application, navigate to the [Authgear Portal UI](https://portal.authgear.com/) and select **Applications** on the left-hand navigation bar. Use the interactive selector to create a new **Authgear OIDC Client application** or select an existing application that represents the project you want to integrate with.
-
-<figure><img src="../../.gitbook/assets/image (34) (1).png" alt=""><figcaption></figcaption></figure>
-
-Every application in Authgear is assigned an alphanumeric, unique client ID that your application code will use to call Authgear APIs through the NextAuth.js Client in the Next.js app. Record the generated Authgear `ISSUER` (for example, [https://example-auth.authgear.cloud](https://example-auth.authgear.cloud)), `CLIENT ID`, `CLIENT SECRET` from the output. You will use these values in the next step for the client app config.
-
-<figure><img src="../../.gitbook/assets/image (35) (1).png" alt=""><figcaption></figcaption></figure>
-
-#### Step 2: Configure **Redirect URI**
-
-An **Authorized Redirect URI** of your application is the URL that Authgear will redirect to after the user has authenticated for the **OpenID Connect middleware** to complete the authentication process. In our case, it will be a home page for our Next.js and it will run at [http://localhost:3000](http://localhost:3000).
-
-Set the following [http://localhost:3000/api/auth/callback/authgear](http://localhost:3000/api/auth/callback/authgear) to the **Authorized Redirect URIs** field. If not set, users will not be returned to your application after they log in.
-
-#### Step 3: Choose a Login method
-
-After you created the **Authgear app**, you choose how users need to **authenticate on the login page**. From the **Authentication** tab, navigate to **Login Methods**, you can choose a **login method** from various options including, by email, mobile, or social, just using a username or the custom method you specify. For this demo, we choose the **Email+Passwordless** approach where our users are asked to register an account and log in by using their emails. They will receive a One-time password (OTP) to their emails and verify the code to use the app.
-
-<figure><img src="../../.gitbook/assets/image (36) (1).png" alt=""><figcaption></figcaption></figure>
-
-### Part 2: **Create the Next.js application**
-
-You have two options here. You can either clone a [working example](https://github.com/authgear/authgear-example-nextjs) or build the app from scratch.
-
-#### Clone the demo repository
-
-If you want to run an already working application, you can clone the demo project from this [GitHub repository](https://github.com/authgear/authgear-example-nextjs) using the following command.
+#### Step 1: Create a Next.js Project
 
 ```bash
-git clone https://github.com/authgear/authgear-example-nextjs.git
+npx create-next-app@latest my-app --typescript --tailwind --app
+cd my-app
 ```
 
-Since you've cloned a working repo, you don't need to follow the next section. If you'd like to understand more about what was done in the demo application, feel free to read them.
-
-Either way, continue configuring the [Environment variables](https://fusionauth.io/blog/2023/04/26/nextjs-single-sign-on#environment-variables) to proceed with this tutorial.
-
-#### Step 1: Create your own Next.js application
-
-If you want to create your own application instead of using our demo project, you can create a new Next.js application by running the command below.
+#### Step 2: Install the Authgear SDK
 
 ```bash
-npx create-next-app authgear-example-nextjs
+npm install @authgear/nextjs
 ```
 
-The `create-next-app` wizard will ask you a few questions on how to set up your application. Answer them accordingly.
+#### Step 3: Configure Environment Variables
 
-#### Step 2: Installing NextAuth.js
-
-Now that you have the application running, let's implement the authentication process by using [NextAuth.js](https://next-auth.js.org/). We recommend you look also at the [NextAuth.js Getting Start guide](https://next-auth.js.org/getting-started/example) for the most up-to-date instructions. First, install NextAuth.js:
+Create `.env.local` with the following content:
 
 ```bash
-npm install next-auth
+AUTHGEAR_ENDPOINT=https://your-project.authgear.cloud
+AUTHGEAR_CLIENT_ID=your-client-id
+AUTHGEAR_CLIENT_SECRET=your-client-secret
+AUTHGEAR_REDIRECT_URI=http://localhost:3000/api/auth/callback
+SESSION_SECRET=a-random-string-of-at-least-32-characters
 ```
 
-Now, you need to create a file named exactly like `[...nextauth].js` in `src/pages/api/auth`. First, make the directory and then create a file named `[...nextauth].js` in that directory.
+{% hint style="info" %}
+`SESSION_SECRET` encrypts the session cookie stored in the browser. It must be at least 32 characters. Use a random string generator to create one.
+{% endhint %}
 
-Next, you'll configure a [custom provider](https://next-auth.js.org/configuration/providers/oauth#using-a-custom-provider) for Authgear. Doing so ensures every request to the `/api/auth/*` path is handled by NextAuth.js.
+#### Step 4: Create the Shared Authgear Config
 
-In the following code, we made a few config:
+Create `src/lib/authgear.ts`. This file holds your Authgear configuration and is imported by both server-side and client-side code:
 
-1. We've added [`https://authgear.com/scopes/full-userinfo`](https://authgear.com/scopes/full-userinfo)as the scope to make Authgear return all user profiles
-2. We have made `id` and `name` in the Next Auth session (under `callbacks`). You can also add other attributes such as `email`, `phone_number`, and `preferred_username` to the session as well.
+```typescript
+// src/lib/authgear.ts
+import type { AuthgearConfig } from "@authgear/nextjs";
 
-```jsx
-import NextAuth from "next-auth"
-
-export const authOptions = {
-    providers: [
-        {
-            id: "authgear",
-            name: "Authgear",
-            type: "oauth",
-            issuer: process.env.AUTHGEAR_ISSUER,
-            clientId: process.env.AUTHGEAR_CLIENT_ID,
-            clientSecret: process.env.AUTHGEAR_CLIENT_SECRET,
-            wellKnown: `${process.env.AUTHGEAR_ISSUER}/.well-known/openid-configuration`,
-            authorization: { params: { scope: "openid offline_access https://authgear.com/scopes/full-userinfo" } },
-            client: {
-                token_endpoint_auth_method: "client_secret_post",
-            },
-            profile(profile) {
-              return {
-                id: profile.sub,
-              }
-            },
-          }
-    ],
-    callbacks: {
-        async jwt({ token, account, profile }) {
-            if (account) {
-                token.accessToken = account.access_token
-
-                token.id = profile.sub
-                token.name = profile.name
-            }
-            return token
-        },
-
-        async session({ session, token, user }) {
-            session.accessToken = token.accessToken
-
-            session.user.id = token.id
-            session.user.name = token.name
-
-            return session
-        }
-    },
-}
-
-export default NextAuth(authOptions)
+export const authgearConfig: AuthgearConfig = {
+  endpoint: process.env.AUTHGEAR_ENDPOINT!,
+  clientID: process.env.AUTHGEAR_CLIENT_ID!,
+  clientSecret: process.env.AUTHGEAR_CLIENT_SECRET,
+  redirectURI: process.env.AUTHGEAR_REDIRECT_URI!,
+  sessionSecret: process.env.SESSION_SECRET!,
+};
 ```
 
-#### Step 3: Exposing session state
+#### Step 5: Add the OAuth Route Handler
 
-To allow components to check whether the current user is logged in, change `src/pages/_app.js` to have your application rendered inside a `<SessionProvider>` context, as shown below.
+Create `src/app/api/auth/[...authgear]/route.ts`. This catch-all route handles all Authgear auth endpoints automatically:
 
-```jsx
-import '@/styles/globals.css'
-import { SessionProvider } from "next-auth/react"
+```typescript
+// src/app/api/auth/[...authgear]/route.ts
+import { createAuthgearHandlers } from "@authgear/nextjs";
+import { authgearConfig } from "@/lib/authgear";
 
-export default function App({
-    Component,
-    pageProps: {session, ...pageProps},
-}) {
-    return (
-        <SessionProvider session={session}>
-            <Component {...pageProps} />
-        </SessionProvider>
-    );
+export const { GET, POST } = createAuthgearHandlers(authgearConfig);
+```
+
+`createAuthgearHandlers` registers the following routes for you:
+
+| Method | Path                 | Purpose                                              |
+| ------ | -------------------- | ---------------------------------------------------- |
+| `GET`  | `/api/auth/login`    | Start the OAuth login flow                           |
+| `GET`  | `/api/auth/callback` | Handle the OAuth callback and set the session cookie |
+| `GET`  | `/api/auth/logout`   | Clear the session and revoke tokens                  |
+| `POST` | `/api/auth/refresh`  | Refresh an expired access token                      |
+| `GET`  | `/api/auth/userinfo` | Return the current user's info                       |
+
+#### Step 6: Add AuthgearProvider to Your Layout
+
+`AuthgearProvider` makes the user's session state available to all Client Components via React context. Because it uses browser APIs, it must be a Client Component.
+
+Create `src/app/providers.tsx`:
+
+```typescript
+// src/app/providers.tsx
+"use client";
+
+import { AuthgearProvider } from "@authgear/nextjs/client";
+
+export default function Providers({ children }: { children: React.ReactNode }) {
+  return <AuthgearProvider>{children}</AuthgearProvider>;
 }
 ```
 
-This will make the[ useSession()](https://next-auth.js.org/getting-started/client#usesession) React Hook accessible to your entire application. Now, create a component that will either render a "Log in" or "Log out" button, depending on the session state, in a `src/components/login-button.jsx` file.
+Then wrap your root layout in `src/app/layout.tsx`:
 
-```jsx
-import { useSession, signIn, signOut } from "next-auth/react"
+```typescript
+// src/app/layout.tsx
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import Providers from "./providers";
 
-export default function Component() {
-    const { data: session } = useSession()
-    if (session) {
-        return (
-            <>
-                Status: Logged in as {session.user.id} <br />
-                <button onClick={() => signOut()}>Log out</button>
-            </>
-        )
-    }
-    return (
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Next.js + Authgear",
+  description: "Example app demonstrating Authgear authentication with Next.js",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+On mount, `AuthgearProvider` fetches `/api/auth/userinfo` to check for an existing session. The result is available via the `useAuthgear()` hook.
+
+#### Step 7: Implement the Home Page
+
+Replace `src/app/page.tsx`. The page is a Client Component so it can use `useAuthgear()` to read session state and react to changes:
+
+```typescript
+// src/app/page.tsx
+"use client";
+
+import { useState } from "react";
+import { useAuthgear, SignInButton, SignOutButton } from "@authgear/nextjs/client";
+
+export default function Home() {
+  const { isAuthenticated, user } = useAuthgear();
+  const [apiResult, setApiResult] = useState<string | null>(null);
+
+  async function testProtectedApi() {
+    const res = await fetch("/api/me");
+    const data = await res.json();
+    setApiResult(JSON.stringify(data, null, 2));
+  }
+
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center gap-6">
+      <h1 className="text-3xl font-bold">Next.js + Authgear</h1>
+
+      {isAuthenticated ? (
         <>
-            Status: Not logged in <br />
-            <button onClick={() => signIn()}>Log in</button>
+          <p className="text-gray-600">
+            Logged in as: <span className="font-mono">{user?.sub}</span>
+          </p>
+          {(user?.email ?? user?.phoneNumber) && (
+            <p className="text-gray-600">
+              {user?.email ?? user?.phoneNumber}
+            </p>
+          )}
+          <button
+            onClick={testProtectedApi}
+            className="rounded-md bg-green-600 px-6 py-2 text-white hover:bg-green-700"
+          >
+            Test Protected API
+          </button>
+          {apiResult && (
+            <pre className="rounded-md bg-gray-100 dark:bg-gray-800 p-4 text-sm">{apiResult}</pre>
+          )}
+          <SignOutButton className="rounded-md bg-red-600 px-6 py-2 text-white hover:bg-red-700">
+            Logout
+          </SignOutButton>
         </>
-    )
+      ) : (
+        <SignInButton className="rounded-md bg-blue-600 px-6 py-2 text-white hover:bg-blue-700">
+          Login
+        </SignInButton>
+      )}
+    </main>
+  );
 }
 ```
 
-Then, you change your home component located at `src/pages/index.js` to include the `<LoginButton />` component inside `<main>`.
+**Key hooks and components:**
 
-```jsx
-import { useSession, signIn, signOut } from "next-auth/react"
+* `useAuthgear()` — returns `{ isAuthenticated, user, state, isLoaded, signIn, signOut }`. `user` is a `UserInfo` object with `sub`, `email`, `phoneNumber`, and other profile fields.
+* `<SignInButton>` — navigates to `/api/auth/login` on click, starting the OAuth flow.
+* `<SignOutButton>` — navigates to `/api/auth/logout` on click, clearing the session.
 
-export default function Component() {
-    const { data: session } = useSession()
-    if (session) {
-        return (
-            <>
-                Status: Logged in as {session.user.id} <br />
-                <button onClick={() => signOut()}>Log out</button>
-            </>
-        )
-    }
-    return (
-        <>
-            Status: Not logged in <br />
-            <button onClick={() => signIn()}>Log in</button>
-        </>
-    )
+#### Step 8: Create a Protected API Route
+
+Server-side route handlers can verify authentication using `currentUser()` from `@authgear/nextjs/server`. It reads the encrypted session cookie and returns the current user, or `null` if not authenticated.
+
+Create `src/app/api/me/route.ts`:
+
+```typescript
+// src/app/api/me/route.ts
+import { currentUser } from "@authgear/nextjs/server";
+import { authgearConfig } from "@/lib/authgear";
+import { NextResponse } from "next/server";
+
+export async function GET() {
+  const user = await currentUser(authgearConfig);
+
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  return NextResponse.json({ user });
 }
 ```
 
-#### Step 4: Set environment variables
+`currentUser()` automatically refreshes the access token if expired before fetching user info from the Authgear userinfo endpoint.
 
-In the root directory of your project, add the file `.env.local` with the following environment variables:
+***
 
-```jsx
-AUTHGEAR_ISSUER={your-authgear-app-endpoint}
-AUTHGEAR_CLIENT_ID={your-client-id}
-AUTHGEAR_CLIENT_SECRET={your-client-secret}
-```
-
-replace with Authgear app settings values from **Part1** such as `Issuer`, `ClientId`, `ClientSecret`.
-
-#### Step 5: Testing
-
-Start the HTTP server by running the following command.
+### Running the Application
 
 ```bash
 npm run dev
 ```
 
-Browse to [localhost:3000](http://localhost:3000/). If the installation went successful, you should see the Login page.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-<figure><img src="../../.gitbook/assets/Untitled (22).png" alt=""><figcaption></figcaption></figure>
+***
 
-Click the "Log in" button to be taken to a page with a "Sign in with Authgear" button.
+### Testing the Integration
 
-<figure><img src="../../.gitbook/assets/Untitled (23).png" alt=""><figcaption></figcaption></figure>
+#### Login flow
 
-After clicking it, you should be redirected to your Authgear login screen.
+1. Visit `http://localhost:3000` — you should see a **Login** button
+2. Click **Login** — you are redirected to the Authgear hosted login page
+3. Sign in with your credentials
+4. You are redirected back to the home page, now showing your user ID and email/phone number
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+#### Logout flow
 
-Your users can sign-up and login to your application through a page hosted by Authgear, which provides them with a secure, standards-based login experience that you can customize with your own branding and various authentication methods, such as [social logins](https://www.authgear.com/features/social-login), [passwordless](https://www.authgear.com/features/passwordless-authentication), [biometrics logins](https://www.authgear.com/features/biometric-authentication), [one-time-password (OTP)](https://www.authgear.com/features/whatsapp-otp) with SMS/WhatsApp, and multi-factor authentication (MFA).
+1. Click **Logout** — the session is cleared and you are returned to the login screen
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+#### Protected API
 
-After you have authenticated with a one-time password sent to your email, you'll arrive back at your Next.js application home screen, with your email address displayed and a "Log out" button.
+1. After logging in, click **Test Protected API**
+2. The page calls `GET /api/me`, which verifies your session and returns your user info:
 
-#### Next steps
+```json
+{
+  "user": {
+    "sub": "...",
+    "email": "...",
+    "emailVerified": true
+  }
+}
+```
 
-This tutorial showed how to quickly implement an end-to-end OpenID Connect flow in Next.js with Authgear. Only simple code is needed, after which protected views are secured with built-in UI login pages.
+3. To verify the route is protected, open an incognito window and run:
+
+```bash
+curl http://localhost:3000/api/me
+```
+
+Expected response with status `401`:
+
+```json
+{ "error": "Unauthorized" }
+```
+
+***
+
+### Project Structure
+
+```
+src/
+├── app/
+│   ├── api/
+│   │   ├── auth/
+│   │   │   └── [...authgear]/
+│   │   │       └── route.ts      # OAuth route handler
+│   │   └── me/
+│   │       └── route.ts          # Protected API route
+│   ├── layout.tsx                # Root layout with AuthgearProvider
+│   ├── page.tsx                  # Home page with login/logout UI
+│   └── providers.tsx             # Client component wrapping AuthgearProvider
+└── lib/
+    └── authgear.ts               # Shared Authgear config
+```
+
+***
+
+### Additional Topics
+
+#### Reading the Session in Server Components
+
+Use `auth()` to read the raw session (state + tokens) without making a network request:
+
+```typescript
+import { auth } from "@authgear/nextjs/server";
+import { authgearConfig } from "@/lib/authgear";
+
+export default async function MyServerComponent() {
+  const session = await auth(authgearConfig);
+
+  if (session.state !== "AUTHENTICATED") {
+    return <p>Not logged in</p>;
+  }
+
+  return <p>Access token expires at: {session.expiresAt}</p>;
+}
+```
+
+Use `currentUser()` when you need the full user profile — it makes an extra request to the userinfo endpoint and handles token refresh automatically.
+
+#### Verifying a Bearer Token in an External API
+
+If you have a separate API server that receives Authgear-issued access tokens (e.g. from a mobile app), use `verifyAccessToken()` to validate them:
+
+```typescript
+import { verifyAccessToken } from "@authgear/nextjs/server";
+import { authgearConfig } from "@/lib/authgear";
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(request: NextRequest) {
+  const authHeader = request.headers.get("authorization");
+  if (!authHeader?.startsWith("Bearer ")) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const token = authHeader.slice(7);
+
+  try {
+    const payload = await verifyAccessToken(token, authgearConfig);
+    return NextResponse.json({ sub: payload.sub });
+  } catch {
+    return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+  }
+}
+```
+
+{% hint style="info" %}
+`verifyAccessToken` validates the JWT signature and expiry locally using the Authgear JWKS endpoint — no session cookie is involved.
+{% endhint %}
+
+#### Checking Session State
+
+`useAuthgear()` returns `isLoaded` to indicate whether the initial session check has completed. Use it to avoid a flash of unauthenticated UI:
+
+```typescript
+const { isAuthenticated, isLoaded } = useAuthgear();
+
+if (!isLoaded) return <p>Loading...</p>;
+```
+
+### Next Steps
+
+* [Protect additional pages with middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware)
+* [Backend API integration guide](https://docs.authgear.com/get-started/backend-api)
+* [`@authgear/nextjs` API reference](https://authgear.github.io/authgear-sdk-nextjs/)
