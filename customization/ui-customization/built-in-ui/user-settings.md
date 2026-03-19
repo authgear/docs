@@ -23,15 +23,45 @@ The end-user can perform the following actions on the setting page:
 
 ## Open the settings page in websites
 
+{% tabs %}
+{% tab title="Next.js" %}
+Use the `<UserSettingsButton>` component from `@authgear/nextjs/client`. It exchanges the user's session for a short-lived token and opens the pre-authenticated Settings page in a new tab — no Server Action required.
+
+```tsx
+import { UserSettingsButton } from "@authgear/nextjs/client";
+
+export default function Dashboard() {
+  return (
+    <UserSettingsButton>Account Settings</UserSettingsButton>
+  );
+}
+```
+
+The button must be rendered inside `<AuthgearProvider>`. Guard it with an authentication check to avoid errors when the user is not signed in:
+
+```tsx
+const { isAuthenticated } = useAuthgear();
+
+<UserSettingsButton disabled={!isAuthenticated}>
+  Account Settings
+</UserSettingsButton>
+```
+
+See the [Next.js guide](../../../get-started/regular-web-app/nextjs.md#opening-user-settings) for more options such as styling and customising the route path.
+{% endtab %}
+
+{% tab title="Web SDK" %}
 Use the `open()` method of the Authgear Web SDK to open the built-in settings page.
 
 ```tsx
 import authgear, { Page } from "@authgear/web";
 
-const openSettings = () = {
+const openSettings = () => {
     authgear.open(Page.Settings)
 }
 ```
+{% endtab %}
+{% endtabs %}
 
 ## Open the settings page with the SDK in mobile apps
 

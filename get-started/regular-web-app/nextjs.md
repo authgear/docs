@@ -102,6 +102,7 @@ export const { GET, POST } = createAuthgearHandlers(authgearConfig);
 | `GET`  | `/api/auth/logout`   | Clear the session and revoke tokens                  |
 | `POST` | `/api/auth/refresh`  | Refresh an expired access token                      |
 | `GET`  | `/api/auth/userinfo` | Return the current user's info                       |
+| `GET`  | `/api/auth/open`     | Open a pre-authenticated Authgear-hosted page        |
 
 #### Step 6: Add AuthgearProvider to Your Layout
 
@@ -380,28 +381,57 @@ if (!isLoaded) return <p>Loading...</p>;
 
 #### Opening User Settings
 
-Use `getOpenURL` to open Authgear-hosted pages (e.g. the user's [Settings page](../../customization/ui-customization/built-in-ui/user-settings.md)) without requiring the user to log in again. It exchanges the user's session for a short-lived token and returns a pre-authenticated URL.
+The `<UserSettingsButton>` component opens Authgear's hosted [Settings page](../../customization/ui-customization/built-in-ui/user-settings.md) in a new tab with the current user already authenticated — no Server Action required.
+
+**Add the button to your component:**
 
 ```typescript
-// Server Action
-"use server";
-import { getOpenURL, Page } from "@authgear/nextjs/server";
-import { authgearConfig } from "@/lib/authgear";
+import { UserSettingsButton } from "@authgear/nextjs/client";
 
-export async function getSettingsURLAction(): Promise<string> {
-  return getOpenURL(Page.Settings, authgearConfig);
+export default function Dashboard() {
+  return (
+    <UserSettingsButton>Account Settings</UserSettingsButton>
+  );
 }
 ```
+
+The button must be rendered inside `<AuthgearProvider>`. It exchanges the user's session for a short-lived token and opens the pre-authenticated Settings URL in a new tab.
+
+**Style it like any button** — `<UserSettingsButton>` accepts all standard HTML button props:
 
 ```tsx
-// Client Component
-async function handleClick() {
-  const url = await getSettingsURLAction();
-  window.open(url, "_blank", "noopener,noreferrer");
-}
+<UserSettingsButton
+  className="btn btn-primary"
+  style={{ padding: "0.5rem 1rem" }}
+  disabled={!isAuthenticated}
+>
+  Account Settings
+</UserSettingsButton>
 ```
 
-`getOpenURL` throws `"Not authenticated"` if there is no session, or `"No refresh token in session"` if the session has no refresh token.
+The default label is `"Account Settings"` if no children are provided.
+
+**Customising the route path**
+
+By default, `<UserSettingsButton>` sends requests to `/api/auth/open`. If your auth routes live at a different path, set `openPagePath` on `<AuthgearProvider>`:
+
+```tsx
+<AuthgearProvider openPagePath="/api/my-auth/open">
+  {children}
+</AuthgearProvider>
+```
+
+**Error behaviour**
+
+If the user is not authenticated or their session has no refresh token, the new tab will display an error rather than the Settings page. Guard the button with an authentication check to avoid this:
+
+```tsx
+const { isAuthenticated } = useAuthgear();
+
+<UserSettingsButton disabled={!isAuthenticated}>
+  Account Settings
+</UserSettingsButton>
+```
 
 #### Controlling Single Sign-On Behaviour
 
