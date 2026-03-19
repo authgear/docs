@@ -23,7 +23,7 @@ A complete example application is available at [authgear/authgear-example-nextjs
 2. Select or create a Project
 3. Navigate to **Applications** in the left menu
 4. Click **⊕ Add Application**
-5. Enter an application name and select **OIDC/SAML Client Application** as the application type
+5. Enter an application name and select **Single Page Application** as the application type
 6. Click **Save**
 
 #### Step 2: Configure the Application
