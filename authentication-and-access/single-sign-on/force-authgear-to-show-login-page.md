@@ -21,6 +21,19 @@ The `prompt="login"` parameter which is defined in the [OIDC spec](https://openi
 The following code shows how to set `prompt: "login"` in Authgear SDKs:
 
 {% tabs %}
+{% tab title="Next.js" %}
+```typescript
+import { PromptOption } from "@authgear/nextjs";
+
+// via hook
+const { signIn } = useAuthgear();
+signIn({ prompt: PromptOption.Login });
+
+// via component
+<SignInButton signInOptions={{ prompt: PromptOption.Login }}>Sign In</SignInButton>
+```
+{% endtab %}
+
 {% tab title="JavaScript" %}
 ```javascript
 authgear
