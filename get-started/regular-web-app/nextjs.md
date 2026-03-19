@@ -23,14 +23,14 @@ A complete example application is available at [authgear/authgear-example-nextjs
 2. Select or create a Project
 3. Navigate to **Applications** in the left menu
 4. Click **⊕ Add Application**
-5. Enter an application name and select **OIDC/SAML Client Application** as the application type
+5. Enter an application name and select **Single Page Application** as the application type
 6. Click **Save**
 
 #### Step 2: Configure the Application
 
 1. Under **OAuth 2.0**, find the **Authorized Redirect URIs** field
 2. Add `http://localhost:3000/api/auth/callback`
-3. Note down your **Client ID**, **Client Secret**, and **Endpoint** (e.g. `https://your-project.authgear.cloud`) — you will need these shortly
+3. Note down your **Client ID** and **Endpoint** (e.g. `https://your-project.authgear.cloud`) — you will need these shortly
 4. Click **Save**
 
 ***
@@ -57,7 +57,6 @@ Create `.env.local` with the following content:
 ```bash
 AUTHGEAR_ENDPOINT=https://your-project.authgear.cloud
 AUTHGEAR_CLIENT_ID=your-client-id
-AUTHGEAR_CLIENT_SECRET=your-client-secret
 AUTHGEAR_REDIRECT_URI=http://localhost:3000/api/auth/callback
 SESSION_SECRET=a-random-string-of-at-least-32-characters
 ```
@@ -77,7 +76,6 @@ import type { AuthgearConfig } from "@authgear/nextjs";
 export const authgearConfig: AuthgearConfig = {
   endpoint: process.env.AUTHGEAR_ENDPOINT!,
   clientID: process.env.AUTHGEAR_CLIENT_ID!,
-  clientSecret: process.env.AUTHGEAR_CLIENT_SECRET,
   redirectURI: process.env.AUTHGEAR_REDIRECT_URI!,
   sessionSecret: process.env.SESSION_SECRET!,
 };
@@ -379,6 +377,68 @@ const { isAuthenticated, isLoaded } = useAuthgear();
 
 if (!isLoaded) return <p>Loading...</p>;
 ```
+
+#### Opening User Settings
+
+Use `getOpenURL` to open Authgear-hosted pages (e.g. the user's [Settings page](../../customization/ui-customization/built-in-ui/user-settings.md)) without requiring the user to log in again. It exchanges the user's session for a short-lived token and returns a pre-authenticated URL.
+
+```typescript
+// Server Action
+"use server";
+import { getOpenURL, Page } from "@authgear/nextjs/server";
+import { authgearConfig } from "@/lib/authgear";
+
+export async function getSettingsURLAction(): Promise<string> {
+  return getOpenURL(Page.Settings, authgearConfig);
+}
+```
+
+```tsx
+// Client Component
+async function handleClick() {
+  const url = await getSettingsURLAction();
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+```
+
+`getOpenURL` throws `"Not authenticated"` if there is no session, or `"No refresh token in session"` if the session has no refresh token.
+
+#### Controlling Single Sign-On Behaviour
+
+By default, Authgear reuses its server-side session across sign-ins (SSO enabled). You can change this globally via `isSSOEnabled` in `createAuthgearHandlers`, or override it per sign-in call using the `prompt` option.
+
+**Disable SSO globally** — always show the login form:
+
+```typescript
+// src/app/api/auth/[...authgear]/route.ts
+import { createAuthgearHandlers } from "@authgear/nextjs";
+import { authgearConfig } from "@/lib/authgear";
+
+export const { GET, POST } = createAuthgearHandlers({
+  ...authgearConfig,
+  isSSOEnabled: false,
+});
+```
+
+**Override per sign-in call** using `PromptOption`:
+
+```typescript
+import { PromptOption } from "@authgear/nextjs";
+
+// via hook
+const { signIn } = useAuthgear();
+signIn({ prompt: PromptOption.Login }); // always show login form
+
+// via component
+<SignInButton signInOptions={{ prompt: PromptOption.Login }}>Sign In</SignInButton>
+```
+
+| `PromptOption`       | Effect                                               |
+| -------------------- | ---------------------------------------------------- |
+| `PromptOption.Login` | Always show the login form                           |
+| `PromptOption.None`  | Never show the login form; error if not authenticated |
+
+Per-call `prompt` takes precedence over the global `isSSOEnabled` setting.
 
 ### Next Steps
 
