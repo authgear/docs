@@ -95,7 +95,9 @@ In this step, we will create a “Meta App”
 8.  Under “From” dropdown, select the phone number we registered in Step 2. Note the “**Phone number ID**” and “**WhatsApp Business Account ID**”. Here if your enter a valid “To” number, you should be able to receive a testing “Hello World” message.<br>
 
     <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
-9. Go to “App Settings”, add “Privacy Policy” link
+9.  Go to “App Settings”, add “Privacy Policy” link; and note the **"App ID"**, and **"App secret"** on this page.<br>
+
+    <figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
 10. Switch App mode to “**Live**” (You may be asked to enter business details for review.)
 
 ### Step 5: Set up “System User”
@@ -105,17 +107,7 @@ In this step, we will create a “Meta App”
 3. Add a new system user
 4. Assign the App we created in Step 4 with “Develop app” access
 5. Assign the WhatsApp account created in Step 2 with "Message templates (view only)” and “Phone Numbers (view and manage)” access
-6. Click “Generate token” and note the token created.
-
-{% hint style="success" %}
-Now, give Authgear team the following items:
-
-* **Phone number ID**
-* **WhatsApp Business Account ID**
-* **Access Token of the System user**
-
-And we will help you set up the connection in the backend
-{% endhint %}
+6. Click “**Generate token**” and note the token created.
 
 ### Step 6: Set up Automatic SMS Fallback
 
@@ -131,7 +123,7 @@ You can share app access with the Authgear Team for assistance with this step.
    1. Callback URL: `https://{authgear_endpoint}/whatsapp/webhook`
    2. Verify token: A random string
       1. e.g. Use `openssl rand -hex 16` command to generate a 32-character sequence
-4. Share the “Verify token” to the Authgear Team for backend configuration
+4. Share the **“Verify token”** to the Authgear Team for backend configuration
 5.  Press “Verify and save”<br>
 
     <figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
@@ -139,3 +131,17 @@ You can share app access with the Authgear Team for assistance with this step.
 
     <figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
+
+
+{% hint style="success" %}
+Now, give Authgear team the following items:
+
+* **Phone number ID**
+* **WhatsApp Business Account ID**
+* **Access Token of the System user**
+* **App ID**
+* **App Secret**
+* **Verify Token**
+
+And we will help you set up the connection in the backend
+{% endhint %}
