@@ -233,6 +233,7 @@
   * [AWS Reference Architecture](deployment/architecture-guides/aws-reference-architecture.md)
   * [Azure Reference Architecture](deployment/architecture-guides/azure-reference-architecture.md)
   * [Google Cloud Reference Architecture](deployment/architecture-guides/google-cloud-reference-architecture.md)
+  * [On-Premises Reference Architecture](deployment/architecture-guides/on-premises-reference-architecture.md)
   * [Throughput Scaling Reference](deployment/architecture-guides/throughput-scaling-reference.md)
 
 ## Troubleshooting
