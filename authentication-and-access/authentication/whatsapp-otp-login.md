@@ -109,6 +109,18 @@ In this step, we will create a “Meta App”
 5. Assign the WhatsApp account created in Step 2 with "Message templates (view only)” and “Phone Numbers (view and manage)” access
 6. Click “**Generate token**” and note the token created.
 
+{% hint style="success" %}
+Now, give Authgear team the following items:
+
+* **Phone number ID**
+* **WhatsApp Business Account ID**
+* **Access Token of the System user**
+* **App ID**
+* **App Secret**
+
+And we will help you set up the connection in the backend
+{% endhint %}
+
 ### Step 6: Set up Automatic SMS Fallback
 
 To support automatic fallback to SMS when the WhatsApp delivery failed, we will need to set up a webhook between Meta and the Authgear server to check the delivery status of messages.
@@ -130,8 +142,28 @@ You can share app access with the Authgear Team for assistance with this step.
 6.  In The “Webhooks” page, select “WhatsApp Business Account” under Product, and then enable the `messages` webhook subscription.<br>
 
     <figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+7. Subscribe to the WhatsApp Business Account
+   1. This step is required to let your facebook app to receive notifications from your whatsapp business account. \
+      Note, you must be logged in to an account with access to both your Facebook app and Whatsapp Business account to perform these steps:
+      1. Go to https://developers.facebook.com/tools/explorer
+      2. In "Add a permission", select:
+         1. whatsapp\_business\_management
+         2. whatsapp\_business\_messaging
+      3. Press "Generate Access Token"
+      4. Then, type `{WABA_ID}/subscribed_apps` as the request path. Replace `{WABA}` with your whatsapp business account ID.
+      5. Change the request method to `POST`.
+      6. Press "Submit"
+      7. Change the request method to `GET`, submit and confirm a new item is created. You should an item like this:
 
-
+```json
+{
+  "whatsapp_business_api_data": {
+    "link": "https://www.facebook.com/games/?app_id=1234567890987654",
+    "name": "YOUR APP NAME",
+    "id": "1234567890987654"
+  }
+},
+```
 
 {% hint style="success" %}
 Now, give Authgear team the following items:
