@@ -146,14 +146,16 @@ You can share app access with the Authgear Team for assistance with this step.
    1. This step is required to let your facebook app to receive notifications from your whatsapp business account. \
       Note, you must be logged in to an account with access to both your Facebook app and Whatsapp Business account to perform these steps:
       1. Go to https://developers.facebook.com/tools/explorer
-      2. In "Add a permission", select:
-         1. whatsapp\_business\_management
-         2. whatsapp\_business\_messaging
-      3. Press "Generate Access Token"
-      4. Then, type `{WABA_ID}/subscribed_apps` as the request path. Replace `{WABA}` with your whatsapp business account ID.
-      5. Change the request method to `POST`.
-      6. Press "Submit"
-      7. Change the request method to `GET`, submit and confirm a new item is created. You should an item like this:
+      2. In "Meta App", select your facebook app
+      3. In User or Page, select "User Token"
+      4. In "Add a permission", select:
+         * whatsapp\_business\_management
+         * whatsapp\_business\_messaging
+      5. Press Generate Access Token
+      6. Then, type `{WABA_ID}/subscribed_apps` as the request path. Replace `{WABA_ID}` with your whatsapp business account ID.
+      7. Change the request method to `POST`.
+      8. Press "Submit"
+      9. Change the request method to `GET`, submit and confirm a new item is created. You should an item like this:
 
 ```json
 {
