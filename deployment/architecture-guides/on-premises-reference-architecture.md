@@ -135,8 +135,6 @@ Components:
 | OUT | TCP | 443 | Kubernetes | SMS Gateway | Allow | |
 | OUT | TCP | 443 | Kubernetes | WhatsApp API | Allow | |
 
-Protocols are transport-layer (TCP/UDP). HTTP and HTTPS are application-layer and should not appear in firewall rules.
-
 ### Web Application Firewall (WAF)
 
 #### Hostnames
