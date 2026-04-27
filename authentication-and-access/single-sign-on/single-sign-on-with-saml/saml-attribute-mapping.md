@@ -1,21 +1,39 @@
 # SAML Attribute Mapping
 
-By default, only the `sub` field of the UserInfo is included in the SAML assertion. To include other fields like users' email address, phone number, etc., you can set up SAML Attribute Mapping for the fields.
+By default, Authgear includes only the `sub` field in the SAML assertion. SAML Attribute Mapping lets you add other UserInfo fields, such as email, phone number, or name, so your SAML service provider receives the user data it needs.
 
-SAML Attribute Mapping allows you to configure your Authgear client application to include additional fields in the SAML assertion. This is a great way to pass additional data from Authgear to your SAML application that depends on Authgear as an Identity Provider.
+You can map fields directly from the user profile, or transform them with a Go text template before they go into the assertion.
 
-Authgear supports using SAML attribute mapping to include additional fields in the SAML assertion using any field in the user profile attributes (UserInfo).
+### How attribute mapping works
 
-There's also support for a template that can be used to customize the values of the fields before including them in the SAML assertion. For example, the template `{{.preferred_username}}@example.com` will return the `preferred_username` field from the UserInfo prepended to '@example.com'.
+Each mapping has two parts:
 
-{% hint style="info" %}
-To enable SAML Attribute Mapping for your Authgear project, [please contact support](https://www.authgear.com/schedule-demo).
-{% endhint %}
+* **Definition**: declares a SAML attribute by name. This becomes the `Name` of the `<Attribute>` element in the assertion.
+* **Mapping**: sets the value of that attribute, either from a UserInfo field or from a text template.
 
-#### Example of SAML Attribute Mapping
+### Enable SAML Attribute Mapping
+
+#### Prerequisites
+
+* A client application with **SAML 2.0 support** enabled. See [.](./ "mention") to set one up.
+
+#### Steps
+
+1. Open the Authgear Portal and go to **Advanced > Edit Config**.
+2. Find your application under `saml.service_providers` by matching its `client_id`.
+3. Add an `attributes` block under that service provider with `definitions` and `mappings`. Use the example below as a starting point.
+4. Save the config.
+
+#### Example
+
+Add the `attributes` block under the service provider matching your `client_id`. Leave the existing fields (`acs_urls`, `audience`, `nameid_format`, etc.) untouched, they were set when the SAML application was created.
 
 ```yaml
-attributes:
+saml:
+  service_providers:
+  - client_id: YOUR_CLIENT_ID
+    # ...existing fields, leave as-is...
+    attributes:
       definitions:
       - name: family_name
       - name: given_name
@@ -38,8 +56,61 @@ attributes:
           saml_attribute: placeholder_email
 ```
 
-The above example creates three SAML attributes (`family_name`, `given_name`, `placeholder_email`) that will be added to the SAML assertion.
+The `attributes` block adds three attributes: `family_name`, `given_name`, and `placeholder_email` to every SAML assertion issued to this service provider.
 
-The value for `pointer` refers to a user profile attribute in the UserInfo object.
+### Configuration reference
 
-From an attribute that uses a template, the value in between the `{{}}` also refers to a user profile attribute in the UserInfo object.\\
+#### `definitions`
+
+Each entry declares one SAML attribute.
+
+| Field           | Type   | Required | Description                                                                                                                    |
+| --------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `name`          | string | Yes      | The attribute name. Used as the `Name` of the `<Attribute>` element in the assertion.                                          |
+| `name_format`   | string | No       | Sets the `NameFormat` attribute. See [SAML Core 2.7.3.1](https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf). |
+| `friendly_name` | string | No       | Sets the `FriendlyName` attribute.                                                                                             |
+
+#### `mappings`
+
+Each mapping sets the value of one declared attribute. Two source types are supported.
+
+**Map from a user profile field**
+
+Use a JSON pointer to reference any field in the UserInfo object.
+
+```yaml
+- from:
+    user_profile:
+      pointer: /email
+  to:
+    saml_attribute: email
+```
+
+| Field                       | Description                                                                                      |
+| --------------------------- | ------------------------------------------------------------------------------------------------ |
+| `from.user_profile.pointer` | JSON pointer to a UserInfo field, e.g. `/sub`, `/email`, `/phone_number`, `/preferred_username`. |
+| `to.saml_attribute`         | Name of the target SAML attribute. Must match one declared in `definitions`.                     |
+
+The SAML value type is derived from the JSON type: strings become `xs:string`, numbers become `xs:decimal`, booleans become `xs:boolean`, and arrays produce multiple `<AttributeValue>` elements.
+
+{% hint style="info" %}
+A field referenced by `pointer` must exist in the UserInfo. Missing fields produce an attribute with no `<AttributeValue>`.&#x20;
+{% endhint %}
+
+**Map from a text template**
+
+Use a [Go text template](https://pkg.go.dev/text/template) to build the value. The template receives the UserInfo object as its context.
+
+```yaml
+- from:
+    text_template:
+      template: '{{.preferred_username}}@example.com'
+  to:
+    saml_attribute: placeholder_email
+```
+
+The output is always rendered as `xs:string`. Missing fields render as empty strings.
+
+{% hint style="warning" %}
+Mapping order matters. If two mappings write to the same `saml_attribute`, the later one overrides the earlier one.
+{% endhint %}
