@@ -102,7 +102,7 @@ The account manage API requires a user's valid access token to work. Hence, you 
 
 Set up your application to allow users to log in using Authgear and obtain an access token.
 
-See our [Getting Started](broken-reference) section for a detailed guide for your preferred programming language or framework.
+See our [Getting Started](../../../get-started/start-building.md) section for a detailed guide for your preferred programming language or framework.
 
 ### Step 2: Initiate OAuth Link Flow
 

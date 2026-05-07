@@ -59,7 +59,7 @@ The **Security** section of the User Settings page has the following options:
 * **Signed-in device:** from this page, the user can view browsers and devices that their account is currently signed in on.
 * **Advanced Settings:** contains additional settings. For example, when you enable [Account Deletion](../admin/user-management/account-deletion.md) for your project, users can click on this link to access the **Delete Account** button.
 
-You can learn more about the User Settings page [here](../customization/ui-customization/built-in-ui/auth-ui.md).
+You can learn more about the User Settings page [here](../customization/ui-customization/built-in-ui/user-settings.md).
 
 ### 5. Integrate Authgear with Your Application or Website
 

@@ -6,7 +6,7 @@ description: This guide shows how to use Custom Login/Signup pages UI in Native 
 
 Implementing custom login and signup screens in any native application (Flutter, React Native, Kotlin, or iOS) doesn't require much change to the code for your existing native apps that use Authgear.
 
-At the moment, we don't support direct interaction between your native code and the Authentication Flow API that powers custom UIs. That means you'll need to use the platform-specific [SDKs](broken-reference/) we already provide and call the authenticate method to start the authentication flow.
+At the moment, we don't support direct interaction between your native code and the Authentication Flow API that powers custom UIs. That means you'll need to use the platform-specific [SDKs](../../../get-started/start-building.md) we already provide and call the authenticate method to start the authentication flow.
 
 In this guide, we'll teach you how to implement custom authentication UIs in a Flutter app using the Flutter SDK and Authentication Flow API.
 

@@ -21,7 +21,7 @@ There are 3 different high-level approaches to integrating Authgear with your ap
 
 ### Client-side SDKs
 
-Client-side SDKs are designed for developers to quickly implement authentication with Auth UI on your web and mobile applications. After login, it returns the user data for your apps. It can open a hosted [pre-built account settings page](../customization/ui-customization/built-in-ui/auth-ui.md) for the user to manage their own account. The SDKs manage session token storage automatically and have built-in token ownership protection ([DPoP](https://oauth.net/2/dpop/)) against stolen refresh tokens.
+Client-side SDKs are designed for developers to quickly implement authentication with Auth UI on your web and mobile applications. After login, it returns the user data for your apps. It can open a hosted [pre-built account settings page](../customization/ui-customization/built-in-ui/user-settings.md) for the user to manage their own account. The SDKs manage session token storage automatically and have built-in token ownership protection ([DPoP](https://oauth.net/2/dpop/)) against stolen refresh tokens.
 
 **Check out the following guides for your specific framework:**
 
@@ -90,5 +90,5 @@ If you wish to use a custom UI instead of the pre-built UI for signup and login,
 
 When implementing identity management for your enterprise software, Authgear provides robust single sign-on (SSO) capabilities that seamlessly connect your workforce. Enterprise applications typically support standard authentication protocols like OpenID Connect (OIDC) and Security Assertion Markup Language (SAML)
 
-* [Integration with OIDC Protocol](../how-to-guide/single-sign-on/oidc-provider.md)
-* [Integration with SAML 2.0 Protocol](../how-to-guide/single-sign-on/single-sign-on-with-saml/)
+* [Integration with OIDC Protocol](../authentication-and-access/single-sign-on/oidc-provider.md)
+* [Integration with SAML 2.0 Protocol](../authentication-and-access/single-sign-on/single-sign-on-with-saml/)
