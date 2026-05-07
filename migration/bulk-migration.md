@@ -129,7 +129,7 @@ Now that you have successfully imported your users to Authgear, you can start us
 To do this, implement a middleware and server-side logic that uses Authgear session.
 
 {% hint style="info" %}
-**Note:** Deploying the middleware and server-side logic that uses Authgear session means all users will be logged out and be required to log in again [using Authgear's authentication flow](broken-reference).
+**Note:** Deploying the middleware and server-side logic that uses Authgear session means all users will be logged out and be required to log in again [using Authgear's authentication flow](../get-started/start-building.md).
 {% endhint %}
 
 The following is an example of a simple Express.js application with a middleware that uses Authgear session:
