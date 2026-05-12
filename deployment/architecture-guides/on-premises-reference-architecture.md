@@ -108,7 +108,7 @@ Components:
 
 * **Two PostgreSQL instances** on separate VMs, managed with `pg_autoctl`.
 * **Monitoring agent** running in Kubernetes, executing `pg_auto_failover`. Requires persistent storage. If your cluster has no persistent volumes, deploy the monitoring agent on a dedicated VM instead.
-* **PAF (Python-based wrapper)** running in Kubernetes, reports primary/standby status to HAProxy.
+* **Probe (Python-based)** running in Kubernetes, reports primary/standby status to HAProxy.
 * **HAProxy** running in Kubernetes, routes all database traffic to the current primary instance.
 
 ### Redis
