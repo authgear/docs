@@ -69,8 +69,6 @@ Under this section you can select the types of authenticator where failed login 
 
 An administrator can unlock a locked user immediately without waiting for the lockout duration to elapse. In the Authgear Portal, navigate to **Users**, open the affected user, and switch to the **Account Status** tab. Under the **Account Lockout** section you will see a message such as "This user is locked out due to failed sign-in attempts." along with the time the lock will automatically expire. Click **Reset account lockout** to clear the lock immediately.
 
-The **Account Lockout** section is only shown when the user is currently locked.
-
 ### Unlocking a User via the Admin API
 
 You can also inspect a user's lockout state and clear it programmatically using the Admin GraphQL API. This is useful for automating customer-support workflows or building internal tooling.
