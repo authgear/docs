@@ -194,4 +194,4 @@ When using `signup_login_flows`, disable **"Automatically sign up a new user if 
 ### Further reading
 
 * [Overview of Authentication Flow API](../../customization/ui-customization/custom-ui/authentication-flow-api.md) — use the API to build a fully custom login UI
-* [Authentication Flow API specification](../../api-reference/apis/authentication-flow-api.md) — full reference for all flow types, step types, and options
+* [Authentication Flow API specification](../../reference/apis/authentication-flow-api.md) — full reference for all flow types, step types, and options

@@ -90,7 +90,7 @@ These are the parties that have access to the user profile:
 
 ### The Admin API
 
-Through [the Admin API](../../api-reference/apis/admin-api/), developers **ALWAYS** have **full access** to **ALL** the standard attributes and custom attributes. The Admin API allows the developer to view or edit the standard attributes and the custom attributes.
+Through [the Admin API](../../reference/apis/admin-api/), developers **ALWAYS** have **full access** to **ALL** the standard attributes and custom attributes. The Admin API allows the developer to view or edit the standard attributes and the custom attributes.
 
 ### The Portal
 

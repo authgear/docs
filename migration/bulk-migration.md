@@ -1,6 +1,6 @@
 # Bulk migration
 
-The bulk migration strategy allows you to move all your user data to Authgear at once using the [User Import API](../api-reference/apis/user-import-api.md). Bulk migration is ideal when you want to stop using your old authentication system immediately and start using Authgear.
+The bulk migration strategy allows you to move all your user data to Authgear at once using the [User Import API](../reference/apis/user-import-api.md). Bulk migration is ideal when you want to stop using your old authentication system immediately and start using Authgear.
 
 Once you import your users, you'll need to implement a middleware and server-side logic that uses Authgear user sessions to protect resources. As a result, all users will be logged out and will be required to log in again using Authgear's authentication flow.
 
@@ -38,7 +38,7 @@ You can export users from any authentication system, including your own custom-b
 
 ### Step 2: Reformat User Data into Support JSON Format
 
-Reformat your exported user data to a JSON document that follows the [Import User API schema](../api-reference/apis/user-import-api.md).&#x20;
+Reformat your exported user data to a JSON document that follows the [Import User API schema](../reference/apis/user-import-api.md).&#x20;
 
 You can then use the reformatted JSON document with the Import API to import your user data.
 
@@ -118,7 +118,7 @@ fetch(`${appUrl}/_api/admin/users/import`, options)
 
 ```
 
-The above JavaScript code imports the data from our example `users` table using the Import User API. The API requires a valid [Admin API JWT](../api-reference/apis/admin-api/authentication-and-security.md) for authentication.&#x20;
+The above JavaScript code imports the data from our example `users` table using the Import User API. The API requires a valid [Admin API JWT](../reference/apis/admin-api/authentication-and-security.md) for authentication.&#x20;
 
 Learn more about using the Import User API [here](../admin/user-management/import-users-using-user-import-api.md).
 
