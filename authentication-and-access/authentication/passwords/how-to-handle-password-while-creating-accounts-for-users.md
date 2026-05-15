@@ -6,7 +6,7 @@ description: >-
 
 # How to Handle Password While Creating Accounts for Users
 
-For creating accounts and sending users their passwords using Admin API, see `createUser` in the [Admin API documentation](../../../api-reference/apis/admin-api/api-queries-and-mutations.md#id-2.3.-createuser).&#x20;
+For creating accounts and sending users their passwords using Admin API, see `createUser` in the [Admin API documentation](../../../reference/apis/admin-api/api-queries-and-mutations.md#id-2.3.-createuser).&#x20;
 
 In this post, we'll cover a few options and describe examples of automating the process of sending passwords to new users using the Authgear Portal or webhooks.
 

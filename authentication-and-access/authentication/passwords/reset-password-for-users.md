@@ -38,7 +38,7 @@ Finally, remember to click **Change** to save your changes.&#x20;
 
 ## How to reset a user's password via AdminAPI <a href="#via-portal" id="via-portal"></a>
 
-See [resetPassword](../../../api-reference/apis/admin-api/api-queries-and-mutations.md#id-2.9.-resetpassword) under Reference > APIs > Admin API > API Queries and Mutations.
+See [resetPassword](../../../reference/apis/admin-api/api-queries-and-mutations.md#id-2.9.-resetpassword) under Reference > APIs > Admin API > API Queries and Mutations.
 
 ## What happens if the user loses the preset password?
 

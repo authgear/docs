@@ -16,7 +16,7 @@ With the **Issue JWT as access token** option turned on in your application, Aut
 
 ## Payload of the JWT access token
 
-See the claims in the access token in this reference: [jwt-access-token.md](../../api-reference/tokens/jwt-access-token.md "mention"). Learn more about [add-custom-fields-to-a-jwt-access-token.md](../../integration/add-custom-fields-to-a-jwt-access-token.md "mention") for adding claims into the JWT.
+See the claims in the access token in this reference: [jwt-access-token.md](../../reference/tokens/jwt-access-token.md "mention"). Learn more about [add-custom-fields-to-a-jwt-access-token.md](../../integration/add-custom-fields-to-a-jwt-access-token.md "mention") for adding claims into the JWT.
 
 ## Find the JSON Web Key Sets (JWKS) endpoint
 

@@ -149,7 +149,7 @@ Alternatively, if you did not enable the "Delete Account" button in **User Setti
 
 ### Schedule Deletion
 
-Your backend server can invoke the mutation `scheduleAccountDeletion` with the [Admin API](../../api-reference/apis/admin-api/) to initiate the account deletion.
+Your backend server can invoke the mutation `scheduleAccountDeletion` with the [Admin API](../../reference/apis/admin-api/) to initiate the account deletion.
 
 Here is an example:
 
@@ -173,7 +173,7 @@ mutation {
 
 ### Immediate Deletion
 
-Your backend server can invoke the mutation `scheduleAccountDeletion` with the [Admin API](../../api-reference/apis/admin-api/) to initiate the account deletion.
+Your backend server can invoke the mutation `scheduleAccountDeletion` with the [Admin API](../../reference/apis/admin-api/) to initiate the account deletion.
 
 Here is an example:
 
