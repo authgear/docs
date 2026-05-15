@@ -196,7 +196,7 @@
 * [Rate Limits](api-reference/rate-limits/README.md)
   * [Account Lockout](api-reference/rate-limits/account-lockout.md)
 * [Glossary](api-reference/glossary.md)
-* [Billing FAQ](api-reference/billing-faq.md)
+* [Billing FAQ](reference/billing-faq.md)
 
 ## Authgear ONCE
 
