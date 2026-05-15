@@ -64,3 +64,58 @@ Under this section you can select the types of authenticator where failed login 
 * Passwordless via Phone/Email
 * Authenticator App (TOTP)
 * Recovery codes
+
+### How to Unlock a User from the Portal
+
+An administrator can unlock a locked user immediately without waiting for the lockout duration to elapse. In the Authgear Portal, navigate to **Users**, open the affected user, and switch to the **Account Status** tab. Under the **Account Lockout** section you will see a message such as "This user is locked out due to failed sign-in attempts." along with the time the lock will automatically expire. Click **Reset account lockout** to clear the lock immediately.
+
+The **Account Lockout** section is only shown when the user is currently locked.
+
+### Unlocking a User via the Admin API
+
+You can also inspect a user's lockout state and clear it programmatically using the Admin GraphQL API. This is useful for automating customer-support workflows or building internal tooling.
+
+Use the `accountLockout` field on the `User` type to check whether a user is currently locked:
+
+```graphql
+query {
+  node(id: "<ENCODED USER ID>") {
+    ... on User {
+      id
+      accountLockout {
+        lockoutType
+        isLocked
+        lockedUntil
+        lockedIPs {
+          ipAddress
+          lockedUntil
+        }
+      }
+    }
+  }
+}
+```
+
+The response shape depends on the configured **Lockout Type**:
+
+* For `per_user`, `lockedUntil` is the time the lock expires (UTC) and `lockedIPs` is empty.
+* For `per_user_per_ip`, `lockedUntil` is `null` and `lockedIPs` lists each currently locked IP with its own expiry, ordered by expiry descending.
+
+To unlock the user immediately, call the `resetAccountLockout` mutation:
+
+```graphql
+mutation {
+  resetAccountLockout(input: { userID: "<ENCODED USER ID>" }) {
+    user {
+      id
+      accountLockout {
+        isLocked
+      }
+    }
+  }
+}
+```
+
+The mutation clears lockout state across all participating authenticator types (password, TOTP, OOB OTP, recovery code). For `per_user_per_ip` lockouts it clears every IP-specific lock for the user. After the call succeeds, the user can authenticate immediately from any IP. If account lockout is not configured or not enabled, the mutation succeeds with no effect.
+
+See [API Queries and Mutations](../apis/admin-api/api-queries-and-mutations.md) for the full Admin API reference.

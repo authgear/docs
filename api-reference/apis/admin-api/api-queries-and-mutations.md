@@ -404,6 +404,102 @@ The `getUser` and `getUsers` queries are a collection of Admin API queries for g
 
 Learn more about all the queries in this collection [here](retrieving-users-using-admin-api.md).
 
+### 1.8 User.accountLockout
+
+The `accountLockout` field on the `User` type returns the current account lockout state for a user. Select this field through any query that returns a `User` (for example, the `node` query in 1.3, or the `getUser` / `getUsers` queries in 1.7).
+
+**Schema:**
+
+```graphql
+type AccountLockout {
+  lockoutType: LockoutType!
+  isLocked: Boolean!
+  lockedUntil: DateTime
+  lockedIPs: [LockedIP!]!
+}
+
+type LockedIP {
+  ipAddress: String!
+  lockedUntil: DateTime!
+}
+
+enum LockoutType {
+  per_user
+  per_user_per_ip
+}
+```
+
+The response shape depends on the project's configured Lockout Type:
+
+* For `per_user`, `lockedUntil` is the time the lock expires (UTC) and `lockedIPs` is empty.
+* For `per_user_per_ip`, `lockedUntil` is `null` and `lockedIPs` lists each currently locked IP with its own expiry, ordered by expiry descending.
+
+**Example:**
+
+{% tabs %}
+{% tab title="Query" %}
+```graphql
+query {
+  node(id: "<ENCODED USER ID>") {
+    ... on User {
+      id
+      accountLockout {
+        lockoutType
+        isLocked
+        lockedUntil
+        lockedIPs {
+          ipAddress
+          lockedUntil
+        }
+      }
+    }
+  }
+}
+```
+{% endtab %}
+
+{% tab title="Response (per_user)" %}
+```json
+{
+  "data": {
+    "node": {
+      "id": "VXNlcjowNGUyJJO4Mi04NmEzLTRjYjItOGQxNy14ZWU0Y2FlNzQ5Kse",
+      "accountLockout": {
+        "lockoutType": "per_user",
+        "isLocked": true,
+        "lockedUntil": "2026-05-15T14:53:50Z",
+        "lockedIPs": []
+      }
+    }
+  }
+}
+```
+{% endtab %}
+
+{% tab title="Response (per_user_per_ip)" %}
+```json
+{
+  "data": {
+    "node": {
+      "id": "VXNlcjowNGUyJJO4Mi04NmEzLTRjYjItOGQxNy14ZWU0Y2FlNzQ5Kse",
+      "accountLockout": {
+        "lockoutType": "per_user_per_ip",
+        "isLocked": true,
+        "lockedUntil": null,
+        "lockedIPs": [
+          { "ipAddress": "192.0.2.10", "lockedUntil": "2026-05-15T14:53:50Z" },
+          { "ipAddress": "192.0.2.42", "lockedUntil": "2026-05-15T14:31:18Z" }
+        ]
+      }
+    }
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+See [Account Lockout](../../rate-limits/account-lockout.md) for an overview of the feature and how to unlock a user.
+
 ## 2. Mutations
 
 With mutations, you can modify data from your application using the Admin API GraphQL. For example, you can use mutation to update
@@ -2151,3 +2247,51 @@ mutation {
 ```
 {% endtab %}
 {% endtabs %}
+
+### 2.39 resetAccountLockout
+
+The `resetAccountLockout` mutation clears all account lockout state for a user, allowing them to authenticate again immediately without waiting for the lockout duration to elapse. The mutation clears lockout state across all authenticator types that participate in account lockout (password, TOTP, OOB OTP, recovery code). For `per_user` lockouts the global lock is cleared. For `per_user_per_ip` lockouts every IP-specific lock for the user is cleared. If account lockout is not configured or not enabled, the mutation succeeds with no effect.
+
+**Schema:**
+
+```graphql
+resetAccountLockout(input: ResetAccountLockoutInput!): ResetAccountLockoutPayload!
+```
+
+**Example:**
+
+{% tabs %}
+{% tab title="Query" %}
+```graphql
+mutation {
+  resetAccountLockout(input: {userID: "<ENCODED USER ID>"}) {
+    user {
+      id
+      accountLockout {
+        isLocked
+      }
+    }
+  }
+}
+```
+{% endtab %}
+
+{% tab title="Response" %}
+```json
+{
+  "data": {
+    "resetAccountLockout": {
+      "user": {
+        "id": "VXNlcjowNGUyJJO4Mi04NmEzLTRjYjItOGQxNy14ZWU0Y2FlNzQ5Kse",
+        "accountLockout": {
+          "isLocked": false
+        }
+      }
+    }
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+See [Account Lockout](../../rate-limits/account-lockout.md) for an overview of the feature, including how to unlock a user from the Authgear Portal.
