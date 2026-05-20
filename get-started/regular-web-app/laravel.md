@@ -40,11 +40,11 @@ Before we can use Authgear as an OAuth identity provider, we need to set up an a
 
 To do that, log in to Authgear then select a project. Next, navigate to the Applications section for your project. Create a new application or configure an existing one with **OIDC Client Application** as Application Type as shown below:
 
-<figure><img src="../../.gitbook/assets/authgear-configure-project (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-configure-project (1).png" alt=""><figcaption></figcaption></figure>
 
 Once you're done, click on **Save** to go to the application configuration page. This page reveals the application credentials and OAuth 2.0 endpoints.
 
-<figure><img src="../../.gitbook/assets/authgear-app-config-page (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-app-config-page (1).png" alt=""><figcaption></figcaption></figure>
 
 Note down details like the Client ID, Client Secret, and the endpoints as you'll use them later in your Laravel project.
 
@@ -213,7 +213,7 @@ Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
 At this point accessing the `/login` route should redirect to the Authgear authorization page.
 
-<figure><img src="../../.gitbook/assets/authgear-authorization-page (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-authorization-page (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Step 6: Implement Redirect URI Page
 

@@ -33,7 +33,7 @@ Input the name of your application and select **Native App** as the application 
 
 You will see a list of guides that can help you for setting up, then click "Next".
 
-<figure><img src="../../.gitbook/assets/authgear-new-app-native-2 (1).png" alt="" width="563"><figcaption><p>Create Application</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-new-app-native-2.png" alt="" width="563"><figcaption><p>Create Application</p></figcaption></figure>
 
 ### **Step 2: Configure the application**
 

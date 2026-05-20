@@ -32,7 +32,7 @@ To use the default domain setup, add new DNS records using the IPv4 address for 
 
 <table><thead><tr><th width="66.83203125">Type</th><th width="275">Name</th><th>Usage</th></tr></thead><tbody><tr><td>A</td><td><code>auth</code></td><td>The authentication endpoint</td></tr><tr><td>A</td><td><code>authgear-portal</code></td><td>The admin portal for CIAM functions</td></tr><tr><td>A</td><td><code>authgear-portal-accounts</code></td><td>A domain for logging into the Authgear portal. You don't need to access it directly.</td></tr></tbody></table>
 
-<figure><img src="../.gitbook/assets/image (54) (1).png" alt=""><figcaption><p>Example: Add the A records in DNS management in Namecheap</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (54).png" alt=""><figcaption><p>Example: Add the A records in DNS management in Namecheap</p></figcaption></figure>
 
 ### Step 3: Prepare External Email Provider
 

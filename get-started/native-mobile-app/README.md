@@ -22,8 +22,8 @@ description: >-
 [react-native.md](react-native.md)
 {% endcontent-ref %}
 
-{% content-ref url="ionic-sdk.md" %}
-[ionic-sdk.md](ionic-sdk.md)
+{% content-ref url="ionic.md" %}
+[ionic.md](ionic.md)
 {% endcontent-ref %}
 
 {% content-ref url="xamarin.md" %}

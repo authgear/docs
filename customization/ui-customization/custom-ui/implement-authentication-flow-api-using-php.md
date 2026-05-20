@@ -13,7 +13,7 @@ Before we dive into the step-by-step guide, here are some key things you should 
 * **URL Query**: When any of the Authgear SDKs redirects users to your Custom UI URL, Authgear adds some additional queries to the URL. These queries are required in order to get the `finish_redirect_uri`.
 * **Endpoint**: You can find your Authgear project domain from your application configuration page (usually under the **Endpoint** section) in Authgear Portal. The full endpoint is this Authgear domain followed by a valid path for an operation. For example, `https://my-project.authgear.cloud/api/v1/authentication_flows` to start an authentication flow. The two valid paths the API supports are `/api/v1/authentication_flows` and `/api/v1/authentication_flows/states/input` (which is for passing input to an existing authentication flow).
 * **State Token**: The Authentication Flow API supports authentication with multi-step UI just like the default authentication flow in Auth UI. State tokens can be used to make this type of type of authentication flow work. You can pass information about a previous step to the next step by using the state token. For example, using the state token in the result of step A as input in step B to continue using the state of the previous step.
-* **Inputs**: You can pass values to Authentication Flow API using the `input` or `batch_input` parameters in your HTTP request body. Use the `batch_input` to send multiple values as in an array and `input` when you are passing only 1 value.&#x20;
+* **Inputs**: You can pass values to Authentication Flow API using the `input` or `batch_input` parameters in your HTTP request body. Use the `batch_input` to send multiple values as in an array and `input` when you are passing only 1 value.
 * **Finish Redirect URI**: A URL that you can use to redirect back to your app at the end of the authentication flow.
 
 ### Prerequisites
@@ -24,7 +24,7 @@ To follow along with the example in this post, you should have the following:
 * [Composer](https://getcomposer.org/) installed on your computer.
 * A code editor like VS Code, Sublime, Atom, or any editor you use for PHP development.
 * An Authgear account. You can create one for free [here](https://www.authgear.com/).
-* Enable Custom UI for your Authgear Project. [Contact us](https://www.authgear.com/talk-with-us) to enable custom UI.&#x20;
+* Enable Custom UI for your Authgear Project. [Contact us](https://www.authgear.com/talk-with-us) to enable custom UI.
 
 Now that you understand basic concepts about the Authentication API and what you need to follow along with our example, let's look at how to create our first custom login and signup page from scratch.
 
@@ -60,27 +60,25 @@ Now, still within the configuration page for your application, scroll down to th
 
 <figure><img src="../../../.gitbook/assets/authgear-config-app-custom-ui-url.png" alt=""><figcaption></figcaption></figure>
 
-If you're testing your custom UI on a browser on the same device that you'll be using to serve the PHP code, you can enter your `localhost` URL  in Custom UI URI. For example, you can use the following URL if you will run the PHP code on your local machine using port 8081 :
+If you're testing your custom UI on a browser on the same device that you'll be using to serve the PHP code, you can enter your `localhost` URL in Custom UI URI. For example, you can use the following URL if you will run the PHP code on your local machine using port 8081 :
 
 ```
 http://localhost:8081/login.php
 ```
 
-Alternatively, can use  [CloudFlare Tunnel](https://developers.cloudflare.com/pages/how-to/preview-with-cloudflare-tunnel/) to get a public URL for your PHP application that's running locally. Then, enter the public URL from CloudFlare as your Custom UI URI.
+Alternatively, can use [CloudFlare Tunnel](https://developers.cloudflare.com/pages/how-to/preview-with-cloudflare-tunnel/) to get a public URL for your PHP application that's running locally. Then, enter the public URL from CloudFlare as your Custom UI URI.
 
 #### Step 4: Enable Email + Password Login Option and Disable 2FA
 
 For our example app in this tutorial, users will be using their email and password to log in. Hence, you are required to enable this option in the Authgear Portal.
 
-&#x20;To do that,  enable the "Email + Password" option under **Authentication** > **Login Methods**.&#x20;
+To do that, enable the "Email + Password" option under **Authentication** > **Login Methods**.
 
-<figure><img src="../../../.gitbook/assets/authgear-login-methods (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-login-methods.png" alt=""><figcaption></figcaption></figure>
 
+Also, disable 2FA (if enabled) so that the authentication flow does not include an extra step which our demo app will not cover. You can disable 2FA Requirements in **Authentication** > **2FA** in the Authgear Portal.
 
-
-Also, disable 2FA (if enabled) so that the authentication flow does not include an extra step which our demo app will not cover.  You can disable 2FA Requirements in **Authentication** > **2FA** in the Authgear Portal.
-
-<figure><img src="../../../.gitbook/assets/authgear-config-2fa (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-config-2fa.png" alt=""><figcaption></figcaption></figure>
 
 With that, we're done with the required configuration on the Authgear Portal. In the next part, we'll design some custom UI and implement the Authentication Flow API.
 
@@ -110,7 +108,7 @@ For this example, we'll be using the oauth2-client package to interact with Auth
 composer require league/oauth2-client
 ```
 
-Create the following files in  and add the corresponding code to the files:
+Create the following files in and add the corresponding code to the files:
 
 **config.php:**
 
@@ -273,9 +271,9 @@ The following screenshot shows the output of the custom login page on a browser:
 
 #### Step 3: Implement Login Flow
 
-This is the part where you start to make interactions with the actual Authentication Flow API.&#x20;
+This is the part where you start to make interactions with the actual Authentication Flow API.
 
-In this first interaction, we'll be making an HTTP request to the API endpoint to log a user into our application.&#x20;
+In this first interaction, we'll be making an HTTP request to the API endpoint to log a user into our application.
 
 In the request, we'll send the email and password the user enters in the **login.php** page to the API endpoint to complete the authentication flow in a single step. What this means is that we'll initiate and finish the login flow using a single HTTP request. Unlike what we'll do in later steps for signup and OTP flows.
 

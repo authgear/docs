@@ -60,7 +60,7 @@ The following code samples show the use of the state parameter with Authgear.
 
 {% tabs %}
 {% tab title="JavaScript (React)" %}
-#### Step 1: Set up a React Project to use Authgear
+**Step 1: Set up a React Project to use Authgear**
 
 Create a new React project or use an existing project and configure the project to use Authgear. The following example is based on our [React example Git repository](https://github.com/authgear/authgear-example-react).
 
@@ -94,7 +94,7 @@ async function init() {
 init().catch((e) => console.log(e));
 ```
 
-#### Step 2: Include State Parameter in Authorization Request
+**Step 2: Include State Parameter in Authorization Request**
 
 Set the `state` field in your call to the `startAuthentication()` method of the Authgear SDK to a random hard-to-guess value based on your use case.
 
@@ -118,7 +118,7 @@ Set the `state` field in your call to the `startAuthentication()` method of the 
   }, []);
 ```
 
-#### Step 3: Read and Use the Value of State Returned After the Authorization
+**Step 3: Read and Use the Value of State Returned After the Authorization**
 
 Implement the component that handles your OAuth 2.0 redirect like this:
 
@@ -170,7 +170,7 @@ For this example, when the initial value of the `state` parameter before authori
 {% endtab %}
 
 {% tab title="PHP" %}
-#### Step 1: Set up PHP Project
+**Step 1: Set up PHP Project**
 
 This example uses the [League OAuth 2.0 client](https://oauth2-client.thephpleague.com/) PHP package. Install the package using the following command:
 
@@ -217,7 +217,7 @@ if (!isset($_GET['code'])) {
 
 The League OAuth 2.0 client we are using in this example helps us generate random strings for the `state` parameter. In the above code, we store the value for the state generated in session on the line with `$_SESSION['oauth2state'] = $provider->getState()`;.
 
-#### Step 2: Read and Use the Value of State
+**Step 2: Read and Use the Value of State**
 
 Add an else block for the `if (!isset($_GET['code']))` condition with the following code:
 

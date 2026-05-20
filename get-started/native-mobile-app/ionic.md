@@ -607,7 +607,7 @@ export default Home;
 
 ```
 
-Save your work and run the command to serve your project on the web or [build it for iOS or Android](ionic-sdk.md#step-10-deploy-app-to-mobile).
+Save your work and run the command to serve your project on the web or [build it for iOS or Android](ionic.md#step-10-deploy-app-to-mobile).
 
 You should be able to see the Authentication UI after you click on the Login button. However, you can't complete the authentication flow because we're yet to handle the redirect.
 

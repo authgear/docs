@@ -69,12 +69,10 @@ Skip this if you already have an existing business portfolio
    2. Select “Add security recommendation” under **Content**
    3.  Set Validity period to 10 minutes<br>
 
-       <figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+       <figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 5.  The template page should look like this after adding the required languages<br>
 
     <figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
-
-
 
 ### Step 4: Set up Application
 
@@ -88,13 +86,11 @@ In this step, we will create a “Meta App”
 6.  After creating the app, select “WhatsApp” in “Add product to your app”<br>
 
     <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
-
-
 7. In “API Setup”, tap “Generate access token” and select the WhatsApp account we created in Step 2. Then click continue.\
    ![](<../../.gitbook/assets/image (9).png>)
 8.  Under “From” dropdown, select the phone number we registered in Step 2. Note the “**Phone number ID**” and “**WhatsApp Business Account ID**”. Here if your enter a valid “To” number, you should be able to receive a testing “Hello World” message.<br>
 
-    <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 9.  Go to “App Settings”, add “Privacy Policy” link; and note the **"App ID"**, and **"App secret"** on this page.<br>
 
     <figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
@@ -143,7 +139,7 @@ You can share app access with the Authgear Team for assistance with this step.
 
     <figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 7. Subscribe to the WhatsApp Business Account
-   1. This step is required to let your facebook app to receive notifications from your whatsapp business account. \
+   1. This step is required to let your facebook app to receive notifications from your whatsapp business account.\
       Note, you must be logged in to an account with access to both your Facebook app and Whatsapp Business account to perform these steps:
       1. Go to https://developers.facebook.com/tools/explorer
       2. In "Meta App", select your facebook app

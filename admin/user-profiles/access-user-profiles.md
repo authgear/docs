@@ -70,13 +70,13 @@ To manage access for standard attributes for all users:
 
 Go to **Portal** > **User Profile** > **Standard Attributes**
 
-<img src="../../.gitbook/assets/image (14) (1).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (14).png" alt="" data-size="original">
 
 To manage access and add new custom attributes for all users:
 
 Go to **Portal** > **User Profile** > **Custom Attributes** and click **Add New Attribute**
 
-<img src="../../.gitbook/assets/image (22) (1).png" alt="" data-size="original">
+<img src="../../.gitbook/assets/image (22).png" alt="" data-size="original">
 
 </details>
 
@@ -231,11 +231,11 @@ The `userInfo` object is returned from calling **fetch user info** function whic
 
 The following are some attributes that are usually in the userInfo object. Other attributes like email, phoneNumber and custom attributes will be in the userInfo object if those attributes were set for the current user.
 
-| Key         | Type      | Description                                                                                                                                                                                                                                         |
-| ----------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Key         | Type      | Description                                                                                                                                                                                                       |
+| ----------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | isAnonymous | _boolean_ | Indicate if the user is anonymous, i.e. no [identity](../../concepts/user-identity-and-authenticator.md#identity) or [authenticator](../../concepts/user-identity-and-authenticator.md#authenticator) is provided |
-| isVerified  | _boolean_ | Indicate if the user completed the verification requirement                                                                                                                                                                                         |
-| sub         | _string_  | Unique identifier of the user in your Authgear project                                                                                                                                                                                              |
+| isVerified  | _boolean_ | Indicate if the user completed the verification requirement                                                                                                                                                       |
+| sub         | _string_  | Unique identifier of the user in your Authgear project                                                                                                                                                            |
 
 To access a user's profile using the UserInfo endpoint of OpenID Connect, you need to follow these steps:
 

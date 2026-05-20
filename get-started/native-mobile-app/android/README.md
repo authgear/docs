@@ -32,7 +32,7 @@ Input the name of your application and select **Native App** as the application 
 
 You will see a list of guides that can help you for setting up, then click "Next".
 
-![Create an application](<../../../.gitbook/assets/authgear-new-app-native-2 (1).png>)
+![Create an application](../../../.gitbook/assets/authgear-new-app-native-2.png)
 
 ### **Step 2: Configure the application**
 
@@ -46,7 +46,7 @@ com.example.authgeardemo://host/path
 
 Click "Save" in the top toolbar and note the **Client ID** as you'll use it later in your Android app. You can also obtain it again from the Applications list later.
 
-![Fill in the Redirect URI](<../../../.gitbook/assets/authgear-app-config-android (1).png>)
+![Fill in the Redirect URI](../../../.gitbook/assets/authgear-app-config-android.png)
 
 ## Add Authgear to an Android Application
 

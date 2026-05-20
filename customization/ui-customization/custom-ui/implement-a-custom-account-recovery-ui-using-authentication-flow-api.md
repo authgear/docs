@@ -34,7 +34,7 @@ Using custom UI in your Authgear application requires setting the value for Cust
 
 To set this value, log in to the Authgear Portal and navigate to **Applications** then select your application. Next, in your application's configuration page, scroll down to the Custom UI section and enter the URL for your custom UI.
 
-<figure><img src="../../../.gitbook/assets/authgear-config-app-custom-ui-url-2 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/authgear-config-app-custom-ui-url-2.png" alt=""><figcaption></figcaption></figure>
 
 For the example in this post, we'll be using CloudFlare Tunnel to expose the custom UI we'll be building so that we can have a public URL to enter in the **Custom UI URI** field in our Authgear application configuration.
 

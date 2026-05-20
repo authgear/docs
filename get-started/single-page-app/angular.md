@@ -583,7 +583,7 @@ This is the resulting home.component.html:
 </div>
 ```
 
-![Show the User ID, a link to User Settings and a logout button after login](<../../.gitbook/assets/spa-react-sample-screenshot (1).png>)
+![Show the User ID, a link to User Settings and a logout button after login](../../.gitbook/assets/spa-react-sample-screenshot.png)
 
 ## Next steps, Calling an API
 

@@ -38,7 +38,7 @@ You can export users from any authentication system, including your own custom-b
 
 ### Step 2: Reformat User Data into Support JSON Format
 
-Reformat your exported user data to a JSON document that follows the [Import User API schema](../reference/apis/user-import-api.md).&#x20;
+Reformat your exported user data to a JSON document that follows the [Import User API schema](../reference/apis/user-import-api.md).
 
 You can then use the reformatted JSON document with the Import API to import your user data.
 
@@ -69,7 +69,7 @@ Here's the example `users` table from earlier reformatted:
 
 ```
 
-### &#x20;Step 3: Import Formatted User Data
+### Step 3: Import Formatted User Data
 
 Import your formatted user data you formatted via a POST HTTPS request to the `_api/admin/users/import` endpoint of the User Import API.
 
@@ -118,7 +118,7 @@ fetch(`${appUrl}/_api/admin/users/import`, options)
 
 ```
 
-The above JavaScript code imports the data from our example `users` table using the Import User API. The API requires a valid [Admin API JWT](../reference/apis/admin-api/authentication-and-security.md) for authentication.&#x20;
+The above JavaScript code imports the data from our example `users` table using the Import User API. The API requires a valid [Admin API JWT](../reference/apis/admin-api/authentication-and-security.md) for authentication.
 
 Learn more about using the Import User API [here](../admin/user-management/import-users-using-user-import-api.md).
 
@@ -201,7 +201,7 @@ app.listen(port, () => {
 
 ```
 
-This example app uses the "Bearer \<access token>" to protect the `/protected` route. Learn more about [verifying access tokens and using Authgear in your backend here.](../get-started/backend-api/jwt.md)&#x20;
+This example app uses the "Bearer \<access token>" to protect the `/protected` route. Learn more about [verifying access tokens and using Authgear in your backend here.](../get-started/backend-api/jwt.md)
 
 ### Step 5: Authenticate Your Users with Authgear
 
@@ -216,7 +216,7 @@ You can use any of our SDKs for the following platforms to integrate Authgear in
 * [Android](../get-started/native-mobile-app/android/)
 * [iOS](../get-started/native-mobile-app/ios.md)
 * [Flutter](../get-started/native-mobile-app/flutter.md)
-* [Ionic](../get-started/native-mobile-app/ionic-sdk.md)
+* [Ionic](../get-started/native-mobile-app/ionic.md)
 
 Or manually add Authgear as an [OAuth 2.0 provider](../get-started/regular-web-app/).
 

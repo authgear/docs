@@ -22,7 +22,7 @@ In this step, we'll create a webhook for the **User pre-create** event in the Au
 
 Enter the full URL that points to the page that will be receiving and processing the webhook requests in the Endpoint text field.
 
-<figure><img src="../../.gitbook/assets/authgear-webhooks (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/authgear-webhooks (1).png" alt=""><figcaption></figcaption></figure>
 
 Once you're done, click on the Save button at the top.
 

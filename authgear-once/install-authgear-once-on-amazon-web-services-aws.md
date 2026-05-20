@@ -59,7 +59,7 @@ Configure your domain name with the following A records and the public IP addres
 | A    | authgear-portal          | IP of your VM | The admin portal for CIAM functions                                                  |
 | A    | authgear-portal-accounts | IP of your VM | A domain for logging into the Authgear portal. You don't need to access it directly. |
 
-<figure><img src="../.gitbook/assets/image (54) (1).png" alt=""><figcaption><p>Example of A records on Namecheap</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (54).png" alt=""><figcaption><p>Example of A records on Namecheap</p></figcaption></figure>
 
 ### Step 4: Prepare External Email Provider
 
