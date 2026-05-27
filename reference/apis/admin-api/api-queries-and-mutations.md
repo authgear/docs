@@ -150,7 +150,7 @@ query {
 
 ### 1.3. node
 
-A node represents a single object of different Types. The node query allows you to query a single object using the node ID. You can [learn more about node ID here](../../../reference/apis/admin-api/using-global-node-ids.md).
+A node represents a single object of different Types. The node query allows you to query a single object using the node ID. You can [learn more about node ID here](using-global-node-ids.md).
 
 **Schema:**
 
@@ -620,7 +620,7 @@ mutation {
 Note on `password`:
 
 * If `password` is an empty string (""), the server will generate a password only if the project has `password` enabled.
-  * You can include `sendPassword: true` and `setPasswordExpired: true` in the input for the `resetPassword` mutation to send the new password to a user and set it as expired so they can set a new one the next time they log in.
+  * You can include `sendPassword: true` and `setPasswordExpired: true` in the input to send the new password to a user and set it as expired so they can set a new one the next time they log in.
 * If `password` is null, no password will be created regardless of the project's configuration.
 {% endtab %}
 
@@ -928,7 +928,7 @@ If `password` is an empty string ("") or null, a random password will be generat
 You can include the following in the `resetPassword` mutation:
 
 * `sendPassword: true` sends the new password to a user
-* `setPasswordExpired: true`  forces the user to change their password on next login.
+* `setPasswordExpired: true` forces the user to change their password on next login.
 
 ```graphql
 mutation {
