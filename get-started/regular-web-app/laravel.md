@@ -32,7 +32,7 @@ The example app we'll build uses Laravel Breeze for its UI scaffolding — the B
 
 By handing authentication to Authgear, you get passwordless sign-in, phone OTP, 2FA, and more without writing or maintaining that logic yourself.
 
-<figure><img src="../../.gitbook/assets/laravel-example-new-landing.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 ### How to Add User Authentication to Laravel with Authgear as an OAuth Provider
 
@@ -97,7 +97,7 @@ Route::get('/', function () {
 
 Run `php artisan serve` and open `localhost:8000` in a browser. You should see the landing page with a login link.
 
-<figure><img src="../../.gitbook/assets/laravel-example-landing.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 #### Step 4: Install Laravel Breeze
 
