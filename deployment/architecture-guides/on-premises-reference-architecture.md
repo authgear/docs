@@ -7,58 +7,67 @@ This page describes the reference architecture for deploying Authgear on-premise
 ```mermaid
 architecture-beta
   service user(internet)[User]
-  group OnPrem(cloud)[OnPrem]
+  group OnPrem(cloud)["On-Premises"]
     service firewall(server)[Firewall] in OnPrem
     service lb(server)[Load Balancer] in OnPrem
-    service db(database)[PgSQL] in OnPrem
-    service redis(database)[Redis] in OnPrem
-
+    service db(database)["PostgreSQL x2"] in OnPrem
+    service redis(database)["Redis x2"] in OnPrem
     junction j_k8s_out in OnPrem
     junction j_db in OnPrem
+    junction j_db2 in OnPrem
+    junction j_db3 in OnPrem
     junction j_redis in OnPrem
+    junction j_redis_t in OnPrem
+    junction j_lb in OnPrem
+    junction j_lb2 in OnPrem
 
   group Kubernetes(cloud)[Kubernetes] in OnPrem
     service authgear(server)[Authgear] in Kubernetes
     service grafana(server)[Grafana] in Kubernetes
-    service s3(disk)[S3 Alike] in Kubernetes
-    service sentinel(server)[Sentinel] in Kubernetes
-    service haproxy_redis(server)["HAProxy: Redis"] in Kubernetes
+    service s3(disk)["S3-Compatible Storage"] in Kubernetes
     service paf(server)[PAF] in Kubernetes
-    service haproxy_db(server)["HAProxy: PgSQL"] in Kubernetes
+    service haproxy_db(server)[HAProxy] in Kubernetes
+    service haproxy_redis(server)[HAProxy] in Kubernetes
+    service sentenial(server)[Sentenial] in Kubernetes
     junction j_authgear in Kubernetes
     junction j_s3 in Kubernetes
     junction j_s3b in Kubernetes
     junction j_haproxy_redis in Kubernetes
-    junction j_haproxy_db in Kubernetes
 
   group External(cloud)[External Services]
     service mailer(server)[Mailer] in External
-    service sms(server)[SMS Gateway] in External
-    service whatsapp(server)[WhatsApp] in External
+    service sms(server)["SMS Gateway"] in External
+    service whatsapp(server)["WhatsApp"] in External
     junction j_mailer in External
     junction j_sms in External
     junction j_whatsapp in External
 
   user:R --> L:firewall
   firewall:R --> L:lb
-  lb:R -- L:authgear{group}
+  lb:R -- L:j_lb
+  j_lb:R -- L:j_lb2
+  j_lb2:R -- L:authgear{group}
 
   j_s3:B -- T:j_s3b
   j_s3b:R -- L:s3
-  j_haproxy_redis:R -- L:haproxy_redis
-  j_haproxy_db:R -- L:haproxy_db
 
   authgear:T -- B:grafana
 
   authgear:R -- L:j_authgear
   j_authgear:T -- B:j_haproxy_redis
-  j_haproxy_redis:B -- T:j_haproxy_db
-  j_haproxy_db:B -- T:j_s3
-  sentinel:R -- T:redis
-  paf:R -- B:db
+  j_haproxy_redis:R -- L:haproxy_redis
+  haproxy_redis:R -- L:j_redis
+  j_redis:R -- L:redis
+  j_authgear:R -- L:haproxy_db
+  haproxy_db:R -- L:j_db2
+  j_db2:R -- L:db
+  paf:R -- L:j_db3
+  j_db3:R -- B:db
 
-  haproxy_redis:R -- L:redis
-  haproxy_db:R -- L:db
+  j_authgear:B -- T:j_s3
+  sentenial:R -- L:j_redis_t
+  j_redis_t:B -- T:redis
+
 
   j_mailer:B -- T:mailer
   j_sms:B -- T:sms
