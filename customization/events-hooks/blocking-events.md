@@ -32,7 +32,7 @@ Each of your hooks must respond within 5 seconds. All of your hooks must complet
 
 Supported fields in the JSON response:
 
-<table><thead><tr><th width="178.265625">Parameter</th><th width="259.9609375">Description</th><th>Supported Blocking events</th></tr></thead><tbody><tr><td><code>is_allowed</code></td><td>Allow or abort the current operation</td><td>All blocking events</td></tr><tr><td><code>reason</code></td><td>(When <code>is_allowed</code> is false) A human-readable explanation for rejecting the operation. This will be shown in the UI. </td><td>All blocking events</td></tr><tr><td><code>title</code></td><td>(When <code>is_allowed</code> is false)  A human-readable title for rejecting the operation. This will be shown in the UI. </td><td>All blocking events</td></tr><tr><td><code>mutation</code></td><td>Mutate the object in the Event payload.</td><td>user.pre_create<br>user.profile.pre_update<br>user.pre_schedule_deletion user.pre_schedule_anonymization<br>oidc.jwt.pre_create</td></tr><tr><td><code>constraints</code></td><td>Apply authentication constraints that are required for the authentication. For example, require Email OTP 2FA for this request.</td><td>authentication.pre_initialize<br>authentication.post_identified<br>authentication.pre_authenticated</td></tr><tr><td><code>rate_limits</code></td><td>Dynamically override rate limit weights.</td><td>authentication.pre_initialize<br>authentication.post_identified<br>authentication.pre_authenticated</td></tr><tr><td><code>bot_protection</code></td><td>Determines whether bot protection should be enabled for this request.</td><td>authentication.pre_initialize<br>authentication.post_identified</td></tr></tbody></table>
+<table><thead><tr><th width="178.265625">Parameter</th><th width="259.9609375">Description</th><th>Supported Blocking events</th></tr></thead><tbody><tr><td><code>is_allowed</code></td><td>Allow or abort the current operation</td><td>All blocking events</td></tr><tr><td><code>reason</code></td><td>(When <code>is_allowed</code> is false) A human-readable explanation for rejecting the operation. This will be shown in the UI.</td><td>All blocking events</td></tr><tr><td><code>title</code></td><td>(When <code>is_allowed</code> is false) A human-readable title for rejecting the operation. This will be shown in the UI.</td><td>All blocking events</td></tr><tr><td><code>mutation</code></td><td>Mutate the object in the Event payload.</td><td>user.pre_create<br>user.profile.pre_update<br>user.pre_schedule_deletion user.pre_schedule_anonymization<br>oidc.jwt.pre_create</td></tr><tr><td><code>constraints</code></td><td>Apply authentication constraints that are required for the authentication. For example, require Email OTP 2FA for this request.</td><td>authentication.pre_initialize<br>authentication.post_identified<br>authentication.pre_authenticated</td></tr><tr><td><code>rate_limits</code></td><td>Dynamically override rate limit weights.</td><td>authentication.pre_initialize<br>authentication.post_identified<br>authentication.pre_authenticated</td></tr><tr><td><code>bot_protection</code></td><td>Determines whether bot protection should be enabled for this request.</td><td>authentication.pre_initialize<br>authentication.post_identified</td></tr></tbody></table>
 
 ## Deny Access with "is\_allowed"
 
@@ -62,7 +62,7 @@ Your hooks can optionally apply a mutation for certain blocking events. The supp
 
 Mutations by a hook are applied only when the operation is allowed to proceed, and take effect only when all hooks allow the operation to proceed.
 
-* Objects not appearing in `mutations` are left intact.&#x20;
+* Objects not appearing in `mutations` are left intact.
 * The mutated objects are **NOT** merged with the original ones.
 * The mutated objects are **NOT** validated, and are propagated along the hook chain. The mutated objects are validated after traversing the hook chain.
 * Mutations do **NOT** generate extra events to avoid infinite loops.
@@ -119,7 +119,7 @@ If a blocking event supports mutations on the access token or ID token (JWT) pay
 }
 ```
 
-To add additional fields to the JWT payload, include the **WHOLE** `jwt.payload` inside `mutations`. You must only add your own custom fields.&#x20;
+To add additional fields to the JWT payload, include the **WHOLE** `jwt.payload` inside `mutations`. You must only add your own custom fields.
 
 ## Apply Authentication Constraints
 
@@ -558,7 +558,7 @@ This event supports [#mutations-on-the-jwt-id-token-payload](blocking-events.md#
 
 ### oidc.id\_token.pre\_create
 
-Occurs right before the access token is issued. Use this event to add custom fields to the JWT access token.
+Occurs right before the ID token is issued. Use this event to add custom fields to the OIDC's ID token.
 
 This event supports [#mutations-on-the-jwt-id-token-payload](blocking-events.md#mutations-on-the-jwt-id-token-payload "mention")
 
