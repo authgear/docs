@@ -18,7 +18,7 @@ To configure "Sign in with Apple" for Authgear, you will need to fulfil the foll
 10. Create a "Key" following [this guide](https://developer.apple.com/help/account/manage-keys/create-a-private-key) with "Sign in with Apple" enabled. Click "Configure" next to "Sign in with Apple" and select "Primary App ID" with app ID created above. Keep the private key safe, you need to provide this later.
 
 {% hint style="info" %}
-Redirect URI has the form of `/sso/oauth2/callback/:alias`. The `alias` is used as the identifier of OAuth provider. You can configure the `alias` in Authgear Portal.
+Redirect URI has the form of `/sso/oauth2/callback/:oauth_provider_alias`. The `oauth_provider_alias` is the OAuth Provider Alias configured for this provider in Authgear Portal.
 {% endhint %}
 
 ## Configure Sign in with Apple in Authgear Portal

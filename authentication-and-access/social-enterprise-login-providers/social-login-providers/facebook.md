@@ -44,7 +44,7 @@ Follow the on-screen instructions to finish the app creation process.
 <figure><img src="../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
-Redirect URI has the form of `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/:alias`. The `alias` is used as the identifier of OAuth provider. You can configure the `alias` in Authgear Portal.
+Redirect URI has the form of `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/:oauth_provider_alias`. The `oauth_provider_alias` is the OAuth Provider Alias configured for this provider in Authgear Portal.
 
 See [Your Authgear Endpoint](../../../reference/glossary.md#your-authgear-endpoint) for instructions on how to get the value for `YOUR_AUTHGEAR_ENDPOINT`.
 {% endhint %}
