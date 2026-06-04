@@ -60,8 +60,8 @@ The following is a sample of the response you would get from the Authentication 
                     },
                     {
                         "identification": "oauth",
-                        "provider_type": "google",
-                        "alias": "google"
+                        "oauth_provider_type": "google",
+                        "oauth_provider_alias": "google"
                     }
                 ]
             }

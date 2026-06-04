@@ -438,13 +438,13 @@ When you make the above HTTP request to create a signup flow, you get a response
           },
           {
             "identification": "oauth",
-            "provider_type": "google",
-            "alias": "google"
+            "oauth_provider_type": "google",
+            "oauth_provider_alias": "google"
           },
           {
             "identification": "oauth",
-            "provider_type": "wechat",
-            "alias": "wechat_mobile",
+            "oauth_provider_type": "wechat",
+            "oauth_provider_alias": "wechat_mobile",
             "wechat_app_type": "mobile"
           }
         ]
@@ -545,8 +545,8 @@ The response for the above HTTP request will look like this:
                     },
                     {
                         "identification": "oauth",
-                        "provider_type": "wechat",
-                        "alias": "wechat_mobile",
+                        "oauth_provider_type": "wechat",
+                        "oauth_provider_alias": "wechat_mobile",
                         "wechat_app_type": "mobile"
                     }
                 ]
@@ -884,12 +884,12 @@ Presence in response:
 ```
 {
   "identification": "oauth",
-  "provider_type": "google",
-  "alias": "google"
+  "oauth_provider_type": "google",
+  "oauth_provider_alias": "google"
 }
 ```
 
-* `provider_type`: The expected value here is a keyword for a specific OAuth provider. Possible values are:
+* `oauth_provider_type`: The type of OAuth provider. Possible values are:
   * `google`
   * `facebook`
   * `github`
@@ -899,7 +899,7 @@ Presence in response:
   * `adfs`
   * `apple`
   * `wechat`
-* `alias`: The identifier of the OAuth provider. You pass this in the input.
+* `oauth_provider_alias`: The configured alias of the OAuth provider. Pass this value as `alias` in the input.
 
 Usage in input:
 
@@ -923,8 +923,8 @@ The response to an Authentication Flow API request with the above input should l
             "type": "identify",
             "identification": "oauth",
             "data": {
-                "alias": "google",
                 "oauth_provider_type": "google",
+                "oauth_provider_alias": "google",
                 "oauth_authorization_url": "https://accounts.google.com/o/oauth2/v2/auth?client_id=850158775140-cuov06p5ru3kq27n4bfvrlp3fb7vrpgd.apps.googleusercontent.com&prompt=select_account&redirect_uri=http%3A%2F%2Flocalhost%3A3000&response_type=code&scope=openid+profile+email"
             }
         }
