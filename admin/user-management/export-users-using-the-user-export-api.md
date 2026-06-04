@@ -10,7 +10,7 @@ In this guide, you'll learn how to use the User Export API.
 
 ## User Export API
 
-The User Export API allows developers to bulk export users into a file.&#x20;
+The User Export API allows developers to bulk export users into a file.
 
 The export process is asynchronous. That is, the process runs in the background. Hence, you will need to initiate an export task in one endpoint call and then, make an additional call to another endpoint to get the status of the export task.
 
@@ -55,7 +55,7 @@ The Initiate Export endpoint accepts JSON input via an HTTP(S) request body. The
 
 * The `format` field is where you specify the format of the export file. The value can be `csv` or `ndjson`.
 * `csv`: use this field when `format` is set to `csv`. The value is an object with a `fields` property.
-* `csv.fields`: you can use this field to list all the user attributes you want to include as fields in the CSV file. The value should be an array and each item in the array is an object with a `pointer` and an optional `field_name` property that describe a user attribute.&#x20;
+* `csv.fields`: you can use this field to list all the user attributes you want to include as fields in the CSV file. The value should be an array and each item in the array is an object with a `pointer` and an optional `field_name` property that describe a user attribute.
 
 #### Check Status
 
@@ -71,7 +71,7 @@ Use this endpoint to query the status of an existing export task. Replace `{Task
 | Host          | `<Your Authgear Project domain>` |
 
 {% hint style="info" %}
-See the [User Export API Reference](export-users-using-the-user-export-api.md#user-export-api) for more details about the endpoints, inputs, and pointers.
+See the [User Export API Reference](../../reference/apis/user-export-api.md) for more details about the endpoints, inputs, and pointers.
 {% endhint %}
 
 ## Example: Using the User Export API
@@ -117,7 +117,7 @@ See [Admin API Authentication](https://docs.authgear.com/reference/apis/admin-ap
 
 ### Step 2: Initiate User Export Task
 
-Make an HTTP(S) POST request to the initiate export endpoint to initiate a new user export task.&#x20;
+Make an HTTP(S) POST request to the initiate export endpoint to initiate a new user export task.
 
 To do that, first, install the node-fetch package in your app using this command:
 
@@ -271,4 +271,4 @@ When the status task is completed, the HTTP(S) response body will look like this
 
 * `download_url` : open the URL in the value of `download_url` to download the exported users file.
 
-**Note:** The result from a completed export task will expire after 24 hours. Hence, after 24 hours, you can no longer use the task ID associated with the task to generate a new download link.&#x20;
+**Note:** The result from a completed export task will expire after 24 hours. Hence, after 24 hours, you can no longer use the task ID associated with the task to generate a new download link.
