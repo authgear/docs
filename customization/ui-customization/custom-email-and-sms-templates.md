@@ -29,7 +29,7 @@ The teamplates support the same set of variables described below.
 | --------------------------- | ------------------------- |
 | `{{ template "app.name" }}` | Your organization's name. |
 
-The app name is referenced as `{{ template "app.name" }}`, not as a data field. It is itself a translatable string, so changing the `app.name` translation updates it everywhere at once.
+The organization name is referenced as `{{ template "app.name" }}`, not as a data field. It is itself a translatable string, so changing the `app.name` translation updates it everywhere at once.
 
 #### Per message type
 
