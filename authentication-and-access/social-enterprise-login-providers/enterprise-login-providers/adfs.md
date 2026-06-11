@@ -6,7 +6,7 @@
 2. Create an application in your AD FS Server, obtain "Client ID", "Client Secret" and "Discovery Document Endpoint". Discovery Document Endpoint typically ends with `/.well-known/openid-configuration`. Configure your application with redirect uri `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/adfs`.
 
 {% hint style="info" %}
-Redirect URI has the form of `/sso/oauth2/callback/:alias`. The `alias` is used as the identifier of OAuth provider. You can configure the `alias` in Authgear Portal.
+Redirect URI has the form of `/sso/oauth2/callback/:oauth_provider_alias`. The `oauth_provider_alias` is the OAuth Provider Alias configured for this provider in Authgear Portal.
 {% endhint %}
 
 ## Configure Sign in with Microsoft AD FS through the portal

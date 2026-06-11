@@ -16,7 +16,7 @@
 6. Follow [this](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-a-client-secret) section to add a client secret. Remember to record the secret value when you add the client secret, as it will not be displayed again. This will be needed for configure OAuth client in Authgear.
 
 {% hint style="info" %}
-Redirect URI has the form of `/sso/oauth2/callback/:alias`. The `alias` is used as the identifier of OAuth provider. You can configure the `alias` in Authgear Portal.
+Redirect URI has the form of `/sso/oauth2/callback/:oauth_provider_alias`. The `oauth_provider_alias` is the OAuth Provider Alias configured for this provider in Authgear Portal.
 {% endhint %}
 
 ## Configure Sign in with Microsoft through the portal

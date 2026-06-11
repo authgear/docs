@@ -20,7 +20,7 @@ Also, add `https://<YOUR_AUTHGEAR_ENDPOINT>/sso/oauth2/callback/linkedin` to "Au
 <figure><img src="../../../.gitbook/assets/linkedin-social-login-auth-tab.png" alt=""><figcaption><p>LinkedIn app, "Auth" tab</p></figcaption></figure>
 
 {% hint style="info" %}
-The redirect URI has the form of `/sso/oauth2/callback/:alias`. The `alias` is used as the identifier of OAuth provider. You can configure the `alias` in Authgear Portal
+The redirect URI has the form of `/sso/oauth2/callback/:oauth_provider_alias`. The `oauth_provider_alias` is the OAuth Provider Alias configured for this provider in Authgear Portal
 {% endhint %}
 
 Next, open the **Products** tab of your LinkedIn app, and request access to "Sign In with LinkedIn using OpenID Connect."

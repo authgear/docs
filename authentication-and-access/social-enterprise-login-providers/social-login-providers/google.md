@@ -28,7 +28,7 @@ After creating a new project, you will need to configure the OAuth consent scree
 ![OAuth Client ID in the Credentials page](../../../.gitbook/assets/GCP_create_client_id.png)
 
 {% hint style="info" %}
-Redirect URI has the form of `/sso/oauth2/callback/:alias`. The `alias` is used as the identifier of OAuth provider. You can configure the `alias` in Authgear Portal.
+Redirect URI has the form of `/sso/oauth2/callback/:oauth_provider_alias`. The `oauth_provider_alias` is the OAuth Provider Alias configured for this provider in Authgear Portal.
 {% endhint %}
 
 You can find more details in [official Google Cloud Platform doc](https://support.google.com/cloud/answer/6158849)
