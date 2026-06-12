@@ -183,7 +183,7 @@ The options are the same as `startLinkOAuth()`. Use a different `state` value so
 When the user returns to your `redirectURI`, finish the action. Read the `state` query parameter to choose between `finishLinkOAuth()` and `finishUnlinkOAuth()`, then send the user back to your account details page.
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title="React" %}
 ```tsx
 import { useEffect } from "react";
 import authgear from "@authgear/web";
@@ -206,7 +206,8 @@ function OAuthCallback() {
         } else if (state === "unlink_oauth") {
           await authgear.finishUnlinkOAuth();
         }
-        window.location.replace("/members");
+        // Both actions are done. Return to the account details page.
+        window.location.replace("/account");
       } catch (err) {
         console.error(err);
       }
@@ -239,8 +240,8 @@ function OAuthCallback() {
     } else if (state === "unlink_oauth") {
       await authgear.finishUnlinkOAuth();
     }
-    // Both actions are done. Return to the members portal.
-    window.location.replace("/members");
+    // Both actions are done. Return to the account details page.
+    window.location.replace("/account");
   } catch (err) {
     console.error(err);
   }
