@@ -81,6 +81,7 @@
     * [Connect Apps to Microsoft AD FS](authentication-and-access/social-enterprise-login-providers/enterprise-login-providers/adfs.md)
     * [Connect Apps to Azure AD B2C](authentication-and-access/social-enterprise-login-providers/enterprise-login-providers/azureadb2c.md)
   * [Force Social/Enterprise Login Providers to Show Login Screen](authentication-and-access/social-enterprise-login-providers/force-social-enterprise-login-providers-to-show-login-screen.md)
+  * [Link and Unlink Social/Enterprise Provider with the SDK](authentication-and-access/social-enterprise-login-providers/link-and-unlink-social-enterprise-provider-with-the-sdk.md)
 
 ***
 
