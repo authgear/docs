@@ -6,7 +6,7 @@ Follow these steps to change any text in AuthUI.
 
 1. Go to **Portal** > **Branding** > **Custom Text**
 2. In the text box, add new key–value pairs or modify the values of existing keys in the JSON object.
-   1. See default translation.json [here](https://github.com/authgear/authgear-server/blob/52b0c60d8ea2/resources/authgear/templates/en/translation.json) for a list of available keys and their default values.
+   1. See default translation.json [here](https://github.com/authgear/authgear-server/blob/main/resources/authgear/templates/en/translation.json) for a list of available keys and their default values.
 
 Authgear uses **ICU Message Format** for message values.
 
