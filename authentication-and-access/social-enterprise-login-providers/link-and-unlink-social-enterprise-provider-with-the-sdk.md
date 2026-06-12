@@ -180,7 +180,7 @@ The options are the same as `startLinkOAuth()`. Use a different `state` value so
 
 ### Step 5: Handle the callback
 
-When the user returns to your `redirectURI`, finish the action. Read the `state` query parameter to choose between `finishLinkOAuth()` and `finishUnlinkOAuth()`, then send the user back to your members portal.
+When the user returns to your `redirectURI`, finish the action. Read the `state` query parameter to choose between `finishLinkOAuth()` and `finishUnlinkOAuth()`, then send the user back to your account details page.
 
 {% tabs %}
 {% tab title="First Tab" %}
