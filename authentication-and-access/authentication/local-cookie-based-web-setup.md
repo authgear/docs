@@ -47,7 +47,7 @@ Although you can see the cookies now, the cookies have the **Secure** attribute 
 One quick simple way to do this is to use [mkcert](https://github.com/FiloSottile/mkcert), you may follow the installation steps [here](https://github.com/FiloSottile/mkcert#installation). After installing mkcert, generate a certificate with the following command:
 
 ```
-mkcert *.{PROJECT_NAME}.authgear.cloud
+mkcert "*.{PROJECT_NAME}.authgear.cloud"
 ```
 
 A key file and a cert file will be generated. They will be used in the next part of the guide.
