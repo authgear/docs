@@ -33,6 +33,7 @@
 * [Backend/API Integration](get-started/backend-api/README.md)
   * [Client SDK to make authorized API calls to backend](integration/using-sdk-to-call-your-application-server.md)
   * [Validate JWT in your backend](get-started/backend-api/jwt.md)
+  * [NestJS](get-started/backend-api/nestjs.md)
   * [Forward Authentication to Authgear Resolver Endpoint](get-started/backend-api/nginx.md)
 * [Machine-to-Machine (M2M) Applications](get-started/m2m-applications.md)
 * [Integration by OIDC](authentication-and-access/single-sign-on/oidc-provider.md)
