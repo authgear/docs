@@ -8,6 +8,10 @@ description: >-
 
 In this section, we will go through how to decode the JWT token to obtain the currently logged-in user.
 
+{% hint style="info" %}
+Building with **NestJS**? The [`@authgear/nestjs`](nestjs.md) SDK provides a ready-made module, guard, and decorators so you don't have to wire up JWT validation by hand.
+{% endhint %}
+
 Before we start, make sure the option **Issue JWT as access token** is enabled in your Application settings in the Portal.
 
 <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt="" width="375"><figcaption><p>Enable this option in application settings in the portal</p></figcaption></figure>
