@@ -224,9 +224,9 @@
 
 ## Deployment
 
-* [Run with Docker](deployment/local-development/local.md)
 * [Deploy with Helm chart](deployment/production-deployment/helm.md)
 * [Authenticating HTTP request with Nginx](deployment/production-deployment/auth-nginx.md)
+* [Run locally with Docker Compose](deployment/local-development/local.md)
 * [Configuration](deployment/configuration/README.md)
   * [Environment Variables](deployment/configuration/env.md)
   * [authgear.yaml](deployment/configuration/authgear.yaml.md)
