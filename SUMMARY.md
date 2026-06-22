@@ -78,7 +78,7 @@
     * [Connect Mobile Apps to WeChat](authentication-and-access/social-enterprise-login-providers/social-login-providers/wechat-mobile.md)
     * [Connect Websites to WeChat](authentication-and-access/social-enterprise-login-providers/social-login-providers/wechat-web.md)
   * [Enterprise Login Providers](authentication-and-access/social-enterprise-login-providers/enterprise-login-providers/README.md)
-    * [Connect Apps to Azure Active Directory](authentication-and-access/social-enterprise-login-providers/enterprise-login-providers/azureadv2.md)
+    * [Connect Apps to Microsoft Entra ID (Azure AD)](authentication-and-access/social-enterprise-login-providers/enterprise-login-providers/azureadv2.md)
     * [Connect Apps to Microsoft AD FS](authentication-and-access/social-enterprise-login-providers/enterprise-login-providers/adfs.md)
     * [Connect Apps to Azure AD B2C](authentication-and-access/social-enterprise-login-providers/enterprise-login-providers/azureadb2c.md)
   * [Force Social/Enterprise Login Providers to Show Login Screen](authentication-and-access/social-enterprise-login-providers/force-social-enterprise-login-providers-to-show-login-screen.md)
