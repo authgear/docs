@@ -90,13 +90,17 @@ ionic start authgear-ionic-example --type=react --capacitor
 
 After running the above command, follow the wizard to create a new **blank project**.
 
-Next, open your new project in a code editor and update for `appId` in **capacitor.config.ts** to the following value:
+Next, open your new project in a code editor and configure the `appId`. Because the current Capacitor CLI cannot compile a TypeScript config file under **TypeScript 7** (the current release), replace the generated `capacitor.config.ts` with a **`capacitor.config.json`** file containing:
 
-```typescript
-appId: 'com.authgear.example.capacitor',
+```json
+{
+  "appId": "com.authgear.example.capacitor",
+  "appName": "authgear-ionic-example",
+  "webDir": "dist"
+}
 ```
 
-This new value for `appId` is the same value we used in the authorized redirect URI earlier.
+This value for `appId` is the same value we used in the authorized redirect URI earlier.
 
 {% hint style="info" %}
 **Note:** It is important that you update the value for `appId` before you create the Android and iOS projects for your Ionic application. Doing this will enable Capacitor to create your Android and iOS project with the value for appId as the package name and app ID.
