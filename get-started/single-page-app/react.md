@@ -347,7 +347,7 @@ In the last step, the user is successfully logged in, so let's try to print the 
 
 In `Home.tsx`, we will add a simple loading splash and a greeting message printing the Sub ID. We will add two conditional elements such that they are only shown when user is logged in. We can also change the login button to show only if the user is not logged in.
 
-Make use of `isLoggedIn` from the `UserContext` to control the components on the page. Fetch the user info by `fetchInfo()` and access its `sub` property.
+Make use of `isLoggedIn` from the `UserContext` to control the components on the page. Fetch the user info by `fetchUserInfo()` and access its `sub` property.
 
 ```tsx
 // src/Home.tsx  
