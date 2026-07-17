@@ -248,7 +248,7 @@ export default AuthRedirect;
 ```
 
 {% hint style="info" %}
-Since in React 18, useEffect will be fired twice in development mode, we need to implement a [cleanup function](https://beta.reactjs.org/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) to stop it from firing twice. We will use an `useRef` Hook to stop the user token from being sent twice to the Authgear Endpoint.
+Since in React 18 and later, useEffect will be fired twice in development mode, we need to implement a [cleanup function](https://beta.reactjs.org/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) to stop it from firing twice. We will use an `useRef` Hook to stop the user token from being sent twice to the Authgear Endpoint.
 
 Without a cleanup function, an`useEffect`Hook will be fired twice and hence `finishAuthentication()` will send the token back to Authgear Endpoint for two times, which the second one will result in "Invalid Token" error since the token can only be used once.
 {% endhint %}
