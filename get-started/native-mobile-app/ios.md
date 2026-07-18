@@ -4,9 +4,9 @@ description: Integrate your iOS application with Authgear iOS SDK
 
 # iOS SDK
 
-This guide provides instructions on integrating Authgear with an iOS app. Supported platforms include:
+This guide provides instructions on integrating Authgear with an iOS app.
 
-* iOS 11.0 or higher
+The Authgear iOS SDK supports **iOS 11.0 and higher**. This tutorial builds the demo app with Apple's Observation framework (`@Observable`) and Swift Concurrency (`async`/`await`), which require **iOS 17.0 or higher**, **Xcode 16 or later**, and the **Swift 6** language mode. If you need to support older iOS versions, you can apply the same structure using `ObservableObject` and the SDK's completion handlers instead.
 
 Follow this guide to add Authgear to your iOS app in 🕐 10 minutes.
 
@@ -36,7 +36,7 @@ You will see a list of guides that can help you for setting up, then click "Next
 
 ### **Step 2: Configure the application**
 
-Here you'll need to define a custom URI scheme that Authgear will use to redirect users back to your app after authentication. For our example app, this URL Scheme will be `com.example.authgeardemo://host/path`. For further instructions on setting up a custom URI scheme in iOS, see the official documentation [here](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app).
+Here you'll need to define a custom URI scheme that Authgear will use to redirect users back to your app after authentication. For our example app, the custom URL scheme is `com.example.authgeardemo`, and the full **Redirect URI** built on top of it is `com.example.authgeardemo://host/path`. For further instructions on setting up a custom URI scheme in iOS, see the official documentation [here](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app).
 
 Head back to Authgear Portal, and add `com.example.authgeardemo://host/path` as Redirect URI.
 
@@ -52,8 +52,9 @@ In this step, we'll add user authentication to a simple iOS app using the Authge
 
 To follow the steps in this guide seamlessly, you should have the following:
 
-* [Xcode](https://developer.apple.com/xcode/) (Latest Version)
-* Some knowledge of SwiftUI
+* [Xcode](https://developer.apple.com/xcode/) 16 or later
+* A project targeting iOS 17.0 or later, using the Swift 6 language mode
+* Some knowledge of SwiftUI and Swift Concurrency (`async`/`await`)
 
 ### Step 1: Create new iOS project
 
@@ -70,7 +71,7 @@ To create a new project, open Xcode and navigate to **File** > **New** > **Proje
 
 The Authgear iOS SDK makes it easy to interact with Authgear services from your iOS project.
 
-To add Authgear SDK to your project, in Xcode navigate to **File** > **Add Package Dependencies** and enter `https://github.com/authgear/authgear-sdk-ios.git` in the Package URL text field.
+To add Authgear SDK to your project, in Xcode navigate to **File** > **Add Package Dependencies** and enter `https://github.com/authgear/authgear-sdk-ios.git` in the Package URL text field. Select the **Up to Next Major Version** dependency rule starting from `2.0.0`.
 
 Click **Add Package** to proceed.
 
@@ -86,44 +87,168 @@ Alternatively, if your project uses cocoapods, install the SDK using:
 pod 'Authgear', :git => 'https://github.com/authgear/authgear-sdk-ios.git'
 ```
 
-### Step 3: Initialize Authgear SDK
+### Step 3: Create the authentication model
 
-In this step, we'll initialize an instance of the Authgear SDK when the user interface of our app loads.
+We'll keep all authentication logic in one place — an `@Observable` model that owns a single `Authgear` instance and exposes a small, UI-friendly state. The view (next step) just renders that state and calls the model's methods.
 
-{% hint style="info" %}
-In a production app, you may want to initialize Authgear at the entry point of your app. E.g. For SwiftUI projects, this is usually a file with a name like YourProjectNameApp.swift or AppDelegate for storyboard projects.
-{% endhint %}
-
-For our demo app, add the following code to `ContentView.swift`
-
-1. First import Authgear iOS SDK:
+Create a new Swift file named `AuthenticationModel.swift` and add the following:
 
 ```swift
+//  AuthenticationModel.swift
+
 import Authgear
-```
+import Observation
 
-2. In `struct ContentView: View {}`, initialize an instance of `Authgear()` and call the `.configure()` method in an `.onAppear()` modifier attached to `VStack` like this:
+// Sendable snapshots produced *inside* the SDK's completion handlers so that
+// no non-Sendable Authgear type crosses the `await` boundary.
+private enum AuthOutcome: Sendable {
+    case signedIn(userID: String)
+    case cancelled
+    case failed(message: String)
+}
 
-```swift
-private var authgear: Authgear = Authgear(clientId: "<ClIENT_ID>", endpoint: "<AUTHGEAR_ENDPOINT>")
-var body: some View {
-    VStack {
-        Image(systemName: "globe")
-            .imageScale(.large)
-            .foregroundStyle(.tint)
-        Text("My Demo App")
+private enum VoidOutcome: Sendable {
+    case ok
+    case failed(message: String)
+}
+
+@MainActor
+@Observable
+final class AuthenticationModel {
+    enum State: Equatable {
+        case loading
+        case signedOut
+        case signedIn(userID: String)
     }
-    .padding()
-    .onAppear() {
-        authgear.configure() { result in
-            switch result {
-            case .success():
-                // configured successfully
-                print("// configured successfully")
-            case let .failure(error):
-                // failed to configured
-                print("config failed", error)
+
+    private(set) var state: State = .loading
+
+    // Non-nil drives an error alert in the view.
+    var errorMessage: String?
+
+    private let authgear: Authgear
+    private var didConfigure = false
+
+    init() {
+        authgear = Authgear(
+            clientId: "<CLIENT_ID>",
+            endpoint: "<AUTHGEAR_ENDPOINT>"
+        )
+    }
+
+    // Configure the SDK once and restore any existing session.
+    func configure() async {
+        guard !didConfigure else { return }
+        didConfigure = true
+
+        let outcome: VoidOutcome = await withCheckedContinuation { continuation in
+            authgear.configure { result in
+                switch result {
+                case .success:
+                    continuation.resume(returning: .ok)
+                case let .failure(error):
+                    continuation.resume(returning: .failed(message: error.localizedDescription))
+                }
             }
+        }
+
+        switch outcome {
+        case .ok:
+            // Refresh the session if the user has an existing one.
+            if authgear.sessionState == .authenticated {
+                await refreshCurrentUser()
+            } else {
+                state = .signedOut
+            }
+        case let .failed(message):
+            errorMessage = message
+            state = .signedOut
+        }
+    }
+
+    // Start the interactive login flow.
+    func logIn() async {
+        state = .loading
+
+        let outcome: AuthOutcome = await withCheckedContinuation { continuation in
+            authgear.authenticate(redirectURI: "com.example.authgeardemo://host/path") { result in
+                switch result {
+                case let .success(userInfo):
+                    continuation.resume(returning: .signedIn(userID: userInfo.sub))
+                case let .failure(error):
+                    if let authgearError = error as? AuthgearError,
+                       case .cancel = authgearError {
+                        continuation.resume(returning: .cancelled)
+                    } else {
+                        continuation.resume(returning: .failed(message: error.localizedDescription))
+                    }
+                }
+            }
+        }
+
+        apply(outcome)
+    }
+
+    // Log out and clear the local session.
+    func logOut() async {
+        state = .loading
+
+        let outcome: VoidOutcome = await withCheckedContinuation { continuation in
+            authgear.logout { result in
+                switch result {
+                case .success:
+                    continuation.resume(returning: .ok)
+                case let .failure(error):
+                    continuation.resume(returning: .failed(message: error.localizedDescription))
+                }
+            }
+        }
+
+        switch outcome {
+        case .ok:
+            state = .signedOut
+        case let .failed(message):
+            errorMessage = message
+            // The SDK's session state is authoritative after a failed logout.
+            if authgear.sessionState == .authenticated {
+                await refreshCurrentUser()
+            } else {
+                state = .signedOut
+            }
+        }
+    }
+
+    // Open the pre-built user settings page.
+    func openUserSettings() {
+        authgear.open(page: .settings)
+    }
+
+    // Refresh the signed-in user's info; downgrades to signed-out if the
+    // refresh token is no longer valid.
+    private func refreshCurrentUser() async {
+        let outcome: AuthOutcome = await withCheckedContinuation { continuation in
+            authgear.fetchUserInfo { result in
+                switch result {
+                case let .success(userInfo):
+                    continuation.resume(returning: .signedIn(userID: userInfo.sub))
+                case let .failure(error):
+                    continuation.resume(returning: .failed(message: error.localizedDescription))
+                }
+            }
+        }
+
+        apply(outcome)
+    }
+
+    private func apply(_ outcome: AuthOutcome) {
+        switch outcome {
+        case let .signedIn(userID):
+            state = .signedIn(userID: userID)
+        case .cancelled:
+            state = .signedOut
+        case let .failed(message):
+            errorMessage = message
+            state = .signedOut
         }
     }
 }
@@ -131,159 +256,85 @@ var body: some View {
 
 Replace **"\<CLIENT\_ID>"** and **"\<AUTHGEAR\_ENDPOINT>"** with the client ID and endpoint from the configuration page of the client project you [created earlier](ios.md#step-2-configure-the-application).
 
-### Step 4: Add Login Button
+{% hint style="info" %}
+**Why the `AuthOutcome` / `VoidOutcome` enums?** The Authgear SDK ships completion-handler APIs, and its result types (`UserInfo`, `SessionState`, `AuthgearError`) are not `Sendable`. To stay clean under the Swift 6 language mode, each call is wrapped with `withCheckedContinuation`, and the completion closure captures **only** the continuation and resumes with a small `Sendable` value extracted inside the closure. That way no non-`Sendable` SDK type crosses the `await` boundary, so the model compiles under strict concurrency checking without extra annotations.
 
-Now let's add the Login button and other UI elements for the demo app.
+In the demo app repo, the client ID, endpoint, and redirect URI are factored into a small `Constants.swift` enum instead of being hard-coded in the initializer — a good pattern for real projects.
+{% endhint %}
 
-Add the following views to `VStack`:
+Here's what each method does:
 
-```swift
-VStack {
-    if isLoading {
-        ProgressView()
-    }
-    if loginState == SessionState.authenticated {
-        Text("Welcome user \(userId ?? "user")")
-        Button(action: openUserSettings) {
-            Text("User Settings")
-        }
-        Button(action: logout) {
-            Text("Logout")
-        }
-    } else {
-        Image(systemName: "globe")
-            .imageScale(.large)
-            .foregroundStyle(.tint)
-        Text("My Demo App")
-        Button(action: startAuthentication) {
-            Text("Login")
-        }
-    }
-}
-```
+* `configure()` — initializes the SDK once (guarded by `didConfigure`) and, if a previous session exists, refreshes it so returning users land straight on the signed-in screen.
+* `logIn()` — runs the interactive authentication flow. User cancellation is handled distinctly from real errors, so cancelling the login sheet doesn't raise an error alert.
+* `logOut()` — ends the current session. On failure it treats the SDK's `sessionState` as authoritative rather than assuming the user is signed out.
+* `openUserSettings()` — opens Authgear's pre-built User Settings page, where users can view and modify their profile attributes and security settings.
+* `refreshCurrentUser()` — calls `fetchUserInfo` to update `sessionState` and retrieve the user's `sub` (a unique user ID). This also detects a session that has been revoked remotely: `sessionState` becomes `.noSession` and the model drops back to signed-out.
 
-In addition to the Login button, we've included a ProgressView and a block with views we want only logged-in users to see. Create the `isLoading` , `userId` and `loginState` variables that the if-statement and Text view depend on at the top of the class just after `private var authgear: Authgear = Authgear(...)`:
+### Step 4: Build the ContentView
 
-```swift
-@State private var loginState: SessionState = .unknown
-@State private var isLoading: Bool = false
-@State private var userId: String? = ""
-```
-
-### Step 5: Start Authentication Flow
-
-Implement a `startAuthentication()` method in your `ContentView` class that will call the `authenticate()` method of the Authgear SDK:
-
-```swift
-func startAuthentication() {
-    isLoading = true
-    authgear.authenticate(redirectURI: "com.example.authgeardemo://host/path", handler: { result in
-        switch result {
-        case let .success(userInfo):
-            // login successfully
-            loginState = authgear.sessionState
-            userId = userInfo.sub
-            isLoading = false
-        case let .failure(error):
-            if let authgearError = error as? AuthgearError, case .cancel = authgearError {
-                // user cancel
-                isLoading = false
-            } else {
-                // Something went wrong
-                isLoading = false
-            }
-        }
-    })
-}
-```
-
-In order to get your app to build at this point, add empty declarations for logout and openUserSettings methods:
-
-```swift
-func logout() {
-}
-    
-func openUserSettings() {
-}
-```
-
-The full code for `ContentView.swift` at this point should look like this:
+Now replace the contents of `ContentView.swift` with a state-driven view that observes the model. It triggers `configure()` from `.task` when the view first appears, wraps the async actions in `Task {}`, and surfaces any `errorMessage` with an `.alert`:
 
 ```swift
 //  ContentView.swift
 
 import SwiftUI
-import Authgear
+
 struct ContentView: View {
-    
-    private var authgear: Authgear = Authgear(clientId: "<ClIENT_ID>", endpoint: "<AUTHGEAR_ENDPOINT>")
-    @State private var loginState: SessionState = .unknown
-    @State private var isLoading: Bool = false
-    @State private var userId: String? = ""
-    
+    @State private var model = AuthenticationModel()
+
     var body: some View {
-        VStack {
-            if isLoading {
+        VStack(spacing: 16) {
+            switch model.state {
+            case .loading:
                 ProgressView()
-            }
-            if loginState == SessionState.authenticated {
-                Text("Welcome user \(userId ?? "user")")
-                Button(action: openUserSettings) {
-                    Text("User Settings")
-                }
-                Button(action: logout) {
-                    Text("Logout")
-                }
-            } else {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("My Demo App")
-                Button(action: startAuthentication) {
-                    Text("Login")
-                }
+            case .signedOut:
+                signedOutView
+            case let .signedIn(userID):
+                signedInView(userID: userID)
             }
         }
         .padding()
-        .onAppear() {
-            authgear.configure() { result in
-                switch result {
-                case .success():
-                    // configured successfully
-                    print("// configured successfully")
-                case let .failure(error):
-                    // failed to configured
-                    print("config failed", error)
+        .task {
+            await model.configure()
+        }
+        .alert(
+            "Something went wrong",
+            isPresented: Binding(
+                get: { model.errorMessage != nil },
+                set: { isPresented in
+                    if !isPresented { model.errorMessage = nil }
                 }
+            ),
+            presenting: model.errorMessage
+        ) { _ in
+            Button("OK", role: .cancel) {}
+        } message: { message in
+            Text(message)
+        }
+    }
+
+    private var signedOutView: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundStyle(.tint)
+            Text("My Demo App")
+            Button("Login") {
+                Task { await model.logIn() }
             }
         }
     }
-    
-    func startAuthentication() {
-        isLoading = true
-        authgear.authenticate(redirectURI: "com.example.authgeardemo://host/path", handler: { result in
-            switch result {
-            case let .success(userInfo):
-                // login successfully
-                userId = userInfo.sub
-                loginState = authgear.sessionState
-                isLoading = false
-            case let .failure(error):
-                if let authgearError = error as? AuthgearError, case .cancel = authgearError {
-                    // user cancel
-                    isLoading = false
-                } else {
-                    // Something went wrong
-                    isLoading = false
-                }
+
+    private func signedInView(userID: String) -> some View {
+        VStack(spacing: 16) {
+            Text("Welcome user \(userID)")
+            Button("User Settings") {
+                model.openUserSettings()
             }
-        })
-    }
-    
-    func logout() {
-    }
-    
-    func openUserSettings() {
+            Button("Logout") {
+                Task { await model.logOut() }
+            }
+        }
     }
 }
 
@@ -292,13 +343,17 @@ struct ContentView: View {
 }
 ```
 
+The view has no direct SDK calls — it only reads `model.state` and invokes the model's methods. When signed out it shows the **Login** button; while an operation is in flight it shows a `ProgressView`; once signed in it greets the user and offers **User Settings** and **Logout**.
+
 #### Checkpoint
 
-Run your app now. When you click on the **Login** button, you should be redirected to the user authentication page.
+Run your app now. It should launch and settle on the **Login** screen. Tapping **Login** will attempt to open the authentication page — but it won't return to your app yet. We'll register the redirect URI scheme next.
 
 <figure><img src="../../.gitbook/assets/ios-demo-ss.png" alt="" width="188"><figcaption></figcaption></figure>
 
-### Step 6: Register URI Schema for Redirect URI
+### Step 5: Register the URI Scheme for the Redirect URI
+
+For Authgear to redirect back into your app after authentication, register the custom URL **scheme** — the part of the redirect URI before `://`. For our redirect URI `com.example.authgeardemo://host/path`, the scheme is `com.example.authgeardemo`.
 
 Open your project's `Info.plist` or project settings UI in Xcode and add the following:
 
@@ -310,7 +365,7 @@ Add a new URL scheme with the following details:
 
 **Identifier**: `CFBundleURLTypes`
 
-**URL Schemes**: `com.example.authgeardemo://host/path`
+**URL Schemes**: `com.example.authgeardemo`
 
 **Role**: Editor
 
@@ -328,9 +383,11 @@ Add a new URL scheme with the following details:
             &#x3C;dict>
                 &#x3C;key>CFBundleTypeRole&#x3C;/key>
                 &#x3C;string>Editor&#x3C;/string>
+                &#x3C;key>CFBundleURLName&#x3C;/key>
+                &#x3C;string>CFBundleURLTypes&#x3C;/string>
                 &#x3C;key>CFBundleURLSchemes&#x3C;/key>
                 &#x3C;array>
-                    &#x3C;string>com.example.authgeardemo://host/path&#x3C;/string>
+                    &#x3C;string>com.example.authgeardemo&#x3C;/string>
                 &#x3C;/array>
             &#x3C;/dict>
         &#x3C;/array>
@@ -340,130 +397,53 @@ Add a new URL scheme with the following details:
 {% endtab %}
 {% endtabs %}
 
-Now run your app again and try logging in. Because we've set up a redirect URL, Authgear should redirect back to our app correctly.
+{% hint style="warning" %}
+Register the bare scheme `com.example.authgeardemo` in `CFBundleURLSchemes` — **not** the full redirect URI `com.example.authgeardemo://host/path`. `CFBundleURLSchemes` expects only the scheme (the text before `://`). The full redirect URI is what you register in the Authgear Portal and pass to `authenticate(redirectURI:)`.
+{% endhint %}
 
-### Step 7: Implement Logout method
+### Step 6: Run and test
 
-Implement the logout method that will be executed when the Logout button is clicked by updating the empty logout function we added in the previous step:
+Run your app again and try logging in. Because the redirect scheme is now registered, Authgear will redirect back to your app after authentication and the view will switch to the signed-in screen.
 
-```swift
-func logout() {
-    isLoading = true
-    authgear.logout { result in
-        switch result {
-            case .success():
-                // logout successfully
-                isLoading = false
-            loginState = authgear.sessionState
-            case let .failure(error):
-                print("failed to logout", error)
-                isLoading = false// failed to login
-        }
-    }
-}
-```
+Try the full flow:
 
-Now clicking on the Logout button will call Authgear SDK's logout method and end the current user session.
+* **Login** — completes authentication and shows "Welcome user &#x3C;sub>".
+* **User Settings** — opens Authgear's pre-built settings page.
+* **Logout** — ends the session and returns to the Login screen.
 
-### Step 8: Show the user information
+If configuration fails (for example, a wrong endpoint) or authentication errors out, the `.alert` you added in Step 4 surfaces the message instead of failing silently.
 
-In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI). Use the `fetchUserInfo` function to obtain the user info, see [example](../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
+## Understanding session state
 
-The Authgear SDK can return the current user's details via the UserInfo object. The authenticate method returns this userInfo object as demonstrated earlier in our app's `startAuthentication()` method. You can also call the SDK's `.fetchUserInfo()` method to get the UserInfo object.
+You may want to know whether the user has logged in (for example, to show a Login button only when they haven't).
 
-Add a new `getCurrentUser()` method to your `ContentView` class:
+The `sessionState` reflects the user's logged-in state in the SDK's local state. Even if `sessionState` is `.authenticated`, the session may be invalid if it was revoked remotely. Hence, after initializing the SDK, call `fetchUserInfo` to update `sessionState` as soon as it is proper to do so — which is exactly what `configure()` → `refreshCurrentUser()` does in the model above.
 
-```swift
-func getCurrentUser() {
-    isLoading = true
-    authgear.fetchUserInfo { userInfoResult in
-        // sessionState is now up to date
-        // it will change to .noSession if the session is invalid
-        loginState = authgear.sessionState
-        
-        switch userInfoResult {
-        case let .success(userInfo):
-            // read the userInfo if needed
-            userId = userInfo.sub
-            isLoading = false
-        case let .failure(error):
-            // failed to fetch user info
-            // the refresh token maybe expired or revoked
-            print("the refresh token maybe expired or revoked", error)
-            isLoading = false
-        }
-    
-    }
-}
-```
-
-Now call the new `getCurrentUser()` method in the `.onAppear()` modifier of the `VStack` like this:
-
-```swift
-.onAppear() {
-    authgear.configure() { result in
-        switch result {
-        case .success():
-            // configured successfully
-            // refresh access token if user has an existing session
-            if authgear.sessionState == SessionState.authenticated {
-                getCurrentUser()
-            }
-        case let .failure(error):
-            // failed to configured
-            print("config failed", error)
-        }
-    }
-}
-```
-
-This will make your app refresh the access token and greet users who are already logged in with their `sub` (a unique user ID) when the launch the app. You can read other user attributes like email address, phone number, full name, etc. from [userInfo](../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
-
-### Step 9: Open User Settings page
-
-Authgear offers a pre-built User Settings page that user's can use to view, and modify their profile attributes and security settings.
-
-Implement the empty `openUserSettings()` method we added in the previous step to call the `.open()` method of the Authgear SDK:
-
-```swift
-func openUserSettings() {
-    authgear.open(page: SettingsPage.settings)
-}
-```
-
-## Get the Logged In State
-
-When you start launching the application. You may want to know if the user has logged in. (e.g. Show users a Login button if they haven't logged in).
-
-The `sessionState` reflects the user logged-in state in the SDK local state. That means even if the `sessionState` is `.authenticated`, the session may be invalid if it is revoked remotely. Hence, after initializing the Authgear SDK, call `fetchUserInfo` to update the `sessionState` as soon as it is proper to do so. We demonstrated how to use `sessionState`, and `fetchUserInfo`, to get a user's true logged-in state and retrieve their UserInfo in [Step 8](ios.md#step-8-show-the-user-information).
-
-The value of `sessionState` can be `.unknown`, `.noSession` or `.authenticated`. Initially, the `sessionState` is `.unknown`. After a call to `authgear.configure`, the session state would become `.authenticated` if a previous session was found, or `.noSession` if such session was not found.
+The value of `sessionState` can be `.unknown`, `.noSession` or `.authenticated`. Initially it is `.unknown`. After a call to `authgear.configure`, it becomes `.authenticated` if a previous session was found, or `.noSession` if no such session existed.
 
 ## Using the Access Token in HTTP Requests
 
-Call `refreshAccessTokenIfNeeded` every time before using the access token, the function will check and make the network call only if the access token has expired. Include the access token in the Authorization header of your application request.
+Call `refreshAccessTokenIfNeeded` every time before using the access token; it checks and makes a network call only if the access token has expired. Then include the access token in the `Authorization` header of your request. As with the other SDK calls, you can bridge the completion handler into `async`/`await` with a continuation:
 
 ```swift
-authgear.refreshAccessTokenIfNeeded() { result in
-    switch result {
-    case .success():
-        // access token is ready to use
-        // accessToken can be empty
-        // it will be empty if user is not logged in or session is invalid
-
-        // include Authorization header in your application request
-        if let accessToken = authgear.accessToken {
-            // example only, you can use your own networking library
-            var urlRequest = URLRequest(url: "YOUR_SERVER_URL")
-            urlRequest.setValue(
-                "Bearer \(accessToken)", forHTTPHeaderField: "authorization")
-            // ... continue making your request
-        } else {
-            // The user is not logged in, or the token is expired.
+func callProtectedAPI() async throws {
+    try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+        authgear.refreshAccessTokenIfNeeded { result in
+            continuation.resume(with: result)
         }
-    case let .failure(error):
-        // Something went wrong
     }
+
+    // The access token is ready to use. It can be empty if the user is not
+    // logged in or the session is invalid.
+    guard let accessToken = authgear.accessToken else {
+        // The user is not logged in, or the token is expired.
+        return
+    }
+
+    // Example only — use your own networking library.
+    var urlRequest = URLRequest(url: URL(string: "YOUR_SERVER_URL")!)
+    urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
+    // ... continue making your request
 }
 ```
 
