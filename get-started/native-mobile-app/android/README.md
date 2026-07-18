@@ -66,7 +66,7 @@ For the purpose of this guide, we'll be creating a new simple Android app projec
 Open Android Studio and create a new project with the following details:
 
 * Select **Empty View Activity** on the Activity selection screen.
-* **Name**: My Dem App
+* **Name**: My Demo App
 * **Build configuration language**: Groovy DSL
 
 {% hint style="info" %}
@@ -77,28 +77,27 @@ The reason for recommending you use Groovy DSL as **Build configuration language
 
 The Authgear Android SDK makes it easier to interact with Authgear endpoints and services from your Android app.
 
-To add the SDK to your app, first, add the `jitpack.io` repository to your project by adding the following to your project's `settings.gradle` file:
+The SDK is published on Maven Central. Make sure the `mavenCentral()` repository is available to your project. It is included by default in new Android Studio projects; if it is missing, add it to your project's `settings.gradle` file:
 
 ```groovy
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         mavenCentral()
-        maven { url 'https://jitpack.io' }
     }
 }
 ```
 
-Next, add `authgear` in the `dependencies` section of your app-level (`/app/build.gradle`) `build.gradle`. Use `$branch-SNAPSHOT` (e.g. `main-SNAPSHOT`) for the latest version in a branch or a release tag/git commit hash of the desired version.
+Next, add the Authgear SDK to the `dependencies` section of your app-level (`/app/build.gradle`) `build.gradle`:
 
 ```groovy
 dependencies {
     // Other implementations
-    implementation 'com.github.authgear:authgear-sdk-android:SNAPSHOT'
+    implementation 'com.authgear:android-sdk:3.0.0'
 }
 ```
 
-Replace `SNAPSHOT` with the latest version of the Authgear SDK from: [https://github.com/authgear/authgear-sdk-android/tags](https://github.com/authgear/authgear-sdk-android/tags). For example, replacing SNAPSHOT with `2024-12-11.0` to use the latest version at the time of writing this.
+`3.0.0` is the latest version at the time of writing. Check for newer releases on [Maven Central](https://central.sonatype.com/artifact/com.authgear/android-sdk) or the [release tags](https://github.com/authgear/authgear-sdk-android/tags).
 
 #### Enable Java 8+ API desugaring support
 
@@ -122,6 +121,10 @@ dependencies {
 ```
 
 Learn more about Java 8+ API desugaring support [here](https://developer.android.com/studio/write/java8-support#library-desugaring).
+
+{% hint style="info" %}
+If your app uses **Jetpack Compose** (or any theme that is not an AppCompat descendant), make sure your app's theme still descends from a `Theme.AppCompat` theme. The SDK's authentication screens (`OAuthActivity`, `OAuthRedirectActivity`) are `AppCompatActivity`, and Android throws `You need to use a Theme.AppCompat theme (or descendant) with this activity` if the host app's theme is a plain framework theme. The example on this page uses `AppCompatActivity` with a Material Components theme, so it already satisfies this requirement.
+{% endhint %}
 
 Sync Gradle to continue.
 
@@ -150,7 +153,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        authgear = Authgear(application, "<ClIENT_ID>", "<AUTHGEAR_ENDPOINT>")
+        authgear = Authgear(application, "<CLIENT_ID>", "<AUTHGEAR_ENDPOINT>")
         authgear.configure(object : OnConfigureListener {
             override fun onConfigured() {
                 // Authgear can be used.
@@ -164,7 +167,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 }
 ```
 
-Replace `<CLIENT_ID>` and `<ENDPOINT>` with the values from the configuration page of your Authgear client application.
+Replace `<CLIENT_ID>` and `<AUTHGEAR_ENDPOINT>` with the values from the configuration page of your Authgear client application.
 
 The complete code for `MainActivity.kt` at this point should look like this:
 
@@ -177,7 +180,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         
-        authgear = Authgear(application, "<ClIENT_ID>", "<AUTHGEAR_ENDPOINT>")
+        authgear = Authgear(application, "<CLIENT_ID>", "<AUTHGEAR_ENDPOINT>")
         authgear.configure(object : OnConfigureListener {
             override fun onConfigured() {
                 // Authgear can be used.
@@ -223,7 +226,7 @@ Switch to the code view of `activity_main.xml` and add the login button and a Te
     android:text="Login"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView" />
+    app:layout_constraintTop_toBottomOf="@+id/app_title" />
 ```
 
 Also, add the following views to `activity_main.xml` to include a Progress Bar, a User Settings button, and a Logout button that will be visible to a logged-in user.
@@ -309,7 +312,7 @@ class MainActivity : AppCompatActivity() {
 
 Create a `startLogin()` method in the `MainActivity.kt` inside `class MainActivity : AppCompatActivity(){}`. This method will call the Authgear SDK's `authenticate()` method to start a new authentication flow.
 
-```java
+```kotlin
 fun startLogin() {
     binding.progressBar.visibility =  View.VISIBLE
     val options = AuthenticateOptions("com.example.authgeardemo://host/path")
@@ -337,7 +340,7 @@ The `updateUi()` method also calls the `fetchUserInfo()` method of the Authgear 
 ```kotlin
 fun updateUi(authgear: Authgear) {
     val state = authgear.sessionState
-    if (state.toString() == ("AUTHENTICATED")) {
+    if (state == SessionState.AUTHENTICATED) {
         binding.loginBtn.visibility = View.GONE
         binding.loggedInViews.visibility = View.VISIBLE
         // Get userInfo and display in welcome text
@@ -373,7 +376,7 @@ At this point, if you try to run your application on a mobile device or emulator
 
 <figure><img src="../../../.gitbook/assets/android-demo-ss.png" alt="" width="188"><figcaption><p>Demo app screenshot</p></figcaption></figure>
 
-## Step 6: Setup Redirect URI for Your Android App
+### Step 6: Setup Redirect URI for Your Android App
 
 Add the following activity entry to the `AndroidManifest.xml` of your app. The intent system would dispatch the redirect URI to `OAuthRedirectActivity` and the SDK would handle the rest.
 
@@ -392,7 +395,7 @@ Add the following activity entry to the `AndroidManifest.xml` of your app. The i
             &#x3C;category android:name="android.intent.category.DEFAULT" />
             &#x3C;category android:name="android.intent.category.BROWSABLE" />
             &#x3C;!-- Configure data to be the exact redirect URI your app uses. -->
-            &#x3C;!-- Here, we are using com.authgear.example://host/path as configured in the portal -->
+            &#x3C;!-- Here, we are using com.example.authgeardemo://host/path as configured in the portal -->
             &#x3C;!-- NOTE: The redirectURI supplied in AuthenticateOptions *has* to match as well -->
             &#x3C;data android:scheme="com.example.authgeardemo"
                 android:host="host"
@@ -446,7 +449,7 @@ binding.logoutBtn.setOnClickListener {
 }
 ```
 
-### Step 7: Open User Settings Page
+### Step 8: Open User Settings Page
 
 Authgear offers a pre-built User Settings page that user's can use to view, modify their profile attributes and security settings.
 
@@ -488,7 +491,7 @@ In some cases, you may need to obtain current user info through the SDK. (e.g. D
 
 Call `refreshAccessTokenIfNeeded` every time before using the access token, the function will check and make the network call only if the access token has expired. Include the access token in the Authorization header of your application request. If you are using OKHttp in your project, you can also use the interceptor extension provided by the SDK, see [detail](okhttp-interceptor-extension.md).
 
-```java
+```kotlin
 try {
     authgear.refreshAccessTokenIfNeededSync()
 } catch (e: OAuthException) {
@@ -520,7 +523,7 @@ To protect your application server from unauthorized access. You will need to [i
 
 ## Android SDK Reference
 
-For detailed documentation on the Flutter SDK, visit [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
+For detailed documentation on the Android SDK, visit [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
 
 ### Footnote
 
