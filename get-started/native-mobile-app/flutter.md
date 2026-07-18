@@ -6,7 +6,7 @@ description: How to integrate with a Flutter app
 
 This guide provides instructions on integrating Authgear with a Flutter app. Supported platforms include:
 
-* Flutter 2.5.0 or higher
+* Flutter 3.0.0 or higher
 * Android minimum SDK 30 (Android 11 or later)
 
 Follow this guide to add Authgear to your Flutter app in 🕐 10 minutes.
@@ -37,7 +37,7 @@ You will see a list of guides that can help you for setting up, then click "Next
 
 ### **Step 2: Configure the application**
 
-In your IDE, define a custom URI scheme that Authgear will use to redirect users back to your app after they have authenticated , For your demo application for this guide, the URI scheme will be: `com.example.authgeardemo.flutter://host/path`. To learn more about setting up URI Scheme in flutter, visit [https://docs.flutter.dev/development/ui/navigation/deep-linking](https://docs.flutter.dev/development/ui/navigation/deep-linking).
+In your IDE, define a custom URI scheme that Authgear will use to redirect users back to your app after they have authenticated , For your demo application for this guide, the URI scheme will be: `com.example.authgeardemo.flutter://host/path`. To learn more about setting up URI Scheme in flutter, visit [https://docs.flutter.dev/ui/navigation/deep-linking](https://docs.flutter.dev/ui/navigation/deep-linking).
 
 Head back to Authgear Portal, fill in the Redirect URI that you have defined in the previous step.
 
@@ -84,7 +84,7 @@ Next, create a field variable `_authgear` of type `Authgear` and an `_init()` me
 late Authgear _authgear;
 
 Future<void> _init() async {
-  _authgear = Authgear(endpoint: "<AUTHGEAR_ENDPOINT>", clientID: "<ClIENT_ID>");
+  _authgear = Authgear(endpoint: "<AUTHGEAR_ENDPOINT>", clientID: "<CLIENT_ID>");
   await _authgear.configure();
 }
 ```
@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late Authgear _authgear;
   
   Future<void> _init() async {
-    _authgear = Authgear(endpoint: "<AUTHGEAR_ENDPOINT>", clientID: "<ClIENT_ID>");
+    _authgear = Authgear(endpoint: "<AUTHGEAR_ENDPOINT>", clientID: "<CLIENT_ID>");
     await _authgear.configure();
   }
   
@@ -190,9 +190,7 @@ Future<void> _onPressedAuthenticate() async {
       _userInfo = userInfo;
     });
   } catch (e) {
-    print(e);
-  } finally {
-
+    debugPrint(e.toString());
   }
 }
 ```
@@ -222,7 +220,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -274,9 +272,7 @@ class _MyAppState extends State<MyApp> {
         _userInfo = userInfo;
       });
     } catch (e) {
-      print(e);
-    } finally {
-
+      debugPrint(e.toString());
     }
   }
 
@@ -345,7 +341,7 @@ Add the following `<activity>` entry to the `/android/app/src/main/AndroidManife
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Configure data to be the exact redirect URI your app uses. -->
-                <!-- Here, we are using com.authgear.example://host/path as configured in the portal -->
+                <!-- Here, we are using com.example.authgeardemo.flutter://host/path as configured in the portal -->
                 <!-- NOTE: The redirectURI supplied in AuthenticateOptions *has* to match as well -->
                 <data android:scheme="com.example.authgeardemo.flutter"
                     android:host="host"
@@ -432,7 +428,7 @@ Update the empty `_onPressedLogout` you added earlier so that it calls the `logo
 
 ```dart
 Future<void> _onPressedLogout() async {
-  await _authgear.logout();    
+  await _authgear.logout();
   setState(() {
       _userInfo = null;
   });
@@ -478,7 +474,7 @@ Future<void> _init() async {
 
 #### Get the Logged In State
 
-When you start launching the application. You may want to know if the user has logged in. (e.g. Show users the login page if they haven't logged in). The `sessionState` reflects the user logged in state in the SDK local state. That means even the `sessionState` is `SessionState.authenticated`, the session may be invalid if it is revoked remotely. After initializing the Authgear SDK, call `fetchUserInfo` to update the `sessionState` as soon as it is proper to do so.
+When you start launching the application. You may want to know if the user has logged in. (e.g. Show users the login page if they haven't logged in). The `sessionState` reflects the user logged in state in the SDK local state. That means even the `sessionState` is `SessionState.authenticated`, the session may be invalid if it is revoked remotely. After initializing the Authgear SDK, call `getUserInfo` to update the `sessionState` as soon as it is proper to do so.
 
 ```dart
 // After authgear.configure, it only reflect SDK local state.
