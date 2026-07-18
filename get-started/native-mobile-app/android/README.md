@@ -77,28 +77,27 @@ The reason for recommending you use Groovy DSL as **Build configuration language
 
 The Authgear Android SDK makes it easier to interact with Authgear endpoints and services from your Android app.
 
-To add the SDK to your app, first, add the `jitpack.io` repository to your project by adding the following to your project's `settings.gradle` file:
+The SDK is published on Maven Central. Make sure the `mavenCentral()` repository is available to your project. It is included by default in new Android Studio projects; if it is missing, add it to your project's `settings.gradle` file:
 
 ```groovy
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         mavenCentral()
-        maven { url 'https://jitpack.io' }
     }
 }
 ```
 
-Next, add `authgear` in the `dependencies` section of your app-level (`/app/build.gradle`) `build.gradle`. Use `$branch-SNAPSHOT` (e.g. `main-SNAPSHOT`) for the latest version in a branch or a release tag/git commit hash of the desired version.
+Next, add the Authgear SDK to the `dependencies` section of your app-level (`/app/build.gradle`) `build.gradle`:
 
 ```groovy
 dependencies {
     // Other implementations
-    implementation 'com.github.authgear:authgear-sdk-android:SNAPSHOT'
+    implementation 'com.authgear:android-sdk:3.0.0'
 }
 ```
 
-Replace `SNAPSHOT` with the latest version of the Authgear SDK from: [https://github.com/authgear/authgear-sdk-android/tags](https://github.com/authgear/authgear-sdk-android/tags). For example, replacing SNAPSHOT with `2024-12-11.0` to use the latest version at the time of writing this.
+`3.0.0` is the latest version at the time of writing. Check for newer releases on [Maven Central](https://central.sonatype.com/artifact/com.authgear/android-sdk) or the [release tags](https://github.com/authgear/authgear-sdk-android/tags).
 
 #### Enable Java 8+ API desugaring support
 
@@ -122,6 +121,10 @@ dependencies {
 ```
 
 Learn more about Java 8+ API desugaring support [here](https://developer.android.com/studio/write/java8-support#library-desugaring).
+
+{% hint style="info" %}
+If your app uses **Jetpack Compose** (or any theme that is not an AppCompat descendant), make sure your app's theme still descends from a `Theme.AppCompat` theme. The SDK's authentication screens (`OAuthActivity`, `OAuthRedirectActivity`) are `AppCompatActivity`, and Android throws `You need to use a Theme.AppCompat theme (or descendant) with this activity` if the host app's theme is a plain framework theme. The example on this page uses `AppCompatActivity` with a Material Components theme, so it already satisfies this requirement.
+{% endhint %}
 
 Sync Gradle to continue.
 
