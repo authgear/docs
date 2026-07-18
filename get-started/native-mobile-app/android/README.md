@@ -66,7 +66,7 @@ For the purpose of this guide, we'll be creating a new simple Android app projec
 Open Android Studio and create a new project with the following details:
 
 * Select **Empty View Activity** on the Activity selection screen.
-* **Name**: My Dem App
+* **Name**: My Demo App
 * **Build configuration language**: Groovy DSL
 
 {% hint style="info" %}
@@ -153,7 +153,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        authgear = Authgear(application, "<ClIENT_ID>", "<AUTHGEAR_ENDPOINT>")
+        authgear = Authgear(application, "<CLIENT_ID>", "<AUTHGEAR_ENDPOINT>")
         authgear.configure(object : OnConfigureListener {
             override fun onConfigured() {
                 // Authgear can be used.
@@ -167,7 +167,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 }
 ```
 
-Replace `<CLIENT_ID>` and `<ENDPOINT>` with the values from the configuration page of your Authgear client application.
+Replace `<CLIENT_ID>` and `<AUTHGEAR_ENDPOINT>` with the values from the configuration page of your Authgear client application.
 
 The complete code for `MainActivity.kt` at this point should look like this:
 
@@ -180,7 +180,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         
-        authgear = Authgear(application, "<ClIENT_ID>", "<AUTHGEAR_ENDPOINT>")
+        authgear = Authgear(application, "<CLIENT_ID>", "<AUTHGEAR_ENDPOINT>")
         authgear.configure(object : OnConfigureListener {
             override fun onConfigured() {
                 // Authgear can be used.
@@ -226,7 +226,7 @@ Switch to the code view of `activity_main.xml` and add the login button and a Te
     android:text="Login"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView" />
+    app:layout_constraintTop_toBottomOf="@+id/app_title" />
 ```
 
 Also, add the following views to `activity_main.xml` to include a Progress Bar, a User Settings button, and a Logout button that will be visible to a logged-in user.
@@ -312,7 +312,7 @@ class MainActivity : AppCompatActivity() {
 
 Create a `startLogin()` method in the `MainActivity.kt` inside `class MainActivity : AppCompatActivity(){}`. This method will call the Authgear SDK's `authenticate()` method to start a new authentication flow.
 
-```java
+```kotlin
 fun startLogin() {
     binding.progressBar.visibility =  View.VISIBLE
     val options = AuthenticateOptions("com.example.authgeardemo://host/path")
@@ -340,7 +340,7 @@ The `updateUi()` method also calls the `fetchUserInfo()` method of the Authgear 
 ```kotlin
 fun updateUi(authgear: Authgear) {
     val state = authgear.sessionState
-    if (state.toString() == ("AUTHENTICATED")) {
+    if (state == SessionState.AUTHENTICATED) {
         binding.loginBtn.visibility = View.GONE
         binding.loggedInViews.visibility = View.VISIBLE
         // Get userInfo and display in welcome text
@@ -376,7 +376,7 @@ At this point, if you try to run your application on a mobile device or emulator
 
 <figure><img src="../../../.gitbook/assets/android-demo-ss.png" alt="" width="188"><figcaption><p>Demo app screenshot</p></figcaption></figure>
 
-## Step 6: Setup Redirect URI for Your Android App
+### Step 6: Setup Redirect URI for Your Android App
 
 Add the following activity entry to the `AndroidManifest.xml` of your app. The intent system would dispatch the redirect URI to `OAuthRedirectActivity` and the SDK would handle the rest.
 
@@ -395,7 +395,7 @@ Add the following activity entry to the `AndroidManifest.xml` of your app. The i
             &#x3C;category android:name="android.intent.category.DEFAULT" />
             &#x3C;category android:name="android.intent.category.BROWSABLE" />
             &#x3C;!-- Configure data to be the exact redirect URI your app uses. -->
-            &#x3C;!-- Here, we are using com.authgear.example://host/path as configured in the portal -->
+            &#x3C;!-- Here, we are using com.example.authgeardemo://host/path as configured in the portal -->
             &#x3C;!-- NOTE: The redirectURI supplied in AuthenticateOptions *has* to match as well -->
             &#x3C;data android:scheme="com.example.authgeardemo"
                 android:host="host"
@@ -449,7 +449,7 @@ binding.logoutBtn.setOnClickListener {
 }
 ```
 
-### Step 7: Open User Settings Page
+### Step 8: Open User Settings Page
 
 Authgear offers a pre-built User Settings page that user's can use to view, modify their profile attributes and security settings.
 
@@ -491,7 +491,7 @@ In some cases, you may need to obtain current user info through the SDK. (e.g. D
 
 Call `refreshAccessTokenIfNeeded` every time before using the access token, the function will check and make the network call only if the access token has expired. Include the access token in the Authorization header of your application request. If you are using OKHttp in your project, you can also use the interceptor extension provided by the SDK, see [detail](okhttp-interceptor-extension.md).
 
-```java
+```kotlin
 try {
     authgear.refreshAccessTokenIfNeededSync()
 } catch (e: OAuthException) {
@@ -523,7 +523,7 @@ To protect your application server from unauthorized access. You will need to [i
 
 ## Android SDK Reference
 
-For detailed documentation on the Flutter SDK, visit [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
+For detailed documentation on the Android SDK, visit [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
 
 ### Footnote
 
