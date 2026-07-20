@@ -52,6 +52,8 @@ Click "Save" in the top toolbar and note the **Client ID** as you'll use it late
 
 In this step, we'll add user authentication to an Android application using the Authgear client application we set up in the previous steps.
 
+The Authgear SDK works with both **Jetpack Compose** and the classic **View/XML** UI toolkit. [Step 4](#step-4-implement-authentication) below provides the implementation for each — pick the tab that matches your app.
+
 ### Pre-requisites
 
 To follow along, you need to have the following:
@@ -65,7 +67,7 @@ For the purpose of this guide, we'll be creating a new simple Android app projec
 
 Open Android Studio and create a new project with the following details:
 
-* Select **Empty View Activity** on the Activity selection screen.
+* On the Activity selection screen, choose **Empty Activity** (Jetpack Compose) or **Empty Views Activity** (XML) — this guide covers both. The current Android Studio default, **Empty Activity**, uses Jetpack Compose.
 * **Name**: My Demo App
 * **Build configuration language**: Groovy DSL
 
@@ -122,261 +124,23 @@ dependencies {
 
 Learn more about Java 8+ API desugaring support [here](https://developer.android.com/studio/write/java8-support#library-desugaring).
 
-{% hint style="info" %}
-If your app uses **Jetpack Compose** (or any theme that is not an AppCompat descendant), make sure your app's theme still descends from a `Theme.AppCompat` theme. The SDK's authentication screens (`OAuthActivity`, `OAuthRedirectActivity`) are `AppCompatActivity`, and Android throws `You need to use a Theme.AppCompat theme (or descendant) with this activity` if the host app's theme is a plain framework theme. The example on this page uses `AppCompatActivity` with a Material Components theme, so it already satisfies this requirement.
+{% hint style="warning" %}
+Your app's **window theme** must descend from a `Theme.AppCompat` theme. The SDK's authentication screens (`OAuthActivity`, `OAuthRedirectActivity`) are `AppCompatActivity`, and Android throws `You need to use a Theme.AppCompat theme (or descendant) with this activity` on login if the app theme is a plain framework theme.
+
+An **Empty Views Activity** project already uses a Material Components (AppCompat-descendant) theme. If you created a **Jetpack Compose** project, open `res/values/themes.xml` and make sure your app theme uses an AppCompat or Material 3 parent, for example:
+
+```xml
+<resources>
+    <style name="Theme.MyDemoApp" parent="Theme.AppCompat.DayNight.NoActionBar" />
+</resources>
+```
+
+Your Compose UI still themes itself; this is only the window theme.
 {% endhint %}
 
 Sync Gradle to continue.
 
-### Step 3: Initialize Authgear
-
-In this step, we'll initialize Authgear in the onCreate method of our app's `MainActivity.kt` class using a member variable. Alternatively, you can initialize Authgear in any class that's the entry point for your app:
-
-First, declare a member variable `authgear` like this:
-
-```kotlin
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var authgear: Authgear
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        ...
-    }
-}
-```
-
-Next, we'll initialize a new instance of the Authgear SDK and call the `configure()` method in the onCreate function.
-
-```kotlin
-override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        authgear = Authgear(application, "<CLIENT_ID>", "<AUTHGEAR_ENDPOINT>")
-        authgear.configure(object : OnConfigureListener {
-            override fun onConfigured() {
-                // Authgear can be used.
-            }
-
-            override fun onConfigurationFailed(throwable: Throwable) {
-                Log.d("TAG", throwable.toString())
-                // Something went wrong, check the client ID or endpoint.
-            }
-        })
-}
-```
-
-Replace `<CLIENT_ID>` and `<AUTHGEAR_ENDPOINT>` with the values from the configuration page of your Authgear client application.
-
-The complete code for `MainActivity.kt` at this point should look like this:
-
-```kotlin
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var authgear: Authgear
-    
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        
-        authgear = Authgear(application, "<CLIENT_ID>", "<AUTHGEAR_ENDPOINT>")
-        authgear.configure(object : OnConfigureListener {
-            override fun onConfigured() {
-                // Authgear can be used.
-            }
-
-            override fun onConfigurationFailed(throwable: Throwable) {
-                Log.d("TAG", throwable.toString())
-                // Something went wrong, check the client ID or endpoint.
-            }
-        })
-
-    }
-}
-```
-
-{% hint style="info" %}
-Import any class that shows as unresolved.
-{% endhint %}
-
-### Step 4: Add Login Button
-
-In this step, we'll add a login button that when the user taps on will open the login/sign-up page.
-
-Open `res/layout/activity_main.xml` and delete the default "Hello World!" TextView.
-
-Switch to the code view of `activity_main.xml` and add the login button and a TextView inside the root view (ConstraintsLayout).
-
-```xml
-<TextView
-        android:id="@+id/app_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Demo App!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-<Button
-    android:id="@+id/login_btn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Login"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/app_title" />
-```
-
-Also, add the following views to `activity_main.xml` to include a Progress Bar, a User Settings button, and a Logout button that will be visible to a logged-in user.
-
-```xml
-<ProgressBar
-    android:id="@+id/progressBar"
-    style="?android:attr/progressBarStyleHorizontal"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="48dp"
-    android:indeterminate="true"
-    android:visibility="invisible"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-<TextView
-    android:id="@+id/welcome_text"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="welcome user"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/login_btn" />
-
-<Button
-    android:id="@+id/user_settings_btn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="User Settings"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
-
-<Button
-    android:id="@+id/logout_btn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Logout"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/user_settings_btn" />
-
-<androidx.constraintlayout.widget.Group
-    android:id="@+id/logged_in_views"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:visibility="gone"
-    app:constraint_referenced_ids="welcome_text,user_settings_btn,logout_btn" />
-```
-
-The complete content of `activity_main.xml` can be found [here](https://github.com/authgear/authgear-example-android/blob/main/app/src/main/res/layout/activity_main.xml).
-
-**Enable View Binding**
-
-Next, set up [view binding](https://developer.android.com/topic/libraries/view-binding) so that you can easily reference Views in your `MainActivity.kt` file. Add the following to your app-level (`/app/build.gradle`) `build.gradle` file under the `android` block to enable view binding:
-
-```groovy
-buildFeatures {
-    viewBinding = true
-}
-```
-
-Create a `binding` member variable in `MainActivity.kt` and modify the `onCreate()` method as shown below to use view binding in `setContentView`:
-
-```kotlin
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var authgear: Authgear
-    private lateinit var binding: ActivityMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-        // ... the rest of onCreate continues
-    }
-}
-```
-
-### Step 5: Start the authentication flow
-
-Create a `startLogin()` method in the `MainActivity.kt` inside `class MainActivity : AppCompatActivity(){}`. This method will call the Authgear SDK's `authenticate()` method to start a new authentication flow.
-
-```kotlin
-fun startLogin() {
-    binding.progressBar.visibility =  View.VISIBLE
-    val options = AuthenticateOptions("com.example.authgeardemo://host/path")
-    authgear.authenticate(options, object : OnAuthenticateListener {
-        override fun onAuthenticated(userInfo: UserInfo) {
-
-            updateUi(authgear)
-        }
-
-        override fun onAuthenticationFailed(throwable: Throwable) {
-            binding.progressBar.visibility =  View.INVISIBLE
-
-            Log.d("TAG", throwable.toString())
-        }
-
-
-    })
-}
-```
-
-Next, implement the `updateUi()` method that was called in `startLogin()`. This function will update the Views on the screen when the user's logged-in state changes.
-
-The `updateUi()` method also calls the `fetchUserInfo()` method of the Authgear SDK. This will return the [User Info](../../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md) of the current user such as their email address, name, etc.
-
-```kotlin
-fun updateUi(authgear: Authgear) {
-    val state = authgear.sessionState
-    if (state == SessionState.AUTHENTICATED) {
-        binding.loginBtn.visibility = View.GONE
-        binding.loggedInViews.visibility = View.VISIBLE
-        // Get userInfo and display in welcome text
-        authgear.fetchUserInfo(object: OnFetchUserInfoListener {
-            override fun onFetchedUserInfo(userInfo: UserInfo) {
-                binding.welcomeText.text = userInfo.email
-            }
-
-            override fun onFetchingUserInfoFailed(throwable: Throwable) {
-                Log.d("TAG", "Failed to fetch UserInfo")
-            }
-
-        })
-    } else {
-        binding.loggedInViews.visibility = View.GONE
-        binding.loginBtn.visibility = View.VISIBLE
-    }
-    binding.progressBar.visibility =  View.INVISIBLE
-}
-```
-
-Finally, call the `startLogin()` method on click of the Login button by adding an onClickListener in the onCreate() method.
-
-```kotlin
-binding.loginBtn.setOnClickListener {
-    startLogin()
-}
-```
-
-#### Checkpoint
-
-At this point, if you try to run your application on a mobile device or emulator, you should be able to see the authentication UI (login/sign-up page) when you click on the Login button. However, you will be unable to complete authentication at this point because you have not implemented the activity that handles the Redirect URI.
-
-<figure><img src="../../../.gitbook/assets/android-demo-ss.png" alt="" width="188"><figcaption><p>Demo app screenshot</p></figcaption></figure>
-
-### Step 6: Setup Redirect URI for Your Android App
+### Step 3: Set up the Redirect URI
 
 Add the following activity entry to the `AndroidManifest.xml` of your app. The intent system would dispatch the redirect URI to `OAuthRedirectActivity` and the SDK would handle the rest.
 
@@ -421,14 +185,286 @@ If your Android app is targeting API level 30 or above (Android 11 or above), yo
 </manifest>
 ```
 
-### Step 7: Implement User Logout
+### Step 4: Implement authentication
 
-Add a `logout()` method to your MainActivity.kt class that will call the Authgear SDK's logout() method and end the current user session.
+Now initialize Authgear and build the screen with a **Login** button, plus **User Settings** and **Logout** for logged-in users. Choose the tab that matches your UI toolkit — both produce the same flow.
+
+Replace `<CLIENT_ID>` and `<AUTHGEAR_ENDPOINT>` in the code below with the values from the configuration page of your Authgear client application.
+
+{% tabs %}
+{% tab title="Jetpack Compose" %}
+The SDK exposes `suspend` functions, so you call them from Compose with `rememberCoroutineScope()` and `LaunchedEffect`.
+
+Create the Authgear instance in your `MainActivity` and host your Compose UI:
 
 ```kotlin
+class MainActivity : ComponentActivity() {
+
+    private lateinit var authgear: Authgear
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        authgear = Authgear(application, "<CLIENT_ID>", "<AUTHGEAR_ENDPOINT>")
+        setContent {
+            MaterialTheme {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    MainScreen(authgear)
+                }
+            }
+        }
+    }
+}
+```
+
+The `MainScreen` composable configures Authgear when it first appears (restoring an existing session), then shows a **Login** button or the logged-in view based on `sessionState`:
+
+```kotlin
+private const val REDIRECT_URI = "com.example.authgeardemo://host/path"
+private const val TAG = "AuthgearDemo"
+
+@Composable
+fun MainScreen(authgear: Authgear) {
+    val scope = rememberCoroutineScope()
+    var configuring by remember { mutableStateOf(true) }
+    var email by remember { mutableStateOf<String?>(null) }
+    var busy by remember { mutableStateOf(false) }
+
+    // Configure once when the screen first appears; restore an existing session.
+    LaunchedEffect(Unit) {
+        try {
+            authgear.configure()
+            if (authgear.sessionState == SessionState.AUTHENTICATED) {
+                email = authgear.fetchUserInfo().email
+            }
+        } catch (e: Throwable) {
+            Log.e(TAG, "configure failed", e)
+        }
+        configuring = false
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        when {
+            configuring -> CircularProgressIndicator()
+
+            email != null -> {
+                Text("Welcome, $email")
+                OutlinedButton(
+                    enabled = !busy,
+                    onClick = { authgear.open(Page.SETTINGS) },
+                    modifier = Modifier.padding(top = 16.dp),
+                ) { Text("User Settings") }
+                Button(
+                    enabled = !busy,
+                    onClick = {
+                        scope.launch {
+                            busy = true
+                            try {
+                                authgear.logout()
+                                email = null
+                            } catch (e: Throwable) {
+                                Log.e(TAG, "logout failed", e)
+                            }
+                            busy = false
+                        }
+                    },
+                ) { Text("Logout") }
+            }
+
+            else -> {
+                Button(
+                    enabled = !busy,
+                    onClick = {
+                        scope.launch {
+                            busy = true
+                            try {
+                                email = authgear.authenticate(AuthenticateOptions(REDIRECT_URI)).email
+                            } catch (e: Throwable) {
+                                Log.e(TAG, "login failed", e)
+                            }
+                            busy = false
+                        }
+                    },
+                ) { Text("Login") }
+            }
+        }
+    }
+}
+```
+
+{% hint style="info" %}
+`configure`, `authenticate`, `logout`, and `fetchUserInfo` are `suspend` extension functions on `Authgear` — import them (e.g. `import com.oursky.authgear.configure`) if they show as unresolved. Import any other unresolved class as well.
+{% endhint %}
+{% endtab %}
+
+{% tab title="Views (XML)" %}
+**Enable View Binding**
+
+Add the following to your app-level (`/app/build.gradle`) `build.gradle` under the `android` block:
+
+```groovy
+buildFeatures {
+    viewBinding = true
+}
+```
+
+**Build the layout**
+
+Open `res/layout/activity_main.xml`, delete the default "Hello World!" TextView, and add a title, a Login button, and the logged-in views (a progress bar, welcome text, User Settings and Logout buttons) grouped so they can be shown/hidden together:
+
+```xml
+<TextView
+    android:id="@+id/app_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="My Demo App!"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<Button
+    android:id="@+id/login_btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Login"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/app_title" />
+
+<ProgressBar
+    android:id="@+id/progressBar"
+    style="?android:attr/progressBarStyleHorizontal"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="48dp"
+    android:indeterminate="true"
+    android:visibility="invisible"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<TextView
+    android:id="@+id/welcome_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="welcome user"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/login_btn" />
+
+<Button
+    android:id="@+id/user_settings_btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="User Settings"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
+
+<Button
+    android:id="@+id/logout_btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Logout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/user_settings_btn" />
+
+<androidx.constraintlayout.widget.Group
+    android:id="@+id/logged_in_views"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    app:constraint_referenced_ids="welcome_text,user_settings_btn,logout_btn" />
+```
+
+The complete `activity_main.xml` is available [here](https://github.com/authgear/authgear-example-android/blob/main/app/src/main/res/layout/activity_main.xml).
+
+**Initialize Authgear and wire the buttons**
+
+In `MainActivity.kt`, initialize Authgear with view binding, call `configure()`, and connect the buttons:
+
+```kotlin
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var authgear: Authgear
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        authgear = Authgear(application, "<CLIENT_ID>", "<AUTHGEAR_ENDPOINT>")
+        authgear.configure(object : OnConfigureListener {
+            override fun onConfigured() {
+                updateUi(authgear)
+            }
+
+            override fun onConfigurationFailed(throwable: Throwable) {
+                Log.d("TAG", throwable.toString())
+                // Something went wrong, check the client ID or endpoint.
+            }
+        })
+
+        binding.loginBtn.setOnClickListener { startLogin() }
+        binding.logoutBtn.setOnClickListener { logout() }
+        binding.userSettingsBtn.setOnClickListener { openUserSettings() }
+    }
+}
+```
+
+**Implement the actions**
+
+Add these methods to `MainActivity`. `startLogin()` starts the authentication flow, `updateUi()` reflects the session state (and fetches the user's email), `logout()` ends the session, and `openUserSettings()` opens the pre-built settings page:
+
+```kotlin
+fun startLogin() {
+    binding.progressBar.visibility = View.VISIBLE
+    val options = AuthenticateOptions("com.example.authgeardemo://host/path")
+    authgear.authenticate(options, object : OnAuthenticateListener {
+        override fun onAuthenticated(userInfo: UserInfo) {
+            updateUi(authgear)
+        }
+
+        override fun onAuthenticationFailed(throwable: Throwable) {
+            binding.progressBar.visibility = View.INVISIBLE
+            Log.d("TAG", throwable.toString())
+        }
+    })
+}
+
+fun updateUi(authgear: Authgear) {
+    val state = authgear.sessionState
+    if (state == SessionState.AUTHENTICATED) {
+        binding.loginBtn.visibility = View.GONE
+        binding.loggedInViews.visibility = View.VISIBLE
+        // Get userInfo and display in welcome text
+        authgear.fetchUserInfo(object : OnFetchUserInfoListener {
+            override fun onFetchedUserInfo(userInfo: UserInfo) {
+                binding.welcomeText.text = userInfo.email
+            }
+
+            override fun onFetchingUserInfoFailed(throwable: Throwable) {
+                Log.d("TAG", "Failed to fetch UserInfo")
+            }
+        })
+    } else {
+        binding.loggedInViews.visibility = View.GONE
+        binding.loginBtn.visibility = View.VISIBLE
+    }
+    binding.progressBar.visibility = View.INVISIBLE
+}
+
 fun logout() {
-    binding.progressBar.visibility =  View.VISIBLE
-    authgear.logout(true, object: OnLogoutListener {
+    binding.progressBar.visibility = View.VISIBLE
+    authgear.logout(true, object : OnLogoutListener {
         override fun onLogout() {
             updateUi(authgear)
         }
@@ -436,44 +472,31 @@ fun logout() {
         override fun onLogoutFailed(throwable: Throwable) {
             Log.d("TAG", throwable.toString())
         }
-
     })
 }
-```
 
-Finally, add an onClickListener for the Logout button that calls the above `logout()` method in the onCreate() method.
-
-```kotlin
-binding.logoutBtn.setOnClickListener {
-    logout()
-}
-```
-
-### Step 8: Open User Settings Page
-
-Authgear offers a pre-built User Settings page that user's can use to view, modify their profile attributes and security settings.
-
-Add the following `openUserSettings()` method to your MainActivity.kt class:
-
-```kotlin
 fun openUserSettings() {
     authgear.open(Page.SETTINGS)
 }
 ```
 
-Then add an onClickListener for the User Settings button in the onCreate() method that calls the above openUserSettings() method.
+{% hint style="info" %}
+Import any class that shows as unresolved.
+{% endhint %}
+{% endtab %}
+{% endtabs %}
 
-```kotlin
-binding.userSettingsBtn.setOnClickListener {
-    openUserSettings()
-}
-```
+#### Checkpoint
+
+Run your app on a device or emulator and tap **Login**. Because you set up the Redirect URI in [Step 3](#step-3-set-up-the-redirect-uri), the Authgear login page opens, and on success you're returned to the app showing the user's email with the **User Settings** and **Logout** buttons.
+
+<figure><img src="../../../.gitbook/assets/android-demo-ss.png" alt="" width="188"><figcaption><p>Demo app screenshot</p></figcaption></figure>
 
 ### Additional Actions
 
 #### Get the Logged In State
 
-You can use the user's logged-in state to determine whether a user is logged in and display content like their user info and a logout button as we have done in the `updateUi()` method in [step 5](./#step-5-start-the-authentication-flow). The `SessionState` reflects the user logged-in state in the SDK local state. That means even if the `SessionState` is `AUTHENTICATED`, the session may be invalid if it is revoked remotely. After initializing the Authgear SDK, call `fetchUserInfo` to update the `SessionState` as soon as it is proper to do so.
+You can use the user's logged-in state to determine whether a user is logged in and display content like their user info and a logout button, as we did in [Step 4](#step-4-implement-authentication). The `SessionState` reflects the user logged-in state in the SDK local state. That means even if the `SessionState` is `AUTHENTICATED`, the session may be invalid if it is revoked remotely. After initializing the Authgear SDK, call `fetchUserInfo` to update the `SessionState` as soon as it is proper to do so.
 
 ```kotlin
 // After authgear.configure, it only reflect SDK local state.
@@ -485,11 +508,15 @@ The value of `SessionState` can be `UNKNOWN`, `NO_SESSION` or `AUTHENTICATED`. I
 
 #### Fetching User Info
 
-In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI as we did in [step 5](./#step-5-start-the-authentication-flow)). Use the `fetchUserInfo` function to obtain the user info, see [example](../../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
+In some cases, you may need to obtain current user info through the SDK. (e.g. Display email address in the UI as we did in [Step 4](#step-4-implement-authentication)). Use the `fetchUserInfo` function to obtain the user info, see [example](../../../reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md).
 
 #### Using the Access Token in HTTP Requests
 
 Call `refreshAccessTokenIfNeeded` every time before using the access token, the function will check and make the network call only if the access token has expired. Include the access token in the Authorization header of your application request. If you are using OKHttp in your project, you can also use the interceptor extension provided by the SDK, see [detail](okhttp-interceptor-extension.md).
+
+{% hint style="info" %}
+The access token is a [JSON Web Token (JWT)](https://en.wikipedia.org/wiki/JSON_Web_Token).
+{% endhint %}
 
 ```kotlin
 try {
@@ -524,7 +551,3 @@ To protect your application server from unauthorized access. You will need to [i
 ## Android SDK Reference
 
 For detailed documentation on the Android SDK, visit [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
-
-### Footnote
-
-\[^1]: For further instruction on setting up custom URI scheme in Android, see [https://developer.android.com/training/app-links/deep-linking](https://developer.android.com/training/app-links/deep-linking) \[^2]: For more explanation on JWT, see [https://en.wikipedia.org/wiki/JSON\_Web\_Token](https://en.wikipedia.org/wiki/JSON_Web_Token)
