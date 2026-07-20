@@ -15,7 +15,6 @@
 * [Native/Mobile App](get-started/native-mobile-app/README.md)
   * [iOS SDK](get-started/native-mobile-app/ios.md)
   * [Android SDK](get-started/native-mobile-app/android/README.md)
-    * [Android Kotlin coroutine support](get-started/native-mobile-app/android/coroutine-support.md)
     * [Android OKHttp Interceptor Extension (Optional)](get-started/native-mobile-app/android/okhttp-interceptor-extension.md)
   * [Flutter SDK](get-started/native-mobile-app/flutter.md)
   * [React Native SDK](get-started/native-mobile-app/react-native.md)
