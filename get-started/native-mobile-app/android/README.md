@@ -514,6 +514,10 @@ In some cases, you may need to obtain current user info through the SDK. (e.g. D
 
 Call `refreshAccessTokenIfNeeded` every time before using the access token, the function will check and make the network call only if the access token has expired. Include the access token in the Authorization header of your application request. If you are using OKHttp in your project, you can also use the interceptor extension provided by the SDK, see [detail](okhttp-interceptor-extension.md).
 
+{% hint style="info" %}
+The access token is a [JSON Web Token (JWT)](https://en.wikipedia.org/wiki/JSON_Web_Token).
+{% endhint %}
+
 ```kotlin
 try {
     authgear.refreshAccessTokenIfNeededSync()
@@ -547,7 +551,3 @@ To protect your application server from unauthorized access. You will need to [i
 ## Android SDK Reference
 
 For detailed documentation on the Android SDK, visit [Android SDK Reference](https://authgear.github.io/authgear-sdk-android/)
-
-### Footnote
-
-\[^1]: For further instruction on setting up custom URI scheme in Android, see [https://developer.android.com/training/app-links/deep-linking](https://developer.android.com/training/app-links/deep-linking) \[^2]: For more explanation on JWT, see [https://en.wikipedia.org/wiki/JSON\_Web\_Token](https://en.wikipedia.org/wiki/JSON_Web_Token)
