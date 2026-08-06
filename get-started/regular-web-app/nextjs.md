@@ -28,7 +28,7 @@ A complete example application is available at [authgear/authgear-example-nextjs
 
 #### Step 2: Configure the Application
 
-1. Under **OAuth 2.0**, find the **Authorized Redirect URIs** field
+1. Under **URIs**, find the **Authorized Redirect URIs** field
 2. Add `http://localhost:3000/api/auth/callback`
 3. Note down your **Client ID** and **Endpoint** (e.g. `https://your-project.authgear.cloud`) — you will need these shortly
 4. Click **Save**
