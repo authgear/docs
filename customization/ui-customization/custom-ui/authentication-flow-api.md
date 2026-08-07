@@ -73,7 +73,7 @@ The following is a sample of the response you would get from the Authentication 
 The above response means you've successfully started a new login flow using the API.
 
 {% hint style="info" %}
-If the browser already has an active Authgear session and your flow config enables it, the `options` array can also include a `select_account` entry, letting the user continue as their existing account without re-entering credentials. See [Single Sign-On Continuation with Custom UI](single-sign-on-continuation-with-custom-ui.md).
+If the browser already has an active Authgear session and your flow config enables it, the `options` array can also include a `select_account` entry. This lets the user continue as their existing account without re-entering credentials. See [Single Sign-On Continuation with Custom UI](single-sign-on-continuation-with-custom-ui.md).
 {% endhint %}
 
 To continue and finish the authentication flow, you can send the value for `state_token` from the above response in your next HTTP request to the `api/v1/authentication_flows/states/input` endpoint like the example shown below:
@@ -154,7 +154,7 @@ When you use the authentication flow API to power your custom UI, the authentica
 
 If you have Authentication Flow API enabled and a Custom UI URI set for your Authgear App, the authorization server will redirect your users to the custom UI as shown in **step 2** above.
 
-The redirect includes query parameters such as `client_id`, `redirect_uri`, and `x_ref` that your custom UI should forward back to the API via `url_query`. If the authorization request carries `login_hint` or `id_token_hint`, those are forwarded on the redirect too, so your custom UI can read them — for example to pre-fill an identifier field or to decide whether to offer [Single Sign-On Continuation](single-sign-on-continuation-with-custom-ui.md).
+The redirect includes query parameters such as `client_id`, `redirect_uri`, and `x_ref` that your custom UI should forward back to the API via `url_query`. If the authorization request carries `login_hint` or `id_token_hint`, those are forwarded on the redirect too. Your custom UI can read them to pre-fill an identifier field, or to decide whether to offer [Single Sign-On Continuation](single-sign-on-continuation-with-custom-ui.md).
 
 #### Step 3: Make HTTP Requests to Authentication Flow API Endpoints
 

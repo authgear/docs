@@ -8,20 +8,20 @@ description: >-
 
 When an end-user already has an active Authgear session in their browser, your Custom UI can show a **"Continue as user@example.com"** option instead of asking them to enter their credentials again. This is powered by `select_account`, an identification option you can add to the `identify` step of `login` and `signup_login` flows.
 
-`select_account` works through the same Authentication Flow API endpoints your Custom UI already calls — there is no new endpoint and no new token. When the browser has an eligible session, the `identify` step's response includes an extra option describing the account; when there is none, the response looks exactly as it did before, so a Custom UI that does not recognize the option keeps working unchanged.
+`select_account` works through the same Authentication Flow API endpoints your Custom UI already calls. There is no new endpoint and no new token. When the browser has an eligible session, the `identify` step's response includes an extra option describing the account. When there is none, the response is unchanged, so a Custom UI that does not recognize the option keeps working as before.
 
 If you are new to building a Custom UI, read the [Authentication Flow API](authentication-flow-api.md) overview first.
 
 ## Use cases
 
-**Single sign-on across apps in the same project.** Two applications, App A and App B, are OAuth clients of the same Authgear project, and each has its own Custom UI. A user signs in to App A, then opens App B for the first time in the same browser. Because the Authgear session cookie is shared, App B's Custom UI can offer to continue as the same account — the user clicks once instead of typing their credentials again.
+**Single sign-on across apps in the same project.** Two applications, App A and App B, are OAuth clients of the same Authgear project, and each has its own Custom UI. A user signs in to App A, then opens App B for the first time in the same browser. Because the Authgear session cookie is shared, App B's Custom UI can offer to continue as the same account. The user clicks once instead of typing their credentials again.
 
-**A single "Continue" entry point.** Your Custom UI uses one combined screen (a `signup_login` flow) instead of separate sign-in and sign-up pages. When a session already exists, the screen shows "Continue as user@example.com" alongside the usual email and social login options. Declining is nothing special: the user simply picks another option, and can even register a second account that way.
+**A single "Continue" entry point.** Your Custom UI uses one combined screen (a `signup_login` flow) instead of separate sign-in and sign-up pages. When a session already exists, the screen shows "Continue as user@example.com" alongside the usual email and social login options. To decline, the user picks another option instead, and can even register a second account that way.
 
 ## Prerequisites
 
-* **Your Custom UI must be same-site with your Authgear endpoint.** The browser only sends the Authgear session cookie to the Authentication Flow API when your Custom UI and your Authgear endpoint share a registrable domain — for example `auth.example.com` and `ui.example.com`. In practice this means setting up a [Custom Domain](../../custom-domain.md) for your project. A Custom UI hosted on an unrelated domain never sees the `select_account` option.
-* **Custom UI URI configured.** Your OAuth client must have its **Custom UI URI** set in the Authgear Portal (**Applications** > your application > **Custom UI**). Authgear allows cross-origin requests with credentials from origins registered as a Custom UI URI, so no extra CORS setup is needed on your side.
+* **Your Custom UI must be same-site with your Authgear endpoint.** The browser only sends the Authgear session cookie to the Authentication Flow API when your Custom UI and your Authgear endpoint share a registrable domain (the eTLD+1, such as `example.com`): for example `auth.example.com` and `ui.example.com`. In practice this means setting up a [Custom Domain](../../custom-domain.md) for your project. A Custom UI hosted on an unrelated domain never sees the `select_account` option.
+* **Custom UI URI configured.** Your OAuth client must have its **Custom UI URI** set in the Authgear Portal (**Applications** > your application > **Custom UI**). Note that same-site is not the same as same-origin: `ui.example.com` and `auth.example.com` are still cross-origin, so the browser applies CORS to these API calls. Authgear allows cross-origin requests with credentials from origins registered as a Custom UI URI, so no extra CORS setup is needed on your side.
 * **Send the session cookie from the browser.** Calls to the Authentication Flow API made with `fetch()` must use `credentials: 'include'`, otherwise the session cookie is not sent and the option never appears.
 
 ```mermaid
@@ -39,12 +39,12 @@ flowchart TD
 ```
 
 {% hint style="info" %}
-If your Custom UI has separate sign-in and sign-up screens, its **first** call to create a flow must be of type `login` or `signup_login` — never `signup` directly. `select_account` only exists in those two flow types, so starting with `signup` means you never find out that a session exists. Create a separate `signup` flow afterward only if the user has no eligible session (or declines it) and wants a new account.
+If your Custom UI has separate sign-in and sign-up screens, its **first** call to create a flow must be of type `login` or `signup_login`, never `signup` directly. `select_account` only exists in those two flow types, so starting with `signup` means you never find out that a session exists. Create a separate `signup` flow afterward only if the user has no eligible session (or declines it) and wants a new account.
 {% endhint %}
 
 ## How it works
 
-The select-account exchange sits inside the same OAuth flow every Custom UI already follows — the only new parts are the extra option in the `identify` response and the one-click input that completes it:
+The select-account exchange sits inside the same OAuth flow every Custom UI already follows. The only new parts are the extra option in the `identify` response and the one-click input that completes it:
 
 ```mermaid
 sequenceDiagram
@@ -65,7 +65,7 @@ sequenceDiagram
     App->>Authgear: POST /oauth2/token (exchange code for tokens)
 ```
 
-The user never typed a credential — the only interaction was the click on "Continue as user@example.com". When there is no eligible session, the third step's response simply has no `select_account` entry and your UI proceeds as a normal login.
+The user never typed a credential; the only interaction was the click on "Continue as user@example.com". When there is no eligible session, the flow-creation response has no `select_account` entry and your UI proceeds as a normal login.
 
 ## Step 1: Add select\_account to your flow config
 
@@ -88,7 +88,7 @@ authentication_flow:
 ```
 {% endcode %}
 
-The `select_account` entry above has no nested `steps`, so choosing it completes the login immediately. To ask for something extra first (for example a 2FA code), give the entry its own nested `authenticate` step — see [Require 2FA on continuation](#require-2fa-on-continuation) below.
+The `select_account` entry above has no nested `steps`, so choosing it completes the login immediately. To ask for something extra first (for example a 2FA code), give the entry its own nested `authenticate` step. See [Require 2FA on continuation](#require-2fa-on-continuation) below.
 
 ## Step 2: Detect the option in your Custom UI
 
@@ -135,13 +135,13 @@ When the browser has an eligible session, the `identify` step's `options` includ
 }
 ```
 
-Use `display_name` to render the "Continue as user@example.com" button. Unlike `masked_display_name` elsewhere in this API, it is returned unmasked: it identifies the account already bound to the caller's own session cookie, so there is nothing to hide.
+Use `display_name` to render the "Continue as user@example.com" button. Unlike `masked_display_name` elsewhere in this API, it is returned unmasked because it identifies the account already bound to the caller's own session cookie.
 
-When there is no eligible session, the `select_account` entry is simply absent and the response is identical to what it was before this feature.
+When there is no eligible session, the `select_account` entry is absent and the rest of the response is unchanged.
 
 ## Step 3: Submit the selection
 
-When the user clicks "Continue as...", submit the option by its `index` — its position in the `options` array:
+When the user clicks "Continue as...", submit the option by its `index`, its position in the `options` array:
 
 ```json
 {
@@ -171,7 +171,7 @@ With the minimal config from Step 1, the flow finishes immediately:
 }
 ```
 
-Redirect the browser to `finish_redirect_uri` with a top-level navigation (not a `fetch()` call), exactly as for any other completed flow. The user never re-entered credentials — they only clicked once.
+Redirect the browser to `finish_redirect_uri` with a top-level navigation (not a `fetch()` call), exactly as for any other completed flow.
 
 {% hint style="info" %}
 `user_id` is informational and read-only. The input only ever carries `index`; the server re-resolves the account from its own session cookie at submission time, so a forged or stale `user_id` can never be used to select a different account.
@@ -195,7 +195,7 @@ The flow then proceeds exactly as a normal login.
 
 ## Using select\_account in signup\_login flows
 
-In a `signup_login` flow, `select_account` declares a `login_flow` only — it can only ever continue an existing login, never a signup. Choosing it switches into the named login flow, so **that login flow must itself declare a `select_account` entry** for the switch to land anywhere:
+In a `signup_login` flow, `select_account` declares a `login_flow` only; it can only ever continue an existing login, never a signup. Choosing it switches into the named login flow and replays the same `identify` input there, so **that login flow must itself declare a `select_account` entry**. If it does not, the replayed input matches no option in the target flow and the submission fails instead of completing the login:
 
 {% code lineNumbers="true" %}
 ```yaml
@@ -225,11 +225,11 @@ authentication_flow:
 ```
 {% endcode %}
 
-Any steps configured after `identify` in the target login flow (for example `terminate_other_sessions`) still run — continuing via `select_account` does not skip them.
+Any steps configured after `identify` in the target login flow (for example `terminate_other_sessions`) still run; continuing via `select_account` does not skip them.
 
 ## Require 2FA on continuation
 
-To ask for a fresh second factor specifically when continuing with an existing session — without adding that step to normal logins — give the `select_account` entry its own nested `authenticate` step:
+To ask for a fresh second factor when continuing with an existing session, without adding that step to normal logins, give the `select_account` entry its own nested `authenticate` step:
 
 {% code lineNumbers="true" %}
 ```yaml
@@ -270,11 +270,11 @@ Submit the TOTP code as usual to complete the flow.
 
 If your application passes `login_hint` or `id_token_hint` in the authorization request, Authgear forwards both parameters on the redirect to your Custom UI URI, alongside `client_id` and `x_ref`.
 
-The Authentication Flow API deliberately does **not** filter the `select_account` option by these hints — the option is offered whenever an eligible session exists. If you want "only offer continuation when it matches the hint" behavior, implement it in your Custom UI: resolve the hint yourself, compare it against the option's `user_id`, and hide the option on a mismatch, falling back to whatever your UI does when there is no eligible session. A Custom UI that does not care about hints can ignore `user_id` entirely.
+The Authentication Flow API deliberately does **not** filter the `select_account` option by these hints; the option is offered whenever an eligible session exists. If you want to offer continuation only when it matches the hint, implement the check in your Custom UI: resolve the hint yourself, compare it against the option's `user_id`, and hide the option on a mismatch, falling back to whatever your UI does when there is no eligible session. For `id_token_hint`, that means decoding the ID token and comparing its `sub` claim against the option's `user_id`. A Custom UI that does not care about hints can ignore `user_id` entirely.
 
 ## Error handling
 
-If the session changes between the option being shown and the input being submitted — for example the user logged out or switched accounts in another tab — the API responds with:
+If the session changes between the option being shown and the input being submitted (for example, the user logged out or switched accounts in another tab), the API responds with:
 
 ```json
 {
@@ -291,7 +291,7 @@ Handle this by restarting the flow: create a new authentication flow and render 
 
 ## When the option will not appear
 
-The `select_account` option is omitted, and the response looks exactly as it did before this feature, when any of the following holds:
+The `select_account` option is omitted, and the response is the same as if the feature were not configured, when any of the following holds:
 
 * There is no active session, or the session cookie was not sent (missing `credentials: 'include'`, or the Custom UI is not same-site with Authgear).
 * The flow config's `identify` step does not list `select_account`.

@@ -959,7 +959,7 @@ In some cases, the user may be unable to grant authorization successfully. In su
 
 ### 3.5 identification: select\_account
 
-The `select_account` option lets a user who already has an active Authgear session continue as that account without re-entering credentials. It can appear in the `identify` step of `login` and `signup_login` flows only, and only when the flow config lists it and the request carries an eligible session cookie. When there is no eligible session, the option is simply absent from `options`. See [Single Sign-On Continuation with Custom UI](../../customization/ui-customization/custom-ui/single-sign-on-continuation-with-custom-ui.md) for the full guide.
+The `select_account` option lets a user who already has an active Authgear session continue as that account without re-entering credentials. It can appear in the `identify` step of `login` and `signup_login` flows only, and only when the flow config lists it and the request carries an eligible session cookie. When there is no eligible session, the option is absent from `options`. See [Single Sign-On Continuation with Custom UI](../../customization/ui-customization/custom-ui/single-sign-on-continuation-with-custom-ui.md) for the full guide.
 
 Presence in response:
 
@@ -972,7 +972,7 @@ Presence in response:
 ```
 
 * `display_name`: A human-readable name for the account bound to the caller's session, suitable for a "Continue as user@example.com" button. Unlike `masked_display_name` elsewhere in this API, it is unmasked because it identifies the caller's own session.
-* `user_id`: The ID of the user this option would select. Informational only — it is never accepted as input. Use it if your UI wants to compare the option against a `login_hint` or `id_token_hint` it resolved itself.
+* `user_id`: The ID of the user this option would select. Informational only; it is never accepted as input. Use it if your UI wants to compare the option against a `login_hint` or `id_token_hint` it resolved itself.
 
 Usage in input:
 
