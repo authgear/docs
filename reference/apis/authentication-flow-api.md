@@ -957,6 +957,36 @@ In some cases, the user may be unable to grant authorization successfully. In su
 
 `error_description` and `error_uri` are optional.
 
+### 3.5 identification: select\_account
+
+The `select_account` option lets a user who already has an active Authgear session continue as that account without re-entering credentials. It can appear in the `identify` step of `login` and `signup_login` flows only, and only when the flow config lists it and the request carries an eligible session cookie. When there is no eligible session, the option is simply absent from `options`. See [Single Sign-On Continuation with Custom UI](../../customization/ui-customization/custom-ui/single-sign-on-continuation-with-custom-ui.md) for the full guide.
+
+Presence in response:
+
+```json
+{
+  "identification": "select_account",
+  "display_name": "user@example.com",
+  "user_id": "user_01J8ZC0M2N3P4Q5R6S7T8V9W0X"
+}
+```
+
+* `display_name`: A human-readable name for the account bound to the caller's session, suitable for a "Continue as user@example.com" button. Unlike `masked_display_name` elsewhere in this API, it is unmasked because it identifies the caller's own session.
+* `user_id`: The ID of the user this option would select. Informational only — it is never accepted as input. Use it if your UI wants to compare the option against a `login_hint` or `id_token_hint` it resolved itself.
+
+Usage in input:
+
+```json
+{
+  "identification": "select_account",
+  "index": 0
+}
+```
+
+* `index`: The position of the `select_account` entry in the `options` array of the current response.
+
+If the session changes between the option being shown and the input being submitted, the API returns a [SelectAccountSessionChanged](authentication-flow-api.md#id-6.9-selectaccountsessionchanged) error.
+
 ## 4.0 Input: Authentications
 
 Here we'll cover all the supported authentication methods (authenticators) and how to pass them as input.
@@ -1326,7 +1356,7 @@ The value of `error.reason` can be `ValidationFailed` when there's a missing req
 
 Another cause for a `ValidationFailed` error is an invalid format in the value of a required field or an invalid constant in a required field.&#x20;
 
-An example of an invalid constant is setting the value of `identification` to anything outside the allowed values (`email`, `phone`, `oauth`, `username`). Also, using a constant for any feature that is not supported by your current login methods may throw the same error. You can always find more specific details about the cause of the error in the `error.info` object.&#x20;
+An example of an invalid constant is setting the value of `identification` to anything outside the allowed values (`email`, `phone`, `oauth`, `username`, `select_account`). Also, using a constant for any feature that is not supported by your current login methods may throw the same error. You can always find more specific details about the cause of the error in the `error.info` object.&#x20;
 
 The following example shows a `ValidationFailed` error for when a user enters a string that's not the correct format for an email address:
 
@@ -1465,6 +1495,19 @@ This is a rare error that may occur due to improper inputs such as poorly format
         "reason": "UnexpectedError",
         "message": "unexpected error occurred",
         "code": 500
+    }
+```
+
+### 6.9 SelectAccountSessionChanged
+
+A `SelectAccountSessionChanged` error occurs when a [select\_account](authentication-flow-api.md#id-3.5-identification-select_account) input is submitted but the session no longer matches the account that was offered — for example, the user logged out or switched accounts in another tab between the two requests. Handle it by creating a new authentication flow and rendering the fresh response.
+
+```json
+"error": {
+        "name": "Unauthorized",
+        "reason": "SelectAccountSessionChanged",
+        "message": "session no longer matches the selected account",
+        "code": 401
     }
 ```
 

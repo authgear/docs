@@ -23,3 +23,7 @@ You can build your own custom UI powered by the new Authentication Flow API. Her
 {% content-ref url="add-custom-login-signup-ui-to-native-apps.md" %}
 [add-custom-login-signup-ui-to-native-apps.md](add-custom-login-signup-ui-to-native-apps.md)
 {% endcontent-ref %}
+
+{% content-ref url="single-sign-on-continuation-with-custom-ui.md" %}
+[single-sign-on-continuation-with-custom-ui.md](single-sign-on-continuation-with-custom-ui.md)
+{% endcontent-ref %}
