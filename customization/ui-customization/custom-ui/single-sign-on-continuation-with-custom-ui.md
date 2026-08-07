@@ -24,9 +24,48 @@ If you are new to building a Custom UI, read the [Authentication Flow API](authe
 * **Custom UI URI configured.** Your OAuth client must have its **Custom UI URI** set in the Authgear Portal (**Applications** > your application > **Custom UI**). Authgear allows cross-origin requests with credentials from origins registered as a Custom UI URI, so no extra CORS setup is needed on your side.
 * **Send the session cookie from the browser.** Calls to the Authentication Flow API made with `fetch()` must use `credentials: 'include'`, otherwise the session cookie is not sent and the option never appears.
 
+```mermaid
+flowchart TD
+    subgraph samesite ["example.com — same registrable domain"]
+        authgear["Authgear<br/>auth.example.com"]
+        uia["Custom UI of App A<br/>ui-a.example.com"]
+        uib["Custom UI of App B<br/>ui-b.example.com"]
+    end
+    other["Custom UI on an unrelated domain<br/>ui.other-domain.io"]
+
+    uia -- "session cookie sent,<br/>select_account offered" --> authgear
+    uib -- "session cookie sent,<br/>select_account offered" --> authgear
+    other -. "cookie never sent,<br/>option never appears" .-> authgear
+```
+
 {% hint style="info" %}
 If your Custom UI has separate sign-in and sign-up screens, its **first** call to create a flow must be of type `login` or `signup_login` — never `signup` directly. `select_account` only exists in those two flow types, so starting with `signup` means you never find out that a session exists. Create a separate `signup` flow afterward only if the user has no eligible session (or declines it) and wants a new account.
 {% endhint %}
+
+## How it works
+
+The select-account exchange sits inside the same OAuth flow every Custom UI already follows — the only new parts are the extra option in the `identify` response and the one-click input that completes it:
+
+```mermaid
+sequenceDiagram
+    participant App as Your App
+    participant CustomUI as Custom UI (ui.example.com)
+    participant Authgear as Authgear (auth.example.com)
+
+    Note over App,Authgear: The browser already holds an Authgear session cookie
+    App->>Authgear: GET /oauth2/authorize?client_id=...
+    Authgear-->>CustomUI: 302 to Custom UI URI (client_id, x_ref, ...)
+    CustomUI->>Authgear: POST /api/v1/authentication_flows<br/>fetch with credentials: 'include' — cookie sent (same-site)
+    Authgear-->>CustomUI: identify options include select_account<br/>(display_name, user_id)
+    Note over CustomUI: Render "Continue as user@example.com"
+    CustomUI->>Authgear: POST /api/v1/authentication_flows/states/input<br/>{ "identification": "select_account", "index": 0 }
+    Authgear-->>CustomUI: action.type: finished (finish_redirect_uri)
+    CustomUI->>Authgear: Top-level navigation to finish_redirect_uri
+    Authgear-->>App: 302 to redirect_uri with authorization code
+    App->>Authgear: POST /oauth2/token (exchange code for tokens)
+```
+
+The user never typed a credential — the only interaction was the click on "Continue as user@example.com". When there is no eligible session, the third step's response simply has no `select_account` entry and your UI proceeds as a normal login.
 
 ## Step 1: Add select\_account to your flow config
 
