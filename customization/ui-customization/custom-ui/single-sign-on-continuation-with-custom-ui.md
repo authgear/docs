@@ -14,7 +14,7 @@ If you are new to building a Custom UI, read the [Authentication Flow API](authe
 
 ## Use cases
 
-**Single sign-on across apps in the same project.** Two applications, App A and App B, are OAuth clients of the same Authgear project, and each has its own Custom UI. A user signs in to App A, then opens App B for the first time in the same browser. Because the Authgear session cookie is shared, App B's Custom UI can offer to continue as the same account. The user clicks once instead of typing their credentials again.
+**Single sign-on across apps in the same project.** Two applications, App A and App B, are OAuth clients of the same Authgear project and share the same Custom UI. A user signs in to App A, then opens App B for the first time in the same browser. Because the Authgear session cookie is shared, the Custom UI can offer to continue as the same account. The user clicks once instead of typing their credentials again.
 
 **A single "Continue" entry point.** Your Custom UI uses one combined screen (a `signup_login` flow) instead of separate sign-in and sign-up pages. When a session already exists, the screen shows "Continue as user@example.com" alongside the usual email and social login options. To decline, the user picks another option instead, and can even register a second account that way.
 
@@ -26,15 +26,15 @@ If you are new to building a Custom UI, read the [Authentication Flow API](authe
 
 ```mermaid
 flowchart TD
+    appa["App A"] --> ui
+    appb["App B"] --> ui
     subgraph samesite ["example.com — same registrable domain"]
+        ui["Shared Custom UI<br/>ui.example.com"]
         authgear["Authgear<br/>auth.example.com"]
-        uia["Custom UI of App A<br/>ui-a.example.com"]
-        uib["Custom UI of App B<br/>ui-b.example.com"]
     end
     other["Custom UI on an unrelated domain<br/>ui.other-domain.io"]
 
-    uia -- "session cookie sent,<br/>select_account offered" --> authgear
-    uib -- "session cookie sent,<br/>select_account offered" --> authgear
+    ui -- "session cookie sent,<br/>select_account offered" --> authgear
     other -. "cookie never sent,<br/>option never appears" .-> authgear
 ```
 
