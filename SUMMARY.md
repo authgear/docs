@@ -129,6 +129,7 @@
   * [Add Custom Login/Signup UI to Native Apps](customization/ui-customization/custom-ui/add-custom-login-signup-ui-to-native-apps.md)
   * [Manually Link OAuth Provider using Account Management API](customization/ui-customization/custom-ui/manually-link-oauth-provider-using-account-management-api.md)
   * [Implement a custom account recovery UI using Authentication Flow API](customization/ui-customization/custom-ui/implement-a-custom-account-recovery-ui-using-authentication-flow-api.md)
+  * [Single Sign-On Continuation with Custom UI](customization/ui-customization/custom-ui/single-sign-on-continuation-with-custom-ui.md)
 * [Custom Domain](customization/custom-domain.md)
 * [Custom Email and SMS Templates](customization/ui-customization/custom-email-and-sms-templates.md)
 * [Custom Email Provider](customization/custom-providers/custom-email-provider.md)
