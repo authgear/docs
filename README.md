@@ -51,6 +51,7 @@ Authgear contains the following high-level components:
 
 * [**Brute-force Protection**](security/brute-force-protection.md) - Set account Lockout Policy to safeguard a user account from brute-force login attempts.
 * [**Bot Protection**](security/bot-protection.md) - Bot protection tools to block automated attackers.
+* [**Fraud Protection**](security/fraud-protection.md) - Detect and stop fraudulent traffic such as SMS pumping before it drives up your messaging costs.
 * [**Password Strength**](authentication-and-access/authentication/passwords/password-policy.md) - Learn how to set password strength and how the password strength is calculated.
 
 #### Login Methods
