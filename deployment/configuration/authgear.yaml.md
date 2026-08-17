@@ -1972,14 +1972,19 @@ oauth:
     issue_jwt_access_token: false
 # Configure session.
 session:
-  # Whether the cookie is session cookie. Default is false.
-  cookie_non_persistent: false
-  # Whether the session becomes invalid after idling.
-  idle_timeout_enabled: false
-  # How long before the session timeout.
-  idle_timeout_seconds: 300
-  # The lifetime of the session. Default is 86400.
-  lifetime_seconds: 86400
+  # Whether the session cookie is a HTTP session cookie,
+  # i.e. the browser discards it when it is closed,
+  # ending the session on browser close.
+  # This does NOT affect server-side session expiry.
+  # Default is false.
+  use_session_cookie: false
+  # Whether the session becomes invalid after idling. Default is true.
+  idle_timeout_enabled: true
+  # How long the user can stay idle before the session expires.
+  # Default is 2592000 (30 days).
+  idle_timeout_seconds: 2592000
+  # The maximum lifetime of the session. Default is 31449600 (52 weeks).
+  lifetime_seconds: 31449600
 ui:
   phone_input:
     # The list of country code to show in the phone number input widget.
