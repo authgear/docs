@@ -6,12 +6,12 @@ description: >-
 
 # Sessions
 
-When a user signs in through Authgear — the built-in UI or your [Custom UI](../customization/ui-customization/custom-ui/README.md) — Authgear remembers the signed-in user with a session cookie on your Authgear domain (e.g. `myproject.authgear.cloud` or your custom domain). Every app in the same project shares this session — it is what powers Single Sign-On (SSO) across your apps.
+When a user signs in through Authgear on the built-in UI or your [Custom UI](../customization/ui-customization/custom-ui/README.md), Authgear remembers the signed-in user with a session cookie on your Authgear domain (e.g. `myproject.authgear.cloud` or your custom domain). Every app in the same project shares this session and it powers Single Sign-On (SSO) across your apps.
 
 Control the behavior and expiration of this session in **Authgear Portal** > **Advanced** > **Session**.
 
 {% hint style="info" %}
-Token-based apps (SPAs and native apps using the SDKs) keep their own sessions with refresh tokens. Their lifetimes are configured per application in **Portal** > **Applications**. See [Refresh Token](../reference/tokens/refresh-token.md) for details. An SDK configured with `isSSOEnabled: false` skips the shared session cookie entirely — see [SSO with mobile apps / websites](single-sign-on/sso-with-mobile-app-web-spa.md).
+Token-based apps (SPAs and native apps using the SDKs) keep their own sessions with refresh tokens. Their lifetimes are configured per application in **Portal** > **Applications**. See [Refresh Token](../reference/tokens/refresh-token.md) for details. An SDK configured with `isSSOEnabled: false` skips the shared session cookie entirely, see [SSO with mobile apps / websites](single-sign-on/sso-with-mobile-app-web-spa.md).
 {% endhint %}
 
 ## Session Behavior
