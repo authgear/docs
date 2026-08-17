@@ -10,8 +10,6 @@ When a user signs in through the Authgear built-in UI, Authgear remembers the si
 
 You can control the behavior and expiration of this session in **Authgear Portal** > **Advanced** > **Session**.
 
-<figure><img src="../.gitbook/assets/session-settings.png" alt=""><figcaption><p>Session settings in Authgear Portal</p></figcaption></figure>
-
 {% hint style="info" %}
 Token-based apps (SPAs and native apps using the SDKs) keep their own sessions with refresh tokens. Their lifetimes are configured per application in **Portal** > **Applications**. See [Refresh Token](../reference/tokens/refresh-token.md) for details.
 {% endhint %}
