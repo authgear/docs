@@ -1976,7 +1976,6 @@ session:
   # i.e. the browser discards it when it is closed,
   # ending the session on browser close.
   # This does NOT affect server-side session expiry.
-  # Replaces the deprecated cookie_non_persistent key.
   # Default is false.
   use_session_cookie: false
   # Whether the session becomes invalid after idling. Default is true.
