@@ -15,7 +15,7 @@ description: >-
 * A user management portal, like password resets, account locking, scheduled deletion or anonymization, and user profile management.
 * Single Sign-On (SSO) provides a single unified experience for your customers to log into multiple web/mobile apps, including Web2Web, Web2App, and App2App SSO.
 * Enable [SSO with SAML](authentication-and-access/single-sign-on/single-sign-on-with-saml/) for your users to log into multiple web applications easily.
-* Session management with Authgear Portals, and a pre-built setting page for users to control concurrent sessions.
+* [Session management](authentication-and-access/sessions.md) with Authgear Portal, and a pre-built setting page for users to control concurrent sessions.
 * Customizable UI with a **user-friendly low-code** dashboard.
 * Various security features such as audit logs, brute force protection, smart account lockout, password policy, etc.
 * APIs for further integration and customizations. For example, build your own custom login and sign-up pages from the ground up powered by [Authentication Flow API](https://docs.authgear.com/~/changes/anTCj6yoZ06s3pLJk5v8/reference/apis/authentication-flow-api).
