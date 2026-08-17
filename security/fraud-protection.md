@@ -47,7 +47,7 @@ Configure Fraud Protection in the **Settings** tab:
   * **Phone Number Allowlist**: A list of full phone numbers (e.g. `+85212345678`) or regular expression patterns.
   * **Allow the following countries based on phone country code**: Requests to phone numbers registered in these countries are not blocked.
 
-Authgear manages the detection thresholds, so there is nothing to tune. To change the defaults for your project, [contact us](https://www.authgear.com/talk-with-us).
+Detection thresholds are managed by Authgear with sensible defaults, so it works out of the box without tuning. To change the defaults, [contact us](https://www.authgear.com/talk-with-us).
 
 ## Monitoring
 
