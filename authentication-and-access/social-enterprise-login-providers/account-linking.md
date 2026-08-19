@@ -18,7 +18,7 @@ Account linking runs automatically **during signup**. To let an already signed-i
 
 Enable account linking when the same person can reach your app through more than one signup method and you want them to keep a single account. Typical situations:
 
-* **You added Google login to an app with existing password users.** A user who signed up with `alice@example.com` and a password clicks **Continue with Google**. Her Google account uses the same email. With account linking she logs in with her password once, and from then on can sign in with either method.
+* **You added Google login to an app with existing password users.** A user who signed up with `alice@example.com` and a password clicks **Continue with Google**. Their Google account uses the same email. With account linking they log in with their password once, and from then on can sign in with either method.
 * **You offer several social providers.** A user signs up with Google today and taps **Continue with Apple** on their phone next month. Both accounts share one email; linking keeps them on one Authgear account instead of two.
 * **You migrated users into Authgear and later enabled an enterprise provider.** Imported users match their Microsoft Entra ID or ADFS accounts by email, so their first enterprise login attaches to the account you imported rather than creating a fresh one.
 
@@ -32,7 +32,7 @@ When a user signs up with a social or enterprise provider, Authgear reads a clai
 | `login_and_link` | Show the user their existing account and ask them to log in to it. After they authenticate, add the new provider identity to that account and continue the signup. |
 
 {% hint style="warning" %}
-The login step in `login_and_link` prevents account takeover. Some identity providers let anyone register with an unverified email, so an email match alone doesn't prove ownership — an attacker could register `alice@example.com` at such a provider and hijack Alice's account. The login does prove it.
+The login step in `login_and_link` prevents account takeover. Some identity providers let anyone register with an unverified email, so an email match alone doesn't prove ownership. Without the login step, an attacker could register `alice@example.com` at such a provider and hijack Alice's account.
 {% endhint %}
 
 ## Enable account linking
@@ -45,7 +45,7 @@ This walkthrough uses Google, but the same configuration works for any provider 
 
 ### Add the configuration
 
-You configure account linking in your project's YAML config. In the Portal, go to **Advanced > Edit Config** and add an `account_linking` section:
+Configure account linking in your project's YAML config. In the Portal, go to **Advanced > Edit Config** and add an `account_linking` section:
 
 ```yaml
 account_linking:
@@ -79,7 +79,7 @@ With the config above in place, here is the full flow for a user who already has
 
 1. On the signup page, the user clicks **Continue with Google** and completes Google's consent screen.
 2. Authgear finds the existing account and shows an **Existing account found** page listing it with a masked identifier, such as `al***@example.com`.
-3. The user selects the account and logs in with their existing method — here, their password.
+3. The user selects the account and logs in with their existing method, in this case their password.
 4. Authgear links the Google identity to the account. If your signup flow requires steps the account doesn't satisfy yet (for example, setting up two-factor authentication), the user completes them now; steps the account already satisfies are skipped.
 5. The user is signed in. From now on, both the password and Google sign the user in to the same account.
 
@@ -96,7 +96,7 @@ account_linking:
       action: login_and_link
 ```
 
-`key` names the login ID type (`email`, `phone`, or `username` by default). When a signup with that login ID matches an existing user, the user logs in with the existing account — in this case, through Google — and the new email login ID is added to it. Without this config, the conflicting signup fails with an error, as before.
+`key` names the login ID type (`email`, `phone`, or `username` by default). When a signup with that login ID matches an existing user, the user logs in to the existing account (in this case, through Google) and the new email login ID is added to it. Without this config, the conflicting signup fails with an error, as before.
 
 ## Advanced: different rules per signup flow
 
