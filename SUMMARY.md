@@ -5,7 +5,7 @@
 ## Get Started
 
 * [5-Minute Guide](get-started/5-minute-guide.md)
-* [Skills for AI Agent](get-started/ai-coding-tools/README.md)
+* [Auth for MCP](get-started/auth-for-mcp.md)
 * [Start Building](get-started/start-building.md)
 * [Single-Page App](get-started/single-page-app/README.md)
   * [JavaScript (Web)](get-started/single-page-app/website.md)
@@ -40,6 +40,10 @@
   * [Use Authgear as SAML Identity Provider for Salesforce](authentication-and-access/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-salesforce.md)
   * [Use Authgear as SAML Identity Provider for Dropbox](authentication-and-access/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-dropbox.md)
   * [SAML Attribute Mapping](authentication-and-access/single-sign-on/single-sign-on-with-saml/saml-attribute-mapping.md)
+
+## Build with AI
+
+* [Skills for AI Agent](get-started/ai-coding-tools/README.md)
 
 ## Authentication and Access
 
@@ -97,6 +101,7 @@
 
 ## Integration
 
+* [Dynamic Client Registration (DCR)](integration/dynamic-client-registration.md)
 * [Add custom fields to a JWT Access Token or ID Token](integration/add-custom-fields-to-a-jwt-access-token.md)
 * [User Profiles](admin/user-profiles/README.md)
   * [What is User Profile](admin/user-profiles/user-profile.md)
