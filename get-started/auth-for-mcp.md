@@ -47,7 +47,7 @@ Go to **Applications** → the **Dynamic clients (DCR)** tab:
 * Under **Registration security**, turn off **Require initial access token**. Generic MCP clients have no way to obtain or present an initial access token. With the requirement on, their registration attempts fail with `403 access_denied`.
 
 {% hint style="info" %}
-Open registration means anyone can register a client with your project. A registered client can do nothing until a real user signs in and consents, and it can only request the resources and scopes you opened in step 2. Registrations do count toward your plan's dynamic client limit, so delete clients you don't recognize.
+Open registration means anyone can register a client with your project. A registered client can do nothing until a real user signs in and consents, and it can only request the resources and scopes you opened in step 2.
 {% endhint %}
 
 ## Set up the MCP server side <a href="#set-up-the-mcp-server-side" id="set-up-the-mcp-server-side"></a>
