@@ -43,7 +43,7 @@
 
 ## Build with AI
 
-* [Skills for AI Agent](get-started/ai-coding-tools/README.md)
+* [Skills for AI Agent](build-with-ai/ai-coding-tools/README.md)
 
 ## Authentication and Access
 
