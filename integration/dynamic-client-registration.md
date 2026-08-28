@@ -26,7 +26,7 @@ Clients registered this way are **public clients**: they authenticate users with
 * **Registration endpoint:** `https://<your-project>.authgear.cloud/oauth2/register`. While DCR is enabled it is also advertised as `registration_endpoint` in your project's OpenID Connect discovery document.
 * **Initial access token (IAT):** By default, callers must present a valid IAT as a Bearer token to register. You create IATs in the Portal and control who can register by controlling who holds a token.
 * **Token type (third-party vs first-party):** A **third-party** IAT registers clients whose users see a consent screen; it is safe to hand to external developers. A **first-party** IAT registers clients that skip the consent screen; treat it like your Admin API key.
-* **Open registration:** Turning the IAT requirement off lets anyone register a client with your project. This is what the MCP flow expects; note that your plan's client limit bounds how many clients can accumulate.
+* **Open registration:** Turning the IAT requirement off lets anyone register a client with your project. This is what the MCP flow expects.
 
 ## Enable DCR in the Portal <a href="#enable-dcr-in-the-portal" id="enable-dcr-in-the-portal"></a>
 
