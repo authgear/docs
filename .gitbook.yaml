@@ -1,0 +1,8 @@
+root: ./
+
+structure:
+  readme: README.md
+  summary: SUMMARY.md
+
+redirects:
+  get-started/ai-coding-tools: build-with-ai/ai-coding-tools/README.md
