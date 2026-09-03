@@ -115,7 +115,7 @@ In addition to the [common inventory](#common-inventory), you provide the follow
 
 ### Option 1: High Availability
 
-Authgear runs on two VMs behind a load balancer, so either can be rebooted or upgraded without an outage. The monitoring stack moves to an optional monitor VM.
+Authgear runs on two VMs behind a load balancer, so either can be rebooted or upgraded without an outage. The monitoring stack moves to an optional monitor VM. Without that VM, the setup has no monitoring.
 
 ```mermaid
 architecture-beta
@@ -179,7 +179,7 @@ In addition to the [common inventory](#common-inventory), you provide the follow
 | -------------- | ------------------------------- | -------------------------------- | -------- | --------------------------------------------------------------------- |
 | Load balancer  |                                 |                                  | 1        | Must be highly available itself.                                      |
 | Authgear VM    | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 2        | For failover, not capacity.                                           |
-| Monitor VM     | 1 CPU / 8 GB / 40 GB Data Disk  | 1 CPU / 8 GB / 40 GB Data Disk   | 1        | Optional. Runs the monitoring stack.                                  |
+| Monitor VM     | 1 CPU / 8 GB / 40 GB Data Disk  | 1 CPU / 8 GB / 40 GB Data Disk   | 1        | Optional. Runs the monitoring stack. Without it, there is no monitoring. |
 | PostgreSQL     | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Your existing service. Size the disk to the expected number of users. |
 | Redis          | 1 CPU / 4 GB / 10 GB Data Disk  | 1 CPU / 8 GB / 10 GB Data Disk   | 1        | Your existing service.                                                |
 | Object storage | 40 GB Storage                   | 80 GB Storage                    | 1        | Your existing service.                                                |
