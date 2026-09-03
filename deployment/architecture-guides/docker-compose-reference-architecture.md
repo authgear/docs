@@ -356,7 +356,7 @@ With Option 1 you supply the datastores. With Option 2 they are installed to the
 
 ### Expected Capacity
 
-At 100 users, the Minimum and Recommended specifications in the inventories above are expected to sustain:
+With 100 concurrent users logging in, the Minimum and Recommended specifications in the inventories above are expected to sustain:
 
 | Specification | Logins per second |
 | ------------- | ----------------- |
