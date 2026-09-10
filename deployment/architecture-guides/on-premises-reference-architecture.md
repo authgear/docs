@@ -1,6 +1,6 @@
 # On-Premises Reference Architecture
 
-This page describes the reference architecture for deploying Authgear on-premises.
+This page describes the reference architecture for deploying Authgear on-premises. For smaller deployments on virtual machines without Kubernetes, see [Docker Compose Reference Architecture](docker-compose-reference-architecture.md).
 
 ## Architecture
 
