@@ -74,7 +74,7 @@ curl https://<your-project>.authgear.cloud/oauth2/register \
 ```
 {% endtab %}
 
-{% tab title="Open registration (native app)" %}
+{% tab title="Open registration" %}
 ```bash
 curl https://<your-project>.authgear.cloud/oauth2/register \
   -H 'Content-Type: application/json' \
@@ -88,7 +88,7 @@ curl https://<your-project>.authgear.cloud/oauth2/register \
 {% endtabs %}
 
 {% hint style="warning" %}
-**Redirecting to `localhost`? Set `"application_type": "native"`.** The default, `web`, accepts only `https://` redirect URIs, so a desktop, CLI, or MCP client that listens on `http://localhost` is rejected with `invalid_redirect_uri` unless it registers as `native`.
+**When redirecting to `localhost`, set `"application_type": "native"`.** The default, `web`, accepts only `https://` redirect URIs, so a desktop, CLI, or MCP client that listens on `http://localhost` is rejected.
 {% endhint %}
 
 A successful registration returns **201 Created** with the new client's metadata:
