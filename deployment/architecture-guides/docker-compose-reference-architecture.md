@@ -364,7 +364,7 @@ With 100 concurrent users logging in, the Minimum and Recommended specifications
 | Minimum       | 5                 |
 | Recommended   | 15                |
 
-The figures hold for both options, provided the datastores you supply under Option 1 match the specifications in the inventories. Larger datastores may sustain more, but no higher figure has been measured.
+The figures hold for both options, provided the datastores you supply under Option 1 match the specifications in the inventories.
 
 Throughput is bound by the database, not by the number of Authgear VMs, so the high availability tier adds availability, not capacity. It therefore fixes Authgear at two VMs, enough for failover and rolling upgrades. A third would add nothing.
 
