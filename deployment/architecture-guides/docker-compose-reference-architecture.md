@@ -186,7 +186,7 @@ In addition to the [common inventory](#common-inventory), you provide the follow
 
 ## Option 2: Included Datastores
 
-PostgreSQL, Redis, and [RustFS](https://rustfs.com) object storage are installed on dedicated datastore VMs as part of the deployment. This is the only option that needs no managed datastore from you, at the cost of more VMs.
+PostgreSQL, Redis, and S3-compatible object storage ([RustFS](https://rustfs.com)) are installed on dedicated datastore VMs as part of the deployment. This is the only option that needs no managed datastore from you, at the cost of more VMs.
 
 ### Option 2: Single Instance
 
@@ -248,14 +248,14 @@ authgear:B -- T:j_mailer
 
 In addition to the [common inventory](#common-inventory), you provide the following. The datastores are installed on the datastore VM as part of the deployment.
 
-| Item         | Minimum                          | Recommended                      | Quantity | Remarks                                                                         |
-| ------------ | -------------------------------- | -------------------------------- | -------- | ------------------------------------------------------------------------------- |
-| Authgear VM  | 2 CPU / 16 GB / 40 GB Data Disk  | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Also runs the monitoring stack.                                                 |
-| Datastore VM | 2 CPU / 16 GB / 100 GB Data Disk | 4 CPU / 16 GB / 200 GB Data Disk | 1        | Runs PostgreSQL, Redis, and RustFS. Size the disk for user data and audit logs. |
+| Item         | Minimum                          | Recommended                      | Quantity | Remarks                                                                                 |
+| ------------ | -------------------------------- | -------------------------------- | -------- | --------------------------------------------------------------------------------------- |
+| Authgear VM  | 2 CPU / 16 GB / 40 GB Data Disk  | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Also runs the monitoring stack.                                                         |
+| Datastore VM | 2 CPU / 16 GB / 100 GB Data Disk | 4 CPU / 16 GB / 200 GB Data Disk | 1        | Runs PostgreSQL, Redis, and object storage. Size the disk for user data and audit logs. |
 
 ### Option 2: High Availability
 
-PostgreSQL, Redis, and RustFS run on two datastore VMs, a primary and a replica. Authgear runs on two further VMs behind the load balancer. Each Authgear VM runs its own HAProxy, which routes database and Redis connections to the current primary. The monitor VM runs the monitoring stack and the failover controllers: [pg\_auto\_failover](https://github.com/hapostgres/pg_auto_failover) (PAF) for PostgreSQL and Sentinel for Redis. RustFS bucket replication copies objects to the second datastore VM, which gives a redundant copy rather than automatic failover. This is the largest footprint.
+PostgreSQL, Redis, and object storage run on two datastore VMs, a primary and a replica. Authgear runs on two further VMs behind the load balancer. Each Authgear VM runs its own HAProxy, which routes database and Redis connections to the current primary. The monitor VM runs the monitoring stack and the failover controllers: [pg\_auto\_failover](https://github.com/hapostgres/pg_auto_failover) (PAF) for PostgreSQL and Sentinel for Redis. Object storage replication copies objects to the second datastore VM, which gives a redundant copy rather than automatic failover. This is the largest footprint.
 
 ```mermaid
 architecture-beta
@@ -349,11 +349,11 @@ Every setup needs the following, in addition to the VMs listed in its inventory.
 
 The versions below are the ones Authgear is tested against, on both a cloud-managed service and the included datastores. Option 2 installs exactly these versions. With Option 1, match them where you can. Other releases have not been tested.
 
-| Datastore      | Version                                                                           |
-| -------------- | --------------------------------------------------------------------------------- |
-| PostgreSQL     | 16.14, with the `pg_partman` extension 16.5.1.                                    |
-| Redis          | 6.2.20.                                                                           |
-| Object storage | Any S3-compatible implementation. Option 2 installs [RustFS](https://rustfs.com). |
+| Datastore      | Version                                        |
+| -------------- | ---------------------------------------------- |
+| PostgreSQL     | 16.14, with the `pg_partman` extension 16.5.1. |
+| Redis          | 6.2.20.                                        |
+| Object storage | Any S3-compatible implementation.              |
 
 ### Expected Capacity
 
@@ -372,7 +372,7 @@ Throughput is bound by the database, not by the number of Authgear VMs, so the h
 
 With Option 1, datastore availability is your responsibility. With Option 2, the single-instance tier has no redundancy. The high availability tier uses PAF for PostgreSQL and Sentinel for Redis, both run on the monitor VM, and an HAProxy on each Authgear VM that routes connections to the current primary. The [High Availability](on-premises-reference-architecture.md#high-availability) section of the On-Premises Reference Architecture describes how PAF, Sentinel, and HAProxy fail over. That page places them in Kubernetes. Here they run on the monitor VM and the Authgear VMs.
 
-Object storage uses RustFS [bucket replication](https://docs.rustfs.com/en/administration/data/bucket/replication) to keep a copy of every object on the second datastore VM. Replication is asynchronous and provides a redundant copy rather than automatic failover.
+Object storage uses [bucket replication](https://docs.rustfs.com/en/administration/data/bucket/replication) to keep a copy of every object on the second datastore VM. Replication is asynchronous and provides a redundant copy rather than automatic failover.
 
 ## Network, Monitoring, and Backups
 
