@@ -114,12 +114,12 @@ GET https://myproject.authgear.cloud/oauth2/authorize
 {% endtab %}
 
 {% tab title="DCR" %}
-Register a client:
+Register a client. A desktop or CLI client redirects to `localhost`, so it must register as `native`, or the request fails with `invalid_redirect_uri`:
 
 ```bash
 curl https://myproject.authgear.cloud/oauth2/register \
   -H 'Content-Type: application/json' \
-  -d '{"redirect_uris": ["https://mcp-client.example.com/callback"]}'
+  -d '{"redirect_uris": ["http://localhost:3000/callback"], "application_type": "native"}'
 ```
 
 Then run the Authorization Code Flow with PKCE using the returned `client_id`:
@@ -129,7 +129,7 @@ GET https://myproject.authgear.cloud/oauth2/authorize
   ?client_id=dcrc_AbCdEfGhIjKlMnOpQr
   &response_type=code
   &scope=openid+read:tools
-  &redirect_uri=https://mcp-client.example.com/callback
+  &redirect_uri=http://localhost:3000/callback
   &code_challenge=<challenge>
   &code_challenge_method=S256
   &resource=https://mcp-server.example.com

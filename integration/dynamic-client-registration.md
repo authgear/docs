@@ -74,16 +74,22 @@ curl https://<your-project>.authgear.cloud/oauth2/register \
 ```
 {% endtab %}
 
-{% tab title="Open registration" %}
+{% tab title="Open registration (native app)" %}
 ```bash
 curl https://<your-project>.authgear.cloud/oauth2/register \
   -H 'Content-Type: application/json' \
   -d '{
-    "redirect_uris": ["https://mcp-client.example.com/callback"]
+    "client_name": "Example MCP Client",
+    "redirect_uris": ["http://localhost:3000/callback"],
+    "application_type": "native"
   }'
 ```
 {% endtab %}
 {% endtabs %}
+
+{% hint style="warning" %}
+**Redirecting to `localhost`? Set `"application_type": "native"`.** The default, `web`, accepts only `https://` redirect URIs, so a desktop, CLI, or MCP client that listens on `http://localhost` is rejected with `invalid_redirect_uri` unless it registers as `native`.
+{% endhint %}
 
 A successful registration returns **201 Created** with the new client's metadata:
 
@@ -101,7 +107,7 @@ A successful registration returns **201 Created** with the new client's metadata
 
 Rules to keep in mind:
 
-* `application_type` is `web` (the default) or `native`. A `web` client's redirect URIs must use `https`; a `native` client may use custom schemes (e.g. `myapp://callback`) or `http://localhost`.
+* `application_type` decides which redirect URIs are accepted. `web` (the default) accepts only `https://`. `native` accepts `http://localhost` on any port and custom schemes such as `myapp://callback`, and nothing else: `https://` and `http://127.0.0.1` are rejected. A mismatch fails with `invalid_redirect_uri`.
 * No client secret is ever issued: `token_endpoint_auth_method` is always `none`, and requests asking for anything else are rejected.
 * Whether the client is first-party or third-party is decided by the IAT used to register it; open registration always registers third-party clients.
 
