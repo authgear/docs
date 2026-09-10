@@ -106,12 +106,12 @@ authgear:B -- T:j_mailer
 
 In addition to the [common inventory](#common-inventory), you provide the following.
 
-| Item           | Minimum                         | Recommended                      | Quantity | Remarks                                                               |
-| -------------- | ------------------------------- | -------------------------------- | -------- | --------------------------------------------------------------------- |
-| Authgear VM    | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Also runs the monitoring stack.                                       |
-| PostgreSQL     | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Your existing service. Size the disk to the expected number of users. |
-| Redis          | 1 CPU / 4 GB / 10 GB Data Disk  | 1 CPU / 8 GB / 10 GB Data Disk   | 1        | Your existing service.                                                |
-| Object storage | 40 GB Storage                   | 80 GB Storage                    | 1        | Your existing service.                                                |
+| Item           | Minimum                         | Recommended                      | Quantity | Remarks                                                            |
+| -------------- | ------------------------------- | -------------------------------- | -------- | ------------------------------------------------------------------ |
+| Authgear VM    | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Also runs the monitoring stack.                                    |
+| PostgreSQL     | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Your existing service. Size the disk for user data and audit logs. |
+| Redis          | 1 CPU / 4 GB / 10 GB Data Disk  | 1 CPU / 8 GB / 10 GB Data Disk   | 1        | Your existing service.                                             |
+| Object storage | 40 GB Storage                   | 80 GB Storage                    | 1        | Your existing service.                                             |
 
 ### Option 1: High Availability
 
@@ -175,18 +175,18 @@ authgear:B -- T:j_mailer
 
 In addition to the [common inventory](#common-inventory), you provide the following.
 
-| Item           | Minimum                         | Recommended                      | Quantity | Remarks                                                               |
-| -------------- | ------------------------------- | -------------------------------- | -------- | --------------------------------------------------------------------- |
-| Load balancer  |                                 |                                  | 1        | Must be highly available itself.                                      |
-| Authgear VM    | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 2        | For failover, not capacity.                                           |
-| Monitor VM     | 1 CPU / 8 GB / 40 GB Data Disk  | 1 CPU / 8 GB / 40 GB Data Disk   | 1        | Optional. Runs the monitoring stack. Without it, there is no monitoring. |
-| PostgreSQL     | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Your existing service. Size the disk to the expected number of users. |
-| Redis          | 1 CPU / 4 GB / 10 GB Data Disk  | 1 CPU / 8 GB / 10 GB Data Disk   | 1        | Your existing service.                                                |
-| Object storage | 40 GB Storage                   | 80 GB Storage                    | 1        | Your existing service.                                                |
+| Item           | Minimum                         | Recommended                      | Quantity | Remarks                                                                                                                                           |
+| -------------- | ------------------------------- | -------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Load balancer  |                                 |                                  | 1        | Your choice, such as HAProxy, Apache, or a managed service. Must be highly available itself. Can terminate TLS or pass it through to the ingress. |
+| Authgear VM    | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 2        | For failover, not capacity.                                                                                                                       |
+| Monitor VM     | 1 CPU / 8 GB / 40 GB Data Disk  | 1 CPU / 8 GB / 40 GB Data Disk   | 1        | Optional. Runs the monitoring stack. Without it, there is no monitoring.                                                                          |
+| PostgreSQL     | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Your existing service. Size the disk for user data and audit logs.                                                                                |
+| Redis          | 1 CPU / 4 GB / 10 GB Data Disk  | 1 CPU / 8 GB / 10 GB Data Disk   | 1        | Your existing service.                                                                                                                            |
+| Object storage | 40 GB Storage                   | 80 GB Storage                    | 1        | Your existing service.                                                                                                                            |
 
 ## Option 2: Included Datastores
 
-PostgreSQL, Redis, and S3-compatible object storage are installed on dedicated datastore VMs as part of the deployment. This is the only option that needs no managed datastore from you, at the cost of more VMs.
+PostgreSQL, Redis, and [RustFS](https://rustfs.com) object storage are installed on dedicated datastore VMs as part of the deployment. This is the only option that needs no managed datastore from you, at the cost of more VMs.
 
 ### Option 2: Single Instance
 
@@ -248,14 +248,14 @@ authgear:B -- T:j_mailer
 
 In addition to the [common inventory](#common-inventory), you provide the following. The datastores are installed on the datastore VM as part of the deployment.
 
-| Item         | Minimum                          | Recommended                      | Quantity | Remarks                                                                                    |
-| ------------ | -------------------------------- | -------------------------------- | -------- | ------------------------------------------------------------------------------------------ |
-| Authgear VM  | 2 CPU / 16 GB / 40 GB Data Disk  | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Also runs the monitoring stack.                                                            |
-| Datastore VM | 2 CPU / 16 GB / 100 GB Data Disk | 4 CPU / 16 GB / 200 GB Data Disk | 1        | Runs PostgreSQL, Redis, and object storage. Size the disk to the expected number of users. |
+| Item         | Minimum                          | Recommended                      | Quantity | Remarks                                                                         |
+| ------------ | -------------------------------- | -------------------------------- | -------- | ------------------------------------------------------------------------------- |
+| Authgear VM  | 2 CPU / 16 GB / 40 GB Data Disk  | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Also runs the monitoring stack.                                                 |
+| Datastore VM | 2 CPU / 16 GB / 100 GB Data Disk | 4 CPU / 16 GB / 200 GB Data Disk | 1        | Runs PostgreSQL, Redis, and RustFS. Size the disk for user data and audit logs. |
 
 ### Option 2: High Availability
 
-Replicated PostgreSQL, Redis, and object storage run on two datastore VMs. Authgear runs on two further VMs behind the load balancer. The monitor VM runs the monitoring stack and the failover controllers: [pg\_auto\_failover](https://github.com/hapostgres/pg_auto_failover) (PAF) for PostgreSQL and Sentinel for Redis. This is the largest footprint.
+PostgreSQL, Redis, and RustFS run on two datastore VMs, a primary and a replica. Authgear runs on two further VMs behind the load balancer. Each Authgear VM runs its own HAProxy, which routes database and Redis connections to the current primary. The monitor VM runs the monitoring stack and the failover controllers: [pg\_auto\_failover](https://github.com/hapostgres/pg_auto_failover) (PAF) for PostgreSQL and Sentinel for Redis. RustFS bucket replication copies objects to the second datastore VM, which gives a redundant copy rather than automatic failover. This is the largest footprint.
 
 ```mermaid
 architecture-beta
@@ -320,12 +320,12 @@ authgear:B -- T:j_mailer
 
 In addition to the [common inventory](#common-inventory), you provide the following. The datastores are installed on the datastore VMs as part of the deployment.
 
-| Item          | Minimum                          | Recommended                      | Quantity | Remarks                                                              |
-| ------------- | -------------------------------- | -------------------------------- | -------- | -------------------------------------------------------------------- |
-| Load balancer |                                  |                                  | 1        | Must be highly available itself.                                     |
-| Authgear VM   | 2 CPU / 16 GB / 40 GB Data Disk  | 4 CPU / 16 GB / 100 GB Data Disk | 2        | For failover, not capacity.                                          |
-| Datastore VM  | 2 CPU / 16 GB / 100 GB Data Disk | 4 CPU / 16 GB / 200 GB Data Disk | 2        | Primary and replica. Size the disk to the expected number of users.  |
-| Monitor VM    | 1 CPU / 8 GB / 40 GB Data Disk   | 1 CPU / 8 GB / 40 GB Data Disk   | 1        | Runs the monitoring stack and the PAF and Sentinel failover controllers. |
+| Item          | Minimum                          | Recommended                      | Quantity | Remarks                                                                                                                                           |
+| ------------- | -------------------------------- | -------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Load balancer |                                  |                                  | 1        | Your choice, such as HAProxy, Apache, or a managed service. Must be highly available itself. Can terminate TLS or pass it through to the ingress. |
+| Authgear VM   | 2 CPU / 16 GB / 40 GB Data Disk  | 4 CPU / 16 GB / 100 GB Data Disk | 2        | For failover, not capacity. Each runs its own HAProxy for database and Redis routing.                                                             |
+| Datastore VM  | 2 CPU / 16 GB / 100 GB Data Disk | 4 CPU / 16 GB / 200 GB Data Disk | 2        | Primary and replica. Size the disk for user data and audit logs.                                                                                  |
+| Monitor VM    | 1 CPU / 8 GB / 40 GB Data Disk   | 1 CPU / 8 GB / 40 GB Data Disk   | 1        | Runs the monitoring stack and the PAF and Sentinel failover controllers.                                                                          |
 
 ## Requirements
 
@@ -333,26 +333,27 @@ In addition to the [common inventory](#common-inventory), you provide the follow
 
 Every setup needs the following, in addition to the VMs listed in its inventory.
 
-| Item        | Quantity          | Remarks                                                                                                                                                                                                                                                       |
-| ----------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| IP address  | 1                 | For the ingress, or for the load balancer in the high availability tier.                                                                                                                                                                                      |
-| Domain      | 2 + 1 per project | Two system domains for the Authgear Portal and Portal Login, for example `portal.example.com` and `accounts.example.com`, plus one Authgear Endpoint domain per [project](../../get-started/5-minute-guide.md), for example `auth.example.com`.                |
-| Certificate | 1                 | Wildcard certificate covering the domains above.                                                                                                                                                                                                              |
-| Firewall    | 1                 | In front of the ingress or load balancer.                                                                                                                                                                                                                     |
-| Mailer      | 1                 | Optional. SMTP server or SendGrid.                                                                                                                                                                                                                            |
-| SMS         | 1                 | Optional. Gateway account for SMS delivery.                                                                                                                                                                                                                   |
-| WhatsApp    | 1                 | Optional. Business account for WhatsApp delivery.                                                                                                                                                                                                             |
-| CAPTCHA     | 1                 | Optional. Google reCAPTCHA or Cloudflare Turnstile.                                                                                                                                                                                                           |
+| Item             | Quantity          | Remarks                                                                                                                                                                                                                                         |
+| ---------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| IP address       | 1                 | For the ingress, or for the load balancer in the high availability tier.                                                                                                                                                                        |
+| Domain           | 2 + 1 per project | Two system domains for the Authgear Portal and Portal Login, for example `portal.example.com` and `accounts.example.com`, plus one Authgear Endpoint domain per [project](../../get-started/5-minute-guide.md), for example `auth.example.com`. |
+| Certificate      | 1                 | Wildcard certificate covering the domains above. Install it on the ingress, or on the load balancer if that terminates TLS.                                                                                                                     |
+| Grafana hostname | 1                 | Internal hostname and certificate. Grafana is not exposed to the internet, so it does not use the public domains or the wildcard certificate. Not needed when Option 1 High Availability omits the monitor VM.                                  |
+| Firewall         | 1                 | In front of the ingress or load balancer.                                                                                                                                                                                                       |
+| Mailer           | 1                 | Optional. SMTP server or SendGrid.                                                                                                                                                                                                              |
+| SMS              | 1                 | Optional. Gateway account for SMS delivery.                                                                                                                                                                                                     |
+| WhatsApp         | 1                 | Optional. Business account for WhatsApp delivery.                                                                                                                                                                                               |
+| CAPTCHA          | 1                 | Optional. Google reCAPTCHA or Cloudflare Turnstile.                                                                                                                                                                                             |
 
 ### Datastore Requirements
 
-With Option 1 you supply the datastores. With Option 2 they are installed to the same requirements.
+The versions below are the ones Authgear is tested against, on both a cloud-managed service and the included datastores. Option 2 installs exactly these versions. With Option 1, match them where you can. Other releases have not been tested.
 
-| Datastore      | Requirement                                    |
-| -------------- | ---------------------------------------------- |
-| PostgreSQL     | 16.14, with the `pg_partman` extension 16.5.1. |
-| Redis          | 6.2.20.                                        |
-| Object storage | Any S3-compatible implementation.              |
+| Datastore      | Version                                                                           |
+| -------------- | --------------------------------------------------------------------------------- |
+| PostgreSQL     | 16.14, with the `pg_partman` extension 16.5.1.                                    |
+| Redis          | 6.2.20.                                                                           |
+| Object storage | Any S3-compatible implementation. Option 2 installs [RustFS](https://rustfs.com). |
 
 ### Expected Capacity
 
@@ -363,14 +364,18 @@ With 100 concurrent users logging in, the Minimum and Recommended specifications
 | Minimum       | 5                 |
 | Recommended   | 15                |
 
+The figures hold for both options, provided the datastores you supply under Option 1 match the specifications in the inventories. Larger datastores may sustain more, but no higher figure has been measured.
+
 Throughput is bound by the database, not by the number of Authgear VMs, so the high availability tier adds availability, not capacity. It therefore fixes Authgear at two VMs, enough for failover and rolling upgrades. A third would add nothing.
 
 ### Datastore High Availability
 
-With Option 1, datastore availability is your responsibility. With Option 2, the single-instance tier has no redundancy, and the high availability tier uses PAF for PostgreSQL and Sentinel for Redis, both driven from the monitor VM. The [High Availability](on-premises-reference-architecture.md#high-availability) section of the On-Premises Reference Architecture describes how these components work.
+With Option 1, datastore availability is your responsibility. With Option 2, the single-instance tier has no redundancy. The high availability tier uses PAF for PostgreSQL and Sentinel for Redis, both run on the monitor VM, and an HAProxy on each Authgear VM that routes connections to the current primary. The [High Availability](on-premises-reference-architecture.md#high-availability) section of the On-Premises Reference Architecture describes how PAF, Sentinel, and HAProxy fail over. That page places them in Kubernetes. Here they run on the monitor VM and the Authgear VMs.
+
+Object storage uses RustFS [bucket replication](https://docs.rustfs.com/en/administration/data/bucket/replication) to keep a copy of every object on the second datastore VM. Replication is asynchronous and provides a redundant copy rather than automatic failover.
 
 ## Network, Monitoring, and Backups
 
-The firewall rules, hostnames, WAF paths, and backup guidance in [On-Premises Reference Architecture](on-premises-reference-architecture.md) apply to this architecture too. Where that page says Kubernetes, read the Authgear VMs. In the single-instance tier, the ingress on the Authgear VM takes the place of the load balancer.
+The firewall rules, hostnames, WAF paths, and backup guidance in [On-Premises Reference Architecture](on-premises-reference-architecture.md) apply to this architecture too. Where that page says Kubernetes, read the Authgear VMs. In the single-instance tier, the ingress on the Authgear VM takes the place of the load balancer. Administrators reach Grafana over your internal network, not through the public path that serves users.
 
 Metrics are collected by the Prometheus and Grafana instances that ship with the deployment. Access logs come from the ingress on each Authgear VM. Audit logs are persisted in PostgreSQL, so include the database in your backup policy.
