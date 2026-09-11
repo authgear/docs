@@ -45,7 +45,7 @@ Counts exclude the load balancer, which you provide in the high availability tie
 
 The deployment adds only the VMs that run Authgear and the monitoring stack. The datastores are services you already operate.
 
-### Option 1: Single Instance
+### Single Instance
 
 Authgear, its ingress, and the monitoring stack share a single VM.&#x20;
 
@@ -111,7 +111,7 @@ In addition to the [common inventory](docker-compose-reference-architecture.md#c
 | Redis          | 1 CPU / 4 GB / 10 GB Data Disk  | 1 CPU / 8 GB / 10 GB Data Disk   | 1        | \~30k per sessions                          |
 | Object storage | 40 GB Storage                   | 80 GB Storage                    | 1        | Size for user profile pic and other assets  |
 
-### Option 1: High Availability
+### High Availability
 
 Authgear runs on two VMs behind a load balancer, so either can be rebooted or upgraded without an outage. The monitoring stack moves to an optional monitor VM. Without that VM, the setup has no monitoring.
 
@@ -186,7 +186,7 @@ In addition to the [common inventory](docker-compose-reference-architecture.md#c
 
 PostgreSQL, Redis, and S3-compatible object storage ([RustFS](https://rustfs.com)) are installed on dedicated datastore VMs as part of the deployment. This is the only option that needs no managed datastore from you, at the cost of more VMs.
 
-### Option 2: Single Instance
+### Single Instance
 
 The datastores run on one datastore VM, and Authgear, its ingress, and the monitoring stack on one Authgear VM. Every component is a single instance, so either VM failing takes the service down. This is the cheapest setup and the quickest to stand up.
 
@@ -251,7 +251,7 @@ In addition to the [common inventory](docker-compose-reference-architecture.md#c
 | Authgear VM  | 2 CPU / 16 GB / 40 GB Data Disk  | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Also runs the monitoring stack.                                                         |
 | Datastore VM | 2 CPU / 16 GB / 100 GB Data Disk | 4 CPU / 16 GB / 200 GB Data Disk | 1        | Runs PostgreSQL, Redis, and object storage. Size the disk for user data and audit logs. |
 
-### Option 2: High Availability
+### High Availability
 
 PostgreSQL, Redis, and object storage run on two datastore VMs, a primary and a replica. Authgear runs on two further VMs behind the load balancer. Each Authgear VM runs its own HAProxy, which routes database and Redis connections to the current primary. The monitor VM runs the monitoring stack and the failover controllers: [pg\_auto\_failover](https://github.com/hapostgres/pg_auto_failover) (PAF) for PostgreSQL and Sentinel for Redis. Object storage replication copies objects to the second datastore VM, which gives a redundant copy rather than automatic failover.&#x20;
 
@@ -336,7 +336,7 @@ Every setup needs the following, in addition to the VMs listed in its inventory.
 | IP address       | 1                 | For the ingress, or for the load balancer in the high availability tier.                                                                                                                                                                        |
 | Domain           | 2 + 1 per project | Two system domains for the Authgear Portal and Portal Login, for example `portal.example.com` and `accounts.example.com`, plus one Authgear Endpoint domain per [project](../../get-started/5-minute-guide.md), for example `auth.example.com`. |
 | Certificate      | 1                 | Wildcard certificate covering the domains above. Install it on the ingress, or on the load balancer if that terminates TLS.                                                                                                                     |
-| Grafana hostname | 1                 | Internal hostname and certificate. Grafana is not exposed to the internet, so it does not use the public domains or the wildcard certificate. Not needed when Option 1 High Availability omits the monitor VM.                                  |
+| Grafana hostname | 1                 | Internal hostname and certificate. Grafana is not exposed to the internet, so it does not use the public domains or the wildcard certificate. Not needed when the Option 1 high availability setup omits the monitor VM.                                  |
 | Firewall         | 1                 | In front of the ingress or load balancer.                                                                                                                                                                                                       |
 | Mailer           | 1                 | Optional. SMTP server or SendGrid.                                                                                                                                                                                                              |
 | SMS              | 1                 | Optional. Gateway account for SMS delivery.                                                                                                                                                                                                     |
