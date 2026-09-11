@@ -1,42 +1,33 @@
 ---
 description: >-
-  Reference architecture for running Authgear on virtual machines with Docker
-  Compose or Podman Compose.
+  Highly available reference architecture for running Authgear on virtual
+  machines with Docker Compose or Podman Compose.
 ---
 
 # Docker Compose Reference Architecture
 
-This page describes a reference architecture for running Authgear on conventional virtual machines with Docker Compose or Podman Compose. It suits deployments where a Kubernetes cluster is unavailable, or not worth operating for a single application. For the Kubernetes-based architecture, see [K8S Reference Architecture](on-premises-reference-architecture.md).
+This page describes a highly available reference architecture for running Authgear on conventional virtual machines with Docker Compose or Podman Compose. It suits deployments where a Kubernetes cluster is unavailable, or not worth operating for a single application. For the Kubernetes-based architecture, see [K8S Cluster Reference Architecture](on-premises-reference-architecture.md).
+
+This layout is for production, and for any staging environment that must mirror it. For development, see [Run locally with Docker Compose](../local-development/local.md).
 
 ## Components
 
 The system has three parts.
 
 1. **Authgear**: the application services and their ingress (a reverse proxy), run under Compose on two Authgear VMs.
-2. **Monitoring stack**: Prometheus and Grafana, run under Compose on a separate monitor VM.
+2. **Monitoring stack**: Prometheus and Grafana, run under Compose on a separate monitor VM. Option 1 can omit this VM, at the cost of monitoring.
 3. **Datastores**: PostgreSQL, Redis, and S3-compatible object storage.
 
-## Choosing a Setup
+## Choosing a Datastore Option
 
-### Who Runs the Datastores
+* [**Option 1: Your Own Datastores**](docker-compose-reference-architecture.md#option-1-your-own-datastores). You supply PostgreSQL, Redis, and object storage from services you already operate. Choose this when your platform team already runs them. It is the preferred option, because backup, patching, and failover stay with the team that already handles them. Two VMs, plus an optional monitor VM.
+* [**Option 2: Included Datastores**](docker-compose-reference-architecture.md#option-2-included-datastores). The datastores are installed on dedicated datastore VMs as part of the deployment. Choose this when no managed datastores are available, such as air-gapped sites and bare-metal data centres, or when you want a self-contained environment. Five VMs: two for Authgear, two for the datastores, and a monitor VM.
 
-* [**Option 1: Your Own Datastores**](docker-compose-reference-architecture.md#option-1-your-own-datastores). You supply PostgreSQL, Redis, and object storage from services you already operate. Choose this when your platform team already runs them. It is the preferred option for production, because backup, patching, and failover stay with the team that already handles them.
-* [**Option 2: Included Datastores**](docker-compose-reference-architecture.md#option-2-included-datastores). The datastores are installed on dedicated datastore VMs as part of the deployment. Choose this when no managed datastores are available, such as air-gapped sites and bare-metal data centres, or when you want a self-contained, disposable environment.
-
-### VM Count
-
-|                                   | VMs                            |
-| --------------------------------- | ------------------------------ |
-| **Option 1: your own datastores** | 2, plus an optional monitor VM |
-| **Option 2: included datastores** | 4+1 (monitor VM)               |
-
-Counts exclude the load balancer, which you provide.
+VM counts exclude the load balancer, which you provide.
 
 ## Option 1: Your Own Datastores
 
-The deployment adds only the VMs that run Authgear and the monitoring stack. The datastores are services you already operate.
-
-Authgear runs on two VMs behind a load balancer, so either can be rebooted or upgraded without an outage. The monitoring stack runs on an optional monitor VM. Without that VM, the setup has no monitoring.
+The deployment adds only the VMs that run Authgear and the monitoring stack, and uses datastores you already operate. Authgear runs on two VMs behind a load balancer, so either can be rebooted or upgraded without an outage. The monitoring stack runs on an optional monitor VM. Without that VM, the setup has no monitoring.
 
 ```mermaid
 architecture-beta
@@ -96,20 +87,18 @@ authgear:B -- T:j_mailer
 
 In addition to the [common inventory](docker-compose-reference-architecture.md#common-inventory), you provide the following.
 
-| Item           | Minimum                         | Recommended                      | Quantity | Remarks                                                                                                                                                     |
-| -------------- | ------------------------------- | -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Load balancer  |                                 |                                  | 1        | <ul><li>e.g HAProxy, Apache, or a managed service.</li><li>Must be highly available.</li><li>Can terminate TLS or pass it through to the ingress.</li></ul> |
-| Authgear VM    | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 2        | 2 for failover                                                                                                                                              |
-| Monitor VM     | 1 CPU / 8 GB / 40 GB Data Disk  | 1 CPU / 8 GB / 40 GB Data Disk   | 1        | Optional.                                                                                                                                                   |
-| PostgreSQL     | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Size the disk for user data and audit logs.                                                                                                                 |
-| Redis          | 1 CPU / 4 GB / 10 GB Data Disk  | 1 CPU / 8 GB / 10 GB Data Disk   | 1        | \~30k per sessions                                                                                                                                          |
-| Object storage | 40 GB Storage                   | 80 GB Storage                    | 1        | Size for user profile pic and other assets                                                                                                                  |
+| Item           | Minimum                         | Recommended                      | Quantity | Remarks                                                                                                                                                             |
+| -------------- | ------------------------------- | -------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Load balancer  |                                 |                                  | 1        | <ul><li>For example HAProxy, Apache, or a managed service.</li><li>Must be highly available.</li><li>Can terminate TLS or pass it through to the ingress.</li></ul> |
+| Authgear VM    | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 2        | For failover, not capacity.                                                                                                                                         |
+| Monitor VM     | 1 CPU / 8 GB / 40 GB Data Disk  | 1 CPU / 8 GB / 40 GB Data Disk   | 1        | Optional.                                                                                                                                                           |
+| PostgreSQL     | 2 CPU / 16 GB / 40 GB Data Disk | 4 CPU / 16 GB / 100 GB Data Disk | 1        | Size the disk for user data and audit logs.                                                                                                                         |
+| Redis          | 1 CPU / 4 GB / 10 GB Data Disk  | 1 CPU / 8 GB / 10 GB Data Disk   | 1        | About 30 kB per session.                                                                                                                                            |
+| Object storage | 40 GB Storage                   | 80 GB Storage                    | 1        | Holds user profile pictures and other assets.                                                                                                                       |
 
 ## Option 2: Included Datastores
 
-PostgreSQL, Redis, and S3-compatible object storage ([RustFS](https://rustfs.com)) are installed on dedicated datastore VMs as part of the deployment. This is the only option that needs no managed datastore from you, at the cost of more VMs.
-
-PostgreSQL, Redis, and object storage run on two datastore VMs, a primary and a replica. Authgear runs on two further VMs behind the load balancer. Each Authgear VM runs its own HAProxy, which routes database and Redis connections to the current primary. The monitor VM runs the monitoring stack and the failover controllers: [pg\_auto\_failover](https://github.com/hapostgres/pg_auto_failover) (PAF) for PostgreSQL and Sentinel for Redis. Object storage replication copies objects to the second datastore VM, which gives a redundant copy rather than automatic failover.
+PostgreSQL, Redis, and S3-compatible object storage ([RustFS](https://rustfs.com)) are installed on two dedicated datastore VMs, a primary and a replica, as part of the deployment. This is the only option that needs no managed datastore from you, at the cost of more VMs. Authgear runs on two further VMs behind the load balancer. Each Authgear VM runs its own HAProxy, which routes database and Redis connections to the current primary. The monitor VM runs the monitoring stack and the failover controllers: [pg\_auto\_failover](https://github.com/hapostgres/pg_auto_failover) (PAF) for PostgreSQL and Sentinel for Redis. Object storage replication copies objects to the second datastore VM, which gives a redundant copy rather than automatic failover.
 
 ```mermaid
 architecture-beta
@@ -174,12 +163,12 @@ authgear:B -- T:j_mailer
 
 In addition to the [common inventory](docker-compose-reference-architecture.md#common-inventory), you provide the following. The datastores are installed on the datastore VMs as part of the deployment.
 
-| Item          | Minimum                          | Recommended                      | Quantity | Remarks                                                                                                                                                     |
-| ------------- | -------------------------------- | -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Load balancer |                                  |                                  | 1        | <ul><li>e.g HAProxy, Apache, or a managed service.</li><li>Must be highly available.</li><li>Can terminate TLS or pass it through to the ingress.</li></ul> |
-| Authgear VM   | 2 CPU / 16 GB / 40 GB Data Disk  | 4 CPU / 16 GB / 100 GB Data Disk | 2        | For failover; Each runs its own HAProxy for database and Redis routing.                                                                                     |
-| Datastore VM  | 2 CPU / 16 GB / 100 GB Data Disk | 4 CPU / 16 GB / 200 GB Data Disk | 2        | Primary and replica. Size the disk for user data and audit logs.                                                                                            |
-| Monitor VM    | 1 CPU / 8 GB / 40 GB Data Disk   | 1 CPU / 8 GB / 40 GB Data Disk   | 1        | Runs the monitoring stack and the PAF and Sentinel failover controllers.                                                                                    |
+| Item          | Minimum                          | Recommended                      | Quantity | Remarks                                                                                                                                                             |
+| ------------- | -------------------------------- | -------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Load balancer |                                  |                                  | 1        | <ul><li>For example HAProxy, Apache, or a managed service.</li><li>Must be highly available.</li><li>Can terminate TLS or pass it through to the ingress.</li></ul> |
+| Authgear VM   | 2 CPU / 16 GB / 40 GB Data Disk  | 4 CPU / 16 GB / 100 GB Data Disk | 2        | For failover, not capacity. Each runs its own HAProxy for database and Redis routing.                                                                               |
+| Datastore VM  | 2 CPU / 16 GB / 100 GB Data Disk | 4 CPU / 16 GB / 200 GB Data Disk | 2        | Primary and replica. Size the disk for user data and audit logs.                                                                                                    |
+| Monitor VM    | 1 CPU / 8 GB / 40 GB Data Disk   | 1 CPU / 8 GB / 40 GB Data Disk   | 1        | Runs the monitoring stack and the PAF and Sentinel failover controllers.                                                                                            |
 
 ## Requirements
 
@@ -224,12 +213,12 @@ Throughput is bound by the database, not by the number of Authgear VMs, so the s
 
 ### Datastore High Availability
 
-With Option 1, datastore availability is your responsibility. Option 2 uses PAF for PostgreSQL and Sentinel for Redis, both run on the monitor VM, and an HAProxy on each Authgear VM that routes connections to the current primary. The [High Availability](on-premises-reference-architecture.md#high-availability) section of the On-Premises Reference Architecture describes how PAF, Sentinel, and HAProxy fail over. That page places them in Kubernetes. Here they run on the monitor VM and the Authgear VMs.
+With Option 1, datastore availability is your responsibility. With Option 2, the PAF, Sentinel, and HAProxy components described under [Option 2](docker-compose-reference-architecture.md#option-2-included-datastores) provide it. The [High Availability](on-premises-reference-architecture.md#high-availability) section of the K8S Cluster Reference Architecture describes how they fail over. That page places them in Kubernetes. Here they run on the monitor VM and the Authgear VMs.
 
 Object storage uses [bucket replication](https://docs.rustfs.com/en/administration/data/bucket/replication) to keep a copy of every object on the second datastore VM. Replication is asynchronous and provides a redundant copy rather than automatic failover.
 
 ## Network, Monitoring, and Backups
 
-The firewall rules, hostnames, WAF paths, and backup guidance in [On-Premises Reference Architecture](on-premises-reference-architecture.md) apply to this architecture too. Where that page says Kubernetes, read the Authgear VMs. Administrators reach Grafana over your internal network, not through the public path that serves users.
+The firewall rules, hostnames, WAF paths, and backup guidance in [K8S Cluster Reference Architecture](on-premises-reference-architecture.md) apply to this architecture too. Where that page says Kubernetes, read the Authgear VMs. Administrators reach Grafana over your internal network, not through the public path that serves users.
 
 Metrics are collected by the Prometheus and Grafana instances that ship with the deployment. Access logs come from the ingress on each Authgear VM. Audit logs are persisted in PostgreSQL, so include the database in your backup policy.
