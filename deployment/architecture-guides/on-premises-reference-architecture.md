@@ -1,6 +1,6 @@
-# On-Premises Reference Architecture
+# K8S Cluster Reference Architecture
 
-This page describes the reference architecture for deploying Authgear on-premises. For smaller deployments on virtual machines without Kubernetes, see [Docker Compose Reference Architecture](docker-compose-reference-architecture.md).
+This page describes the reference architecture for deploying Authgear on an on-premises Kubernetes cluster. For deployments on virtual machines without Kubernetes, see [Docker Compose Reference Architecture](docker-compose-reference-architecture.md).
 
 ## Architecture
 
