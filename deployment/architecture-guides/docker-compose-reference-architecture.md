@@ -8,7 +8,7 @@ description: >-
 
 This page describes a highly available reference architecture for running Authgear on conventional virtual machines with Docker Compose or Podman Compose. It suits deployments where a Kubernetes cluster is unavailable, or not worth operating for a single application. For the Kubernetes-based architecture, see [K8S Cluster Reference Architecture](on-premises-reference-architecture.md).
 
-This layout is for production, and for any staging environment that must mirror it. For development, see [Run locally with Docker Compose](../local-development/local.md).
+For development, see [Run locally with Docker Compose](../local-development/local.md).
 
 ## Components
 
