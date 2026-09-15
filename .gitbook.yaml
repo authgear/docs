@@ -6,3 +6,6 @@ structure:
 
 redirects:
   get-started/ai-coding-tools: build-with-ai/ai-coding-tools/README.md
+  integration/client-id-metadata-document: get-started/auth-for-mcp/client-id-metadata-document.md
+  integration/dynamic-client-registration: get-started/auth-for-mcp/dynamic-client-registration.md
+  integration/add-custom-fields-to-a-jwt-access-token: admin/user-profiles/add-custom-fields-to-a-jwt-access-token.md

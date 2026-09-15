@@ -5,7 +5,9 @@
 ## Get Started
 
 * [5-Minute Guide](get-started/5-minute-guide.md)
-* [Auth for MCP](get-started/auth-for-mcp.md)
+* [Auth for MCP](get-started/auth-for-mcp/README.md)
+  * [Client ID Metadata Document (CIMD)](get-started/auth-for-mcp/client-id-metadata-document.md)
+  * [Dynamic Client Registration (DCR)](get-started/auth-for-mcp/dynamic-client-registration.md)
 * [Start Building](get-started/start-building.md)
 * [Single-Page App](get-started/single-page-app/README.md)
   * [JavaScript (Web)](get-started/single-page-app/website.md)
@@ -101,15 +103,13 @@
 
 ## Integration
 
-* [Client ID Metadata Document (CIMD)](integration/client-id-metadata-document.md)
-* [Dynamic Client Registration (DCR)](integration/dynamic-client-registration.md)
-* [Add custom fields to a JWT Access Token or ID Token](integration/add-custom-fields-to-a-jwt-access-token.md)
 * [User Profiles](admin/user-profiles/README.md)
   * [What is User Profile](admin/user-profiles/user-profile.md)
   * [Access User Profiles](admin/user-profiles/access-user-profiles.md)
   * [Update User Profiles](admin/user-profiles/update-user-profiles.md)
   * [Profile Custom Attributes](admin/user-profiles/profile-custom-attributes.md)
   * [Update user profile on sign-up using Hooks](admin/user-profiles/update-user-profile-on-sign-up-using-hooks.md)
+  * [Add custom fields to a JWT Access Token or ID Token](admin/user-profiles/add-custom-fields-to-a-jwt-access-token.md)
 * [Mobile Apps](integration/mobile-apps/README.md)
   * [Force authentication on app launch](integration/mobile-apps/force-authentication-on-app-launch.md)
   * [Customize the Login Pop-up / Disable the login alert box](integration/mobile-apps/using-webview-to-open-the-authgear-ui.md)

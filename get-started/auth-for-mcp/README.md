@@ -13,7 +13,7 @@ The [MCP Authorization specification](https://modelcontextprotocol.io/specificat
 
 * Your **MCP server** is an OAuth **resource server**. It never handles passwords; it only validates access tokens.
 * **Authgear** is the **authorization server**. It signs users in, shows the consent screen, and issues tokens.
-* Each user's **MCP client** (an AI assistant such as Claude, or an IDE agent) is an OAuth client that discovers your authorization server and **identifies itself** at first use, either with a [Client ID Metadata Document](../integration/client-id-metadata-document.md) it hosts or by registering via [Dynamic Client Registration](../integration/dynamic-client-registration.md).
+* Each user's **MCP client** (an AI assistant such as Claude, or an IDE agent) is an OAuth client that discovers your authorization server and **identifies itself** at first use, either with a [Client ID Metadata Document](client-id-metadata-document.md) it hosts or by registering via [Dynamic Client Registration](dynamic-client-registration.md).
 
 The end-to-end flow, fully automatic once you finish the setup below:
 
@@ -49,7 +49,7 @@ On the **CIMD** tab, turn on **Enable CIMD**.
 
 That is the whole setup. **Trusted domains** stays on **Any domain**, which is what this use case needs, because you cannot know in advance which AI agents your users will bring. No credential has to be distributed to anyone.
 
-See [Client ID Metadata Document (CIMD)](../integration/client-id-metadata-document.md) for the document format and the trust controls.
+See [Client ID Metadata Document (CIMD)](client-id-metadata-document.md) for the document format and the trust controls.
 {% endtab %}
 
 {% tab title="DCR (fallback)" %}
@@ -91,7 +91,7 @@ WWW-Authenticate: Bearer resource_metadata="https://mcp-server.example.com/.well
 4. Check `aud` includes your MCP server's URI (`https://mcp-server.example.com`). This check stops a token issued for another audience from being replayed against your server.
 5. Check the token has not expired (`exp`), and that its `scope` covers the requested tool.
 
-See [Validate JWT in your backend](backend-api/jwt.md) for language-specific examples of steps 1–5.
+See [Validate JWT in your backend](../backend-api/jwt.md) for language-specific examples of steps 1–5.
 
 ## Try it end to end <a href="#try-it-end-to-end" id="try-it-end-to-end"></a>
 
