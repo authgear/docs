@@ -23,11 +23,11 @@ Clients identified this way are always **third-party public clients**: they use 
 
 ## When to use CIMD <a href="#when-to-use-cimd" id="when-to-use-cimd"></a>
 
-* **MCP servers and AI agents.** The [MCP Authorization specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) fixes the order in which a client identifies itself: a pre-registered `client_id` if it has one, otherwise CIMD if your authorization server advertises support, and only then [Dynamic Client Registration](dynamic-client-registration.md). Once CIMD is enabled, it is therefore the mechanism a compliant MCP client uses against your project. See [Auth for MCP](../get-started/auth-for-mcp.md) for the full walkthrough.
+* **MCP servers and AI agents.** The [MCP Authorization specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) fixes the order in which a client identifies itself: a pre-registered `client_id` if it has one, otherwise CIMD if your authorization server advertises support, and only then [Dynamic Client Registration](dynamic-client-registration.md). Once CIMD is enabled, it is therefore the mechanism a compliant MCP client uses against your project. See [Auth for MCP](README.md) for the full walkthrough.
 * **Widely distributed clients.** A desktop app, CLI, or IDE extension shipped to many users identifies itself with one document at one URL, rather than every installation registering a separate client and consuming a slot in your project.
 * **Clients whose metadata you do not want to maintain.** Authgear refetches the document once an hour, so the stored metadata follows the client's own document, and no admin has to update it.
 
-**When not to use it:** for your own fixed set of apps, create them under **Applications** → **Client Applications** as usual. For backend services calling your APIs with their own credentials, use [Machine-to-Machine (M2M) Applications](../get-started/m2m-applications.md). For clients that cannot host a document but can call an endpoint, use [DCR](dynamic-client-registration.md).
+**When not to use it:** for your own fixed set of apps, create them under **Applications** → **Client Applications** as usual. For backend services calling your APIs with their own credentials, use [Machine-to-Machine (M2M) Applications](../m2m-applications.md). For clients that cannot host a document but can call an endpoint, use [DCR](dynamic-client-registration.md).
 
 ## How CIMD compares to DCR <a href="#how-cimd-compares-to-dcr" id="how-cimd-compares-to-dcr"></a>
 

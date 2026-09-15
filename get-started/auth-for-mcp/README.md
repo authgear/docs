@@ -13,7 +13,7 @@ The [MCP Authorization specification](https://modelcontextprotocol.io/specificat
 
 * Your **MCP server** is an OAuth **resource server**. It never handles passwords; it only validates access tokens.
 * **Authgear** is the **authorization server**. It signs users in, shows the consent screen, and issues tokens.
-* Each user's **MCP client** (an AI assistant such as Claude, or an IDE agent) is an OAuth client that discovers your authorization server and **identifies itself** at first use, either with a [Client ID Metadata Document](../integration/client-id-metadata-document.md) it hosts or by registering via [Dynamic Client Registration](../integration/dynamic-client-registration.md).
+* Each user's **MCP client** (an AI assistant such as Claude, or an IDE agent) is an OAuth client that discovers your authorization server and **identifies itself** at first use, either with a [Client ID Metadata Document](client-id-metadata-document.md) it hosts or by registering via [Dynamic Client Registration](dynamic-client-registration.md).
 
 The end-to-end flow, fully automatic once you finish the setup below:
 
@@ -22,6 +22,16 @@ The end-to-end flow, fully automatic once you finish the setup below:
 3. The client identifies itself, with its Client ID Metadata Document if the discovery document advertises `client_id_metadata_document_supported`, otherwise by registering through DCR.
 4. The client runs the Authorization Code Flow with PKCE, passing `resource=<your MCP server URI>`. The user signs in with Authgear and approves the requested scopes on the consent screen.
 5. Authgear issues an access token whose `aud` claim is your MCP server's URI. The client retries the MCP request with the token; your server validates it and serves the tools.
+
+The two ways a client can identify itself each have their own page:
+
+{% content-ref url="client-id-metadata-document.md" %}
+[client-id-metadata-document.md](client-id-metadata-document.md)
+{% endcontent-ref %}
+
+{% content-ref url="dynamic-client-registration.md" %}
+[dynamic-client-registration.md](dynamic-client-registration.md)
+{% endcontent-ref %}
 
 ## Set up Authgear for your MCP server <a href="#set-up-authgear-for-your-mcp-server" id="set-up-authgear-for-your-mcp-server"></a>
 
@@ -49,7 +59,7 @@ On the **CIMD** tab, turn on **Enable CIMD**.
 
 That is the whole setup. **Trusted domains** stays on **Any domain**, which is what this use case needs, because you cannot know in advance which AI agents your users will bring. No credential has to be distributed to anyone.
 
-See [Client ID Metadata Document (CIMD)](../integration/client-id-metadata-document.md) for the document format and the trust controls.
+See [Client ID Metadata Document (CIMD)](client-id-metadata-document.md) for the document format and the trust controls.
 {% endtab %}
 
 {% tab title="DCR (fallback)" %}
@@ -61,6 +71,8 @@ For clients that do not support CIMD, go to the **DCR** tab:
 {% hint style="info" %}
 Open registration means anyone can register a client with your project. A registered client can do nothing until a real user signs in and consents, and it can only request the resources and scopes you opened in step 2.
 {% endhint %}
+
+See [Dynamic Client Registration (DCR)](dynamic-client-registration.md) for the registration endpoint, the response fields, and the security options.
 {% endtab %}
 {% endtabs %}
 
@@ -91,7 +103,7 @@ WWW-Authenticate: Bearer resource_metadata="https://mcp-server.example.com/.well
 4. Check `aud` includes your MCP server's URI (`https://mcp-server.example.com`). This check stops a token issued for another audience from being replayed against your server.
 5. Check the token has not expired (`exp`), and that its `scope` covers the requested tool.
 
-See [Validate JWT in your backend](backend-api/jwt.md) for language-specific examples of steps 1–5.
+See [Validate JWT in your backend](../backend-api/jwt.md) for language-specific examples of steps 1–5.
 
 ## Try it end to end <a href="#try-it-end-to-end" id="try-it-end-to-end"></a>
 

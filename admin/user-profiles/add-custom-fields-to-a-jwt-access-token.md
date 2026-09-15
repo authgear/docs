@@ -8,12 +8,12 @@ description: >-
 
 JWTs (JSON Web Tokens) are a common method for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. With Authgear, it is straightforward to add custom fields to your JWT access tokens or ID Tokens.
 
-This how-to guide will walk you through the process of **adding custom fields such as** [**User Profiles**](../admin/user-profiles/) **attributes to a JWT access token/ID token** payload using Authgear and Javascript [Hooks](../customization/events-hooks/).
+This how-to guide will walk you through the process of **adding custom fields such as** [**User Profiles**](README.md) **attributes to a JWT access token/ID token** payload using Authgear and Javascript [Hooks](../../customization/events-hooks/).
 
-Here's an example of the [fields in the JWT Access Tokens by default](../reference/tokens/jwt-access-token.md) and an explanation of their values.
+Here's an example of the [fields in the JWT Access Tokens by default](../../reference/tokens/jwt-access-token.md) and an explanation of their values.
 
 {% hint style="info" %}
-You can also [add custom attributes](../admin/user-profiles/) to [User Profiles](../admin/user-profiles/) on the Authegear Portal.
+You can also [add custom attributes](README.md) to [User Profiles](README.md) on the Authegear Portal.
 {% endhint %}
 
 ## Prerequisites
@@ -36,7 +36,7 @@ Make sure the option **Issue JWT as access token** is enabled in your **Applicat
 
 ### Create a new Event Hook
 
-With the use of Hooks, Authgear provides flexibility for adding custom logic to your authentication pipeline. You can create a Hook which is triggered any of these [Events ](../customization/events-hooks/)about to occur. For example, `oidc.jwt.pre_create` the event happens just before issuing the JWT access token and it can be used to put extra information into the token.
+With the use of Hooks, Authgear provides flexibility for adding custom logic to your authentication pipeline. You can create a Hook which is triggered any of these [Events ](../../customization/events-hooks/)about to occur. For example, `oidc.jwt.pre_create` the event happens just before issuing the JWT access token and it can be used to put extra information into the token.
 
 1. Navigate to your Authgear Dashboard's **Advanced**->**Hooks** section.
 2. **Add** a new **Blocking Event**.
@@ -69,13 +69,13 @@ export default async function(e: EventOIDCJWTPreCreate): Promise<EventOIDCJWTPre
 6. Click on **Finish Editing**.
 7. Back to the **Hooks** page from the navigation bar and click on the **Save** button at the top of the page.
 
-In the above code, we are importing the necessary modules such as `EventOIDCJWTPreCreateHookResponse` and `EventOIDCJWTPreCreate` which are types from the Authgear [Deno](https://deno.land/) hook [Typescript library](https://deno.land/x/authgear_deno_hook). We modify the JWT payload by adding [Standard Attributes](../admin/user-profiles/)(`e.payload.user.standard_attributes`) and [Custom Attributes](../admin/user-profiles/)(`e.payload.user.custom_attributes`) of the user.
+In the above code, we are importing the necessary modules such as `EventOIDCJWTPreCreateHookResponse` and `EventOIDCJWTPreCreate` which are types from the Authgear [Deno](https://deno.land/) hook [Typescript library](https://deno.land/x/authgear_deno_hook). We modify the JWT payload by adding [Standard Attributes](README.md)(`e.payload.user.standard_attributes`) and [Custom Attributes](README.md)(`e.payload.user.custom_attributes`) of the user.
 
 ### Verify the Custom Field in a JWT token
 
 There are two ways to test it:
 
-* You can do this by [decoding the JWT token](../get-started/backend-api/jwt.md) on your application server side using a JWT decoder and inspecting the payload.
+* You can do this by [decoding the JWT token](../../get-started/backend-api/jwt.md) on your application server side using a JWT decoder and inspecting the payload.
 * If you created the application type **OIDC Client Application,** you need to follow the steps below. Expand it to see instructions.
 
 <details>
@@ -92,7 +92,7 @@ This part explains how to retrieve an access token using **OpenID App** Endpoint
 
 Open your **OpenID Auth App** configuration, and find **Client ID**, **Client Secret**, and check **Authorization**, and **Token** endpoints. You will use them in the next steps.
 
-![](<../.gitbook/assets/image (10) (1).png>) ![](<../.gitbook/assets/image (6) (1).png>)
+![](<../../.gitbook/assets/image (10) (1).png>) ![](<../../.gitbook/assets/image (6) (1).png>)
 
 **Step 2: Construct the authorization endpoint URL**
 
@@ -142,7 +142,7 @@ Finally, we can debug the access token using the [JWT Debugger tool](https://www
 
 ## Mutation on ID Tokens
 
-With the use of Hooks, Authgear provides flexibility for adding custom logic to your authentication pipeline. You can create a Hook which is triggered any of these [Events ](../customization/events-hooks/blocking-events.md)about to occur. For example, `oidc.id_token.pre_create` the event happens just before issuing the JWT access token and it can be used to put extra information into the token.
+With the use of Hooks, Authgear provides flexibility for adding custom logic to your authentication pipeline. You can create a Hook which is triggered any of these [Events ](../../customization/events-hooks/blocking-events.md)about to occur. For example, `oidc.id_token.pre_create` the event happens just before issuing the JWT access token and it can be used to put extra information into the token.
 
 1. Navigate to your Authgear Dashboard's **Advanced**->**Hooks** section.
 2. **Add** a new **Blocking Event**.
@@ -176,4 +176,4 @@ export default async function(e: EventOIDCIDTokenPreCreate): Promise<EventOIDCID
 6. Click on **Finish Editing**.
 7. Back to the **Hooks** page from the navigation bar and click on the **Save** button at the top of the page.
 
-In the above code, we are importing the necessary modules such as `EventOIDCIDTokenPreCreateHookResponse` and `EventOIDCIDTokenPreCreate` which are types from the Authgear [Deno](https://deno.land/) hook [Typescript library](https://deno.land/x/authgear_deno_hook). We modify the JWT payload by adding [Custom Attributes](../admin/user-profiles/)(`e.payload.user.custom_attributes`) of the user.
+In the above code, we are importing the necessary modules such as `EventOIDCIDTokenPreCreateHookResponse` and `EventOIDCIDTokenPreCreate` which are types from the Authgear [Deno](https://deno.land/) hook [Typescript library](https://deno.land/x/authgear_deno_hook). We modify the JWT payload by adding [Custom Attributes](README.md)(`e.payload.user.custom_attributes`) of the user.

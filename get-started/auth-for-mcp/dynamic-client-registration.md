@@ -15,11 +15,11 @@ Clients registered this way are **public clients**: they authenticate users with
 
 ## When to use DCR <a href="#when-to-use-dcr" id="when-to-use-dcr"></a>
 
-* **MCP clients that do not support CIMD:** each user's MCP client (an AI assistant, an IDE agent) registers itself with your project at first use, with no admin involvement per client. Note that a compliant MCP client prefers a [Client ID Metadata Document](client-id-metadata-document.md) when your project advertises support, and only falls back to DCR, so enable CIMD first and keep DCR on for the clients that need it. See [Auth for MCP](../get-started/auth-for-mcp.md) for the full walkthrough.
+* **MCP clients that do not support CIMD:** each user's MCP client (an AI assistant, an IDE agent) registers itself with your project at first use, with no admin involvement per client. Note that a compliant MCP client prefers a [Client ID Metadata Document](client-id-metadata-document.md) when your project advertises support, and only falls back to DCR, so enable CIMD first and keep DCR on for the clients that need it. See [Auth for MCP](README.md) for the full walkthrough.
 * **Third-party developer ecosystems:** Let partners and external developers building integrations against your APIs register their own OAuth clients. You hand each developer an initial access token instead of creating clients for them; their users see a consent screen before granting access.
 * **Ephemeral and automated environments:** A CI pipeline can register a short-lived client for every preview deployment, so each environment gets its own client ID without anyone touching the Portal.
 
-**When not to use it:** for your own fixed set of apps, create them under **Applications** → **Client Applications** as usual; for backend services calling your APIs with their own credentials, use [Machine-to-Machine (M2M) Applications](../get-started/m2m-applications.md). For clients that can host a document at a URL, [CIMD](client-id-metadata-document.md) needs no registration step and no credential at all.
+**When not to use it:** for your own fixed set of apps, create them under **Applications** → **Client Applications** as usual; for backend services calling your APIs with their own credentials, use [Machine-to-Machine (M2M) Applications](../m2m-applications.md). For clients that can host a document at a URL, [CIMD](client-id-metadata-document.md) needs no registration step and no credential at all.
 
 ## Key concepts <a href="#key-concepts" id="key-concepts"></a>
 
