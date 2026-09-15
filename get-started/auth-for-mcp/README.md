@@ -23,6 +23,16 @@ The end-to-end flow, fully automatic once you finish the setup below:
 4. The client runs the Authorization Code Flow with PKCE, passing `resource=<your MCP server URI>`. The user signs in with Authgear and approves the requested scopes on the consent screen.
 5. Authgear issues an access token whose `aud` claim is your MCP server's URI. The client retries the MCP request with the token; your server validates it and serves the tools.
 
+The two ways a client can identify itself each have their own page:
+
+{% content-ref url="client-id-metadata-document.md" %}
+[client-id-metadata-document.md](client-id-metadata-document.md)
+{% endcontent-ref %}
+
+{% content-ref url="dynamic-client-registration.md" %}
+[dynamic-client-registration.md](dynamic-client-registration.md)
+{% endcontent-ref %}
+
 ## Set up Authgear for your MCP server <a href="#set-up-authgear-for-your-mcp-server" id="set-up-authgear-for-your-mcp-server"></a>
 
 ### 1. Register the MCP server as an API Resource
@@ -61,6 +71,8 @@ For clients that do not support CIMD, go to the **DCR** tab:
 {% hint style="info" %}
 Open registration means anyone can register a client with your project. A registered client can do nothing until a real user signs in and consents, and it can only request the resources and scopes you opened in step 2.
 {% endhint %}
+
+See [Dynamic Client Registration (DCR)](dynamic-client-registration.md) for the registration endpoint, the response fields, and the security options.
 {% endtab %}
 {% endtabs %}
 
