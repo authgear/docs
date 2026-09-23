@@ -198,6 +198,7 @@
   * [OAuth 2.0 and OpenID Connect (OIDC)](reference/apis/oauth-2.0-and-openid-connect-oidc/README.md)
     * [Supported Scopes](reference/apis/oauth-2.0-and-openid-connect-oidc/supported-scopes.md)
     * [UserInfo](reference/apis/oauth-2.0-and-openid-connect-oidc/userinfo.md)
+    * [Error Codes](reference/apis/oauth-2.0-and-openid-connect-oidc/error-codes.md)
   * [User Import API](reference/apis/user-import-api.md)
   * [User Export API](reference/apis/user-export-api.md)
 * [Tokens](reference/tokens/README.md)
