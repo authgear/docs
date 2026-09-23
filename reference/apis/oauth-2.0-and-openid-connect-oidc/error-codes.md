@@ -25,10 +25,21 @@ Use the `error` field to decide how to handle the error. The `error_description`
 
 ## Errors in the Authgear SDKs
 
-The Authgear SDKs turn these responses into an `OAuthError`. For example, in the JavaScript, React Native, and Capacitor SDKs:
+Each Authgear SDK turns these responses into an OAuth error type that exposes the `error` and `error_description` fields:
 
+| SDK | OAuth error | User closed the login page |
+| --- | --- | --- |
+| JavaScript (Web) | `OAuthError` | — |
+| React Native | `OAuthError` | `CancelError` |
+| Capacitor | `OAuthError` | `CancelError` |
+| iOS | `AuthgearError.oauthError(OAuthError)` | `AuthgearError.cancel` |
+| Android | `OAuthException` | `CancelException` |
+| Flutter | `OAuthException` | `CancelException` |
+
+{% tabs %}
+{% tab title="React Native / Capacitor" %}
 ```typescript
-import { OAuthError, CancelError } from "@authgear/capacitor";
+import { OAuthError, CancelError } from "@authgear/capacitor"; // or "@authgear/react-native"
 
 try {
   await authgear.authenticate({ redirectURI });
@@ -43,8 +54,91 @@ try {
   }
 }
 ```
+{% endtab %}
 
-After the login page closes, the SDK exchanges the authorization code for tokens. If that request fails, the login page has already closed but `authenticate()` rejects with an `OAuthError`. Always handle the rejection. Otherwise, the user sees the login page close and stays logged out without any message.
+{% tab title="JavaScript (Web)" %}
+```typescript
+import { OAuthError } from "@authgear/web";
+
+// On the page of your redirect URI
+try {
+  await authgear.finishAuthentication();
+} catch (e) {
+  if (e instanceof OAuthError) {
+    // e.error is one of the error codes below.
+    console.error(e.error, e.error_description);
+  } else {
+    // Other errors, such as network errors.
+  }
+}
+```
+{% endtab %}
+
+{% tab title="iOS" %}
+```swift
+authgear.authenticate(redirectURI: redirectURI) { result in
+    switch result {
+    case .success(let userInfo):
+        // Logged in.
+        break
+    case .failure(AuthgearError.cancel):
+        // The user closed the login page.
+        break
+    case .failure(AuthgearError.oauthError(let oauthError)):
+        // oauthError.error is one of the error codes below.
+        print(oauthError.error, oauthError.errorDescription ?? "")
+    case .failure(let error):
+        // Other errors, such as network errors.
+        print(error)
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Android" %}
+```kotlin
+authgear.authenticate(AuthenticateOptions(redirectUri), object : OnAuthenticateListener {
+    override fun onAuthenticated(userInfo: UserInfo) {
+        // Logged in.
+    }
+
+    override fun onAuthenticationFailed(throwable: Throwable) {
+        when (throwable) {
+            is CancelException -> {
+                // The user closed the login page.
+            }
+            is OAuthException -> {
+                // throwable.error is one of the error codes below.
+                Log.e(TAG, "${throwable.error}: ${throwable.errorDescription}")
+            }
+            else -> {
+                // Other errors, such as network errors.
+            }
+        }
+    }
+})
+```
+{% endtab %}
+
+{% tab title="Flutter" %}
+```dart
+import 'package:flutter_authgear/flutter_authgear.dart';
+
+try {
+  await authgear.authenticate(redirectURI: redirectURI);
+} on CancelException {
+  // The user closed the login page.
+} on OAuthException catch (e) {
+  // e.error is one of the error codes below.
+  print('${e.error}: ${e.errorDescription}');
+} catch (e) {
+  // Other errors, such as network errors.
+}
+```
+{% endtab %}
+{% endtabs %}
+
+After the login page closes, the SDK exchanges the authorization code for tokens. If that request fails, the login page has already closed but the SDK still reports an OAuth error. Always handle the failure. Otherwise, the user sees the login page close and stays logged out without any message.
 
 ## Error code list
 
