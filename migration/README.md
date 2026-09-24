@@ -12,6 +12,10 @@ For more peace of mind and to avoid the feeling of being locked into Authgear as
 
 In this article, we'll cover all the best strategies and best practices you can use to migrate your users from other identity providers to Authgear.
 
+{% hint style="info" %}
+Need help planning or running your migration? [Talk to us](https://www.authgear.com/schedule-demo) and our team will help with planning, the user import and the switch-over.
+{% endhint %}
+
 ## Migration Strategies
 
 Generally, migration to Authgear is as simple as importing your user data to Authgear and then updating your app to use Authgear sessions. You can migrate all your data at once or do it gradually, depending on what approach works best in your specific use case.
