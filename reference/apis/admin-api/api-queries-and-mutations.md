@@ -500,6 +500,86 @@ query {
 
 See [Account Lockout](../../rate-limits/account-lockout.md) for an overview of the feature and how to unlock a user.
 
+### 1.9 dynamicClients
+
+The `dynamicClients` query lists the OAuth clients that registered themselves with your project through [Dynamic Client Registration (DCR)](../../../get-started/auth-for-mcp/dynamic-client-registration.md) or were resolved from a [Client ID Metadata Document (CIMD)](../../../get-started/auth-for-mcp/client-id-metadata-document.md). Clients configured statically in `authgear.yaml` never appear here.
+
+**Schema:**
+
+```graphql
+dynamicClients(
+  after: String
+  before: String
+  first: Int
+  last: Int
+  clientIDs: [String!]
+  source: OAuthClientSource
+): OAuthClientConnection
+
+enum OAuthClientSource {
+  CIMD
+  DCR
+  STATIC
+}
+```
+
+* `clientIDs` restricts the listing, and its `totalCount`, to the given client IDs. Omit it to list every dynamic client; an empty list matches none. Up to 1000 IDs are accepted, and a page can then hold up to 1000 clients, so one request returns every match.
+* `source` restricts the listing to `DCR` or `CIMD` clients. `STATIC` is rejected with an error, because static clients are not in this listing.
+
+Each node is an `OAuthClient`. Useful fields include `clientID`, `name`, `source`, `kind` (`FIRST_PARTY` or `THIRD_PARTY`), `redirectURIs`, `grantTypes`, `registeredAt`, and, for CIMD clients, `lastFetchedAt`, the time the metadata document was last fetched. The full field list is in the [API Schema](api-schema.md).
+
+**Example:**
+
+{% tabs %}
+{% tab title="Query" %}
+```graphql
+query {
+  dynamicClients(first: 10, source: DCR) {
+    totalCount
+    edges {
+      node {
+        id
+        clientID
+        name
+        source
+        kind
+        redirectURIs
+        registeredAt
+      }
+    }
+  }
+}
+```
+{% endtab %}
+
+{% tab title="Response" %}
+```json
+{
+  "data": {
+    "dynamicClients": {
+      "totalCount": 1,
+      "edges": [
+        {
+          "node": {
+            "id": "T0F1dGhDbGllbnQ6MGE3ZjNjMmUtNWIxZC00ZThhLTljM2YtMmQ2ZTdmOGE5YjBj",
+            "clientID": "dcrc_AbCdEfGhIjKlMnOpQr",
+            "name": "Example MCP Client",
+            "source": "DCR",
+            "kind": "THIRD_PARTY",
+            "redirectURIs": ["https://mcp-client.example.com/callback"],
+            "registeredAt": "2026-09-01T08:12:45Z"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+To delete one of these clients, use the `deleteDynamicClient` mutation in [2.40](api-queries-and-mutations.md#id-2.40-deletedynamicclient).
+
 ## 2. Mutations
 
 With mutations, you can modify data from your application using the Admin API GraphQL. For example, you can use mutation to update
@@ -2295,3 +2375,52 @@ mutation {
 {% endtabs %}
 
 See [Account Lockout](../../rate-limits/account-lockout.md) for an overview of the feature, including how to unlock a user from the Authgear Portal.
+
+
+### 2.40 deleteDynamicClient
+
+The `deleteDynamicClient` mutation deletes a client that registered through DCR or was resolved from a CIMD. It takes the client's `client_id`, not its node ID. Access and refresh tokens already issued to the client stay valid until they expire. If no dynamic client has that `client_id`, the mutation returns an error. Clients configured statically in `authgear.yaml` cannot be deleted this way.
+
+Deleting a CIMD client does not block it: the same `client_id` is resolved again the next time a user signs in with it. See [Manage resolved clients](../../../get-started/auth-for-mcp/client-id-metadata-document.md#manage-resolved-clients) for how to keep a client out.
+
+**Schema:**
+
+```graphql
+deleteDynamicClient(input: DeleteDynamicClientInput!): DeleteDynamicClientPayload!
+
+input DeleteDynamicClientInput {
+  clientID: String!
+}
+
+type DeleteDynamicClientPayload {
+  ok: Boolean
+}
+```
+
+**Example:**
+
+{% tabs %}
+{% tab title="Query" %}
+```graphql
+mutation {
+  deleteDynamicClient(input: {clientID: "dcrc_AbCdEfGhIjKlMnOpQr"}) {
+    ok
+  }
+}
+```
+{% endtab %}
+
+{% tab title="Response" %}
+```json
+{
+  "data": {
+    "deleteDynamicClient": {
+      "ok": true
+    }
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+Each deletion is recorded in the audit log as `admin_api.mutation.delete_dynamic_client.executed`. To find a client's `client_id`, use the `dynamicClients` query in [1.9](api-queries-and-mutations.md#id-1.9-dynamicclients).

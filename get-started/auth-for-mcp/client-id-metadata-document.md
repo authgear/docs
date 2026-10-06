@@ -121,6 +121,7 @@ CIMD clients appear alongside DCR ones under **Applications** → **AI Agents (D
 
 * **Deleting a CIMD client is not a block.** It clears the metadata Authgear stored, but the same `client_id` is resolved again the next time someone signs in with it. To keep a client out for good, set **Trusted domains** to **Only specific domains** without its domain *and* delete it.
 * **Turning CIMD off** stops new clients being resolved and stops refetches. Clients already resolved keep working. Delete them if you want their access gone.
+* **Admin API.** List resolved clients with the [`dynamicClients`](../../reference/apis/admin-api/api-queries-and-mutations.md#id-1.9-dynamicclients) query and delete one with the [`deleteDynamicClient`](../../reference/apis/admin-api/api-queries-and-mutations.md#id-2.40-deletedynamicclient) mutation.
 * **Audit log.** `oauth.client.resolved` is recorded when a client is first resolved or its metadata changes, and `oauth.client.resolution.failed` when a document is unreachable or invalid. A client refused because CIMD is off or its domain is not trusted is not logged.
 
 ## Errors a client can see <a href="#errors-a-client-can-see" id="errors-a-client-can-see"></a>

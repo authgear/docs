@@ -128,3 +128,4 @@ The user signs in and, for a third-party client, approves the requested scopes o
 * **Deleting a client** stops new authorizations immediately; access and refresh tokens already issued stay valid until they expire.
 * **Revoking an IAT** stops it from registering new clients; clients already registered with it are unaffected.
 * **Disabling DCR later** only closes the registration endpoint; already-registered clients keep working. Delete them if you want their access gone.
+* **Admin API.** List registered clients with the [`dynamicClients`](../../reference/apis/admin-api/api-queries-and-mutations.md#id-1.9-dynamicclients) query and delete one with the [`deleteDynamicClient`](../../reference/apis/admin-api/api-queries-and-mutations.md#id-2.40-deletedynamicclient) mutation.
