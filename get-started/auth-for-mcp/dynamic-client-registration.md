@@ -125,7 +125,11 @@ The user signs in and, for a third-party client, approves the requested scopes o
 ## Manage registered clients <a href="#manage-registered-clients" id="manage-registered-clients"></a>
 
 * The **Overview** tab shows how many clients came in via each mechanism; **View all** opens the full list, where a **Type** column distinguishes DCR from CIMD clients and you can inspect or delete each one.
-* **Deleting a client** stops new authorizations immediately; access and refresh tokens already issued stay valid until they expire.
 * **Revoking an IAT** stops it from registering new clients; clients already registered with it are unaffected.
 * **Disabling DCR later** only closes the registration endpoint; already-registered clients keep working. Delete them if you want their access gone.
-* **Admin API.** List registered clients with the [`dynamicClients`](../../reference/apis/admin-api/api-queries-and-mutations.md#id-1.9-dynamicclients) query and delete one with the [`deleteDynamicClient`](../../reference/apis/admin-api/api-queries-and-mutations.md#id-2.40-deletedynamicclient) mutation.
+
+### Delete a client
+
+Delete a DCR client from the **View all** list in the Portal, or with the Admin API: find its `client_id` with the [`dynamicClients`](../../reference/apis/admin-api/api-queries-and-mutations.md#id-1.9-dynamicclients) query and pass it to the [`deleteDynamicClient`](../../reference/apis/admin-api/api-queries-and-mutations.md#id-2.40-deletedynamicclient) mutation.
+
+Deleting a client stops new authorizations immediately. Access and refresh tokens already issued stay valid until they expire. While registration is open, the same software can register again and receive a new `client_id`; to prevent that, require an initial access token.
