@@ -120,9 +120,8 @@ If you set `logo_uri`, the image must be PNG, JPEG, GIF, or WebP, and at most 25
 CIMD clients appear alongside DCR ones under **Applications** → **AI Agents (Dynamic)** → **Overview** → **View all**. A **Type** column and filter distinguish them, and a **Last fetched** column shows document freshness.
 
 * **Deleting a CIMD client is not a block.** It clears the metadata Authgear stored, but the same `client_id` is resolved again the next time someone signs in with it. To keep a client out for good, set **Trusted domains** to **Only specific domains** without its domain *and* delete it.
-* **Client limit:** your plan may cap how many CIMD clients your project holds at once, counted separately from DCR clients. At the cap, resolving a *new* client ID fails with `access_denied`; clients already resolved keep working and keep refetching.
 * **Turning CIMD off** stops new clients being resolved and stops refetches. Clients already resolved keep working. Delete them if you want their access gone.
-* **Audit log.** `oauth.client.resolved` is recorded when a client is first resolved or its metadata changes, and `oauth.client.resolution.failed` when a document is unreachable or invalid, or the client limit is hit. A client refused because CIMD is off or its domain is not trusted is not logged.
+* **Audit log.** `oauth.client.resolved` is recorded when a client is first resolved or its metadata changes, and `oauth.client.resolution.failed` when a document is unreachable or invalid. A client refused because CIMD is off or its domain is not trusted is not logged.
 
 ## Errors a client can see <a href="#errors-a-client-can-see" id="errors-a-client-can-see"></a>
 
