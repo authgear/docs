@@ -117,6 +117,7 @@
   * [Authgear and Supabase](integration/integration-with-other-software/authgear-supabase.md)
   * [Authgear and Firebase](integration/integration-with-other-software/authgear-firebase.md)
   * [Integrate with Google Tag Manager](integration/user-analytics-by-google-tag-manager.md)
+  * [Stream Audit Logs to Datadog](integration/integration-with-other-software/stream-audit-logs-to-datadog.md)
 * [FAQ for Integration](integration/faq-for-integration/README.md)
   * [How to Track User Before and After Signup?](integration/track-user-before-and-after-signup.md)
   * [What happens with user directly access the Authgear Endpoint?](integration/directly-accessing-authgear-endpoint.md)
