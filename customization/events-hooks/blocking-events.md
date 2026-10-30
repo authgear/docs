@@ -17,6 +17,7 @@ The list of events:
 * [authentication.pre\_initialize](blocking-events.md#authentication.pre_initialize)
 * [authentication.post\_identified](blocking-events.md#authentication.post_identified)
 * [authentication.pre\_authenticated](blocking-events.md#authentication.pre_authenticated)
+* [authentication.form.post\_submitted](blocking-events.md#authentication.form.post_submitted)
 * [oidc.jwt.pre\_create](blocking-events.md#oidc.jwt.pre_create)
 * [oidc.id\_token.pre\_create](blocking-events.md#oidc.id_token.pre_create)
 
@@ -55,6 +56,8 @@ To abort the operation, return a JSON document with `is_allowed` set to `false`,
 ```
 
 If any of your hooks abort the operation, the operation is aborted. The `reason` and `title` will be shown to the end-user as an error message.
+
+[#authentication.form.post\_submitted](blocking-events.md#authentication.form.post_submitted "mention") can also return `reasons` to reject a single form field, with a message shown under that field.
 
 ## Mutations
 
@@ -517,6 +520,64 @@ This event supports [#apply-authentication-constraints](blocking-events.md#apply
 ```
 
 * The `authentication_context` object contains details about the current authentication.
+
+### authentication.form.post\_submitted
+
+Occurs right after the end-user submits a form in an authentication flow, before the flow accepts it. A form is a step that asks for profile attributes, such as an employee ID or a date of birth. Nothing is stored yet: the attributes are saved when the flow finishes.
+
+Use this event to check the submitted values against your own system. Unlike `user.pre_create` and `user.profile.pre_update`, which run when the flow finishes, it can reject a single field and show your message under it. The end-user corrects the value and submits the form again.
+
+It is triggered in signup, promote and login flows.
+
+```json
+{
+  "type": "authentication.form.post_submitted",
+  "payload": {
+    "authentication_context": { /* The current authentication, as in authentication.post_identified */ },
+    "user": { /* The user with every attribute submitted so far in this flow applied. In a signup flow, the user to be created. */ },
+    "form": {
+      "name": "employee",
+      "fields": [
+        {
+          "field": {
+            "user_profile": {
+              "pointer": "/x_employee_id"
+            }
+          },
+          "value": "E99999"
+        }
+      ]
+    }
+  }
+}
+```
+
+* `form.name` is the form's name in the authentication flow config. It is absent when the form has none.
+* `form.fields` has one item per field of the form, in the form's order. `field` names the field: for a profile attribute, `user_profile.pointer` is the attribute's pointer. `value` is the submitted value, or `null` if the field is empty.
+
+To accept the form, return `"is_allowed": true`. To reject a field, return `"is_allowed": false` with a `reasons` list. Each item of type `invalid_form_field` names a field, in the same shape as `field` in `payload.form.fields`, and the message to show under it:
+
+```json
+{
+  "is_allowed": false,
+  "title": "Employee not found",
+  "reasons": [
+    {
+      "type": "invalid_form_field",
+      "field": {
+        "user_profile": {
+          "pointer": "/x_employee_id"
+        }
+      },
+      "message": "This employee ID does not exist."
+    }
+  ]
+}
+```
+
+* `reasons` is allowed only when `is_allowed` is `false`. An item with an unknown `type` makes the response invalid.
+* `title` and `reason` are shown above the form. Each `message` is shown under its field.
+* When a hook rejects the form, the flow stays on the form, so the end-user can fix the value and submit again.
 
 ### oidc.jwt.pre\_create
 
