@@ -14,43 +14,40 @@ In this guide, you'll learn how to set up SAML with Authgear as an Identity Prov
 
 * An Authgear account. [Sign up](https://authgear.com) for free.
 * A Salesforce account.
+* Email login enabled in your Authgear project. Authgear sends the user's email address to Salesforce, so every user who signs in to Salesforce needs one.
 
 ### Step 1: Create an Authgear Client Application
 
-An Authgear Client application is required to set up Authgear as a SAML Identity Provider.\
-To create an Authgear application, login to the Authgear Portal and navigate to the **Applications** in your project.&#x20;
+You need an Authgear client application with SAML 2.0 support to use Authgear as a SAML Identity Provider.
 
-<figure><img src="../../../.gitbook/assets/authgear-nav-applications.png" alt=""><figcaption></figcaption></figure>
+1. Log in to Authgear Portal, select your project, and go to **Applications**.
+2. Click **Add Application**.
+3. Enter a **Name** for the application, for example `Salesforce`.
+4. Under **Framework**, in the **Other** section, select **Other OIDC/SAML compatible**.
+5. Click **Create application**.
 
-Click on **Add Application** to create a new application. Or, select an existing application that is of type `OIDC/SAML Client Application` and skip to step 2.
+The application opens on its **Quick Start** tab.
 
-Now on the New Application page, enter a name for your application (e.g. My App) and set the Application Type to "OIDC/SAML Client Application".
-
-<figure><img src="../../../.gitbook/assets/authgear-new-app-saml.png" alt=""><figcaption></figcaption></figure>
-
-Click **Save** to continue.
-
-If prompted to view a tutorial, click **Next** to proceed to the application configuration page.
+{% hint style="info" %}
+Only applications created with **Other OIDC/SAML compatible** have a **SAML 2.0** tab. To reuse an existing application, check that it has this tab, then skip to Step 2.
+{% endhint %}
 
 ### Step 2: Enable SAML 2.0 in Client Application
 
-On the configuration page of your Authgear client application, switch to the **SAML 2.0** tab. Toggle the **SAML 2.0 Support** switch on to enable SAML for the application.
+In your Authgear client application, open the **SAML 2.0** tab and turn on **SAML 2.0 Support**.
 
-<figure><img src="../../../.gitbook/assets/authgear-saml-tab (1).png" alt=""><figcaption></figcaption></figure>
+Then configure the following:
 
-Next, change **NameID Format** to `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
+* **NameID Format**: `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`
+* **Allowed Assertion Consumer Service URLs (ACS URLs)**, under **SSO Settings**: your Salesforce domain. Find it on the **My Domain** page in Salesforce Setup.
 
-Enter your Salesforce domain in the **Allowed Assertion Consumer Service URLs (ACS URLs)** field under SSO Settings. You can get value for your Salesforce domain from the My Domain page on the Salesforce Setup page.
-
-<figure><img src="../../../.gitbook/assets/authgear-saml-config.png" alt=""><figcaption></figcaption></figure>
-
-Click on **Save** to keep your changes.
+Click **Save** to keep your changes.
 
 ### Step 3: Get SAML Identity Provider (IdP) Configuration and Download Certificate
 
-Still, on the SAML 2.0 tab, scroll to the **Configuration Parameters** section and click on the **Download Metadata** button to download the Identity Provider Metadata XML file for your Authgear application to your computer.
+Still on the **SAML 2.0** tab, go to the **Configuration Parameters** section and click **Download Metadata** to download the Identity Provider Metadata XML file for your Authgear application.
 
-Next, scroll to the Identity Provider Certificates section and click **Download Certificate** to download the certificate to your computer.
+Next, in the **Identity Provider Certificates** section, click **Download Certificate**.
 
 You will use the downloaded metadata file and certificate in later steps.
 
@@ -92,13 +89,13 @@ To enable your new SAML IdP (Authgear SAML) search for "my domain" in Quick find
 
 <figure><img src="../../../.gitbook/assets/salesforce-mydomain.png" alt=""><figcaption></figcaption></figure>
 
-You should find your Authgear SAMP IdP under **Authentication Service**. Check the box next to Authgear SAML to enable it. Click **Save** to keep changes.
+You should find your Authgear SAML IdP under **Authentication Service**. Check the box next to Authgear SAML to enable it. Click **Save** to keep changes.
 
 Once you have enabled your SAML Identity provider in this step, it will be visible on your Salesforce login page the next time you attempt login.
 
 ### Step 7: Log in to Salesforce using Authgear SAML &#x20;
 
-Force you can log in to your Salesforce project using Authgear SAML, you need to create a user using an email address that is linked to a user account in your Authgear project.
+Before you can log in to your Salesforce project using Authgear SAML, you need to create a user using an email address that is linked to a user account in your Authgear project.
 
 To create a user in Salesforce, use type "users" in the Quick find search box, then select **Users** > **Users** from the result. This will take you to the All Users page.
 
