@@ -11,7 +11,8 @@ In this post, you'll learn how to set up Authgear as an Identity Provider and Pi
 ### Prerequisites
 
 * An Authgear account. Sign up for free.
-* A Pipedrive account with admin access. SAML single sign-on is available on the Pipedrive Lite plan.
+* Email login enabled in your Authgear project. Pipedrive identifies users by email address, so every user who signs in to Pipedrive needs one.
+* A Pipedrive account with admin access. SAML single sign-on is available on all Pipedrive plans.
 
 ### Step 1: Get the SAML Settings from Pipedrive
 
@@ -83,7 +84,7 @@ Save the config.
 
 ### Step 5: Add Authgear SAML IdP in Pipedrive
 
-Go back to your client application's **SAML 2.0** tab in Authgear Portal. Scroll down to the **Configuration Parameters** section, and download the **Identity Provider Certificate**.
+Go back to your client application's **SAML 2.0** tab in Authgear Portal. In the **Identity Provider Certificates** section, click **Download Certificate**.
 
 In the Pipedrive **Single sign-on** page, fill in the **SAML configuration for Pipedrive** section:
 
