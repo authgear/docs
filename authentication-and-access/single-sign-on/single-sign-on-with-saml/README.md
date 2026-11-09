@@ -21,6 +21,7 @@ See the following guides for some popular service providers:
 
 * [use-authgear-as-saml-identity-provider-for-salesforce.md](use-authgear-as-saml-identity-provider-for-salesforce.md "mention")
 * [use-authgear-as-saml-identity-provider-for-dropbox.md](use-authgear-as-saml-identity-provider-for-dropbox.md "mention")
+* [use-authgear-as-saml-identity-provider-for-pipedrive.md](use-authgear-as-saml-identity-provider-for-pipedrive.md "mention")
 
 ## How to Set up SAML in Authgear
 
