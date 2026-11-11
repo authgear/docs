@@ -43,9 +43,7 @@ Only applications created with **Other OIDC/SAML compatible** have a **SAML 2.0*
 
 ### Step 3: Enable SAML 2.0 in Client Application
 
-By default, SAML 2.0 is not enabled for the client application.
-
-To enable SAML for your client application, click on the **SAML 2.0** tab then toggle the **SAML 2.0 Support** switch on.
+In your Authgear client application, open the **SAML 2.0** tab and turn on **SAML 2.0 Support**.
 
 Then configure the following:
 

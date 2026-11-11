@@ -39,7 +39,7 @@ In your Authgear client application, open the **SAML 2.0** tab and turn on **SAM
 Then configure the following:
 
 * **NameID Format**: `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`
-* **Allowed Assertion Consumer Service URLs (ACS URLs)**, under **SSO Settings**: your Salesforce domain. Find it on the **My Domain** page in Salesforce Setup.
+* **Allowed Assertion Consumer Service URLs (ACS URLs)**, under **SSO Settings**: your Salesforce domain URL, for example `https://<your-domain>.my.salesforce.com`. Find it on the **My Domain** page in Salesforce Setup.
 
 Click **Save** to keep your changes.
 
