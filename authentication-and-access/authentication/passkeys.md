@@ -36,18 +36,18 @@ To use only passkeys, select **Custom**, and in the **Custom Login Methods** tab
 
 ## Use passkeys in your iOS or Android app
 
-When your mobile app shows the Authgear UI in its own WebView instead of the system browser (see [Using WebView to open the Authgear UI](../../integration/mobile-apps/using-webview-to-open-the-authgear-ui.md)), the operating system allows passkeys only for apps that your project lists. Authgear publishes the listed apps in `/.well-known/apple-app-site-association` and `/.well-known/assetlinks.json` on your project's domain.
+When your mobile app shows the Authgear UI in its own WebView instead of the system browser (see [Using WebView to open the Authgear UI](../../integration/mobile-apps/using-webview-to-open-the-authgear-ui.md)), the operating system allows passkeys only for apps that your project lists. Authgear publishes the listed apps in `/.well-known/apple-app-site-association` and `/.well-known/assetlinks.json` on your project's domain. A listed app can also use the passwords your users saved for that domain.
 
 Apps opening the Authgear UI in the system browser need none of this.
 
 {% hint style="warning" %}
-List only apps you control. A listed app controls everything shown in its WebView, including the Authgear UI, and can request your users' passkeys.
+List only apps you control. A listed app controls everything shown in its WebView, including the Authgear UI, and can request your users' passkeys and saved passwords.
 {% endhint %}
 
 ### List your apps
 
 1. In your project portal, go to **Applications** and open your Native App application.
-2. In the **Associated apps** section, press **Add iOS app** or **Add Android app**.
+2. In the **Passkeys & passwords in mobile apps** section, press **Add iOS app** or **Add Android app**.
 3. Enter the app's details:
    * **iOS:** the Team ID from your Apple Developer account, and the Bundle ID.
    * **Android:** the package name, and the SHA-256 fingerprint of every certificate the app is distributed with, one per line.
