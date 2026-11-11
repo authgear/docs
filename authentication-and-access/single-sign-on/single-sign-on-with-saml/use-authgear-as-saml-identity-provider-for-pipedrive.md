@@ -27,21 +27,23 @@ Keep this page open. You'll come back to it in Step 5.
 
 ### Step 2: Create an Authgear Client Application
 
-You need an Authgear client application of type `OIDC/SAML Client Application` to use Authgear as a SAML identity provider.
+You need an Authgear client application with SAML 2.0 support to use Authgear as a SAML identity provider.
 
-To create a new client application, log in to Authgear Portal, select your project then click on the **Applications** link from the navigation menu.
+1. Log in to Authgear Portal, select your project, and go to **Applications**.
+2. Click **Add Application**.
+3. Enter a **Name** for the application, for example `Pipedrive`.
+4. Under **Framework**, in the **Other** section, select **Other OIDC/SAML compatible**.
+5. Click **Create application**.
 
-Next, click on **Add Application** to create a new client application. Alternatively, select an existing application of type `OIDC/SAML Client Application` and skip to step 3.
+The application opens on its **Quick Start** tab.
 
-On the New Application page, enter **Name** and select `OIDC/SAML Client Application` as the **Application Type**.
-
-Click **Save** to proceed.
+{% hint style="info" %}
+Only applications created with **Other OIDC/SAML compatible** have a **SAML 2.0** tab. To reuse an existing application, check that it has this tab, then skip to Step 3.
+{% endhint %}
 
 ### Step 3: Enable SAML 2.0 in Client Application
 
-By default, SAML 2.0 is not enabled for the client application.
-
-To enable SAML for your client application, click on the **SAML 2.0** tab then toggle the **SAML 2.0 Support** switch on.
+In your Authgear client application, open the **SAML 2.0** tab and turn on **SAML 2.0 Support**.
 
 Then configure the following:
 

@@ -4,8 +4,6 @@ description: Guide on how to use Authgear as a SAML IdP for Dropbox
 
 # Use Authgear as SAML Identity Provider for Dropbox
 
-## Use Authgear as SAML Identity Provider for Dropbox
-
 Security Assertion Markup Language (SAML) is a standard that allows an Identity Provider (IdP) and a Service Provider (SP) to perform user authentication and authorization without exchanging a user's password.
 
 In this post, you'll learn how to set up Authgear as an Identity Provider and Dropbox as a Service Provider.
@@ -14,50 +12,46 @@ In this post, you'll learn how to set up Authgear as an Identity Provider and Dr
 
 * An Authgear account. Sign up for free.
 * A Dropbox Business Advanced account.
+* Email login enabled in your Authgear project. Authgear sends the user's email address to Dropbox, so every user who signs in to Dropbox needs one.
 
 ### Step 1: Create an Authgear Client Application
 
-You need an Authgear client application of type `OIDC/SAML Client Application` to use Authgear as a SAML identity provider.
+You need an Authgear client application with SAML 2.0 support to use Authgear as a SAML identity provider.
 
-To create a new client application, log in to Authgear Portal, select your project then click on the **Applications** link from the navigation menu.
+1. Log in to Authgear Portal, select your project, and go to **Applications**.
+2. Click **Add Application**.
+3. Enter a **Name** for the application, for example `Dropbox`.
+4. Under **Framework**, in the **Other** section, select **Other OIDC/SAML compatible**.
+5. Click **Create application**.
 
-<figure><img src="../../../.gitbook/assets/authgear-nav-applications.png" alt=""><figcaption></figcaption></figure>
+The application opens on its **Quick Start** tab.
 
-Next, click on **Add Application** to create a new client application. Alternatively, select an existing application of type `OIDC/SAML Client Application` and skip to step 2.
-
-On the New Application page, enter **Name** and select `OIDC/SAML Client Application` as the **Application Type**.
-
-<figure><img src="../../../.gitbook/assets/authgear-new-app-saml.png" alt=""><figcaption></figcaption></figure>
-
-Click **Save** to proceed.
+{% hint style="info" %}
+Only applications created with **Other OIDC/SAML compatible** have a **SAML 2.0** tab. To reuse an existing application, check that it has this tab, then skip to Step 2.
+{% endhint %}
 
 ### Step 2: Enable SAML 2.0 in Client Application
 
-By default, SAML 2.0 is not enabled for the client application.
+In your Authgear client application, open the **SAML 2.0** tab and turn on **SAML 2.0 Support**.
 
-To enable SAML for your client application, click on the **SAML 2.0** tab then toggle the **SAML 2.0 Support** switch on.
+Then configure the following:
 
-<figure><img src="../../../.gitbook/assets/authgear-saml-tab (1).png" alt=""><figcaption></figcaption></figure>
+* **NameID Format**: `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`
+* **Allowed Assertion Consumer Service URLs (ACS URLs)**: the Dropbox post-back URL:
 
-Next, change **NameID Format** to `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
+  ```
+  https://www.dropbox.com/saml_login
+  ```
 
-Add the following URL (Dropbox post-back URL) in **Allowed Assertion Consumer Service URLs (ACS URLs)** field:
-
-```
-https://www.dropbox.com/saml_login
-```
-
-Click on **Save** to keep your changes.
+Click **Save** to keep your changes.
 
 ### Step 3: Get SAML IdP Configuration and Download Certificate
 
-Scroll down to the Configuration Parameters section of your Authgear client application's SAML 2.0 tab. Note the value for the login URL.
+Still on the **SAML 2.0** tab, go to the **Configuration Parameters** section and note the **Login URL**.
 
-Also, download the **Identity Provider Certificate** for the client application to your computer.
+Next, in the **Identity Provider Certificates** section, click **Download Certificate**.
 
 You'll use the Login URL and certificate later in the Dropbox Admin console.
-
-<figure><img src="../../../.gitbook/assets/authgear-saml-download-cert.png" alt=""><figcaption></figcaption></figure>
 
 ### Step 4: Add Authgear SAML IdP in Dropbox
 
