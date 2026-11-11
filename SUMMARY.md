@@ -43,6 +43,7 @@
   * [Use Authgear as SAML Identity Provider for Dropbox](authentication-and-access/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-dropbox.md)
   * [Use Authgear as SAML Identity Provider for Pipedrive](authentication-and-access/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-pipedrive.md)
   * [Use Authgear as SAML Identity Provider for Google Workspace](authentication-and-access/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-google-workspace.md)
+  * [Use Authgear as SAML Identity Provider for Notion](authentication-and-access/single-sign-on/single-sign-on-with-saml/use-authgear-as-saml-identity-provider-for-notion.md)
   * [SAML Attribute Mapping](authentication-and-access/single-sign-on/single-sign-on-with-saml/saml-attribute-mapping.md)
 
 ## Build with AI
