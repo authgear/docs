@@ -4,7 +4,7 @@ description: Measured login and signup throughput of a self-managed Authgear dep
 
 # Throughput Scaling Reference
 
-In a load test in October 2026, a self-managed Authgear deployment on the hardware below handled about **11 logins per second (40,000 per hour)** or **9 signups per second (32,000 per hour)**. None of the roughly 30,000 test logins and signups failed.
+In a load test in October 2026, a self-managed Authgear deployment on the hardware below handled about **11 logins per second (40,000 per hour)** or **9 signups per second (32,000 per hour)**.
 
 | Role                             | Machines | Each               |
 | -------------------------------- | -------- | ------------------ |
