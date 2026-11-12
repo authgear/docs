@@ -38,9 +38,9 @@ For Custom Attributes, you can define the access right for each way of accessing
 
 Each way of accessing user profiles belongs to one of the following Access Right Categories:
 
-* **Portal Admin Access Right:** Use this category to set the access right of an attribute in the Authgear Portal for an admin user.
-* **Token Bearer Access Right:** This sets the access right of an attribute for the User Info endpoint when a token bearer accesses it. It can be "Hidden" or "Read-Only".
-* **End-user Access Right:** Use this to set the access right of the attribute for the default User Settings UI when accessed by an end-user.
+* **Portal Admin Access Right:** Sets the access right of the attribute for admin users in the Authgear Portal.
+* **Token Bearer Access Right:** Sets the access right of the attribute for token bearers calling the User Info endpoint. Only `Hidden` and `Read-only` apply here.
+* **End-user Access Right:** Sets the access right of the attribute for end-users in the default User Settings UI.
 
 ## How to Retrieve and Manage User Profiles
 
