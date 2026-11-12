@@ -206,7 +206,7 @@ Create your Helm chart and then remove the generated boilerplate `.yaml` in the 
 ```
 $ helm create authgear-deploy
 $ cd authgear-deploy/templates
-$ rm -r test/ NOTES.txt deployment.yaml hpa.yaml ingress.yaml service.yaml serviceaccount.yaml
+$ rm -rf tests/ NOTES.txt deployment.yaml hpa.yaml httproute.yaml ingress.yaml service.yaml serviceaccount.yaml
 $ cd -
 ```
 
@@ -256,7 +256,7 @@ $ docker run --rm -it quay.io/theauthgear/authgear-portal:TAG authgear-portal da
   --database-schema public
 
 # Run this if you are using postgresql as search service
-$ docker run --rm -it quay.io/theauthgear/authgear-portal:TAG authgear search migrate up \
+$ docker run --rm -it quay.io/theauthgear/authgear-server:TAG authgear search database migrate up \
   --search-database-url SEARCH_DATABASE_URL \
   --search-database-schema public
 ```
@@ -321,11 +321,6 @@ Generate the `authgear.yaml` and `authgear.secrets.yaml`. Save the files to `res
 $ docker run -v "$PWD"/resources:/app/resources --rm -it quay.io/theauthgear/authgear-server:TAG authgear init \
   --output-folder=resources/authgear \
   --for-helm-chart
-App ID (default 'my-app'): accounts
-HTTP origin of authgear (default 'http://localhost:3000'): https://accounts.portal.myapp.com
-HTTP origin of portal (default 'http://portal.localhost:8000'): https://portal.myapp.com
-Phone OTP Mode (sms, whatsapp, whatsapp_sms) (default 'sms'):
-Would you like to turn off email verification? (In case you don't have SMTP credentials in your initial setup) [Y/N] (default 'false'): N
 ```
 {% endtab %}
 
@@ -334,35 +329,57 @@ Would you like to turn off email verification? (In case you don't have SMTP cred
 $ ./authgear init \
   --output-folder=resources/authgear \
   --for-helm-chart
-App ID (default 'my-app'): accounts
-HTTP origin of authgear (default 'http://localhost:3000'): https://accounts.portal.myapp.com
-HTTP origin of portal (default 'http://portal.localhost:8000'): https://portal.myapp.com
-Phone OTP Mode (sms, whatsapp, whatsapp_sms) (default 'sms'):
-Would you like to turn off email verification? (In case you don't have SMTP credentials in your initial setup) [Y/N] (default 'false'): N
 ```
 {% endtab %}
 {% endtabs %}
 
-Create the "accounts" app
+Run the command in an interactive terminal. Without a TTY, `authgear init` skips the prompts and writes the default values. Answer the prompts as follows and accept the default for the rest:
+
+| Prompt                                              | Answer                                                                          |
+| --------------------------------------------------- | ------------------------------------------------------------------------------- |
+| App ID                                              | `accounts`                                                                      |
+| HTTP origin of authgear                             | `https://accounts.portal.myapp.com`                                             |
+| Turn off email verification                         | `false`                                                                         |
+| SMTP host, port, username, password, sender address | Leave empty. SMTP is configured in the Helm chart values.                       |
+| Select a service for searching                      | `postgresql` if you use PostgreSQL search. The default is `elasticsearch`.      |
+| HTTP origin of portal                               | `https://portal.myapp.com`                                                      |
+
+With `--for-helm-chart`, the generated `authgear.secrets.yaml` contains only keys. Database, Redis and SMTP credentials come from the Helm chart values.
+
+Create the "accounts" app, its default domain `accounts.myapp.com` and its custom domain `accounts.portal.myapp.com`
 
 {% tabs %}
 {% tab title="Docker" %}
 ```
-$ docker run -v "$PWD"/resources:/app/resources quay.io/theauthgear/authgear-portal:TAG authgear-portal internal configsource create ./resources/authgear \
+$ docker run -v "$PWD"/resources:/app/resources --rm -it quay.io/theauthgear/authgear-portal:TAG authgear-portal internal configsource create ./resources/authgear \
   --database-url DATABASE_URL \
   --database-schema public
-
-// FIXME: There isn't any easy way to configure a custom domain from cli
+$ docker run --rm -it quay.io/theauthgear/authgear-portal:TAG authgear-portal internal domain create-default accounts \
+  --database-url DATABASE_URL \
+  --database-schema public \
+  --default-domain-suffix ".myapp.com"
+$ docker run --rm -it quay.io/theauthgear/authgear-portal:TAG authgear-portal internal domain create-custom accounts \
+  --database-url DATABASE_URL \
+  --database-schema public \
+  --apex-domain myapp.com \
+  --domain accounts.portal.myapp.com
 ```
 {% endtab %}
 
 {% tab title="Binary" %}
 ```
-$ ./authgear-portal internal setup-portal ./resources/authgear \
+$ ./authgear-portal internal configsource create ./resources/authgear \
+  --database-url DATABASE_URL \
+  --database-schema public
+$ ./authgear-portal internal domain create-default accounts \
   --database-url DATABASE_URL \
   --database-schema public \
-  --default-authgear-domain accounts.myapp.com \
-  --custom-authgear-domain accounts.portal.myapp.com
+  --default-domain-suffix ".myapp.com"
+$ ./authgear-portal internal domain create-custom accounts \
+  --database-url DATABASE_URL \
+  --database-schema public \
+  --apex-domain myapp.com \
+  --domain accounts.portal.myapp.com
 ```
 {% endtab %}
 {% endtabs %}
@@ -372,6 +389,37 @@ $ ./authgear-portal internal setup-portal ./resources/authgear \
 Refer to Helm chart values reference and prepare the `./authgear-deploy/values.yaml`.
 
 Remember to provide the correct client ID. The client ID can be found in the generated `authgear.yaml`.
+
+A few values are easy to miss:
+
+* Set `authgear.defaultDomain` to your apex domain, and also list it in `authgear.allDefaultDomains`. Only `allDefaultDomains` creates the wildcard Ingress for `*.myapp.com`; without it, `accounts.myapp.com` and the default domain of every app return 404.
+* Set `authgear.deno.image`. The Deno server is always deployed.
+* If you use PostgreSQL search, set `authgear.postgresqlsearch.enabled` to `true` with the search database URL and schema. Otherwise user search fails.
+* Set `authgear.portalServer.adminAPI.endpoint` to the admin Service the chart creates: `http://RELEASE_NAME-admin.NAMESPACE.svc.cluster.local`, for example `http://authgear-deploy-admin.authgear.svc.cluster.local`.
+
+```yaml
+authgear:
+  authgear:
+    defaultDomain: "myapp.com"
+    allDefaultDomains:
+    - domain: "myapp.com"
+      ingress:
+        enabled: true
+        tls:
+          enabled: true
+      certManager:
+        enabled: true
+      secretName: "tls-star-myapp-com"
+    deno:
+      image: "quay.io/theauthgear/authgear-deno:DENO_TAG"
+    postgresqlsearch:
+      enabled: true
+      databaseURL: "SEARCH_DATABASE_URL"
+      databaseSchema: "public"
+    portalServer:
+      adminAPI:
+        endpoint: "http://authgear-deploy-admin.authgear.svc.cluster.local"
+```
 
 **Create deployment-specific authgear.secrets.yaml**
 
@@ -417,6 +465,38 @@ Install your helm chart with
 helm install authgear-deploy ./authgear-deploy --namespace authgear --values ./authgear-deploy/values.yaml
 ```
 
+**Create the first portal admin**
+
+The portal has no users after installation. Create a user in the "accounts" app with the Admin API, from the admin server pod:
+
+```
+$ kubectl exec --namespace authgear deploy/authgear-deploy-admin -- \
+  authgear internal admin-api invoke \
+  --app-id accounts \
+  --endpoint http://127.0.0.1:3002 \
+  --host accounts.myapp.com \
+  --query 'mutation createUser($email: String!, $password: String!) { createUser(input: { definition: { loginID: { key: "email", value: $email } }, password: $password }) { user { id } } }' \
+  --variables-json '{"email":"EMAIL","password":"PASSWORD"}'
+```
+
+The response contains the node ID of the user. Decode it to get the raw user ID:
+
+```
+$ python3 -c 'import base64,sys; s=sys.argv[1]; print(base64.urlsafe_b64decode(s+"="*(-len(s)%4)).decode().split(":",1)[1])' NODE_ID
+```
+
+Then make the user an owner of the "accounts" app. The portal pod has two containers, so name the portal server container:
+
+```
+$ kubectl exec --namespace authgear deploy/authgear-deploy-portal -c authgear-portal-server -- \
+  authgear-portal internal collaborator add \
+  --app-id accounts \
+  --user-id RAW_USER_ID \
+  --role owner
+```
+
+You can now sign in to `https://portal.myapp.com` with that email and password.
+
 ### How to upgrade Authgear
 
 If there are no breaking changes that require migration to be performed between the running version and the target version, an upgrade is as simple as setting `authgear.mainServer.image` and `authgear.portalServer.image` to a newer value.
@@ -446,10 +526,10 @@ Please refer to [https://github.com/authgear/helm-charts/blob/master/authgear/va
 | `authgear.certManager.issuer.http01.name`                           | String  | Depends  | The name of the HTTP01 issuer. It is required when cert-manager is enabled                                                                                                                                                  |
 | `authgear.certManager.issuer.http01.kind`                           | String  | Depends  | The kind of the HTTP01 issuer. The default is `Issuer`                                                                                                                                                                      |
 | `authgear.certManager.issuer.http01.group`                          | String  | Depends  | The group of the HTTP01 issuer. The default is `cert-manager.io`                                                                                                                                                            |
-| `authgear.baseHost`                                                 | String  | Yes      | The apex domain you assign to Authgear, for example `authgear.cloud`                                                                                                                                                        |
-| `authgear.tls.wildcard.secretName`                                  | String  | No       | The name of the Secret to store the wildcard TLS certificate `*.baseHost`                                                                                                                                                   |
-| `authgear.tls.portal.secretName`                                    | String  | No       | The name of the Secret to store the portal TLS certificate `portal.baseHost`                                                                                                                                                |
-| `authgear.tls.portalAuthgear.secretName`                            | String  | No       | The name of the Secret to store the portal Authgear TLS certificate `accounts.portal.baseHost`                                                                                                                              |
+| `authgear.defaultDomain`                                            | String  | Yes      | The apex domain you assign to Authgear, for example `myapp.com`. The portal is served at `portal.myapp.com`.                                                                                                                |
+| `authgear.allDefaultDomains`                                        | List    | Yes      | Wildcard domains for app endpoints. Include `defaultDomain` here: each entry creates the `*.domain` Ingress (with `ingress`, `certManager` and `secretName` for its TLS certificate).                                       |
+| `authgear.tls.portal.secretName`                                    | String  | No       | The name of the Secret to store the portal TLS certificate `portal.defaultDomain`                                                                                                                                           |
+| `authgear.tls.portalAuthgear.secretName`                            | String  | No       | The name of the Secret to store the portal Authgear TLS certificate, for the host in `portalServer.authgear.endpoint`                                                                                                       |
 | `authgear.smtp.host`                                                | String  | Yes      | The SMTP host                                                                                                                                                                                                               |
 | `authgear.smtp.port`                                                | Integer | No       | The SMTP port. The default is `587`                                                                                                                                                                                         |
 | `authgear.smtp.mode`                                                | String  | No       | The SMTP mode. Valid values are `normal` and `ssl`. When mode is `normal`, SSL usage is inferred from the port.                                                                                                             |
@@ -457,6 +537,9 @@ Please refer to [https://github.com/authgear/helm-charts/blob/master/authgear/va
 | `authgear.smtp.password`                                            | String  | No       | The SMTP password                                                                                                                                                                                                           |
 | `authgear.elasticsearch.enabled`                                    | Boolean | No       | Whether elasticsearch was deployed by you separately and is available for Authgear to use. The default is `false`                                                                                                           |
 | `authgear.elasticsearch.url`                                        | String  | Depends  | The URL to the elasticsearch                                                                                                                                                                                                |
+| `authgear.postgresqlsearch.enabled`                                 | Boolean | No       | Whether to use PostgreSQL for search. The default is `false`                                                                                                                                                                |
+| `authgear.postgresqlsearch.databaseURL`                             | String  | Depends  | The database URL for the search data. It is required when PostgreSQL search is enabled                                                                                                                                      |
+| `authgear.postgresqlsearch.databaseSchema`                          | String  | Depends  | The database schema for the search data. It is required when PostgreSQL search is enabled                                                                                                                                   |
 | `authgear.twilio.accountSID`                                        | String  | Depends  | The account SID of your Twilio subscription. It is required if you allow your users to authenticate with SMS. Either one of Twilio or Nexmo is enough                                                                       |
 | `authgear.twilio.authToken`                                         | String  | Depends  | The auth token SID of your Twilio subscription.                                                                                                                                                                             |
 | `authgear.nexmo.apiKey`                                             | String  | Depends  | The API key of your Nexmo subscription. It is required if you allow your users to authenticate with SMS. Either one of Twilio or Nexmo is enough                                                                            |
@@ -467,14 +550,15 @@ Please refer to [https://github.com/authgear/helm-charts/blob/master/authgear/va
 | `authgear.auditLog.databaseURL`                                     | String  | Yes      | The database URL for Authgear to store its log data                                                                                                                                                                         |
 | `authgear.auditLog.databaseSchema`                                  | String  | Yes      | The database schema for Authgear to store its log data                                                                                                                                                                      |
 | `authgear.analytic.enabled`                                         | Boolean | No       | Whether to collect analytic data. The default is `false`                                                                                                                                                                    |
-| `authgear.analytic.redisURL`                                        | String  | Yes      | The Redis URL for Authgear to store analytic data                                                                                                                                                                           |
+| `authgear.analytic.redisURL`                                        | String  | Depends  | The Redis URL for Authgear to store analytic data. It is required when `analytic.enabled` is `true`                                                                                                                         |
 | `authgear.mainServer.image`                                         | String  | Yes      | The Authgear server image                                                                                                                                                                                                   |
 | `authgear.mainServer.resources`                                     | Object  | No       | Kubernetes ResourceRequirements for the main server                                                                                                                                                                         |
 | `authgear.adminServer.resources`                                    | Object  | No       | Kubernetes ResourceRequirements for the admin API server                                                                                                                                                                    |
 | `authgear.resolverServer.resources`                                 | Object  | No       | Kubernetes ResourceRequirements for the resolver server                                                                                                                                                                     |
 | `authgear.background.resources`                                     | Object  | No       | Kubernetes ResourceRequirements for the background daemon                                                                                                                                                                   |
+| `authgear.deno.image`                                               | String  | Yes      | The Deno server image, for example `quay.io/theauthgear/authgear-deno:TAG`. Deno runs hooks and is always deployed                                                                                                          |
 | `authgear.imagesServer.cdn.host`                                    | String  | No       | The CDN host for serving images                                                                                                                                                                                             |
-| `authgear.imagesServer.objectStore.type`                            | String  | No       | The object store type. Valid values are `GCP_GCS`, `AWS_S3`, and `AZURE_BLOB_STORAGE`.                                                                                                                                      |
+| `authgear.imagesServer.objectStore.type`                            | String  | No       | The object store type. Valid values are `GCP_GCS`, `AWS_S3`, `AZURE_BLOB_STORAGE`, `ALIBABA_CLOUD_OSS` and `MINIO` (any S3-compatible endpoint).                                                                            |
 | `authgear.imagesServer.objectStore.awsS3.region`                    | String  | No       | The S3 region                                                                                                                                                                                                               |
 | `authgear.imagesServer.objectStore.awsS3.bucketName`                | String  | No       | The S3 bucket name                                                                                                                                                                                                          |
 | `authgear.imagesServer.objectStore.awsS3.accessKeyID`               | String  | No       | The S3 access key ID                                                                                                                                                                                                        |
@@ -492,7 +576,7 @@ Please refer to [https://github.com/authgear/helm-charts/blob/master/authgear/va
 | `authgear.portalServer.authgear.appID`                              | String  | Yes      | The app ID of the Authgear providing authentication for the portal server                                                                                                                                                   |
 | `authgear.portalServer.authgear.clientID`                           | String  | Yes      | The client ID for the portal server to use Authgear                                                                                                                                                                         |
 | `authgear.portalServer.authgear.endpoint`                           | String  | Yes      | The endpoint of the Authgear used by the portal server                                                                                                                                                                      |
-| `authgear.portalServer.adminAPI.endpoint`                           | String  | Yes      | The static endpoint to the Admin API server. Normally this is an HTTP URL with cluster-local service name.                                                                                                                  |
+| `authgear.portalServer.adminAPI.endpoint`                           | String  | Yes      | The endpoint of the admin API server: `http://RELEASE_NAME-admin.NAMESPACE.svc.cluster.local`, the admin Service created by this chart.                                                                                     |
 | `authgear.portalServer.resources`                                   | Object  | No       | Kubernetes ResourceRequirements for the portal server                                                                                                                                                                       |
 | `authgear.appCustomResources.path`                                  | String  | No       | The custom resources directory applied to every app. It provides global theming for this particular deployment.                                                                                                             |
 | `authgear.appCustomResources.volume`                                | Object  | No       | Kubernetes Volume without the name field                                                                                                                                                                                    |
