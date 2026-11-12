@@ -16,31 +16,46 @@ To access any of the applications in your Authgear account, each user must have 
 The standard attributes in UserProfile in OIDC are a standardized schema for representing the end-users identity information and you can not add or delete them. To introduce additional attributes, use custom attributes.
 {% endhint %}
 
-### User Profiles Access Right
+## Profile Attribute Access Rights
 
-Access Right defines what information can be viewed or modified when a user's profile is accessed via the Authgear Portal, User Info endpoint, or User Settings page.
+Every profile attribute has three access rights, one for each party that can reach it. You set them per attribute from **User Profile** > **Standard Attributes** or **User Profile** > **Custom Attributes** in the Authgear Portal.
 
-An Access Right can be set for each profile attribute under a specific medium of accessing user profiles. For example, in the following screenshot, the Primary Email attribute has the Editable Access Right for Portal, `Read-only` for User Info endpoint (also known as access Token Bearer), and `Editable` for User Settings page. In simpler terms, the example means an admin can modify Primary Email in Authgear Portal, while a client application can use a user's access token to view their Primary Email. Finally, users can edit their own Primary Email from the User Settings page.
+| Column in the Portal          | Who it controls                            | Where it applies                                                                                                                                             |
+| ----------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Portal Admin Access Right** | Admins using the Authgear Portal           | **User Management** > a user > **Profile** tab                                                                                                               |
+| **Token Bearer Access Right** | Any client holding the user's access token | The [UserInfo endpoint](access-user-profiles.md#id-4.-access-user-profiles-from-the-oidc-userinfo-endpoint), including the SDK fetch user info function |
+| **End-user Access Right**     | The user themselves                        | The [User Settings page](../../customization/ui-customization/built-in-ui/user-settings.md)                                                                 |
+
+Each access right is one of three levels:
+
+| Level         | Portal Admin and End-user         | Token Bearer                                       |
+| ------------- | --------------------------------- | -------------------------------------------------- |
+| **Editable**  | Can view and change the attribute | Not available. The UserInfo endpoint is read-only. |
+| **Read-only** | Can view but not change           | Attribute is included in the UserInfo response     |
+| **Hidden**    | Attribute is not shown            | Attribute is omitted from the UserInfo response    |
+
+{% hint style="info" %}
+Access rights do not apply to the [Admin API](access-user-profiles.md#id-3.-access-user-profiles-from-admin-api), which always has full access to every attribute, or to the user object passed to the [JWT customization hook](add-custom-fields-to-a-jwt-access-token.md).
+{% endhint %}
+
+### Example
 
 <figure><img src="../../.gitbook/assets/authgear-profile-access-right.png" alt=""><figcaption></figcaption></figure>
 
-#### Access Right Options
+In this screenshot, Primary Email is **Editable** for Portal Admin, **Read-only** for Token Bearer and **Editable** for End-user. An admin can change it in the Portal, your app can read it from the UserInfo endpoint, and the user can change it on the User Settings page. Name is **Hidden** in all three columns, so nobody sees it until you change the setting.
 
-The following are the available Access Right options that can be applied to each attribute for a specific medium.
+### Allowed combinations
 
-* **Editable:** Grants a medium access to view and modify the value of an attribute.
-* **Read-only:** A medium with this access for an attribute can only view the value of the attribute.
-* **Hidden:** If the access for an attribute is set to `Hidden` for a medium, that medium can not view or modify the attribute.
+The Portal enforces two rules:
 
-By default, Authgear sets different access rights for the standard attributes on each way of accessing user profiles. You can view and configure this default access right from **User Profile** > **Standard Attributes** in the Authgear Portal.
+* An admin always has at least as much access as the other two parties.
+* If end-users can see an attribute, token bearers can see it too.
 
-For Custom Attributes, you can define the access right for each way of accessing a user profile from **User Profile** > **Custom Attributes** in the portal.
+Token Bearer can only be Hidden or Read-only. If a change would break a rule, the Portal adjusts the other columns to match and asks you to confirm before saving.
 
-Each way of accessing user profiles belongs to one of the following Access Right Categories:
+### Defaults
 
-* **Portal Admin Access Right:** Sets the access right of the attribute for admin users in the Authgear Portal.
-* **Token Bearer Access Right:** Sets the access right of the attribute for token bearers calling the User Info endpoint. Only `Hidden` and `Read-only` apply here.
-* **End-user Access Right:** Sets the access right of the attribute for end-users in the default User Settings UI.
+Authgear ships default access rights for every standard attribute. You can see and change them on the **Standard Attributes** page. Custom attributes get their access rights when you create them on the **Custom Attributes** page.
 
 ## How to Retrieve and Manage User Profiles
 
