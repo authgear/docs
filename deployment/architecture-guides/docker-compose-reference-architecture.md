@@ -188,8 +188,6 @@ Both options need the following, in addition to the VMs listed in their inventor
 | WhatsApp         | 1                 | Optional. Business account for WhatsApp delivery.                                                                                                                                                                                               |
 | CAPTCHA          | 1                 | Optional. Google reCAPTCHA or Cloudflare Turnstile.                                                                                                                                                                                             |
 
-Portal Login does not need to be a subdomain of the Authgear Portal hostname.
-
 ### Datastore Requirements
 
 The versions below are the ones Authgear is tested against, on both a cloud-managed service and the included datastores. Option 2 installs exactly these versions. With Option 1, match them where you can. Other releases have not been tested.
