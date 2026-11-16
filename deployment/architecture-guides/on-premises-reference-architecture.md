@@ -148,15 +148,15 @@ Components:
 
 #### Hostnames
 
-Each Authgear environment (production, staging, etc.) uses three subdomains:
+Each Authgear environment (production, staging, etc.) uses three hostnames:
 
-| Hostname          | Purpose                                                                                      | Example                                |
-| ----------------- | -------------------------------------------------------------------------------------------- | -------------------------------------- |
-| Authgear Endpoint | Serves OAuth 2.0 / OIDC / SAML endpoints for your end-user applications                      | `auth.example.com`                     |
-| Authgear Portal   | Admin UI where tenant administrators manage users, configure auth flows, and view audit logs | `authgear-portal.example.com`          |
-| Portal Login      | Authenticates administrators into the Authgear Portal                                        | `accounts.authgear-portal.example.com` |
+| Hostname          | Purpose                                                                                      | Example                |
+| ----------------- | -------------------------------------------------------------------------------------------- | ---------------------- |
+| Authgear Endpoint | Serves OAuth 2.0 / OIDC / SAML endpoints for your end-user applications                      | `auth.example.com`     |
+| Authgear Portal   | Admin UI where tenant administrators manage users, configure auth flows, and view audit logs | `portal.example.com`   |
+| Portal Login      | Authenticates administrators into the Authgear Portal                                        | `accounts.example.com` |
 
-Deploy a separate set of three subdomains per environment. Naming is up to you — for example, a staging environment might use `auth-stg.example.com`, `authgear-portal-stg.example.com`, and `accounts.authgear-portal-stg.example.com`.
+Deploy a separate set of three hostnames per environment. Naming is up to you. For example, a staging environment might use `auth-stg.example.com`, `portal-stg.example.com`, and `accounts-stg.example.com`.
 
 #### Key Paths on the Authgear Endpoint Host
 
