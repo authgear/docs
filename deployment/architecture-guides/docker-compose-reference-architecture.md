@@ -188,7 +188,7 @@ Both options need the following, in addition to the VMs listed in their inventor
 | WhatsApp         | 1                 | Optional. Business account for WhatsApp delivery.                                                                                                                                                                                               |
 | CAPTCHA          | 1                 | Optional. Google reCAPTCHA or Cloudflare Turnstile.                                                                                                                                                                                             |
 
-The Authgear Portal and Portal Login hostnames must share a parent domain, `example.com` in the examples above. Portal Login sets the admin session cookie on that parent domain, and the browser only sends the cookie to the Authgear Portal when its hostname is under the same domain. Portal Login does not need to be a subdomain of the Authgear Portal hostname. Keeping every hostname one level below the same parent domain also lets the single wildcard certificate cover them all.
+Portal Login does not need to be a subdomain of the Authgear Portal hostname: the Portal authenticates administrators with access and refresh tokens, so the two hostnames are independent. Keeping every hostname one level below the same parent domain is still the simplest layout, because the single wildcard certificate then covers them all. If you run the Portal with cookie sessions instead, the Authgear Portal and Portal Login hostnames must also share a parent domain.
 
 ### Datastore Requirements
 

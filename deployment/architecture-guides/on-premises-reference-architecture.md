@@ -156,7 +156,7 @@ Each Authgear environment (production, staging, etc.) uses three hostnames:
 | Authgear Portal   | Admin UI where tenant administrators manage users, configure auth flows, and view audit logs | `portal.example.com`   |
 | Portal Login      | Authenticates administrators into the Authgear Portal                                        | `accounts.example.com` |
 
-The names are up to you. The one rule is that the Authgear Portal and Portal Login hostnames must share a parent domain, `example.com` in the example above. Portal Login sets the admin session cookie on that parent domain, and the browser only sends the cookie to the Authgear Portal when its hostname is under the same domain. Portal Login does not need to be a subdomain of the Authgear Portal hostname. Keeping all three hostnames one level below the same parent domain also lets a single wildcard certificate cover them.
+The names are up to you. Portal Login does not need to be a subdomain of the Authgear Portal hostname: the Portal authenticates administrators with access and refresh tokens, so the two hostnames are independent. Keeping all three hostnames one level below the same parent domain is still the simplest layout, because a single wildcard certificate then covers them. If you run the Portal with cookie sessions instead, the Authgear Portal and Portal Login hostnames must also share a parent domain.
 
 Deploy a separate set of three hostnames per environment. For example, a staging environment might use `auth-stg.example.com`, `portal-stg.example.com`, and `accounts-stg.example.com`.
 
