@@ -3,11 +3,16 @@
 ## Overview
 
 {% hint style="info" %}
-Biometric login is supported for the following operating systems:
+Biometric login is supported on:
 
-* iOS 11.3 or higher
-* Android 6.0 (API 23) or higher
+* iOS 11.3 or later, with Face ID or Touch ID.
+* Android 6.0 (API 23) or later, with strong (Class 3) biometrics. Falling back to the device PIN or pattern needs Android 11 (API 30) or later.
+* Huawei devices with Google Play services: same as Android.
+* Huawei devices without Google Play services: HarmonyOS 2 to 4, with strong (Class 3) biometrics.
+* HarmonyOS NEXT: not supported yet. It cannot run Android apps.
 {% endhint %}
+
+Biometric login is a separate feature from [passkeys](passkeys.md). Passkeys run on the Authgear login pages and are stored in iCloud Keychain or Google Password Manager. Biometric login keeps a private key on the device and is used from the mobile SDK.
 
 Authgear supports enabling biometric login in the native mobile application. You will need to
 
@@ -941,7 +946,7 @@ You may want to provide an alternative means for users to log in when biometric 
 
 On iOS, you use `deviceOwnerAuthenticationWithBiometrics` during enable, and use `deviceOwnerAuthentication` during subsequent authentication.
 
-On Android, you set `allowedAuthenticatorsOnEnable` and `allowedAuthenticatosOnAuthenticate` according to the example below.
+On Android, you set `allowedAuthenticatorsOnEnable` and `allowedAuthenticatosOnAuthenticate` according to the example below. The fallback needs Android 11 (API 30) or later. Earlier versions do not support `DEVICE_CREDENTIAL` in these options.
 
 {% tabs %}
 {% tab title="iOS" %}
