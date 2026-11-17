@@ -12,7 +12,7 @@ Passkeys replace passwords and other passwordless login methods. They are built 
 
 Passkeys are supported by current versions of the major browsers and operating systems, including iOS 16 and macOS 13 (Ventura) or later, and Android 9 (API level 28) or later. See [passkeys.dev](https://passkeys.dev/device-support/) for the full list.
 
-On Android, passkeys need Google Play services. Huawei devices that ship without Google Play services, that is, all China-market models and all models launched since mid-2019, cannot use passkeys. HarmonyOS NEXT cannot run Android apps and has no passkey support in Authgear yet. On these devices, users sign in with your other login methods.
+On Android, passkeys need Google Play services. Huawei devices that ship without Google Play services, that is, all China-market models and all models launched since mid-2019, cannot use passkeys. HarmonyOS NEXT cannot run Android apps and has no passkey support in Authgear yet. On these devices, users sign in with your other login methods. Huawei provides a native passkey API from HarmonyOS 6.0. If you plan to support passkeys on HarmonyOS NEXT, [contact us](https://www.authgear.com/talk-with-us).
 
 Passkeys sync through the platform's password manager, such as iCloud Keychain or Google Password Manager, so users can sign in on all their devices. Users confirm a sign-in with the device's screen lock, such as Face ID, Touch ID, Windows Hello, or an Android fingerprint or face unlock.
 
