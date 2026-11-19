@@ -17,7 +17,7 @@ In this post, you'll learn how to set up Authgear as an Identity Provider and No
 
 ### Step 1: Get the SAML Settings from Notion
 
-Log in to Notion and go to **Settings** > **Identity**. In the **SAML single sign-on (SSO)** section, click **Edit SAML SSO configuration**.
+Log in to Notion and go to **Settings** > **Identity**. In the **SAML single sign-on (SSO)** section, click **Edit SAML SSO configuration**. The **Set up SAML SSO** dialog opens.
 
 Note the following:
 
@@ -101,17 +101,17 @@ Go back to your client application's **SAML 2.0** tab in Authgear Portal and not
 
 ### Step 6: Add Authgear SAML IdP in Notion
 
-In the Notion **SAML SSO configuration** dialog, under **Identity Provider Details**, enter the **Identity Provider Metadata** URL from Step 5 as the **IdP URL**.
+In the Notion **Set up SAML SSO** dialog, under **Setup method**, select **URL**. Paste the **Identity Provider Metadata** URL from Step 5 into **URL**, then click **Save changes**.
 
-Save the configuration, then turn on **Enable SAML SSO**.
+Back in **Settings** > **Identity**, turn on **Enable SAML SSO**.
 
 {% hint style="info" %}
-Keep a workspace owner signed in to Notion in another browser while you test, so you can fix the setup if the test fails.
+Workspace owners can always log in to Notion with a password or passkey, so you can fix the setup if the test fails.
 {% endhint %}
 
 ### Step 7: Test Single Sign-on
 
-Open a private browser window and go to [https://app.notion.com/login](https://app.notion.com/login). Enter the email address of a user in your verified domain and continue.
+Open a private browser window and go to [https://app.notion.com/login](https://app.notion.com/login). Click **SSO**, enter the email address of a user in your verified domain, and click **Continue with SSO**.
 
 You should be redirected to the Authgear login page. Log in with the Authgear account that has the same email address. Notion then signs you in.
 
