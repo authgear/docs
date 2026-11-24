@@ -10,7 +10,7 @@ Audit Log Streaming sends your project's audit logs to your own log system short
 You can stream to:
 
 * **Datadog**, set up in the Portal. See [Stream Audit Logs to Datadog](stream-audit-logs-to-datadog.md).
-* **A syslog collector**, over TCP with optional TLS. This page covers it.
+* **A syslog collector**, over TCP with optional TLS, set up as described on this page.
 
 {% hint style="info" %}
 On Authgear Cloud, Audit Log Streaming is not enabled by default. [Contact us](https://www.authgear.com/talk-with-us) to enable it for your project.
@@ -35,21 +35,21 @@ Every entry written to your project's [audit log](audit-log.md) is streamed: sig
 1. In the Portal, go to **Advanced** > **Edit Config**.
 2. Add a stream under `telemetry.audit_logs.streams`:
 
-```yaml
-telemetry:
-  audit_logs:
-    streams:
-    - name: collector
-      type: syslog
-      transport: tcp
-      tcp:
-        address: collector.example.com:6514
-        tls:
-          enabled: true
-      syslog:
-        format: rfc5424
-        framing: newline
-```
+   ```yaml
+   telemetry:
+     audit_logs:
+       streams:
+       - name: collector
+         type: syslog
+         transport: tcp
+         tcp:
+           address: collector.example.com:6514
+           tls:
+             enabled: true
+         syslog:
+           format: rfc5424
+           framing: newline
+   ```
 
 3. Click **Save**.
 
@@ -139,26 +139,26 @@ If you run Authgear yourself:
 * Add streams to `authgear.yaml` as shown above.
 * Certificates for a private certificate authority or mutual TLS go in `authgear.secrets.yaml`, matched to a stream by `stream_name`:
 
-```yaml
-secrets:
-- key: telemetry.audit_logs.streams.tls
-  data:
-  - stream_name: collector
-    client_certificate:
-      certificate:
+  ```yaml
+  secrets:
+  - key: telemetry.audit_logs.streams.tls
+    data:
+    - stream_name: collector
+      client_certificate:
+        certificate:
+          pem: |
+            -----BEGIN CERTIFICATE-----
+            ...
+            -----END CERTIFICATE-----
+        key:
+          kty: RSA
+          ...
+      certificate_authority:
         pem: |
           -----BEGIN CERTIFICATE-----
           ...
           -----END CERTIFICATE-----
-      key:
-        kty: RSA
-        ...
-    certificate_authority:
-      pem: |
-        -----BEGIN CERTIFICATE-----
-        ...
-        -----END CERTIFICATE-----
-```
+  ```
 
   * `client_certificate` is the certificate and private key (as a JWK) that Authgear presents to your collector. Add it for mutual TLS.
   * `certificate_authority` is the certificate authority your collector's certificate is checked against, instead of the system's trusted list.
@@ -168,7 +168,7 @@ secrets:
 
 ## Troubleshooting
 
-* **No logs arrive.** Check that `tcp.address` is correct and reachable from the internet, and that your collector listens on TCP at that port. Then trigger some activity, such as signing in, and wait a minute.
+* **No logs arrive.** Check that `tcp.address` is correct and reachable from Authgear (from the internet, on Authgear Cloud), and that your collector listens on TCP at that port. Then trigger some activity, such as signing in, and wait a minute.
 * **TLS connection fails.** Check that your collector's certificate matches the host in `tcp.address` and is not expired. For a private certificate authority or mutual TLS, [contact us](https://www.authgear.com/talk-with-us).
 * **Some entries are missing or cut off.** Your collector may be dropping or cutting long messages. Raise its maximum message size. On the OpenTelemetry Collector, switching to `framing: newline` also helps, because its limit for newline-framed messages is much higher.
 * **Your collector rejects the structured data.** It may require an SD-ID in the form `name@<enterprise-number>`. Set `syslog.structured_data_id` to one.

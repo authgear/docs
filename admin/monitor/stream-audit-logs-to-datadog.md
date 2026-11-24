@@ -5,7 +5,7 @@ description: >-
 
 # Stream Audit Logs to Datadog
 
-Authgear can send your project's audit logs to Datadog, so you can search, alert on and keep them alongside the rest of your logs. To send them to a SIEM or another syslog collector instead, see [Audit Log Streaming](audit-log-streaming.md).
+Authgear can send your project's audit logs to Datadog, so you can search, alert on and keep them alongside the rest of your logs. To send them to a SIEM or another syslog collector as well, see [Audit Log Streaming](audit-log-streaming.md).
 
 {% hint style="info" %}
 On Authgear Cloud, Audit Log Streaming is not enabled by default. [Contact us](https://www.authgear.com/talk-with-us) to enable it for your project.
