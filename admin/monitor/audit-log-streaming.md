@@ -95,7 +95,7 @@ Each entry is one [RFC 5424](https://datatracker.ietf.org/doc/html/rfc5424) sysl
 | `framing` | Format | Notes |
 | --- | --- | --- |
 | `newline` | One message per line | Works for every entry. Use this unless your collector requires octet counting. |
-| `octet_counting` | Each message prefixed with its length ([RFC 6587](https://datatracker.ietf.org/doc/html/rfc6587#section-3.4.1)) | Many collectors cap these messages at 8 KB by default. Some entries are larger, so raise the limit on your collector. |
+| `octet_counting` | Each message prefixed with its length ([RFC 6587](https://datatracker.ietf.org/doc/html/rfc6587#section-3.4.1)) | Some collectors cap these messages at 8 KB by default, such as the OpenTelemetry Collector (`max_octets`). Some entries are larger, so raise the limit on your collector. |
 
 A message is usually a few KB. A `user.authenticated` entry includes the whole user and session, so it can be larger.
 
@@ -124,7 +124,7 @@ Sentinel receives syslog through a Linux log forwarder running the Azure Monitor
 
 * Make the forwarder reachable from the internet, and set up TLS on its `rsyslog` or `syslog-ng` daemon. Microsoft's installation script listens without TLS on port 514.
 * In the data collection rule, collect the `local0` facility, or the facility you set in `syslog.facility`.
-* Raise the daemon's maximum message size to at least 16 KB. `rsyslog` cuts messages at 8 KB by default.
+* Raise the daemon's maximum message size so the largest entries fit. `rsyslog` cuts messages at 8 KB by default, whatever the framing.
 
 ## Self-hosted Authgear
 
@@ -165,5 +165,5 @@ secrets:
 
 * **No logs arrive.** Check that `tcp.address` is correct and reachable from the internet, and that your collector listens on TCP at that port. Then trigger some activity, such as signing in, and wait a minute.
 * **TLS connection fails.** Check that your collector's certificate matches the host in `tcp.address` and is not expired. For a private certificate authority or mutual TLS, [contact us](https://www.authgear.com/talk-with-us).
-* **Some entries are missing or cut off.** Your collector may be dropping long messages. Raise its maximum message size, or switch to `framing: newline`.
+* **Some entries are missing or cut off.** Your collector may be dropping or cutting long messages. Raise its maximum message size. On the OpenTelemetry Collector, switching to `framing: newline` also helps, because its limit for newline-framed messages is much higher.
 * **Logs arrive but your SIEM shows nothing.** Check that its filter includes the facility in `syslog.facility` (`local0` by default).
