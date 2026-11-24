@@ -162,6 +162,7 @@
 * [Monitor](admin/monitor/README.md)
   * [Audit Log For Users Activities](admin/monitor/audit-log.md)
   * [Audit Log for Admin API and Portal](admin/monitor/audit-log-for-admin-api-and-portal.md)
+  * [Audit Log Streaming](admin/monitor/audit-log-streaming.md)
   * [Stream Audit Logs to Datadog](admin/monitor/stream-audit-logs-to-datadog.md)
   * [Analytics](admin/monitor/analytics.md)
 * [User Management](admin/user-management/README.md)
