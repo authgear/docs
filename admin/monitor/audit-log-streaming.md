@@ -13,7 +13,7 @@ You can stream to:
 * **A syslog collector**, over TCP with optional TLS. This page covers it.
 
 {% hint style="info" %}
-Audit Log Streaming is not enabled by default. [Contact us](https://www.authgear.com/talk-with-us) to enable it for your project.
+On Authgear Cloud, Audit Log Streaming is not enabled by default. [Contact us](https://www.authgear.com/talk-with-us) to enable it for your project.
 {% endhint %}
 
 ## What gets streamed
@@ -129,6 +129,7 @@ Sentinel receives syslog through a Linux log forwarder running the Azure Monitor
 
 If you run Authgear yourself:
 
+* Streaming is available unless `authgear.features.yaml` turns it off with `telemetry.audit_logs.streaming.disabled: true`.
 * Add streams to `authgear.yaml` as shown above.
 * Certificates for a private certificate authority or mutual TLS go in `authgear.secrets.yaml`, matched to a stream by `stream_name`:
 
@@ -157,6 +158,7 @@ secrets:
   * `certificate_authority` is the certificate authority your collector's certificate is checked against, instead of the system's trusted list.
   * Either can be set without the other.
 * Entries are delivered by the background worker (`authgear background`). Make sure it is running, or entries are queued but never sent.
+* The worker delivers once a minute by default. Set the `AUDIT_LOG_STREAMING_INTERVAL` environment variable (for example `30s`) to change it.
 
 ## Troubleshooting
 
