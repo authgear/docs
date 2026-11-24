@@ -68,7 +68,7 @@ Your collector must be reachable from the internet at `tcp.address`.
 | `syslog.framing` | Yes | How messages are separated: `newline` or `octet_counting`. Must match your collector. See [Framing](#framing). |
 | `syslog.facility` | No | `user` or `local0` to `local7`. Defaults to `local0`. |
 | `syslog.app_name` | No | The syslog APP-NAME. Defaults to `authgear`. |
-| `syslog.structured_data_id` | No | The syslog SD-ID. Defaults to `authgear`. |
+| `syslog.structured_data_id` | No | The syslog SD-ID. Defaults to `authgear`. RFC 5424 expects an unregistered SD-ID in the form `name@<enterprise-number>`, so set one if your collector enforces it. |
 
 ### TLS and mutual TLS
 
@@ -86,7 +86,7 @@ Each entry is one [RFC 5424](https://datatracker.ietf.org/doc/html/rfc5424) sysl
 
 * **Hostname** is your project's domain.
 * **Message ID** is always `authgear-audit-log`.
-* **Structured data** carries the key fields: `app_id`, `id`, `activity_type`, `user_id`, `client_id` and `ip_address`. A field is left out when it is empty. You can filter on these without parsing the message body.
+* **Structured data** carries the key fields: `app_id`, `id`, `activity_type`, `user_id`, `client_id` and `ip_address`. A field is left out when it is empty. In collectors that parse RFC 5424 structured data, such as the OpenTelemetry Collector, you can filter on these without parsing the message body.
 * **Message body** is the full event as single-line JSON, the same as the **Raw Event Log** of an entry in the Portal.
 * **Severity** is Warning for `email.error`, `sms.error` and `whatsapp.error`, and Informational for every other event.
 
@@ -166,4 +166,5 @@ secrets:
 * **No logs arrive.** Check that `tcp.address` is correct and reachable from the internet, and that your collector listens on TCP at that port. Then trigger some activity, such as signing in, and wait a minute.
 * **TLS connection fails.** Check that your collector's certificate matches the host in `tcp.address` and is not expired. For a private certificate authority or mutual TLS, [contact us](https://www.authgear.com/talk-with-us).
 * **Some entries are missing or cut off.** Your collector may be dropping or cutting long messages. Raise its maximum message size. On the OpenTelemetry Collector, switching to `framing: newline` also helps, because its limit for newline-framed messages is much higher.
+* **Your collector rejects the structured data.** It may require an SD-ID in the form `name@<enterprise-number>`. Set `syslog.structured_data_id` to one.
 * **Logs arrive but your SIEM shows nothing.** Check that its filter includes the facility in `syslog.facility` (`local0` by default).
