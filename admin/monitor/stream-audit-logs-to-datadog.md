@@ -9,7 +9,7 @@ Authgear can send your project's audit logs to Datadog, so you can search, alert
 
 ### What gets sent
 
-Every entry written to your project's [audit log](../../admin/monitor/audit-log.md) is also sent to Datadog: sign-ups, logins, profile changes, Admin API and Portal actions, and so on. Entries are delivered in batches about once a minute.
+Every entry written to your project's [audit log](audit-log.md) is also sent to Datadog: sign-ups, logins, profile changes, Admin API and Portal actions, and so on. Entries are delivered in batches about once a minute.
 
 Each log arrives with `source:authgear` and `service:authgear`, and with Datadog's standard attributes (such as user ID, IP address and user agent) already mapped. You don't need to set up a pipeline in Datadog.
 
