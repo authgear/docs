@@ -25,6 +25,7 @@ Every entry written to your project's [audit log](audit-log.md) is streamed: sig
 * Entries are sent in batches once a minute, so each one reaches your collector within about a minute.
 * Entries are sent in the order they happened.
 * If a batch cannot be delivered, for example because your collector is down, it is not resent. The entries are still kept in the audit log, and you can fetch them with the [Admin API](audit-log.md#retrieve-with-admin-api).
+* Up to 10,000 entries are queued between deliveries. If a project produces more than that in a minute, the oldest queued entries are dropped. They are still kept in the audit log.
 * You can add more than one stream. Each stream receives every entry, and a failure of one does not affect the others.
 
 ## Stream to a syslog collector
