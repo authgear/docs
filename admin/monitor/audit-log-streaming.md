@@ -55,6 +55,11 @@ telemetry:
 
 Your collector must be reachable from the internet at `tcp.address`.
 
+When you edit `telemetry.audit_logs.streams`:
+
+* If you have connected Datadog in the Portal, its stream (`type: datadog`) is also in this list. Leave it as it is, and use **Integrations** to change or remove it.
+* Don't rename a stream that we added certificates to. Its certificates are matched by name, and are removed when you save.
+
 ### Settings
 
 | Field | Required | Description |
